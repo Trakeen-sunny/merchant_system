@@ -1,0 +1,270 @@
+<template>
+  <div class="acount">
+    <!-- 标题一 -->
+    <Row class="title">
+      <Col span="12"><span>商品导入</span></Col>
+    </Row>
+
+    <!-- 表格 -->
+    <div class="table" style="margin-bottom:30px">
+      <div class="title" style="border-bottom: 1px solid #e0e0e0">
+        <span class="left">商品分类</span>
+      </div>
+      <div class="dr_search">
+        <p>
+          为了更好的帮助合作者推广您的产品，请选择您要将商品导入平台到哪一个分类，和您的商品品牌
+        </p>
+        <div class="search" style="padding-left:0;">
+          <div>
+            <span>导入到平台分类</span>
+            <Select v-model="model1" size="large" clearable class="width">
+              <Option :value="1">Mobile Phones</Option>
+              <Option :value="2">Appliances</Option>
+              <Option :value="3">Computer & Electronics</Option>
+              <Option :value="3">Industrial & Scientific</Option>
+              <Option :value="3">Sports & Outdoors</Option>
+              <Option :value="3">Smart Home</Option>
+              <Option :value="3">Hobbies & Toys</Option>
+              <Option :value="3">Pet Supplies</Option>
+              <Option :value="3">Automotive</Option>
+              <Option :value="3">Beauty</Option>
+              <Option :value="3">Health & Wellness</Option>
+              <Option :value="3">Home & Garden</Option>
+              <Option :value="3">DIY & Handmade</Option>
+              <Option :value="3">Consumer Electronics</Option>
+              <Option :value="3">Apparel & Accessories</Option>
+            </Select>
+          </div>
+          <div>
+            <span>导入到对应品牌</span>
+            <Select v-model="model1" size="large" clearable class="width">
+              <Option :value="1">MECOOL</Option>
+              <Option :value="2">Creality 3D</Option>
+              <Option :value="3">HIMO</Option>
+              <Option :value="3">LANKELEISI</Option>
+              <Option :value="3">NIUBILITY</Option>
+              <Option :value="3">ONEBOT</Option>
+              <Option :value="3">SAMEBIKE</Option>
+              <Option :value="3">XIAOMI</Option>
+              <Option :value="3">ELEPHONE</Option>
+              <Option :value="3">SMART RAY</Option>
+              <Option :value="3">360</Option>
+              <Option :value="3">Dreame</Option>
+              <Option :value="3">Oclean</Option>
+              <Option :value="3">Roborock</Option>
+              <Option :value="3">POCO</Option>
+              <Option :value="3">XIAOMI MIJIA</Option>
+              <Option :value="3">Kospet</Option>
+              <Option :value="3">IMILAB</Option>
+              <Option :value="3">MIBRO</Option>
+              <Option :value="3">Blulory</Option>
+              <Option :value="3">Amazfit</Option>
+              <Option :value="3">Cubot</Option>
+              <Option :value="3">Oyeet</Option>
+              <Option :value="3">RedMagic</Option>
+              <Option :value="3">ASUS</Option>
+              <Option :value="3">CHUWI</Option>
+              <Option :value="3">Lenovo</Option>
+              <Option :value="3">HONOR</Option>
+              <Option :value="3">INMIX</Option>
+              <Option :value="3">LONGER</Option>
+              <Option :value="3">EcoFlow</Option>
+              <Option :value="3">Beelink</Option>
+              <Option :value="3">We.Lock</Option>
+              <Option :value="3">CoFANCY</Option>
+              <Option :value="3">Comgrow</Option>
+              <Option :value="3">SwitchBot</Option>
+              <Option :value="3">Haylou</Option>
+              <Option :value="3">Trouver</Option>
+              <Option :value="3">Seven and Me</Option>
+              <Option :value="3">Ortur</Option>
+              <Option :value="3">MIDEA</Option>
+            </Select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 搜索 -->
+    <div class="search">
+      <div>
+        <span>商品名称</span>
+        <Input v-model="value" size="large" clearable class="width" />
+      </div>
+      <div>
+        <Button type="info" ghost class="button" size="large">重置</Button>
+        <Button type="info" class="button" size="large">查询</Button>
+      </div>
+    </div>
+
+    <!-- 表格 -->
+    <div class="table">
+      <div class="title">
+        <span class="left">商品列表</span>
+        <div class="right">
+          <Button type="info" ghost class="button" style="margin-right: 10px"
+            >取消</Button
+          >
+          <Button type="info" class="button">导入</Button>
+        </div>
+      </div>
+      <Table :columns="columns" :data="data"></Table>
+      <Page :total="100" show-sizer class="page" />
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: "ProductAdd",
+  data() {
+    return {
+      value: "",
+      model1: "",
+      columns: [
+        {
+          title: "图片",
+          key: "name",
+        },
+        {
+          title: "商品名称",
+          key: "age",
+        },
+        {
+          title: "类目",
+          key: "address",
+        },
+        {
+          title: "供应商",
+          key: "address",
+        },
+      ],
+      data: [],
+    };
+  },
+  methods: {
+    handleRecharge() {
+      this.$Notice.warning({
+        title: "通知",
+        desc: "目前暂时不支持线上银行转账充值，如有需要，请联系平台客服线下操作",
+      });
+    },
+  },
+};
+</script>
+<style lang="less" scoped>
+.acount {
+  > .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    span {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    span::before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background-color: #419191;
+      font-size: 18px;
+      margin-right: 8px;
+    }
+  }
+
+  .search {
+    background-color: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    padding: 20px 20px;
+    > div {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      span {
+        margin-right: 10px;
+        font-weight: 500;
+        font-size: 14px;
+      }
+      .width {
+        width: 200px;
+      }
+      .button:last-child {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .table {
+    background-color: #ffffff;
+    margin-top: 30px;
+    border-radius: 4px;
+    .title {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .left {
+        font-weight: 600;
+        font-size: 16px;
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        > span {
+          color: #666;
+          font-size: 15px;
+          font-weight: 500;
+          margin-right: 20px;
+        }
+        > div {
+          color: #666;
+          font-size: 15px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          span {
+            margin-right: 10px;
+          }
+          margin-right: 20px;
+        }
+        .button {
+          font-weight: 600;
+          font-size: 14px;
+        }
+      }
+    }
+    .page {
+      text-align: right;
+      margin-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    .dr_search {
+      padding: 10px 20px;
+      p {
+        font-weight: 500;
+        color: #999;
+      }
+
+      > div {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        span {
+          margin-right: 10px;
+          font-weight: 500;
+          font-size: 14px;
+        }
+        .width {
+          width: 200px;
+        }
+        .button:last-child {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+</style>
