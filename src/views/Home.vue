@@ -8,7 +8,7 @@
         :collapsed-width="78"
         v-model="isCollapsed"
       >
-        <div class="logo">SHOPIFY</div>
+        <div class="logo">{{getUserInfo.websiteName}}</div>
         <Aside :isCollapsed="isCollapsed"></Aside>
       </Sider>
       <Layout>
@@ -48,8 +48,9 @@
 
             <Dropdown @on-click="handleDropDown">
               <div class="avatar">
-                <Avatar icon="ios-person" size="large" />
-                <span>name</span>
+                <!-- <Avatar icon="ios-person" size="large" /> -->
+                <img :src="getUserInfo.logo"  style="width:40px;height:40px;border-radius:100%;"/>
+                <span>{{getUserInfo.shopName}}</span>
               </div>
               <DropdownMenu slot="list">
                 <DropdownItem name="1">个人中心</DropdownItem>
@@ -99,6 +100,9 @@ export default {
     rotateIcon() {
       return ["menu-icon", this.isCollapsed ? "rotate-icon" : ""];
     },
+    getUserInfo() {
+      return JSON.parse(window.localStorage.getItem("userinfo"));
+    }
   },
   methods: {
     collapsedSider() {
@@ -124,7 +128,7 @@ export default {
       this.$httpRequest({
         api: logout,
         data: {},
-        success: (res) => {
+        success: () => {
           window.localStorage.removeItem("userinfo");
           window.localStorage.removeItem("token");
           this.$router.replace({ name: "Login" });
