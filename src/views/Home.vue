@@ -80,7 +80,7 @@
 
 <script>
 import Aside from "@/components/Aside.vue";
-import { index} from '../api/index'
+import { logout } from "../api/index";
 // @ is an alias to /src
 
 export default {
@@ -94,22 +94,13 @@ export default {
       isCollapsed: false,
     };
   },
-  created(){
-    this.initData();
-  },
+  created() {},
   computed: {
     rotateIcon() {
       return ["menu-icon", this.isCollapsed ? "rotate-icon" : ""];
     },
   },
   methods: {
-    initData(){
-      this.$httpRequest({api:index,data:{a:1},success:(res)=>{
-        console.log(res)
-      },error:(err)=>{
-       console.log(err)
-      }})
-    },
     collapsedSider() {
       this.$refs.side1.toggleCollapse();
     },
@@ -123,31 +114,26 @@ export default {
       this.$router.push({ name: "Message" });
     },
     handleDropDown(ev) {
-      console.log(ev);
       if (ev == 2) {
         this.modal1 = true;
-        // this.$Modal.info({
-        //   title: "退出",
-        //   content: "是否退出？",
-        //   okText:'退出',
-        //   cancelText:'取消',
-        //   onOk:()=>{
-        //     console.log(1)
-        //   },
-        //   onCancel:()=>{
-        //     console.log(2)
-        //   }
-        // });
-      }else{
-        this.$router.push({name:'SetupProduct'})
+      } else {
+        this.$router.push({ name: "SetupProduct" });
       }
     },
     ok() {
-      this.$Message.info("Clicked ok");
-      this.$router.replace({name:'Login'})
+      this.$httpRequest({
+        api: logout,
+        data: {},
+        success: (res) => {
+          window.localStorage.removeItem("userinfo");
+          window.localStorage.removeItem("token");
+          this.$router.replace({ name: "Login" });
+          this.$Message.success("退出成功!");
+        },
+      });
     },
     cancel() {
-      this.$Message.info("Clicked cancel");
+      this.$Message.info("取消退出!");
     },
   },
 };

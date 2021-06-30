@@ -1,25 +1,23 @@
 import axios from "axios";
 
-let baseUrl = '';
+let baseUrl = "http://42.192.225.148:6081";
 export default {
-    request: function ({
-        api,
-        data,
-        success,
-        error
-    }) {
+    request: function ({ api, data, success, error }) {
         const config = {
             url: baseUrl + api.path,
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
+            method: "post",
+            headers: window.localStorage.getItem("token") ? {
+                "Content-Type": "application/json",
+                "X-Access-Token": window.localStorage.getItem("token")
+            } : {
+                "Content-Type": "application/json"
             },
             withCredentials: true,
         }
         if (api.method) {
             config.method = api.method;
         }
-        if (api.method == 'get') {
+        if (api.method == "get") {
             config.params = data
         } else {
             config.data = data
@@ -34,7 +32,11 @@ export default {
         $http.then(function (response) {
             let resData = response.data
             if (success) {
-                success(resData)
+                if (resData.code == 0) {
+                    success(resData)
+                } else {
+                    this.$Message.error(resData.message);
+                }
             }
         }).catch(function (exception) {
             if (error) {
@@ -43,4 +45,4 @@ export default {
         })
         return $http;
     }
-}
+};
