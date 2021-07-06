@@ -21,6 +21,10 @@ const routes = [{
       path: "acount_detail",
       name: "AcountDetail",
       component: () => import("@/views/acount/AcountDetail.vue"),
+    },{
+      path: "message",
+      name: "Message",
+      component: () => import("@/views/home/Message.vue"),
     }, {
       path: "commision",
       name: "Commision",
@@ -33,6 +37,10 @@ const routes = [{
       path: "profit",
       name: "Profit",
       component: () => import("@/views/acount/Profit.vue"),
+    },{
+      path: "order",
+      name: "Order",
+      component: () => import("@/views/acount/Order.vue"),
     }, {
       path: "collaborator",
       name: "Collaborator",
@@ -53,6 +61,14 @@ const routes = [{
       path: "coupon_add",
       name: "CouponAdd",
       component: () => import("@/views/material/CouponAdd.vue"),
+    }, {
+      path: "picture",
+      name: "Picture",
+      component: () => import("@/views/material/Picture.vue"),
+    }, {
+      path: "picture_add",
+      name: "PictureAdd",
+      component: () => import("@/views/material/PictureAdd.vue"),
     }, {
       path: "setup_commission",
       name: "SetupCommission",
@@ -98,11 +114,11 @@ const routes = [{
       path: "forget",
       name: "Forget",
       component: () => import('@/views/password/forget.vue'),
-    },{
+    }, {
       path: "register",
       name: "Register",
       component: () => import('@/views/password/register.vue'),
-    },{
+    }, {
       path: "register_active",
       name: "RegisterActive",
       component: () => import('@/views/password/register_active.vue'),
