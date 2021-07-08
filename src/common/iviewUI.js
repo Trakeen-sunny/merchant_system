@@ -36,7 +36,8 @@ import {
     InputNumber,
     Steps,
     Step,
-    Poptip
+    Poptip,
+    Tag
 } from 'iview';
 
 Vue.component('Button', Button);
@@ -74,6 +75,7 @@ Vue.component('InputNumber', InputNumber);
 Vue.component('Steps', Steps);
 Vue.component('Step', Step);
 Vue.component('Poptip', Poptip);
+Vue.component('Tag', Tag);
 Vue.prototype.$Notice = Notice;
 Vue.prototype.$Message = Message;
 Vue.prototype.$Modal = Modal;

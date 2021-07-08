@@ -4,20 +4,22 @@
     <Row class="title">
       <Col span="12"><span>商品列表</span></Col>
       <Col span="12" class="right">
-      <Dropdown>
-        <Button type="info" class="button" style="margin-left:0">
+        <Dropdown>
+          <Button type="info" class="button" style="margin-left: 0">
             批量修改
             <Icon type="ios-arrow-down"></Icon>
-        </Button>
-        <DropdownMenu slot="list">
-            <DropdownItem style="text-align:left;">上架</DropdownItem>
-            <DropdownItem style="text-align:left;">下架</DropdownItem>
-            <DropdownItem style="text-align:left;">修改平台分类</DropdownItem>
-            <DropdownItem style="text-align:left;">修改平台品牌</DropdownItem>
-        </DropdownMenu>
-    </Dropdown>
+          </Button>
+          <DropdownMenu slot="list">
+            <DropdownItem style="text-align: left">上架</DropdownItem>
+            <DropdownItem style="text-align: left">下架</DropdownItem>
+            <DropdownItem style="text-align: left">修改平台分类</DropdownItem>
+            <DropdownItem style="text-align: left">修改平台品牌</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
         <Button type="info" class="button" ghost>导出表格</Button>
-        <Button type="info" class="button" @click="handleProductAdd">商品导入</Button>
+        <Button type="info" class="button" @click="handleProductAdd"
+          >商品导入</Button
+        >
       </Col>
     </Row>
 
@@ -124,68 +126,232 @@
 
     <!-- 表格 -->
     <div class="table">
-      <Table :columns="columns" :data="data"></Table>
-      <Page :total="100" show-sizer class="page"/>
+      <Table :columns="columns" :data="data">
+        <template slot-scope="{ row }" slot="img">
+          <img :src="row.image.src" style="width: 80px; height: 80px" />
+        </template>
+        <template slot-scope="{ row }" slot="position">
+          {{ row.image.position }}
+        </template>
+        <template slot-scope="{ row, index }" slot="action">
+          <Button type="info" size="large" @click="details(row, index)"
+            >查看</Button
+          >
+        </template>
+      </Table>
+      <Page :total="100" show-sizer class="page" />
     </div>
+    <Modal v-model="modal1" title="查看" width="1200">
+      <Form
+        :model="detailObj"
+        label-position="right"
+        :label-width="90"
+        :inline="true"
+      >
+        <h3>信息</h3>
+        <Row>
+          <Col span="8">
+            <FormItem label="商品名称:">
+              <span>{{ detailObj.title }}</span>
+            </FormItem>
+          </Col>
+          <Col span="8">
+            <FormItem label="类目:">
+              <span>{{ detailObj.product_type }}</span>
+            </FormItem>
+          </Col>
+          <Col span="8">
+            <FormItem label="品牌:">
+              <span>{{ detailObj.vendor }}</span>
+            </FormItem>
+          </Col>
+          <Col span="8">
+            <FormItem label="描述:">
+              <span>{{ detailObj.body_html }}</span>
+            </FormItem>
+          </Col>
+        </Row>
+        <h3>规格</h3>
+        <Row>
+          <Col span="24" v-for="(item, i) in detailObj.options" :key="i">
+            <FormItem :label="item.name + ':'">
+              <Tag
+                color="default"
+                v-for="(itm, idx) in item.values"
+                :key="idx"
+                >{{ itm }}</Tag
+              >
+            </FormItem>
+            <FormItem label="position:">
+              <Tag color="default">{{ item.position }}</Tag>
+            </FormItem>
+          </Col>
+        </Row>
+        <h3>规格匹配</h3>
+        <Table :columns="columns1" :data="detailObj.variants">
+          <template slot-scope="{ row }" slot="weight">
+            {{ row.weight + row.weight_unit }}
+          </template>
+        </Table>
+      </Form>
+      <div slot="footer">
+        <Button type="info" size="large" @click="ok">关闭</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 <script>
+import { goodsList } from "../../api/material";
 export default {
   name: "Product",
   data() {
     return {
+      modal1: true, // 弹框
       value: "",
       model1: "",
-      columns:[
+      columns: [
         {
           title: "图片",
-          key: "name",
+          slot: "img",
+          align: "center",
         },
         {
           title: "商品名称",
-          key: "age",
+          key: "title",
+          align: "center",
         },
         {
           title: "类目",
-          key: "address",
+          key: "product_type",
+          align: "center",
         },
         {
           title: "品牌",
-          key: "address",
+          key: "vendor",
+          align: "center",
         },
         {
           title: "售价",
           key: "address",
+          align: "center",
         },
         {
           title: "折扣码",
           key: "address",
+          align: "center",
         },
         {
           title: "佣金率",
           key: "address",
+          align: "center",
         },
         {
           title: "发货仓",
           key: "address",
+          align: "center",
+          slot: "position",
         },
         {
           title: "商品状态",
-          key: "address",
+          key: "status",
+          align: "center",
         },
         {
           title: "操作",
-          key: "address",
+          slot: "action",
+          align: "center",
         },
       ],
-      data:[]
+      data: [],
+      detailObj: {},
+      columns1: [
+        {
+          title: "title",
+          key: "title",
+          align: "center",
+        },
+        {
+          title: "weight",
+          slot: "weight",
+          align: "center",
+        },
+        {
+          title: "price",
+          key: "price",
+          align: "center",
+        },
+        {
+          title: "position",
+          key: "position",
+          align: "center",
+        },
+        {
+          title: "inventory_management",
+          key: "inventory_management",
+          align: "center",
+        },
+        {
+          title: "inventory_policy",
+          key: "inventory_policy",
+          align: "center",
+        },
+        {
+          title: "inventory_quantity",
+          key: "inventory_quantity",
+          align: "center",
+        },
+        {
+          title: "sku",
+          key: "sku",
+          align: "center",
+        },
+        {
+          title: "barcode",
+          key: "barcode",
+          align: "center",
+        },
+        {
+          title: "fulfillment_service",
+          key: "fulfillment_service",
+          align: "center",
+        },
+        {
+          title: "grams",
+          key: "grams",
+          align: "center",
+        },
+      ],
     };
   },
-  methods:{
-    handleProductAdd(){
-      this.$router.push({name:'ProductAdd'})
-    }
-  }
+  created() {
+    this.initData();
+  },
+  methods: {
+    handleProductAdd() {
+      this.$router.push({ name: "ProductAdd" });
+    },
+    // 初始化数据
+    initData() {
+      this.$httpRequest({
+        api: goodsList,
+        data: {},
+        success: (res) => {
+          console.log(res);
+          this.data = res.result.prodList;
+          this.detailObj = this.data[0];
+          console.log(this.data);
+        },
+      });
+    },
+    // 查看详情
+    details(row, i) {
+      this.detailObj = row;
+      console.log(row, i);
+      this.modal1 = true;
+    },
+    ok() {},
+    cancel() {},
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -247,7 +413,7 @@ export default {
     background-color: #ffffff;
     margin-top: 30px;
     border-radius: 4px;
-    .page{
+    .page {
       text-align: right;
       margin-top: 30px;
       padding-bottom: 30px;
