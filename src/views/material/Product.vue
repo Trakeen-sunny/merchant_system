@@ -206,7 +206,7 @@ export default {
   name: "Product",
   data() {
     return {
-      modal1: true, // 弹框
+      modal1: false, // 弹框
       value: "",
       model1: "",
       columns: [
@@ -228,11 +228,6 @@ export default {
         {
           title: "品牌",
           key: "vendor",
-          align: "center",
-        },
-        {
-          title: "售价",
-          key: "address",
           align: "center",
         },
         {

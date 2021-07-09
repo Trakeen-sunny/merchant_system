@@ -100,6 +100,8 @@
   </div>
 </template>
 <script>
+import { orderList } from "../../api/acount";
+import { getLocalTime } from "../../common/function";
 export default {
   name: "Order",
   data() {
@@ -109,28 +111,52 @@ export default {
       columns: [
         {
           title: "订单编号",
-          key: "name",
+          key: "order_number",
+          align:'center'
         },
         {
           title: "订单金额($)",
-          key: "age",
+          key: "total_price",
+          align:'center'
         },
         {
           title: "佣金金额($)",
           key: "address",
+          align:'center'
         },
         {
           title: "订单状态",
           key: "address",
+          align:'center'
         },
         {
           title: "创建时间",
-          key: "address",
+          key: "created_at",
+          align:'center'
         },
       ],
       data: [],
     };
   },
+  created(){
+    this.initData();
+  },
+  methods:{
+    // 初始化数据
+    initData() {
+      this.$httpRequest({
+        api: orderList,
+        data: {},
+        success: (res) => {
+          console.log(res);
+          for (const res of res.result.orderList) {
+            res.created_at = getLocalTime(res.created_at)
+          }
+           this.data = res.result.orderList;
+        },
+      });
+    },
+  }
 };
 </script>
 <style lang="less" scoped>
