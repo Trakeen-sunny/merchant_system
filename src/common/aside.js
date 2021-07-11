@@ -18,15 +18,16 @@ export const aside = [
                 name:'账户收支情况',
 
             },
+            // {
+            //     url:'/home/commision',
+            //     name:'佣金支出',
+                
+            // },{
+            //     url:'/home/profit',
+            //     name:'推荐收益明细',
+                
+            // },
             {
-                url:'/home/commision',
-                name:'佣金支出',
-                
-            },{
-                url:'/home/profit',
-                name:'推荐收益明细',
-                
-            },{
                 url:'/home/recharge',
                 name:'充值记录',
                 

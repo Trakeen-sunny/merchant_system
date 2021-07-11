@@ -10,8 +10,8 @@
             <Icon type="ios-arrow-down"></Icon>
           </Button>
           <DropdownMenu slot="list">
-            <DropdownItem style="text-align: left">上架</DropdownItem>
-            <DropdownItem style="text-align: left">下架</DropdownItem>
+            <DropdownItem style="text-align: left">开启</DropdownItem>
+            <DropdownItem style="text-align: left">结束</DropdownItem>
             <DropdownItem style="text-align: left">修改平台分类</DropdownItem>
             <DropdownItem style="text-align: left">修改平台品牌</DropdownItem>
           </DropdownMenu>
@@ -46,10 +46,10 @@
         </Select>
       </div>
       <div>
-        <span>状态</span>
+        <span>推广状态</span>
         <Select v-model="model1" size="large" clearable class="width">
-          <Option :value="1">上架</Option>
-          <Option :value="2">下架</Option>
+          <Option :value="1">开启</Option>
+          <Option :value="2">结束</Option>
         </Select>
       </div>
       <div>
@@ -134,8 +134,17 @@
           {{ row.image.position }}
         </template>
         <template slot-scope="{ row, index }" slot="action">
-          <Button type="info" size="large" @click="details(row, index)"
+          <Button type="info" @click="details(row, index)"
             >查看</Button
+          >
+           <Button type="info" @click="setEdit(row, index)"
+            >编辑</Button
+          >
+          <Button type="info" @click="setMoney(row, index)"
+            >设置佣金</Button
+          >
+          <Button type="info"  @click="setStatus(row, index)"
+            >开启</Button
           >
         </template>
       </Table>
@@ -198,6 +207,54 @@
         <Button type="info" size="large" @click="ok">关闭</Button>
       </div>
     </Modal>
+    <!-- 佣金设置 -->
+    <Modal
+      v-model="modal2"
+      title="设置佣金"
+      @on-ok="ok"
+      @on-cancel="cancel"
+      width="500"
+    >
+      <Form
+        ref="formValidate"
+        :model="formValidate"
+        :label-width="80"
+      >
+        <FormItem label="已选中:">
+          <span>纯棉短袖、牛仔裤</span>
+        </FormItem>
+        <FormItem label="佣金比例" prop="number">
+          <Input v-model="formValidate.number">
+            <span slot="append">$</span>
+          </Input>
+        </FormItem>
+      </Form>
+    </Modal>
+    <!-- 编辑 -->
+     <Modal
+      v-model="modal3"
+      title="编辑"
+      @on-ok="ok"
+      @on-cancel="cancel"
+      width="500"
+    >
+      <Form
+        ref="formValidate"
+        :model="formValidate3"
+        :label-width="80"
+      >
+        <FormItem label="商品名称">
+            <Input v-model="formValidate3.name" placeholder="" readonly></Input>
+        </FormItem>
+        <FormItem label="平台分类" prop="city">
+            <Select v-model="formValidate3.city" placeholder="Select your city">
+                <Option value="beijing">服装</Option>
+                <Option value="shanghai">服装1</Option>
+                <Option value="shenzhen">服装3</Option>
+            </Select>
+        </FormItem>
+      </Form>
+    </Modal>
   </div>
 </template>
 <script>
@@ -207,6 +264,14 @@ export default {
   data() {
     return {
       modal1: false, // 弹框
+      modal2: false,
+      modal3: false,
+      formValidate:{
+        number: 0
+      },
+      formValidate3:{
+        name: 1111
+      },
       value: "",
       model1: "",
       columns: [
@@ -247,12 +312,13 @@ export default {
           slot: "position",
         },
         {
-          title: "商品状态",
+          title: "推广状态",
           key: "status",
           align: "center",
         },
         {
           title: "操作",
+          width: 150,
           slot: "action",
           align: "center",
         },
@@ -343,6 +409,27 @@ export default {
       this.detailObj = row;
       console.log(row, i);
       this.modal1 = true;
+    },
+    // 设置佣金
+    setMoney() {
+      this.modal2 = true
+    },
+    // 设置开启关闭状态
+    setStatus() {
+      this.$Modal.confirm({
+        title: "开启",
+        content: "确定要开启吗？",
+        onOk: () => {
+          // this.$Message.info("Clicked ok");
+        },
+        onCancel: () => {
+          // this.$Message.info("Clicked cancel");
+        },
+      });
+    },
+    // 编辑
+    setEdit(){
+      this.modal3 = true
     },
     ok() {},
     cancel() {},

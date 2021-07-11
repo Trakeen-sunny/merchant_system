@@ -91,6 +91,16 @@
                   </div>
               </div>
           </TabPane>
+          <TabPane name="name6" label="系统">
+              <div class="li">
+                  <Icon type="ios-paper" size="22" color="#45b1b"/>
+                  <div class="right">
+                      <div>系统消息</div>
+                      <span>2021-09-12 12：90</span>
+                      <p>您推荐的商家<span>30099</span>已成功注册平台，系统已大款推荐佣金<span>600¥</span>到您的账户</p>
+                  </div>
+              </div>
+          </TabPane>
         </Tabs>
         <Page :total="100" show-sizer class="page" />
       </div>

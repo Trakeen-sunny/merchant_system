@@ -91,6 +91,11 @@ export default {
       model1: "",
       columns: [
         {
+          type: "selection",
+          width: 60,
+          align: "center",
+        },
+        {
           title: "流水单号",
           key: "name",
         },
@@ -161,7 +166,7 @@ export default {
     margin-bottom: 30px;
     background-color: #ffffff;
     display: flex;
-    >div {
+    > div {
       padding: 24px;
       display: flex;
       flex-direction: column;
@@ -178,7 +183,7 @@ export default {
         align-items: center;
         font-size: 15px;
         font-weight: 600;
-        /deep/ .ivu-poptip{
+        /deep/ .ivu-poptip {
           padding: 0;
           margin: 0;
         }

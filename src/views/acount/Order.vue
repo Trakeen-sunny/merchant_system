@@ -35,10 +35,10 @@
         <span class="num">$0</span>
         <span class="title">佣金总额($)</span>
       </div>
-      <div>
+      <!-- <div>
         <span class="num">$0</span>
         <span class="title">推荐佣金总额($)</span>
-      </div>
+      </div> -->
       <div>
         <span class="num">$0</span>
         <span class="title">销售总额($)</span>
