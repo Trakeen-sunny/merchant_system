@@ -16,7 +16,7 @@ const routes = [{
     children: [{
       path: "",
       name: "Index",
-      component: () => import("@/views/Index.vue"),
+      component: () => import("@/views/statistics/overview.vue"),
     }, {
       path: "acount_detail",
       name: "AcountDetail",
@@ -84,7 +84,7 @@ const routes = [{
     }, {
       path: "overview",
       name: "Overview",
-      component: () => import("@/views/statistics/overview.vue"),
+      component: () => import("@/views/Index.vue"),
     }]
   }, {
     path: '/person',

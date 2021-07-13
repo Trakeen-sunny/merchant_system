@@ -1,5 +1,11 @@
 export const aside = [
     {
+        name:'桌面',
+        url:'/home',
+        icon:'md-albums',
+        children:[]
+    },
+    {
         name:'首页',
         icon:'ios-appstore',
         children:[
@@ -31,12 +37,18 @@ export const aside = [
                 url:'/home/recharge',
                 name:'充值记录',
                 
-            },
-            {
-                url:'/home/order',
-                name:'订单中心',
             }
+            // {
+            //     url:'/home/order',
+            //     name:'订单中心',
+            // }
         ]
+    },
+    {
+        name:'订单中心',
+        url:'/home/order',
+        icon:'md-book',
+        children:[]
     },
     {
         name:'合作者管理',

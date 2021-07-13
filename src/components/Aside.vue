@@ -5,24 +5,25 @@
     :class="menuitemClasses"
     style="background-color: #335850"
   >
-    <MenuItem name="0" to="/home">
-      <Icon type="md-albums" class="icon" size="20" />
-      <span>桌面</span>
-    </MenuItem>
-
-    <Submenu v-for="(item, index) in asideArr" :key="index" :name="index + 1">
-      <template slot="title">
+    <block v-for="(item, index) in asideArr" :key="index" >
+      <Submenu v-if="item.children.length > 0" :name="index + 1">
+        <template slot="title">
+          <Icon :type="item.icon" class="icon" size="20" />
+          <span>{{ item.name }}</span>
+        </template>
+        <MenuItem
+          v-for="(itm, i) in item.children"
+          :key="i"
+          :name="index + 1 + '-' + i"
+          :to="itm.url"
+          ><span>{{ itm.name }}</span></MenuItem
+        >
+      </Submenu>
+      <MenuItem :name="index+1" :to="item.url" v-else>
         <Icon :type="item.icon" class="icon" size="20" />
-        <span>{{ item.name }}</span>
-      </template>
-      <MenuItem
-        v-for="(itm, i) in item.children"
-        :key="i"
-        :name="index + 1 + '-' + i"
-        :to="itm.url"
-        ><span>{{ itm.name }}</span></MenuItem
-      >
-    </Submenu>
+        <span>{{item.name}}</span>
+      </MenuItem>
+    </block>
   </Menu>
 </template>
 <script>
