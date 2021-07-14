@@ -282,7 +282,7 @@ export default {
       columns: [
         {
           type: "selection",
-          width: 60,
+          width: 40,
           align: "center",
         },
         {
