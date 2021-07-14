@@ -5,7 +5,7 @@
     :class="menuitemClasses"
     style="background-color: #335850"
   >
-    <block v-for="(item, index) in asideArr" :key="index" >
+    <div v-for="(item, index) in asideArr" :key="index" >
       <Submenu v-if="item.children.length > 0" :name="index + 1">
         <template slot="title">
           <Icon :type="item.icon" class="icon" size="20" />
@@ -23,7 +23,7 @@
         <Icon :type="item.icon" class="icon" size="20" />
         <span>{{item.name}}</span>
       </MenuItem>
-    </block>
+    </div>
   </Menu>
 </template>
 <script>

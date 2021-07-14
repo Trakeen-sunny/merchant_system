@@ -134,18 +134,10 @@
           {{ row.image.position }}
         </template>
         <template slot-scope="{ row, index }" slot="action">
-          <Button type="info" @click="details(row, index)"
-            >查看</Button
-          >
-           <Button type="info" @click="setEdit(row, index)"
-            >编辑</Button
-          >
-          <Button type="info" @click="setMoney(row, index)"
-            >设置佣金</Button
-          >
-          <Button type="info"  @click="setStatus(row, index)"
-            >开启</Button
-          >
+          <Button type="info" @click="details(row, index)">查看</Button>
+          <Button type="info" @click="setEdit(row, index)">编辑</Button>
+          <Button type="info" @click="setMoney(row, index)">设置佣金</Button>
+          <Button type="info" @click="setStatus(row, index)">开启</Button>
         </template>
       </Table>
       <Page :total="100" show-sizer class="page" />
@@ -215,11 +207,7 @@
       @on-cancel="cancel"
       width="500"
     >
-      <Form
-        ref="formValidate"
-        :model="formValidate"
-        :label-width="80"
-      >
+      <Form ref="formValidate" :model="formValidate" :label-width="80">
         <FormItem label="已选中:">
           <span>纯棉短袖、牛仔裤</span>
         </FormItem>
@@ -231,27 +219,43 @@
       </Form>
     </Modal>
     <!-- 编辑 -->
-     <Modal
+    <Modal
       v-model="modal3"
       title="编辑"
       @on-ok="ok"
       @on-cancel="cancel"
       width="500"
     >
-      <Form
-        ref="formValidate"
-        :model="formValidate3"
-        :label-width="80"
-      >
+      <Form ref="formValidate" :model="formValidate3" :label-width="80">
         <FormItem label="商品名称">
-            <Input v-model="formValidate3.name" placeholder="" readonly></Input>
+          <Input v-model="formValidate3.name" placeholder="" readonly></Input>
         </FormItem>
-        <FormItem label="平台分类" prop="city">
-            <Select v-model="formValidate3.city" placeholder="Select your city">
-                <Option value="beijing">服装</Option>
-                <Option value="shanghai">服装1</Option>
-                <Option value="shenzhen">服装3</Option>
-            </Select>
+        <FormItem label="类目" prop="city">
+          <Select v-model="formValidate3.city" placeholder="Select your city">
+            <Option value="beijing">服装</Option>
+            <Option value="shanghai">服装1</Option>
+            <Option value="shenzhen">服装3</Option>
+          </Select>
+        </FormItem>
+      </Form>
+    </Modal>
+    <!-- 开启 -->
+    <Modal
+      v-model="modal4"
+      title="开启"
+      @on-ok="ok"
+      @on-cancel="cancel"
+      width="500"
+    >
+      <Form ref="formValidate" :model="formValidate" :label-width="80">
+        <FormItem label="已选中:">
+          <span>纯棉短袖、牛仔裤</span>
+        </FormItem>
+        <FormItem label="推广有效期:" prop="number">
+          <DatePicker type="date" placeholder="" ></DatePicker>
+        </FormItem>
+        <FormItem label="" label-width="10">
+          <div>注:如已选择推广有效期，则系统自动根据截止时间结束，无法手动结束。</div>
         </FormItem>
       </Form>
     </Modal>
@@ -266,17 +270,23 @@ export default {
       modal1: false, // 弹框
       modal2: false,
       modal3: false,
-      formValidate:{
-        number: 0
+      modal4: false,
+      formValidate: {
+        number: 0,
       },
-      formValidate3:{
-        name: 1111
+      formValidate3: {
+        name: 1111,
       },
       value: "",
       model1: "",
       columns: [
         {
-          title: "图片",
+          type: "selection",
+          width: 60,
+          align: "center",
+        },
+        {
+          title: "商品图片",
           slot: "img",
           align: "center",
         },
@@ -286,13 +296,18 @@ export default {
           align: "center",
         },
         {
+          title: "推广状态",
+          key: "status",
+          align: "center",
+        },
+        {
           title: "类目",
           key: "product_type",
           align: "center",
         },
         {
-          title: "品牌",
-          key: "vendor",
+          title: "售价($)",
+          key: "price",
           align: "center",
         },
         {
@@ -301,7 +316,7 @@ export default {
           align: "center",
         },
         {
-          title: "佣金率",
+          title: "佣金率(%)",
           key: "address",
           align: "center",
         },
@@ -312,13 +327,12 @@ export default {
           slot: "position",
         },
         {
-          title: "推广状态",
-          key: "status",
+          title: "推广有效期",
+          key: "time",
           align: "center",
         },
         {
           title: "操作",
-          width: 150,
           slot: "action",
           align: "center",
         },
@@ -412,7 +426,7 @@ export default {
     },
     // 设置佣金
     setMoney() {
-      this.modal2 = true
+      this.modal2 = true;
     },
     // 设置开启关闭状态
     setStatus() {
@@ -428,8 +442,8 @@ export default {
       });
     },
     // 编辑
-    setEdit(){
-      this.modal3 = true
+    setEdit() {
+      this.modal3 = true;
     },
     ok() {},
     cancel() {},

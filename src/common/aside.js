@@ -1,27 +1,27 @@
 export const aside = [
     {
-        name:'桌面',
+        name:'首页',
         url:'/home',
         icon:'md-albums',
         children:[]
     },
+    // {
+    //     name:'首页',
+    //     icon:'ios-appstore',
+    //     children:[
+    //         {
+    //             url:'/home/message',
+    //             name:'消息通知',
+    //         }
+    //     ]
+    // },
     {
-        name:'首页',
-        icon:'ios-appstore',
-        children:[
-            {
-                url:'/home/message',
-                name:'消息通知',
-            }
-        ]
-    },
-    {
-        name:'财务中心',
+        name:'财务管理',
         icon:'logo-skype',
         children:[
             {
                 url:'/home/acount_detail',
-                name:'账户收支情况',
+                name:'账户中心',
 
             },
             // {

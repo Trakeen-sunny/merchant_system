@@ -1,5 +1,32 @@
 <template>
   <div class="acount">
+    <!-- 标题一 -->
+    <Row class="title">
+      <Col span="12"><span>账户信息</span></Col>
+      <Col span="12" class="right">
+        <Button type="info" ghost class="button" @click="handleRecharge"
+          >立即充值</Button
+        >
+      </Col>
+    </Row>
+    <div class="content">
+        <div>
+          <span class="num">0</span>
+          <span class="title">累计订单数</span>
+        </div>
+        <div>
+          <span class="num">0</span>
+          <span class="title">累计销售额($)</span>
+        </div>
+        <div>
+          <span class="num">0</span>
+          <span class="title">累计佣金($)</span>
+        </div>
+        <div>
+          <span class="num">0</span>
+          <span class="title">账户余额($)</span>
+        </div>
+      </div>
     <!-- 交易数据 -->
     <div class="table">
       <div class="title">
@@ -16,7 +43,19 @@
               style="width: 200px"
             ></DatePicker>
           </div>
-          <Button type="info" ghost class="button">导出数据</Button>
+          <Dropdown style="margin-left: 20px">
+            <Button type="info" ghost class="button">
+              导出数据
+              <Icon type="ios-arrow-down"></Icon>
+            </Button>
+            <DropdownMenu slot="list">
+              <DropdownItem>导出CSV</DropdownItem>
+              <DropdownItem>导出XLSX</DropdownItem>
+              <DropdownItem>导出XLS</DropdownItem>
+              <DropdownItem>导出XML</DropdownItem>
+              <DropdownItem>导出MHT</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </div>
       </div>
 
@@ -68,7 +107,9 @@
           <span class="title">账户余额</span>
         </div>
         <div style="flex-direction: row; justify-content: center">
-          <Button type="info" class="button" @click="handleRecharge">立即充值</Button>
+          <Button type="info" class="button" @click="handleRecharge"
+            >立即充值</Button
+          >
         </div>
       </div>
     </div>
@@ -208,7 +249,7 @@ export default {
             label: {
               show: true,
               position: "inside",
-              color:"#fff"
+              color: "#fff",
             },
             labelLine: {
               length: 10,
@@ -239,7 +280,7 @@ export default {
     handleRecharge() {
       this.$Notice.warning({
         title: "通知",
-        desc: '目前暂时不支持线上银行转账充值，如有需要，请联系平台客服线下操作'
+        desc: "目前暂时不支持线上银行转账充值，如有需要，请联系平台客服线下操作",
       });
     },
   },
@@ -247,6 +288,92 @@ export default {
 </script>
 <style lang="less" scoped>
 .acount {
+  > .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    span {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    span::before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background-color: #419191;
+      font-size: 18px;
+      margin-right: 8px;
+    }
+    .right {
+      text-align: right;
+      .button {
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+  .content1 {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    .left,
+    .right {
+      background-color: #ffffff;
+      box-sizing: border-box;
+      display: flex;
+      div {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        .num {
+          color: #3eb370;
+          font-size: 18px;
+          font-weight: 600;
+        }
+        .title {
+          font-size: 15px;
+          font-weight: 500;
+        }
+      }
+      div::after {
+        content: "";
+        border: 0.5px solid #ebeef5;
+        display: inline-block;
+        height: 50px;
+        position: absolute;
+        right: 0;
+      }
+      div:last-child::after {
+        content: "";
+        border: 0;
+      }
+    }
+    .left {
+      width: 58%;
+      div {
+        width: 25%;
+      }
+    }
+    .right {
+      width: 40%;
+      div {
+        width: calc(100% / 3);
+      }
+      div:last-child {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .button {
+          font-weight: 600;
+          font-size: 14px;
+        }
+      }
+    }
+  }
   .content {
     margin-bottom: 30px;
     background-color: #ffffff;
