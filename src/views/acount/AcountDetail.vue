@@ -174,7 +174,7 @@ export default {
       position: relative;
       width: calc(100% / 3);
       .num {
-        color: #3eb370;
+        color: #089444;
         font-size: 18px;
         font-weight: 600;
       }

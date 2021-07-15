@@ -270,7 +270,7 @@ export default {
             data: [
               { value: 60, name: "浏览", itemStyle: { color: "#f34e4e" } },
               { value: 40, name: "下单", itemStyle: { color: "#e4945e" } },
-              { value: 20, name: "付款", itemStyle: { color: "#47ca72" } },
+              { value: 20, name: "付款", itemStyle: { color: "#089444" } },
             ],
           },
         ],
@@ -330,9 +330,9 @@ export default {
         align-items: center;
         position: relative;
         .num {
-          color: #3eb370;
-          font-size: 18px;
-          font-weight: 600;
+          color: #089444;
+          font-size: 25px;
+          font-weight: 700;
         }
         .title {
           font-size: 15px;
@@ -386,9 +386,9 @@ export default {
       position: relative;
       width: calc(100% / 3);
       .num {
-        color: #3eb370;
-        font-size: 18px;
-        font-weight: 600;
+        color: #089444;
+        font-size: 25px;
+        font-weight: 700;
       }
       .title {
         font-size: 15px;

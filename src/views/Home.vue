@@ -8,7 +8,10 @@
         :collapsed-width="78"
         v-model="isCollapsed"
       >
-        <div class="logo">{{getUserInfo.websiteName}}</div>
+        <!-- <div class="logo">{{getUserInfo.websiteName}}</div> -->
+        <div class="logo">
+          <img style="width:95%;height:27%;" src="../assets/logo.png" />
+        </div>
         <Aside :isCollapsed="isCollapsed"></Aside>
       </Sider>
       <Layout>
@@ -16,15 +19,23 @@
           <Icon
             @click.native="collapsedSider"
             :class="rotateIcon"
-            :style="{ margin: '0 20px', color: '#fff' }"
+            :style="{ margin: '0 20px', color: '#666' }"
             type="md-menu"
             size="24"
           ></Icon>
           <div class="right">
+            <Tooltip content="客服" class="tooltip">
+              <Icon
+                type="logo-whatsapp"
+                color="#666"
+                size="25"
+                @click="handleGoto"
+              />
+            </Tooltip>
             <Tooltip content="帮助中心" class="tooltip">
               <Icon
                 type="md-help-circle"
-                color="#fff"
+                color="#666"
                 size="25"
                 @click="handleGoto"
               />
@@ -32,7 +43,7 @@
             <Tooltip content="反馈/建议" class="tooltip">
               <Icon
                 type="md-paper"
-                color="#fff"
+                color="#666"
                 size="25"
                 @click="handleGoTo1"
               />
@@ -40,7 +51,7 @@
             <Tooltip content="通知" class="tooltip">
               <Icon
                 type="md-notifications-outline"
-                color="#fff"
+                color="#666"
                 size="25"
                 @click="handleGoTo2"
               />
@@ -49,8 +60,11 @@
             <Dropdown @on-click="handleDropDown">
               <div class="avatar">
                 <!-- <Avatar icon="ios-person" size="large" /> -->
-                <img :src="getUserInfo.logo"  style="width:40px;height:40px;border-radius:100%;"/>
-                <span>{{getUserInfo.shopName}}</span>
+                <img
+                  :src="getUserInfo.logo"
+                  style="width: 40px; height: 40px; border-radius: 100%"
+                />
+                <span>{{ getUserInfo.shopName }}</span>
               </div>
               <DropdownMenu slot="list">
                 <DropdownItem name="1">个人中心</DropdownItem>
@@ -103,7 +117,7 @@ export default {
     },
     getUserInfo() {
       return JSON.parse(window.localStorage.getItem("userinfo"));
-    }
+    },
   },
   methods: {
     collapsedSider() {
@@ -121,9 +135,9 @@ export default {
     handleDropDown(ev) {
       if (ev == 3) {
         this.modal1 = true;
-      } else if(ev==1) {
+      } else if (ev == 1) {
         this.$router.push({ name: "SetupProduct" });
-      }else if(ev==2){
+      } else if (ev == 2) {
         this.$router.push({ name: "Message" });
       }
     },
@@ -159,7 +173,7 @@ export default {
   }
 }
 .layout-header-bar {
-  background: #315855;
+  background: #ffffff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
@@ -174,7 +188,7 @@ export default {
       align-items: center;
       margin-right: 25px;
       span {
-        color: #fff;
+        color: #666666;
         font-weight: 600;
         font-size: 16px;
         margin-left: 10px;
@@ -212,11 +226,10 @@ export default {
   color: #465454;
 }
 .logo {
-  font-size: 20px;
-  color: #fff;
-  font-weight: bold;
   text-align: center;
   height: 64px;
-  line-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

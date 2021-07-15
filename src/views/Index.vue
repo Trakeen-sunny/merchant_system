@@ -188,7 +188,7 @@ export default {
         align-items: center;
         position: relative;
         .num {
-          color: #3eb370;
+          color: #089444;
           font-size: 18px;
           font-weight: 600;
         }

@@ -8,7 +8,7 @@
     <div v-for="(item, index) in asideArr" :key="index" >
       <Submenu v-if="item.children.length > 0" :name="index + 1">
         <template slot="title">
-          <Icon :type="item.icon" class="icon" size="20" />
+          <Icon :type="item.icon" class="icon" size="23" />
           <span>{{ item.name }}</span>
         </template>
         <MenuItem
@@ -20,7 +20,7 @@
         >
       </Submenu>
       <MenuItem :name="index+1" :to="item.url" v-else>
-        <Icon :type="item.icon" class="icon" size="20" />
+        <Icon :type="item.icon" class="icon" size="23" />
         <span>{{item.name}}</span>
       </MenuItem>
     </div>
@@ -59,12 +59,13 @@ export default {
   vertical-align: bottom;
   transition: width 0.2s ease 0.2s;
   color: #fff;
+  font-size: 16px;
 }
 .menu-item i {
   transform: translateX(0px);
   transition: font-size 0.2s ease, transform 0.2s ease;
   vertical-align: middle;
-  font-size: 16px;
+  font-size: 22px;
 }
 /deep/ .ivu-icon-ios-arrow-down:before {
   color: #fff;
@@ -86,4 +87,7 @@ export default {
 .icon {
   color: #fff;
 }
+ .ivu-menu-vertical.ivu-menu-light:after{
+   background: transparent;
+ }
 </style>
