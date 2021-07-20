@@ -122,11 +122,11 @@ export default {
           key: "address",
         },
         {
-          title: "f付款订单数",
+          title: "付款订单数",
           key: "address",
         },
         {
-          title: "累计佣金",
+          title: "累计佣金($)",
           key: "address",
         },
         {

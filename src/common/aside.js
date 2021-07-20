@@ -6,12 +6,6 @@ export const aside = [
         children:[]
     },
     {
-        name:'营销计划',
-        icon:'ios-appstore',
-        url:'/home/market',
-        children:[]
-    },
-    {
         name:'财务管理',
         icon:'logo-skype',
         children:[
@@ -44,6 +38,12 @@ export const aside = [
         name:'订单中心',
         url:'/home/order',
         icon:'md-book',
+        children:[]
+    },
+    {
+        name:'营销计划',
+        icon:'ios-appstore',
+        url:'/home/market',
         children:[]
     },
     {
