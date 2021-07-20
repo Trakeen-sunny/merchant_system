@@ -1,7 +1,7 @@
 <template>
   <div class="invitation">
     <div class="box">
-      <img src="../assets/img.png" class="img" />
+      <img src="../assets/img.jpg" class="img" />
       <div class="form">
         <h4>Here we need some information about cooperation preferences:</h4>
         <Form :model="form" label-position="top">
@@ -21,7 +21,7 @@
               style="margin-bottom: 10px"
             >
               <div slot="prepend" class="label">YouTube</div>
-              <Button slot="append">USB</Button>
+              <Button slot="append">USD</Button>
             </Input>
             <Input
               v-model="form.instagram"
@@ -29,7 +29,7 @@
               style="margin-bottom: 10px"
             >
               <div slot="prepend" class="label">Instagram</div>
-              <Button slot="append">USB</Button>
+              <Button slot="append">USD</Button>
             </Input>
             <Input
               v-model="form.tikTok"
@@ -37,7 +37,7 @@
               style="margin-bottom: 10px"
             >
               <div slot="prepend" class="label">TikTok</div>
-              <Button slot="append">USB</Button>
+              <Button slot="append">USD</Button>
             </Input>
             <Input
               v-model="form.twitter"
@@ -45,7 +45,7 @@
               style="margin-bottom: 10px"
             >
               <div slot="prepend" class="label">Twitter</div>
-              <Button slot="append">USB</Button>
+              <Button slot="append">USD</Button>
             </Input>
             <Input
               v-model="form.twich"
@@ -53,7 +53,7 @@
               style="margin-bottom: 10px"
             >
               <div slot="prepend" class="label">Twitch</div>
-              <Button slot="append">USB</Button>
+              <Button slot="append">USD</Button>
             </Input>
             <Input
               v-model="form.pinterest"
@@ -61,7 +61,7 @@
               style="margin-bottom: 10px"
             >
               <div slot="prepend" class="label">Pinterest</div>
-              <Button slot="append">USB</Button>
+              <Button slot="append">USD</Button>
             </Input>
             <span>* other social media platforms.</span>
             <Input
@@ -71,7 +71,7 @@
             >
             </Input>
             <Input v-model="form.otherPlatformRate" type="number">
-              <Button slot="append">USB</Button>
+              <Button slot="append">USD</Button>
             </Input>
           </FormItem>
           <FormItem label="2.Accept product/sample delivery,or affiliate ways?">
@@ -97,7 +97,7 @@
           </FormItem>
         </Form>
       </div>
-      <img src="../assets/img1.png" class="img1" />
+      <img src="../assets/img1.jpg" class="img1" />
     </div>
   </div>
 </template>
@@ -186,11 +186,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.invitation {
-  min-height: 100vh;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
+@media screen and (max-width: 500px) {
   .box {
     display: flex;
     flex-direction: column;
@@ -199,38 +195,56 @@ export default {
       width: 100%;
       height: auto;
     }
-    .form {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      width: 80%;
-      margin-top: 20px;
-      margin-bottom: 10px;
-      h4 {
-        text-align: center;
-        margin-bottom: 10px;
-      }
-      /deep/ .ivu-form-item-label {
-        word-break: keep-all;
-        word-wrap: break-word;
-        text-align: left;
-      }
-      .label {
-        width: 50px;
-      }
-    }
+
     .img1 {
       width: 100%;
       height: auto;
     }
   }
 }
-@media screen and (max-width: 500px) {
-}
 @media screen and (min-width: 500px) {
   .box {
-    width: 600px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .img {
+      width: 38%;
+      height: auto;
+    }
+
+    .img1 {
+      width: 38%;
+      height: auto;
+    }
+  }
+}
+.invitation {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  .form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    h4 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    /deep/ .ivu-form-item-label {
+      word-break: keep-all;
+      word-wrap: break-word;
+      text-align: left;
+    }
+    .label {
+      width: 50px;
+    }
   }
 }
 </style>
