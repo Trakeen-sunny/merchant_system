@@ -5,16 +5,12 @@ export const aside = [
         icon:'md-albums',
         children:[]
     },
-    // {
-    //     name:'首页',
-    //     icon:'ios-appstore',
-    //     children:[
-    //         {
-    //             url:'/home/message',
-    //             name:'消息通知',
-    //         }
-    //     ]
-    // },
+    {
+        name:'营销计划',
+        icon:'ios-appstore',
+        url:'/home/market',
+        children:[]
+    },
     {
         name:'财务管理',
         icon:'logo-skype',

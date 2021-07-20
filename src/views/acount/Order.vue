@@ -52,6 +52,12 @@
         <Input v-model="value" size="large" clearable class="width" />
       </div>
       <div>
+        <span>收货国家</span>
+        <Select v-model="model1" size="large" clearable class="width">
+          <Option :value="1">全部</Option>
+        </Select>
+      </div>
+      <div>
         <Button type="info" ghost class="button" size="large">重置</Button>
         <Button type="info" class="button" size="large">查询</Button>
       </div>
@@ -73,11 +79,23 @@
             <Table :columns="columns" :data="data"></Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
-          <TabPane label="已取消" name="name4">
+          <TabPane label="退款中" name="name4">
             <Table :columns="columns" :data="data"></Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
           <TabPane label="已退款" name="name5">
+            <Table :columns="columns" :data="data"></Table>
+            <Page :total="100" show-sizer class="page" />
+          </TabPane>
+          <TabPane label="已取消" name="name6">
+            <Table :columns="columns" :data="data"></Table>
+            <Page :total="100" show-sizer class="page" />
+          </TabPane>
+          <TabPane label="已确认收获" name="name7">
+            <Table :columns="columns" :data="data"></Table>
+            <Page :total="100" show-sizer class="page" />
+          </TabPane>
+          <TabPane label="已完成" name="name8">
             <Table :columns="columns" :data="data"></Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
@@ -92,7 +110,19 @@
                 style="width: 200px"
               ></DatePicker>
             </div>
-            <Button type="info" ghost class="button">导出</Button>
+            <Dropdown style="margin-left: 20px">
+              <Button type="info" ghost class="button">
+                导出
+                <Icon type="ios-arrow-down"></Icon>
+              </Button>
+              <DropdownMenu slot="list">
+                <DropdownItem>导出CSV</DropdownItem>
+                <DropdownItem>导出XLSX</DropdownItem>
+                <DropdownItem>导出XLS</DropdownItem>
+                <DropdownItem>导出XML</DropdownItem>
+                <DropdownItem>导出MHT</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </div>
         </Tabs>
       </div>
@@ -110,38 +140,83 @@ export default {
       model1: "",
       columns: [
         {
+          type: "selection",
+          width: 40,
+          align: "center",
+        },
+        {
           title: "订单编号",
           key: "order_number",
-          align:'center'
+          align: "center",
+        },
+        {
+          title: "订单状态",
+          key: "order_number",
+          align: "center",
+        },
+        {
+          title: "商品名称",
+          key: "order_number",
+          align: "center",
+        },
+        {
+          title: "SKU",
+          key: "order_number",
+          align: "center",
+        },
+        {
+          title: "商品数量",
+          key: "order_number",
+          align: "center",
+        },
+        {
+          title: "商品单价($)",
+          key: "order_number",
+          align: "center",
         },
         {
           title: "订单金额($)",
           key: "total_price",
-          align:'center'
+          align: "center",
+        },
+        {
+          title: "优惠金额($)",
+          key: "address",
+          align: "center",
+        },
+        {
+          title: "退款金额($)",
+          key: "address",
+          align: "center",
         },
         {
           title: "佣金金额($)",
           key: "address",
-          align:'center'
+          align: "center",
         },
         {
-          title: "订单状态",
+          title: "买家ID",
           key: "address",
-          align:'center'
+          align: "center",
+        },
+        {
+          title: "收货国家",
+          key: "address",
+          align: "center",
         },
         {
           title: "创建时间",
           key: "created_at",
-          align:'center'
+          align: "center",
         },
       ],
       data: [],
     };
   },
-  created(){
+  created() {
     this.initData();
   },
-  methods:{
+  methods: {
     // 初始化数据
     initData() {
       this.$httpRequest({
@@ -150,13 +225,13 @@ export default {
         success: (res) => {
           console.log(res);
           for (const res of res.result.orderList) {
-            res.created_at = getLocalTime(res.created_at)
+            res.created_at = getLocalTime(res.created_at);
           }
-           this.data = res.result.orderList;
+          this.data = res.result.orderList;
         },
       });
     },
-  }
+  },
 };
 </script>
 <style lang="less" scoped>

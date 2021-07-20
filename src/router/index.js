@@ -85,6 +85,10 @@ const routes = [{
       path: "overview",
       name: "Overview",
       component: () => import("@/views/Index.vue"),
+    },{
+      path: "market",
+      name: "Market",
+      component: () => import("@/views/plan/Market.vue"),
     }]
   }, {
     path: '/person',
