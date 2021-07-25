@@ -4,30 +4,30 @@
     <div class="content">
       <div>
         <span class="num">{{ pendingnum }}</span>
-        <span class="title">进行中计划</span>
+        <span class="title">{{ $t("plans.minTitle1") }}</span>
       </div>
       <div>
         <span class="num">{{ endingnum }}</span>
-        <span class="title">已结束计划</span>
+        <span class="title">{{ $t("plans.minTitle2") }}</span>
       </div>
     </div>
 
     <!-- 搜索 -->
     <div class="search">
       <div>
-        <span>计划ID</span>
+        <span>{{ $t("plans.search.name1") }}</span>
         <Input v-model="form.id" size="large" clearable class="width" />
       </div>
       <div>
-        <span>商品名称</span>
+        <span>{{ $t("plans.search.name2") }}</span>
         <Input v-model="form.goodName" size="large" clearable class="width" />
       </div>
       <div>
-        <span>计划状态</span>
+        <span>{{ $t("plans.search.name3") }}</span>
         <Select v-model="form.status" size="large" clearable class="width">
-          <Option value="">全部</Option>
-          <Option :value="0">进行中</Option>
-          <Option :value="1">已结束</Option>
+          <Option value="">{{ $t("plans.select.name1") }}</Option>
+          <Option :value="0">{{ $t("plans.select.name2") }}</Option>
+          <Option :value="1">{{ $t("plans.select.name3") }}</Option>
         </Select>
       </div>
       <div>
@@ -37,39 +37,45 @@
           class="button"
           size="large"
           @click="handleReset"
-          >重置</Button
+          >{{ $t("common.reset") }}</Button
         >
-        <Button type="info" class="button" size="large" @click="handleSearch"
-          >查询</Button
-        >
+        <Button type="info" class="button" size="large" @click="handleSearch">{{
+          $t("common.search")
+        }}</Button>
       </div>
     </div>
 
     <!-- 表格 -->
     <div class="table">
       <div class="title">
-        <span class="left">营销计划明细</span>
+        <span class="left">{{ $t("plans.title") }}</span>
         <div class="right">
-          <span>最近3个月</span>
-          <span>最近6个月</span>
+          <span>{{ $t("common.searchTime1") }}</span>
+          <span>{{ $t("common.searchTime2") }}</span>
           <div>
-            <span>去年</span>
+            <span>{{ $t("common.searchTime3") }}</span>
             <DatePicker
               type="datetimerange"
               format="yyyy-MM-dd"
               style="width: 200px"
             ></DatePicker>
           </div>
-          <Button type="info" ghost class="button">导出</Button>
+          <Button type="info" ghost class="button">{{
+            $t("common.exportPage")
+          }}</Button>
         </div>
       </div>
       <Table :columns="columns" :data="data">
         <template slot-scope="{ row }" slot="status">
-          <span v-if="row.status == 0" style="color: blue">进行中</span>
-          <span v-else style="color: red">已结束</span>
+          <span v-if="row.status == 0" style="color: blue">{{
+            $t("plans.status.name1")
+          }}</span>
+          <span v-else style="color: red">{{ $t("plans.status.name2") }}</span>
         </template>
         <template slot-scope="{ row, index }" slot="action">
-          <Button type="info" @click="details(row, index)">查看</Button>
+          <Button type="info" @click="details(row, index)">{{
+            $t("plans.button.detail")
+          }}</Button>
         </template>
       </Table>
       <Page
@@ -84,31 +90,28 @@
     </div>
 
     <!-- 详情 -->
-    <Modal title="查看明细" v-model="modal" width="600">
+    <Modal :title="$t('plans.modal.title')" v-model="modal" width="600">
       <div class="content_detail">
-        <div class="li">
-          <img src="../../assets/img.jpg" />
-          <div class="detail">
-            <div>红人昵称：<span>111</span></div>
-            <div>商品链接：<span>111</span></div>
-            <div>优惠券链接：<span>111</span></div>
-            <div>
-              付款订单数：<span>{{ detail.payCount }}</span>
-            </div>
-            <div>订单销售额：<span>111</span></div>
-          </div>
-          <Button type="text" class="copy">复制链接</Button>
-        </div>
+        <Form :model="detail" label-position="left" :label-width="100">
+          <FormItem label="商品链接">
+            <Input v-model="detail.input1"></Input>
+          </FormItem>
+          <FormItem label="优惠券链接">
+            <Input v-model="detail.input2"></Input>
+          </FormItem>
+        </Form>
       </div>
       <div slot="footer">
-        <Button type="primary" size="large" ghost>取消</Button>
-        <Button type="primary" size="large">复制</Button>
+        <Button type="primary" size="large" ghost>{{
+          $t("common.cancel")
+        }}</Button>
+        <Button type="primary" size="large">{{ $t("common.copy") }}</Button>
       </div>
     </Modal>
   </div>
 </template>
 <script>
-import { plansList } from "../../api/plan";
+import { plansList, plansDetails } from "../../api/plan";
 export default {
   name: "Market",
   data() {
@@ -119,8 +122,6 @@ export default {
         status: "",
         goodName: "",
       },
-      value: "",
-      model1: "",
       columns: [
         {
           type: "selection",
@@ -128,43 +129,43 @@ export default {
           align: "center",
         },
         {
-          title: "计划ID",
+          title: this.$t("plans.table.name1"),
           key: "id",
           align: "center",
         },
         {
-          title: "商品名称",
+          title: this.$t("plans.table.name2"),
           key: "goodName",
           align: "center",
         },
         {
-          title: "计划状态",
+          title: this.$t("plans.table.name3"),
           slot: "status",
           align: "center",
         },
         {
-          title: "佣金比例(%)",
+          title: this.$t("plans.table.name4"),
           key: "commission",
           align: "center",
         },
         {
-          title: "付款订单数",
+          title: this.$t("plans.table.name5"),
           key: "payCount",
           align: "center",
         },
         {
-          title: "累计佣金($)",
+          title: this.$t("plans.table.name6"),
           key: "commissionTotal",
           align: "center",
         },
         {
-          title: "创建时间",
+          title: this.$t("plans.table.name7"),
           key: "createTime",
           align: "center",
           width: 150,
         },
         {
-          title: "操作",
+          title: this.$t("plans.table.name8"),
           slot: "action",
           align: "center",
         },
@@ -222,6 +223,13 @@ export default {
     // 查看详情
     details(row) {
       console.log(row);
+      this.$httpRequest({
+        api: plansDetails,
+        data: { id: row.id },
+        success: (res) => {
+          console.log(res);
+        },
+      });
       this.detail = row;
       this.modal = true;
     },
@@ -243,12 +251,12 @@ export default {
     },
     //重置
     handleReset() {
-      (this.form = {
+      this.form = {
         id: "",
         status: "",
         goodName: "",
-      }),
-        this.initData();
+      };
+      this.initData();
     },
   },
 };
@@ -362,39 +370,6 @@ export default {
       text-align: right;
       margin-top: 30px;
       padding-bottom: 30px;
-    }
-  }
-}
-
-// 弹窗
-.content_detail {
-  .li {
-    display: flex;
-    background: #f3f3f3;
-    padding: 10px;
-    margin-bottom: 10px;
-    img {
-      width: 60px;
-      height: 60px;
-      border-radius: 100%;
-      align-self: flex-start;
-    }
-    .detail {
-      flex: 1;
-      margin: 0 10px;
-      div {
-        font-size: 14px;
-        color: #999;
-        font-weight: bold;
-        span {
-          color: #333;
-        }
-      }
-    }
-    .copy {
-      align-self: flex-start;
-      color: #45b1b1;
-      font-weight: bold;
     }
   }
 }

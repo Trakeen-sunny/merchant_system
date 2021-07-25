@@ -4,21 +4,17 @@ import router from "./router";
 import store from "./store";
 import http from './utils/httpRequest';
 
-// import { locale } from 'iview';
-// import en from 'iview/dist/locale/en-US';
-// import zh from 'iview/dist/locale/zh-CN';
-
 import './common/iviewUI';
 import './common/theme.less';
+import { i18n } from './common/i18n/i18n';
 // import 'iview/dist/styles/iview.css';
 Vue.prototype.$httpRequest = http.request;
 Vue.config.productionTip = false;
-// Vue.use(iView);
-
-// locale(en);
+Vue.locale = () => {};
 
 new Vue({
   router,
   store,
+  i18n,
   render: (h) => h(App),
 }).$mount("#app");

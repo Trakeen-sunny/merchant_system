@@ -2,32 +2,34 @@
   <div class="acount">
     <!-- 标题一 -->
     <Row class="title">
-      <Col span="12"><span>账户信息</span></Col>
+      <Col span="12"
+        ><span>{{ $t("acount.title") }}</span></Col
+      >
       <Col span="12" class="right">
-        <Button type="info" class="button" @click="handleRecharge"
-          >立即充值</Button
-        >
+        <Button type="info" class="button" @click="handleRecharge">{{
+          $t("acount.recharge")
+        }}</Button>
       </Col>
     </Row>
 
     <div class="content">
       <div>
         <span class="num">$0</span>
-        <span class="title">支出总额</span>
+        <span class="title">{{ $t("acount.moneyLi1") }}</span>
       </div>
       <div>
         <span class="num">$0</span>
-        <span class="title">收入总额</span>
+        <span class="title">{{ $t("acount.moneyLi2") }}</span>
       </div>
       <div>
         <span class="num">$0</span>
         <span class="title"
-          ><span>账户余额</span>
+          ><span>{{ $t("acount.moneyLi3") }}</span>
           <Poptip
             word-wrap
             width="200"
             placement="bottom"
-            content=" 如果余额低于$100，我们将暂停您的服务；为了不影响你的业务，请及时充值确保账户有足够的余额。 "
+            :content="$t('acount.tip')"
           >
             <Icon type="md-list-box" color="#999" />
           </Poptip>
@@ -38,57 +40,83 @@
     <!-- 搜索 -->
     <div class="search">
       <div>
-        <span>订单编号</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <span>{{ $t("acount.table.name1") }}</span>
+        <Input v-model="form.waterNo" size="large" clearable class="width" />
       </div>
       <div>
-        <span>任务编号</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <span>{{ $t("acount.table.name2") }}</span>
+        <Input v-model="form.taskNo" size="large" clearable class="width" />
       </div>
       <div>
-        <span>交易类型</span>
-        <Select v-model="model1" size="large" clearable class="width">
-          <Option :value="1">1</Option>
-          <Option :value="2">4</Option>
-          <Option :value="3">5</Option>
+        <span>{{ $t("acount.searchName3") }}</span>
+        <Select v-model="form.tranType" size="large" clearable class="width">
+          <Option :value="1">订单成交</Option>
+          <Option :value="2">订单退款</Option>
+          <Option :value="3">佣金支出</Option>
+          <Option :value="4">佣金返还</Option>
         </Select>
       </div>
       <div>
-        <Button type="info" ghost class="button" size="large">重置</Button>
-        <Button type="info" class="button" size="large">查询</Button>
+        <Button
+          type="info"
+          ghost
+          class="button"
+          @click="handleReset"
+          size="large"
+          >{{ $t("common.reset") }}</Button
+        >
+        <Button type="info" class="button" size="large" @click="handleSearch">{{
+          $t("common.search")
+        }}</Button>
       </div>
     </div>
 
     <!-- 表格 -->
     <div class="table">
       <div class="title">
-        <span class="left">账户明细</span>
+        <span class="left">{{ $t("acount.title1") }}</span>
         <div class="right">
-          <span>最近3个月</span>
-          <span>最近6个月</span>
+          <span>{{ $t("common.searchTime1") }}</span>
+          <span>{{ $t("common.searchTime2") }}</span>
           <div>
-            <span>去年</span>
+            <span>{{ $t("common.searchTime3") }}</span>
             <DatePicker
               type="datetimerange"
               format="yyyy-MM-dd"
               style="width: 200px"
             ></DatePicker>
           </div>
-          <Button type="info" ghost class="button">导出报表</Button>
+          <Button type="info" ghost class="button">{{
+            $t("common.exportPage")
+          }}</Button>
         </div>
       </div>
       <Table :columns="columns" :data="data"></Table>
-      <Page :total="100" show-sizer class="page" />
+      <Page
+        :total="total"
+        :current="pageNo"
+        :page-size="pageSize"
+        @on-change="changePage"
+        @on-page-size-change="changeSize"
+        show-sizer
+        class="page"
+      />
     </div>
   </div>
 </template>
 <script>
+import { acountList } from "../../api/acount";
 export default {
   name: "AcountDetail",
   data() {
     return {
       value: "",
       model1: "",
+      form: {
+        waterNo: "",
+        taskNo: "",
+        tranType: "",
+      },
       columns: [
         {
           type: "selection",
@@ -96,34 +124,83 @@ export default {
           align: "center",
         },
         {
-          title: "流水单号",
-          key: "name",
+          title: this.$t("acount.table.name1"),
+          key: "waterNo",
+          align: "center",
         },
         {
-          title: "订单/任务编号",
-          key: "age",
+          title: this.$t("acount.table.name2"),
+          key: "taskNo",
+          align: "center",
         },
         {
-          title: "交易金额",
-          key: "address",
+          title: this.$t("acount.table.name3"),
+          key: "tranTotal",
+          align: "center",
         },
         {
-          title: "账户金额",
-          key: "address",
+          title: this.$t("acount.table.name4"),
+          key: "accountTotal",
+          align: "center",
         },
         {
-          title: "交易类型",
-          key: "address",
+          title: this.$t("acount.table.name5"),
+          key: "tranType",
+          align: "center",
         },
         {
-          title: "交易日期",
-          key: "address",
+          title: this.$t("acount.table.name6"),
+          key: "tranTime",
+          align: "center",
         },
       ],
       data: [],
+      pageNo: 1, //页数
+      pageSize: 10, //条数
+      total: 0, //总条数
     };
   },
+  created() {
+    this.initData();
+  },
   methods: {
+    // 初始化数据
+    initData() {
+      let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
+      this.$httpRequest({
+        api: acountList,
+        data,
+        success: (res) => {
+          console.log(res);
+          this.data = res.result.records;
+          this.total = res.result.total;
+        },
+      });
+    },
+    // 改变页数
+    changePage(page) {
+      console.log(page);
+      this.pageNo = page;
+      this.initData();
+    },
+    // 改变条数
+    changeSize(size) {
+      console.log(size);
+      this.pageSiz = size;
+      this.initData();
+    },
+    // 搜索
+    handleSearch() {
+      this.initData();
+    },
+    //重置
+    handleReset() {
+      this.form = {
+        taskNo: "",
+        tranType: "",
+      };
+      this.initData();
+    },
     handleRecharge() {
       this.$Notice.warning({
         title: "通知",

@@ -70,7 +70,7 @@
             action="//jsonplaceholder.typicode.com/posts/"
             style="display: inline-block; width: 58px"
           >
-            <div style="text-align:center;border:1px solid #e0e0e0;">
+            <div style="text-align: center; border: 1px solid #e0e0e0">
               <Icon type="ios-camera" size="20"></Icon>
             </div>
           </Upload>
@@ -165,8 +165,8 @@ export default {
   },
   methods: {
     // 图片上传成功
-    handleSuccess(res,file){
-      // console.log(res,file)
+    handleSuccess(res, file) {
+      console.log(res,file)
     },
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
@@ -175,8 +175,11 @@ export default {
             api: register,
             data: this.formInline,
             success: (res) => {
-              window.localStorage.setItem('userinfo',JSON.stringify(res.result))
-              this.$router.replace('/home');
+              window.localStorage.setItem(
+                "userinfo",
+                JSON.stringify(res.result)
+              );
+              this.$router.replace("/home");
               this.$Message.success("注册成功!");
             },
           });

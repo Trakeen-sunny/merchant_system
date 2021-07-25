@@ -68,35 +68,187 @@
       <div class="title">
         <Tabs value="name1">
           <TabPane label="全部" name="name1">
-            <Table :columns="columns" :data="data"></Table>
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="userID">
+                {{ row.customer && row.customer.id }}
+              </template>
+              <template slot-scope="{ row }" slot="title">
+                {{ row.line_items && row.line_items[0].title }}
+              </template>
+              <template slot-scope="{ row }" slot="confirmed">
+                {{ row.confirmed ? "已完成" : "未完成" }}
+              </template>
+              <template slot-scope="{ row }" slot="orderCount">
+                {{ row.customer && row.customer.orders_count }}
+              </template>
+              <template slot-scope="{ row }" slot="sku">
+                {{ row.line_items && row.line_items[0].variant_title }}
+              </template>
+              <template slot-scope="{ row }" slot="countryName">
+                {{ row.customer && row.customer.default_address.country }}
+              </template>
+            </Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
           <TabPane label="待付款" name="name2">
-            <Table :columns="columns" :data="data"></Table>
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="userID">
+                {{ row.customer && row.customer.id }}
+              </template>
+              <template slot-scope="{ row }" slot="title">
+                {{ row.line_items && row.line_items[0].title }}
+              </template>
+              <template slot-scope="{ row }" slot="confirmed">
+                {{ row.confirmed ? "已完成" : "未完成" }}
+              </template>
+              <template slot-scope="{ row }" slot="orderCount">
+                {{ row.customer && row.customer.orders_count }}
+              </template>
+              <template slot-scope="{ row }" slot="sku">
+                {{ row.line_items && row.line_items[0].variant_title }}
+              </template>
+              <template slot-scope="{ row }" slot="countryName">
+                {{ row.customer && row.customer.default_address.country }}
+              </template>
+            </Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
           <TabPane label="已付款" name="name3">
-            <Table :columns="columns" :data="data"></Table>
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="userID">
+                {{ row.customer && row.customer.id }}
+              </template>
+              <template slot-scope="{ row }" slot="title">
+                {{ row.line_items && row.line_items[0].title }}
+              </template>
+              <template slot-scope="{ row }" slot="confirmed">
+                {{ row.confirmed ? "已完成" : "未完成" }}
+              </template>
+              <template slot-scope="{ row }" slot="orderCount">
+                {{ row.customer && row.customer.orders_count }}
+              </template>
+              <template slot-scope="{ row }" slot="sku">
+                {{ row.line_items && row.line_items[0].variant_title }}
+              </template>
+              <template slot-scope="{ row }" slot="countryName">
+                {{ row.customer && row.customer.default_address.country }}
+              </template>
+            </Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
           <TabPane label="退款中" name="name4">
-            <Table :columns="columns" :data="data"></Table>
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="userID">
+                {{ row.customer && row.customer.id }}
+              </template>
+              <template slot-scope="{ row }" slot="title">
+                {{ row.line_items && row.line_items[0].title }}
+              </template>
+              <template slot-scope="{ row }" slot="confirmed">
+                {{ row.confirmed ? "已完成" : "未完成" }}
+              </template>
+              <template slot-scope="{ row }" slot="orderCount">
+                {{ row.customer && row.customer.orders_count }}
+              </template>
+              <template slot-scope="{ row }" slot="sku">
+                {{ row.line_items && row.line_items[0].variant_title }}
+              </template>
+              <template slot-scope="{ row }" slot="countryName">
+                {{ row.customer && row.customer.default_address.country }}
+              </template>
+            </Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
           <TabPane label="已退款" name="name5">
-            <Table :columns="columns" :data="data"></Table>
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="userID">
+                {{ row.customer && row.customer.id }}
+              </template>
+              <template slot-scope="{ row }" slot="title">
+                {{ row.line_items && row.line_items[0].title }}
+              </template>
+              <template slot-scope="{ row }" slot="confirmed">
+                {{ row.confirmed ? "已完成" : "未完成" }}
+              </template>
+              <template slot-scope="{ row }" slot="orderCount">
+                {{ row.customer && row.customer.orders_count }}
+              </template>
+              <template slot-scope="{ row }" slot="sku">
+                {{ row.line_items && row.line_items[0].variant_title }}
+              </template>
+              <template slot-scope="{ row }" slot="countryName">
+                {{ row.customer && row.customer.default_address.country }}
+              </template>
+            </Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
           <TabPane label="已取消" name="name6">
-            <Table :columns="columns" :data="data"></Table>
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="userID">
+                {{ row.customer && row.customer.id }}
+              </template>
+              <template slot-scope="{ row }" slot="title">
+                {{ row.line_items && row.line_items[0].title }}
+              </template>
+              <template slot-scope="{ row }" slot="confirmed">
+                {{ row.confirmed ? "已完成" : "未完成" }}
+              </template>
+              <template slot-scope="{ row }" slot="orderCount">
+                {{ row.customer && row.customer.orders_count }}
+              </template>
+              <template slot-scope="{ row }" slot="sku">
+                {{ row.line_items && row.line_items[0].variant_title }}
+              </template>
+              <template slot-scope="{ row }" slot="countryName">
+                {{ row.customer && row.customer.default_address.country }}
+              </template>
+            </Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
           <TabPane label="已确认收获" name="name7">
-            <Table :columns="columns" :data="data"></Table>
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="userID">
+                {{ row.customer && row.customer.id }}
+              </template>
+              <template slot-scope="{ row }" slot="title">
+                {{ row.line_items && row.line_items[0].title }}
+              </template>
+              <template slot-scope="{ row }" slot="confirmed">
+                {{ row.confirmed ? "已完成" : "未完成" }}
+              </template>
+              <template slot-scope="{ row }" slot="orderCount">
+                {{ row.customer && row.customer.orders_count }}
+              </template>
+              <template slot-scope="{ row }" slot="sku">
+                {{ row.line_items && row.line_items[0].variant_title }}
+              </template>
+              <template slot-scope="{ row }" slot="countryName">
+                {{ row.customer && row.customer.default_address.country }}
+              </template>
+            </Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
           <TabPane label="已完成" name="name8">
-            <Table :columns="columns" :data="data"></Table>
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="userID">
+                {{ row.customer && row.customer.id }}
+              </template>
+              <template slot-scope="{ row }" slot="title">
+                {{ row.line_items && row.line_items[0].title }}
+              </template>
+              <template slot-scope="{ row }" slot="confirmed">
+                {{ row.confirmed ? "已完成" : "未完成" }}
+              </template>
+              <template slot-scope="{ row }" slot="orderCount">
+                {{ row.customer && row.customer.orders_count }}
+              </template>
+              <template slot-scope="{ row }" slot="sku">
+                {{ row.line_items && row.line_items[0].variant_title }}
+              </template>
+              <template slot-scope="{ row }" slot="countryName">
+                {{ row.customer && row.customer.default_address.country }}
+              </template>
+            </Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
           <div class="right" slot="extra">
@@ -151,27 +303,27 @@ export default {
         },
         {
           title: "订单状态",
-          key: "order_number",
+          slot: "confirmed",
           align: "center",
         },
         {
           title: "商品名称",
-          key: "order_number",
+          slot: "title",
           align: "center",
         },
         {
           title: "SKU",
-          key: "order_number",
+          slot: "sku",
           align: "center",
         },
         {
           title: "商品数量",
-          key: "order_number",
+          slot: "orderCount",
           align: "center",
         },
         {
           title: "商品单价($)",
-          key: "order_number",
+          key: "total_line_items_price",
           align: "center",
         },
         {
@@ -181,27 +333,27 @@ export default {
         },
         {
           title: "优惠金额($)",
-          key: "address",
+          key: "total_discounts",
           align: "center",
         },
         {
           title: "退款金额($)",
-          key: "address",
+          key: "total_price",
           align: "center",
         },
         {
           title: "佣金金额($)",
-          key: "address",
+          key: "total_tax",
           align: "center",
         },
         {
           title: "买家ID",
-          key: "address",
+          slot: "userID",
           align: "center",
         },
         {
           title: "收货国家",
-          key: "address",
+          slot: "countryName",
           align: "center",
         },
         {

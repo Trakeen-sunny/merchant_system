@@ -10,7 +10,7 @@
       >
         <!-- <div class="logo">{{getUserInfo.websiteName}}</div> -->
         <div class="logo">
-          <img style="width:95%;height:27%;" src="../assets/logo.png" />
+          <img style="width: 95%; height: 27%" src="../assets/logo.png" />
         </div>
         <Aside :isCollapsed="isCollapsed"></Aside>
       </Sider>
@@ -67,9 +67,10 @@
                 <span>{{ getUserInfo.shopName }}</span>
               </div>
               <DropdownMenu slot="list">
-                <DropdownItem name="1">个人中心</DropdownItem>
-                <DropdownItem name="2">消息通知</DropdownItem>
-                <DropdownItem name="3">退出登录</DropdownItem>
+                <DropdownItem name="1">商家信息</DropdownItem>
+                <DropdownItem name="2">个人信息</DropdownItem>
+                <DropdownItem name="3">消息通知</DropdownItem>
+                <DropdownItem name="4">退出登录</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -133,12 +134,14 @@ export default {
       this.$router.push({ name: "Message" });
     },
     handleDropDown(ev) {
-      if (ev == 3) {
-        this.modal1 = true;
-      } else if (ev == 1) {
+      if (ev == 1) {
         this.$router.push({ name: "SetupProduct" });
       } else if (ev == 2) {
+        this.$router.push({ name: "SetupPersion" });
+      } else if (ev == 3) {
         this.$router.push({ name: "Message" });
+      } else if (ev == 4) {
+        this.modal1 = true;
       }
     },
     ok() {

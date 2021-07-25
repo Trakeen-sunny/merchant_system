@@ -78,6 +78,10 @@ const routes = [{
       name: "SetupProduct",
       component: () => import("@/views/setup/Product.vue"),
     }, {
+      path: "setup_persion",
+      name: "SetupPersion",
+      component: () => import("@/views/setup/Persion.vue"),
+    }, {
       path: "sale",
       name: "Sale",
       component: () => import("@/views/statistics/sale.vue"),
