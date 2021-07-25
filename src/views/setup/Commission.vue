@@ -251,6 +251,7 @@
   </div>
 </template>
 <script>
+import { goodsCommission } from "../../api/setup";
 export default {
   name: "SetupCommission",
   data() {
@@ -324,6 +325,19 @@ export default {
     };
   },
   methods: {
+    // 初始化数据
+    initData() {
+      this.$httpRequest({
+        api: goodsCommission,
+        data: {},
+        success: (res) => {
+          console.log(res);
+          this.data = res.result.prodList;
+          this.detailObj = this.data[0];
+          console.log(this.data);
+        },
+      });
+    },
     handleEdit() {
       this.modal1 = true;
     },

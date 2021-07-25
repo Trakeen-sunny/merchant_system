@@ -128,10 +128,14 @@
     <div class="table">
       <Table :columns="columns" :data="data">
         <template slot-scope="{ row }" slot="img">
-          <img :src="row.image.src" style="width: 80px; height: 80px" />
+          <img
+            v-if="row.image"
+            :src="row.image.src"
+            style="width: 80px; height: 80px"
+          />
         </template>
         <template slot-scope="{ row }" slot="position">
-          {{ row.image.position }}
+          {{ row.image ? row.image.position : "" }}
         </template>
         <template slot-scope="{ row, index }" slot="action">
           <Button type="info" @click="details(row, index)">查看</Button>
@@ -142,6 +146,7 @@
       </Table>
       <Page :total="100" show-sizer class="page" />
     </div>
+    <!-- 查看详情 -->
     <Modal v-model="modal1" title="查看" width="1200">
       <Form
         :model="detailObj"
@@ -203,16 +208,15 @@
     <Modal
       v-model="modal2"
       title="设置佣金"
-      @on-ok="ok"
-      @on-cancel="cancel"
+      @on-ok="handleCommosion"
       width="500"
     >
-      <Form ref="formValidate" :model="formValidate" :label-width="80">
+      <Form ref="setCommision" :model="setCommision" :label-width="80">
         <FormItem label="已选中:">
-          <span>纯棉短袖、牛仔裤</span>
+          <span>{{ setCommision.title }}</span>
         </FormItem>
         <FormItem label="佣金比例" prop="number">
-          <Input v-model="formValidate.number">
+          <Input v-model="setCommision.number" type="number">
             <span slot="append">$</span>
           </Input>
         </FormItem>
@@ -252,17 +256,19 @@
           <span>纯棉短袖、牛仔裤</span>
         </FormItem>
         <FormItem label="推广有效期:" prop="number">
-          <DatePicker type="date" placeholder="" ></DatePicker>
+          <DatePicker type="date" placeholder=""></DatePicker>
         </FormItem>
-        <FormItem label="" label-width="10">
-          <div>注:如已选择推广有效期，则系统自动根据截止时间结束，无法手动结束。</div>
+        <FormItem label="" :v-else="10">
+          <div>
+            注:如已选择推广有效期，则系统自动根据截止时间结束，无法手动结束。
+          </div>
         </FormItem>
       </Form>
     </Modal>
   </div>
 </template>
 <script>
-import { goodsList } from "../../api/material";
+import { goodsList, setCommission } from "../../api/material";
 export default {
   name: "Product",
   data() {
@@ -396,6 +402,9 @@ export default {
           align: "center",
         },
       ],
+      setCommision: {
+        number: 0,
+      }, //设置佣金
     };
   },
   created() {
@@ -413,20 +422,38 @@ export default {
         success: (res) => {
           console.log(res);
           this.data = res.result.prodList;
-          this.detailObj = this.data[0];
           console.log(this.data);
         },
       });
     },
     // 查看详情
-    details(row, i) {
+    details(row) {
       this.detailObj = row;
-      console.log(row, i);
       this.modal1 = true;
     },
     // 设置佣金
-    setMoney() {
+    setMoney(row) {
+      console.log(row);
+      row.number = 0;
       this.modal2 = true;
+      this.setCommision = row;
+    },
+    // 设置佣金
+    handleCommosion() {
+      this.$httpRequest({
+        api: setCommission,
+        data: {
+          commission: this.setCommision.number,
+          goodId: this.setCommision.id,
+          goodName: this.setCommision.title,
+        },
+        success: (res) => {
+          console.log(res);
+          this.modal2 = false;
+          this.$Message.success(res.message);
+          this.initData();
+        },
+      });
     },
     // 设置开启关闭状态
     setStatus() {
