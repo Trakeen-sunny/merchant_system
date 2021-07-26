@@ -135,7 +135,12 @@ const routes = [{
   {
     path: "/invitation",
     name: "Invitation",
-    component: () => import("@/views/Invitation.vue"),
+    component: () => import("@/views/invitation/Invitation.vue"),
+  },
+  {
+    path: "/thanks",
+    name: "Thanks",
+    component: () => import("@/views/invitation/Thanks.vue"),
   },
 ];
 

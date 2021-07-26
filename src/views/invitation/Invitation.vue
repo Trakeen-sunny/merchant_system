@@ -1,24 +1,16 @@
 <template>
   <div class="invitation">
     <div class="box">
-      <img src="../assets/img.jpg" class="img" />
+      <img src="../../assets/img.jpg" class="img" />
       <div class="form">
         <h4>Here we need some information about cooperation preferences:</h4>
         <Form :model="form" label-position="top">
           <FormItem label="1.What is the compensation rate?">
-            <!-- <Input
-              v-for="(item, index) in formItem"
-              :key="index"
-              v-model="item.value"
-              style="margin-bottom: 10px"
-            > 
-              <div slot="prepend" class="label">{{ item.name }}</div>
-              <Button slot="append">USB</Button>
-            </Input> -->
             <Input
               v-model="form.youTuBe"
               type="number"
               style="margin-bottom: 10px"
+              required
             >
               <div slot="prepend" class="label">YouTube</div>
               <Button slot="append">USD</Button>
@@ -97,13 +89,13 @@
           </FormItem>
         </Form>
       </div>
-      <img src="../assets/img1.jpg" class="img1" />
+      <img src="../../assets/img1.jpg" class="img1" />
     </div>
   </div>
 </template>
 
 <script>
-import { collect_add } from "../api/invitation";
+import { collect_add } from "../../api/invitation";
 export default {
   name: "Invitation",
   data() {
@@ -150,11 +142,36 @@ export default {
       ],
     };
   },
-  created() {},
+  created() {
+  },
   computed: {},
   mounted() {},
   methods: {
     handleSubmit() {
+      if (this.form.youTuBe == "") {
+        this.$Message.info("请输入YouTube");
+        return;
+      }
+      if (this.form.instagram == "") {
+        this.$Message.info("请输入Instagram");
+        return;
+      }
+      if (this.form.tikTok == "") {
+        this.$Message.info("请输入TikTok");
+        return;
+      }
+      if (this.form.twitter == "") {
+        this.$Message.info("请输入Twitter");
+        return;
+      }
+      if (this.form.twich == "") {
+        this.$Message.info("请输入Twitch");
+        return;
+      }
+      if (this.form.pinterest == "") {
+        this.$Message.info("请输入Pinterest");
+        return;
+      }
       this.form.email = this.$route.query.email;
       this.$httpRequest({
         api: collect_add,
@@ -176,6 +193,7 @@ export default {
               accept: 1,
               infoCollectcol: "",
             };
+            this.$router.replace({path:"/thanks"})
           } else {
             this.$Message.info(res.message);
           }
@@ -243,7 +261,12 @@ export default {
       text-align: left;
     }
     .label {
-      width: 50px;
+      width: 60px;
+    }
+    .label::before {
+      content: "*";
+      color: red;
+      font-size: 17px;
     }
   }
 }
