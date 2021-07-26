@@ -5,24 +5,29 @@
     :class="menuitemClasses"
     style="background-color: #335850"
   >
-    <div v-for="(item, index) in asideArr" :key="index" >
-      <Submenu v-if="item.children.length > 0" :name="index + 1">
-        <template slot="title">
+    <div v-for="(item, index) in asideArr" :key="index">
+      <div v-if="item.children.length > 0">
+        <Submenu :name="index + 1" v-if="item.isShow">
+          <template slot="title">
+            <Icon :type="item.icon" class="icon" size="23" />
+            <span>{{ item.name }}</span>
+          </template>
+          <div v-for="(itm, i) in item.children" :key="i">
+            <MenuItem
+              :name="index + 1 + '-' + i"
+              :to="itm.url"
+              v-if="itm.isShow"
+              ><span>{{ itm.name }}</span></MenuItem
+            >
+          </div>
+        </Submenu>
+      </div>
+      <div v-else>
+        <MenuItem :name="index + 1" :to="item.url" v-if="item.isShow">
           <Icon :type="item.icon" class="icon" size="23" />
           <span>{{ item.name }}</span>
-        </template>
-        <MenuItem
-          v-for="(itm, i) in item.children"
-          :key="i"
-          :name="index + 1 + '-' + i"
-          :to="itm.url"
-          ><span>{{ itm.name }}</span></MenuItem
-        >
-      </Submenu>
-      <MenuItem :name="index+1" :to="item.url" v-else>
-        <Icon :type="item.icon" class="icon" size="23" />
-        <span>{{item.name}}</span>
-      </MenuItem>
+        </MenuItem>
+      </div>
     </div>
   </Menu>
 </template>
@@ -44,6 +49,19 @@ export default {
       return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
     },
     asideArr() {
+      // 角色判断 userRole 0 管理员 1 普通用户 2 网红
+      let userRole = JSON.parse(
+        window.localStorage.getItem("userinfo")
+      ).userRole;
+      for (const res of aside) {
+        res.isShow = res.userRole.includes(userRole);
+        if (res.children.length > 0) {
+          for (const re of res.children) {
+            re.isShow = re.userRole.includes(userRole);
+          }
+        }
+      }
+      console.log(aside);
       return aside;
     },
   },
@@ -87,7 +105,7 @@ export default {
 .icon {
   color: #fff;
 }
- .ivu-menu-vertical.ivu-menu-light:after{
-   background: transparent;
- }
+.ivu-menu-vertical.ivu-menu-light:after {
+  background: transparent;
+}
 </style>

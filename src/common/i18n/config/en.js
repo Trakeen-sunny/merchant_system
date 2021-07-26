@@ -14,9 +14,15 @@ export default {
         searchTime2: "Last 6 months",
         searchTime3: "Last year",
         exportPage: "Generate Report",
+        kefu:"Customer Service",
+        helpCenter:"Help Center",
+        feedback:"Feedback / Suggestions",
+        notice:"Notice",
+        userInfo:"Personal Information"
     },
     // 账户中心
     acount: {
+        mainAsideName:"Financial Management",
         asideName:"Account center",
         title: "Account information",
         title1: "Account details",

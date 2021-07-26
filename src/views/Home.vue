@@ -24,7 +24,7 @@
             size="24"
           ></Icon>
           <div class="right">
-            <Tooltip content="客服" class="tooltip">
+            <Tooltip :content="$t('common.kefu')" class="tooltip" v-if="userRole!=2">
               <Icon
                 type="logo-whatsapp"
                 color="#666"
@@ -32,7 +32,7 @@
                 @click="handleGoto"
               />
             </Tooltip>
-            <Tooltip content="帮助中心" class="tooltip">
+            <Tooltip :content="$t('common.helpCenter')" class="tooltip" v-if="userRole!=2">
               <Icon
                 type="md-help-circle"
                 color="#666"
@@ -40,7 +40,7 @@
                 @click="handleGoto"
               />
             </Tooltip>
-            <Tooltip content="反馈/建议" class="tooltip">
+            <Tooltip :content="$t('common.feedback')" class="tooltip" v-if="userRole!=2">
               <Icon
                 type="md-paper"
                 color="#666"
@@ -48,7 +48,7 @@
                 @click="handleGoTo1"
               />
             </Tooltip>
-            <Tooltip content="通知" class="tooltip">
+            <Tooltip :content="$t('common.notice')" class="tooltip" v-if="userRole!=2">
               <Icon
                 type="md-notifications-outline"
                 color="#666"
@@ -66,11 +66,13 @@
                 />
                 <span>{{ getUserInfo.shopName }}</span>
               </div>
-              <DropdownMenu slot="list">
+              <DropdownMenu slot="list" v-if="userRole!=2">
                 <DropdownItem name="1">商家信息</DropdownItem>
-                <DropdownItem name="2">个人信息</DropdownItem>
                 <DropdownItem name="3">消息通知</DropdownItem>
                 <DropdownItem name="4">退出登录</DropdownItem>
+              </DropdownMenu>
+              <DropdownMenu slot="list" v-else>
+                <DropdownItem name="2">{{$t('common.userInfo')}}</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -118,6 +120,10 @@ export default {
     },
     getUserInfo() {
       return JSON.parse(window.localStorage.getItem("userinfo"));
+    },
+    userRole() {
+      // 角色判断 userRole 0 管理员 1 普通用户 2 网红
+      return JSON.parse(window.localStorage.getItem("userinfo")).userRole;
     },
   },
   methods: {

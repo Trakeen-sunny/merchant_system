@@ -11,7 +11,6 @@ import { i18n } from './common/i18n/i18n';
 Vue.prototype.$httpRequest = http.request;
 Vue.config.productionTip = false;
 Vue.locale = () => {};
-
 new Vue({
   router,
   store,

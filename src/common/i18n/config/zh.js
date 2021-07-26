@@ -14,9 +14,15 @@ export default {
         searchTime2: "最近6个月",
         searchTime3: "去年",
         exportPage: "导出报表",
+        kefu:"客服",
+        helpCenter:"帮助中心",
+        feedback:"反馈/建议",
+        notice:"通知",
+        userInfo:"个人信息"
     },
     // 账户中心
     acount: {
+        mainAsideName:"财务管理",
         asideName:"账户中心",
         title: "账户信息",
         title1: "账户明细",

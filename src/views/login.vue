@@ -99,11 +99,20 @@ export default {
                 api: getUsersByToken,
                 data: {},
                 success: (res) => {
+                  // console.log(res.result.userRole);
+                  // res.result.userRole = 2;
                   window.localStorage.setItem(
                     "userinfo",
                     JSON.stringify(res.result)
                   );
-                  this.$router.replace("/home");
+                  let timer = setTimeout(() => {
+                    if (res.result.userRole != 2) {
+                      this.$router.replace("/home");
+                    } else {
+                      this.$router.replace("/home/acount_detail");
+                    }
+                    clearTimeout(timer);
+                  }, 1000);
                   this.$Message.success("登录成功!");
                 },
               });

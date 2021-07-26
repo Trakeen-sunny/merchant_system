@@ -1,105 +1,102 @@
-export const aside = [
-    {
-        name:'首页',
-        url:'/home',
-        icon:'md-albums',
-        children:[]
+// 角色判断 userRole 0 管理员 1 普通用户 2 网红
+export const aside = [{
+        name: '首页',
+        url: '/home',
+        icon: 'md-albums',
+        userRole: [0, 1],
+        children: []
     },
     {
-        name:'财务管理',
-        icon:'logo-skype',
-        children:[
-            {
-                url:'/home/acount_detail',
-                name:'账户中心',
-
+        name: JSON.parse(window.localStorage.getItem('userinfo')).userRole != 2 ? '财务管理' : 'Financial',
+        icon: 'logo-skype',
+        userRole: [0, 1, 2],
+        children: [{
+                url: '/home/acount_detail',
+                name: JSON.parse(window.localStorage.getItem('userinfo')).userRole != 2 ? '账户中心' : 'Account center',
+                userRole: [0, 1, 2],
             },
-            // {
-            //     url:'/home/commision',
-            //     name:'佣金支出',
-                
-            // },{
-            //     url:'/home/profit',
-            //     name:'推荐收益明细',
-                
-            // },
             {
-                url:'/home/recharge',
-                name:'充值记录',
-                
-            }
-            // {
-            //     url:'/home/order',
-            //     name:'订单中心',
-            // }
-        ]
-    },
-    {
-        name:'订单中心',
-        url:'/home/order',
-        icon:'md-book',
-        children:[]
-    },
-    {
-        name:'营销计划',
-        icon:'ios-appstore',
-        url:'/home/market',
-        children:[]
-    },
-    {
-        name:'合作者管理',
-        icon:'md-people',
-        children:[
-            {
-                url:'/home/collaborator',
-                name:'合作者管理',
+                url: '/home/recharge',
+                name: '充值记录',
+                userRole: [0, 1],
             }
         ]
     },
     {
-        name:'素材管理',
-        icon:'md-photos',
-        children:[
-            {
-                url:'/home/product',
-                name:'商品管理',
+        name: '订单中心',
+        url: '/home/order',
+        icon: 'md-book',
+        userRole: [0, 1],
+        children: []
+    },
+    {
+        name: JSON.parse(window.localStorage.getItem('userinfo')).userRole != 2 ? '营销计划' : 'Marketing Plan',
+        icon: 'ios-appstore',
+        url: '/home/market',
+        userRole: [0, 1, 2],
+        children: []
+    },
+    {
+        name: '合作者管理',
+        icon: 'md-people',
+        userRole: [0, 1],
+        children: [{
+            url: '/home/collaborator',
+            name: '合作者管理',
+            userRole: [0, 1],
+        }]
+    },
+    {
+        name: '素材管理',
+        icon: 'md-photos',
+        userRole: [0, 1],
+        children: [{
+                url: '/home/product',
+                name: '商品管理',
+                userRole: [0, 1],
 
             },
             {
-                url:'/home/coupon',
-                name:'优惠券管理',
-                
-            },{
-                url:'/home/picture',
-                name:'图片管理',
-                
+                url: '/home/coupon',
+                name: '优惠券管理',
+                userRole: [0, 1],
+
+            }, {
+                url: '/home/picture',
+                name: '图片管理',
+                userRole: [0, 1],
+
             }
         ]
-    },{
-        name:'设置',
-        icon:'md-settings',
-        children:[
-            {
-                url:'/home/setup_commission',
-                name:'佣金管理',
+    }, {
+        name: '设置',
+        icon: 'md-settings',
+        userRole: [0, 1],
+        children: [{
+                url: '/home/setup_commission',
+                name: '佣金管理',
+                userRole: [0, 1],
             },
             {
-                url:'/home/setup_product',
-                name:'商家信息',
+                url: '/home/setup_product',
+                name: '商家信息',
+                userRole: [0, 1],
             }
         ]
     },
     {
-        name:'统计',
-        icon:'ios-stats',
-        children:[
-            {
-                url:'/home/overview',
-                name:'统计概览',
+        name: '统计',
+        icon: 'ios-stats',
+        userRole: [0, 1],
+        children: [{
+                url: '/home/overview',
+                name: '统计概览',
+                userRole: [0, 1],
             },
             {
-                url:'/home/sale',
-                name:'销售统计',
+                url: '/home/sale',
+                name: '销售统计',
+                userRole: [0, 1],
             }
         ]
     }

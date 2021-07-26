@@ -55,7 +55,7 @@
               <div slot="prepend" class="label">Pinterest</div>
               <Button slot="append">USD</Button>
             </Input>
-            <span>* other social media platforms.</span>
+            <span>other social media platforms.</span>
             <Input
               v-model="form.otherPlatform"
               style="margin-bottom: 10px"
@@ -107,8 +107,8 @@ export default {
         twitter: "",
         twich: "",
         pinterest: "",
-        otherPlatform: "",
-        otherPlatformRate: "",
+        otherPlatform: null,
+        otherPlatformRate: null,
         accept: 1,
         infoCollectcol: "",
       },
@@ -143,11 +143,16 @@ export default {
     };
   },
   created() {
+    console.log(this.$route.query.email);
   },
   computed: {},
   mounted() {},
   methods: {
     handleSubmit() {
+      if (!this.$route.query.email) {
+        this.$Message.info("无法获取您的邮箱");
+        return;
+      }
       if (this.form.youTuBe == "") {
         this.$Message.info("请输入YouTube");
         return;
@@ -179,7 +184,7 @@ export default {
         success: (res) => {
           console.log(res);
           if (res.code == 0) {
-            this.$Message.success(res.message);
+            this.$Message.success("Completed");
             this.disabled = true;
             this.form = {
               youTuBe: "",
@@ -193,7 +198,7 @@ export default {
               accept: 1,
               infoCollectcol: "",
             };
-            this.$router.replace({path:"/thanks"})
+            this.$router.replace({ path: "/thanks" });
           } else {
             this.$Message.info(res.message);
           }
