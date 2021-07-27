@@ -101,18 +101,18 @@
 </template>
 
 <script>
-import { collect_add } from "../../api/invitation";
+import { collect_add, entryInfo_add } from "../../api/invitation";
 export default {
   name: "Invitation",
   data() {
     return {
       form: {
-        youTuBe: "",
-        instagram: "",
-        tikTok: "",
-        twitter: "",
-        twich: "",
-        pinterest: "",
+        youTuBe: null,
+        instagram: null,
+        tikTok: null,
+        twitter: null,
+        twich: null,
+        pinterest: null,
         otherPlatform: null,
         otherPlatformRate: null,
         accept: 1,
@@ -150,23 +150,36 @@ export default {
     };
   },
   created() {
-    console.log(this.$route.query.email);
+    this.initData();
   },
   computed: {},
   mounted() {},
+  destroyed() {},
   methods: {
+    // 初始化调接口
+    initData() {
+      this.$httpRequest({
+        api: entryInfo_add,
+        data: {
+          email: this.$route.query.email,
+        },
+        success: (res) => {
+          console.log(res);
+        },
+      });
+    },
     handleSubmit() {
       if (!this.$route.query.email) {
         this.$Message.info("无法获取您的邮箱");
         return;
       }
       if (
-        this.form.youTuBe == "" &&
-        this.form.instagram == "" &&
-        this.form.tikTok == "" &&
-        this.form.twitter == "" &&
-        this.form.twich == "" &&
-        this.form.pinterest == ""
+        this.form.youTuBe == null &&
+        this.form.instagram == null &&
+        this.form.tikTok == null &&
+        this.form.twitter == null &&
+        this.form.twich == null &&
+        this.form.pinterest == null
       ) {
         //this.$Message.info("请输入YouTube");
         this.red = true;
@@ -183,14 +196,14 @@ export default {
             this.$Message.success("Completed");
             this.disabled = true;
             this.form = {
-              youTuBe: "",
-              instagram: "",
-              tikTok: "",
-              twitter: "",
-              twich: "",
-              pinterest: "",
-              otherPlatform: "",
-              otherPlatformRate: "",
+              youTuBe: null,
+              instagram: null,
+              tikTok: null,
+              twitter: null,
+              twich: null,
+              pinterest: null,
+              otherPlatform: null,
+              otherPlatformRate: null,
               accept: 1,
               infoCollectcol: "",
             };
