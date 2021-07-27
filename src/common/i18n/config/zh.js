@@ -77,7 +77,9 @@ export default {
             name8: "操作"
         },
         modal:{
-            title:"查看明细"
+            title:"查看明细",
+            formItem1:"商品链接",
+            formItem2:"优惠券链接"
         }
     },
     // 个人中心

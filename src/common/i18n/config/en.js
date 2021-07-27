@@ -77,7 +77,9 @@ export default {
             name8: "Actions"
         },
         modal:{
-            title:"detail"
+            title:"detail",
+            formItem1:"Product Link",
+            formItem2:"Coupon Link"
         }
     },
     // 个人中心
