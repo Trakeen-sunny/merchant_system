@@ -22,7 +22,7 @@ export default {
     },
     // 账户中心
     acount: {
-        mainAsideName:"Financial Management",
+        mainAsideName:"Financial",
         asideName:"Account center",
         title: "Account information",
         title1: "Account details",

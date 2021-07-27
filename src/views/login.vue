@@ -86,6 +86,9 @@ export default {
       },
     };
   },
+  created(){
+    console.log(this.$i18n.locale)
+  },
   methods: {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
@@ -99,17 +102,17 @@ export default {
                 api: getUsersByToken,
                 data: {},
                 success: (res) => {
-                  // console.log(res.result.userRole);
-                  // res.result.userRole = 2;
                   window.localStorage.setItem(
                     "userinfo",
                     JSON.stringify(res.result)
                   );
                   let timer = setTimeout(() => {
-                    if (res.result.userRole != 2) {
+                    if (res.result&&res.result.userRole != 2) {
                       this.$router.replace("/home");
+                      this.$i18n.locale = "zh";
                     } else {
                       this.$router.replace("/home/acount_detail");
+                      this.$i18n.locale = "en"
                     }
                     clearTimeout(timer);
                   }, 1000);

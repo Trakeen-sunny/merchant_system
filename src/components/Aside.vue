@@ -49,20 +49,32 @@ export default {
       return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
     },
     asideArr() {
-      // 角色判断 userRole 0 管理员 1 普通用户 2 网红
-      let userRole = JSON.parse(
-        window.localStorage.getItem("userinfo")
-      ).userRole;
+      //Financial  Account center  Marketing Plan
+      let userinfo = JSON.parse(window.localStorage.getItem("userinfo"));
       for (const res of aside) {
-        res.isShow = res.userRole.includes(userRole);
+        if (res.userRole.includes(userinfo.userRole)) {
+          if (res.name == "财务管理") {
+            res.name = this.$t("acount.mainAsideName");
+          }
+          if (res.name == "营销计划") {
+            res.name = this.$t("plans.asideName");
+          }
+        }
+        res.isShow = res.userRole.includes(userinfo.userRole);
         if (res.children.length > 0) {
           for (const re of res.children) {
-            re.isShow = re.userRole.includes(userRole);
+            re.isShow = re.userRole.includes(userinfo.userRole);
+            if (re.userRole.includes(userinfo.userRole)) {
+              if (re.name == "账户中心") {
+                re.name = this.$t("acount.asideName");
+              }
+            }
           }
         }
       }
-      console.log(aside);
-      return aside;
+      console.log(aside)
+      return aside;    
+;
     },
   },
   methods: {},

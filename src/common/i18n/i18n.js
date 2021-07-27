@@ -11,8 +11,8 @@ const messages = {
     zh: Object.assign(custom_zh, zh),
 }
 // 角色判断 userRole 0 管理员 1 普通用户 2 网红
-let userRole = JSON.parse(window.localStorage.getItem('userinfo')).userRole;
+let userinfo = JSON.parse(window.localStorage.getItem('userinfo')) || {};
 export const i18n = new VueI18n({
-    locale: userRole==2?'en':'zh', //设置地区
+    locale: userinfo.userRole!=2?'zh':'en', //设置地区
     messages
 })

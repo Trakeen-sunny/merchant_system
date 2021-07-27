@@ -24,7 +24,7 @@
             size="24"
           ></Icon>
           <div class="right">
-            <Tooltip :content="$t('common.kefu')" class="tooltip" v-if="userRole!=2">
+            <Tooltip :content="$t('common.kefu')" class="tooltip" v-if="getUserInfo.userRole!=2">
               <Icon
                 type="logo-whatsapp"
                 color="#666"
@@ -32,7 +32,7 @@
                 @click="handleGoto"
               />
             </Tooltip>
-            <Tooltip :content="$t('common.helpCenter')" class="tooltip" v-if="userRole!=2">
+            <Tooltip :content="$t('common.helpCenter')" class="tooltip" v-if="getUserInfo.userRole!=2">
               <Icon
                 type="md-help-circle"
                 color="#666"
@@ -40,7 +40,7 @@
                 @click="handleGoto"
               />
             </Tooltip>
-            <Tooltip :content="$t('common.feedback')" class="tooltip" v-if="userRole!=2">
+            <Tooltip :content="$t('common.feedback')" class="tooltip" v-if="getUserInfo.userRole!=2">
               <Icon
                 type="md-paper"
                 color="#666"
@@ -48,7 +48,7 @@
                 @click="handleGoTo1"
               />
             </Tooltip>
-            <Tooltip :content="$t('common.notice')" class="tooltip" v-if="userRole!=2">
+            <Tooltip :content="$t('common.notice')" class="tooltip" v-if="getUserInfo.userRole!=2">
               <Icon
                 type="md-notifications-outline"
                 color="#666"
@@ -66,7 +66,7 @@
                 />
                 <span>{{ getUserInfo.shopName }}</span>
               </div>
-              <DropdownMenu slot="list" v-if="userRole!=2">
+              <DropdownMenu slot="list" v-if="getUserInfo.userRole!=2">
                 <DropdownItem name="1">商家信息</DropdownItem>
                 <DropdownItem name="3">消息通知</DropdownItem>
                 <DropdownItem name="4">退出登录</DropdownItem>
@@ -113,18 +113,16 @@ export default {
       isCollapsed: false,
     };
   },
-  created() {},
+  created() {
+    console.log(JSON.parse(window.localStorage.getItem("userinfo")))
+  },
   computed: {
     rotateIcon() {
       return ["menu-icon", this.isCollapsed ? "rotate-icon" : ""];
     },
     getUserInfo() {
       return JSON.parse(window.localStorage.getItem("userinfo"));
-    },
-    userRole() {
-      // 角色判断 userRole 0 管理员 1 普通用户 2 网红
-      return JSON.parse(window.localStorage.getItem("userinfo")).userRole;
-    },
+    }
   },
   methods: {
     collapsedSider() {

@@ -7,12 +7,12 @@ export const aside = [{
         children: []
     },
     {
-        name: JSON.parse(window.localStorage.getItem('userinfo')).userRole != 2 ? '财务管理' : 'Financial',
+        name: '财务管理',
         icon: 'logo-skype',
         userRole: [0, 1, 2],
         children: [{
                 url: '/home/acount_detail',
-                name: JSON.parse(window.localStorage.getItem('userinfo')).userRole != 2 ? '账户中心' : 'Account center',
+                name: '账户中心',
                 userRole: [0, 1, 2],
             },
             {
@@ -30,7 +30,7 @@ export const aside = [{
         children: []
     },
     {
-        name: JSON.parse(window.localStorage.getItem('userinfo')).userRole != 2 ? '营销计划' : 'Marketing Plan',
+        name: '营销计划',
         icon: 'ios-appstore',
         url: '/home/market',
         userRole: [0, 1, 2],
