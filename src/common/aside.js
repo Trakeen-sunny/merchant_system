@@ -33,7 +33,7 @@ export const aside = [{
         name: '营销计划',
         icon: 'ios-appstore',
         url: '/home/market',
-        userRole: [0, 1, 2],
+        userRole: [0, 2],
         children: []
     },
     {

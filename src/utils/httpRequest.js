@@ -1,8 +1,15 @@
 import axios from "axios";
-
+import {
+    Message
+} from 'iview';
 let baseUrl = "http://42.192.225.148:6081";
 export default {
-    request: function ({ api, data, success, error }) {
+    request: function ({
+        api,
+        data,
+        success,
+        error
+    }) {
         const config = {
             url: baseUrl + api.path,
             method: "post",
@@ -35,7 +42,7 @@ export default {
                 if (resData.code == 0) {
                     success(resData)
                 } else {
-                    this.$Message.error(resData.message);
+                    Message.error(resData.message);
                 }
             }
         }).catch(function (exception) {

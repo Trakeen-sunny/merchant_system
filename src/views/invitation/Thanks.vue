@@ -1,8 +1,9 @@
 <template>
   <div class="thanks">
     <span>
-      Thank you for submitting, we will contact you by email for follow-up
-      cooperation.
+	  <img src="../../assets/ok.jpg" class="img"/><br/>
+      Thank you for submitting <br/>
+	  we will contact you by email for follow-up collaboration.
     </span>
   </div>
 </template>
@@ -26,5 +27,9 @@ export default {
     font-size: 16px;
     padding: 0 10px;
   }
+}
+.img{
+  width:20vh;
+  height:20vh;
 }
 </style>

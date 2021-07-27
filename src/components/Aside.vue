@@ -49,7 +49,6 @@ export default {
       return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
     },
     asideArr() {
-      //Financial  Account center  Marketing Plan
       let userinfo = JSON.parse(window.localStorage.getItem("userinfo"));
       for (const res of aside) {
         if (res.userRole.includes(userinfo.userRole)) {
@@ -72,7 +71,6 @@ export default {
           }
         }
       }
-      console.log(aside)
       return aside;    
 ;
     },
