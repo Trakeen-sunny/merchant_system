@@ -1,7 +1,7 @@
 <template>
   <div class="thanks">
     <span>
-	  <img src="../../assets/ok.jpg" class="img"/><br/>
+	  <img src="../../assets/ok.png" class="img"/><br/>
       Thank you for submitting <br/>
 	  we will contact you by email for follow-up collaboration.
     </span>

@@ -4,29 +4,20 @@
     <Row class="title">
       <Col span="12"><span>商品列表</span></Col>
       <Col span="12" class="right">
-        <Dropdown>
-          <Button type="info" class="button" style="margin-left: 0">
-            批量修改
-            <Icon type="ios-arrow-down"></Icon>
-          </Button>
-          <DropdownMenu slot="list">
-            <DropdownItem style="text-align: left">开启</DropdownItem>
-            <DropdownItem style="text-align: left">结束</DropdownItem>
-            <DropdownItem style="text-align: left">修改平台分类</DropdownItem>
-            <DropdownItem style="text-align: left">修改平台品牌</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-        <Button type="info" class="button" ghost>导出表格</Button>
-        <Button type="info" class="button" @click="handleProductAdd"
+        <Button type="info" class="button" ghost>导出</Button>
+        <Button type="info" class="button" ghost>设置佣金</Button>
+        <Button type="info" class="button" ghost>结束</Button>
+        <Button type="info" class="button">开启</Button>
+        <!-- <Button type="info" class="button" @click="handleProductAdd"
           >商品导入</Button
-        >
+        > -->
       </Col>
     </Row>
 
     <!-- 搜索 -->
     <div class="search">
       <div>
-        <span>商品关键词</span>
+        <span>商品名称</span>
         <Input v-model="value" size="large" clearable class="width" />
       </div>
       <div>

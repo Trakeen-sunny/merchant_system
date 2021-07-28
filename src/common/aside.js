@@ -61,43 +61,45 @@ export const aside = [{
                 name: '优惠券管理',
                 userRole: [0, 1],
 
-            }, {
-                url: '/home/picture',
-                name: '图片管理',
-                userRole: [0, 1],
+            }
+            //  {
+            //     url: '/home/picture',
+            //     name: '图片管理',
+            //     userRole: [0, 1],
 
-            }
+            // }
         ]
-    }, {
-        name: '设置',
-        icon: 'md-settings',
-        userRole: [0, 1],
-        children: [{
-                url: '/home/setup_commission',
-                name: '佣金管理',
-                userRole: [0, 1],
-            },
-            {
-                url: '/home/setup_product',
-                name: '商家信息',
-                userRole: [0, 1],
-            }
-        ]
-    },
-    {
-        name: '统计',
-        icon: 'ios-stats',
-        userRole: [0, 1],
-        children: [{
-                url: '/home/overview',
-                name: '统计概览',
-                userRole: [0, 1],
-            },
-            {
-                url: '/home/sale',
-                name: '销售统计',
-                userRole: [0, 1],
-            }
-        ]
-    }
+    }, 
+    // {
+    //     name: '设置',
+    //     icon: 'md-settings',
+    //     userRole: [0, 1],
+    //     children: [{
+    //             url: '/home/setup_commission',
+    //             name: '佣金管理',
+    //             userRole: [0, 1],
+    //         },
+    //         {
+    //             url: '/home/setup_product',
+    //             name: '商家信息',
+    //             userRole: [0, 1],
+    //         }
+    //     ]
+    // },
+    // {
+    //     name: '统计',
+    //     icon: 'ios-stats',
+    //     userRole: [0, 1],
+    //     children: [{
+    //             url: '/home/overview',
+    //             name: '统计概览',
+    //             userRole: [0, 1],
+    //         },
+    //         {
+    //             url: '/home/sale',
+    //             name: '销售统计',
+    //             userRole: [0, 1],
+    //         }
+    //     ]
+    // }
 ]
