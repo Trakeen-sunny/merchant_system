@@ -76,7 +76,7 @@ export default {
             name7: "创建时间",
             name8: "操作"
         },
-        modal:{
+        boxs:{
             title:"查看明细",
             formItem1:"商品链接",
             formItem2:"优惠券链接"

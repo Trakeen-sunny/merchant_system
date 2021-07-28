@@ -90,13 +90,13 @@
     </div>
 
     <!-- 详情 -->
-    <Modal :title="$t('plans.modal.title')" v-model="modal" width="600">
+    <Modal :title="$t('plans.boxs.title')" v-model="modal" width="600">
       <div class="content_detail">
         <Form :model="detail" label-position="left" :label-width="100">
-          <FormItem :label="$t('plans.modal.formItem1')">
+          <FormItem :label="$t('plans.boxs.formItem1')">
             <Input v-model="detail.input1"></Input>
           </FormItem>
-          <FormItem :label="$t('plans.modal.formItem2')">
+          <FormItem :label="$t('plans.boxs.formItem2')">
             <Input v-model="detail.input2"></Input>
           </FormItem>
         </Form>

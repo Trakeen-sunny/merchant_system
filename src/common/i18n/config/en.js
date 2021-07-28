@@ -76,7 +76,7 @@ export default {
             name7: "Create at",
             name8: "Actions"
         },
-        modal:{
+        boxs:{
             title:"detail",
             formItem1:"Product Link",
             formItem2:"Coupon Link"

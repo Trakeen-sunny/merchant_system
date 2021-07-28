@@ -84,29 +84,6 @@
           <Option :value="3">XIAOMI MIJIA</Option>
           <Option :value="3">Kospet</Option>
           <Option :value="3">IMILAB</Option>
-          <Option :value="3">MIBRO</Option>
-          <Option :value="3">Blulory</Option>
-          <Option :value="3">Amazfit</Option>
-          <Option :value="3">Cubot</Option>
-          <Option :value="3">Oyeet</Option>
-          <Option :value="3">RedMagic</Option>
-          <Option :value="3">ASUS</Option>
-          <Option :value="3">CHUWI</Option>
-          <Option :value="3">Lenovo</Option>
-          <Option :value="3">HONOR</Option>
-          <Option :value="3">INMIX</Option>
-          <Option :value="3">LONGER</Option>
-          <Option :value="3">EcoFlow</Option>
-          <Option :value="3">Beelink</Option>
-          <Option :value="3">We.Lock</Option>
-          <Option :value="3">CoFANCY</Option>
-          <Option :value="3">Comgrow</Option>
-          <Option :value="3">SwitchBot</Option>
-          <Option :value="3">Haylou</Option>
-          <Option :value="3">Trouver</Option>
-          <Option :value="3">Seven and Me</Option>
-          <Option :value="3">Ortur</Option>
-          <Option :value="3">MIDEA</Option>
         </Select>
       </div>
       <div>
@@ -256,6 +233,9 @@
         </FormItem>
       </Form>
     </Modal>
+    <Modal v-model="modal5" title="结束" @on-ok="ok" @on-cancel="cancel">
+      <span>已选择11个商品，确定要结束吗？</span>
+    </Modal>
   </div>
 </template>
 <script>
@@ -268,6 +248,7 @@ export default {
       modal2: false,
       modal3: false,
       modal4: false,
+      modal5: true,
       formValidate: {
         number: 0,
       },
@@ -401,6 +382,18 @@ export default {
   created() {
     this.initData();
   },
+  mounted() {
+    this.$Modal.confirm({
+      title: "Title",
+      content: "<p>Content of dialog</p><p>Content of dialog</p>",
+      onOk: () => {
+        this.$Message.info("Clicked ok");
+      },
+      onCancel: () => {
+        this.$Message.info("Clicked cancel");
+      },
+    });
+  },
   methods: {
     handleProductAdd() {
       this.$router.push({ name: "ProductAdd" });
@@ -448,16 +441,7 @@ export default {
     },
     // 设置开启关闭状态
     setStatus() {
-      this.$Modal.confirm({
-        title: "开启",
-        content: "确定要开启吗？",
-        onOk: () => {
-          // this.$Message.info("Clicked ok");
-        },
-        onCancel: () => {
-          // this.$Message.info("Clicked cancel");
-        },
-      });
+      this.modal4 = true;
     },
     // 编辑
     setEdit() {

@@ -76,6 +76,6 @@ Vue.component('Steps', Steps);
 Vue.component('Step', Step);
 Vue.component('Poptip', Poptip);
 Vue.component('Tag', Tag);
+Vue.prototype.$Modal = Modal;
 Vue.prototype.$Notice = Notice;
 Vue.prototype.$Message = Message;
-Vue.prototype.$Modal = Modal;
