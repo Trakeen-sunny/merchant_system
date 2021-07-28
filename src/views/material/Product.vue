@@ -248,7 +248,7 @@ export default {
       modal2: false,
       modal3: false,
       modal4: false,
-      modal5: true,
+      modal5: false,
       formValidate: {
         number: 0,
       },
@@ -383,16 +383,6 @@ export default {
     this.initData();
   },
   mounted() {
-    this.$Modal.confirm({
-      title: "Title",
-      content: "<p>Content of dialog</p><p>Content of dialog</p>",
-      onOk: () => {
-        this.$Message.info("Clicked ok");
-      },
-      onCancel: () => {
-        this.$Message.info("Clicked cancel");
-      },
-    });
   },
   methods: {
     handleProductAdd() {
