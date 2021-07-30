@@ -4,7 +4,9 @@
     <Row class="title">
       <Col span="12"><span>账户信息</span></Col>
       <Col span="12" class="right">
-        <Button type="info" class="button" @click="handleRecharge">立即充值</Button>
+        <Button type="info" class="button" @click="handleRecharge"
+          >立即充值</Button
+        >
       </Col>
     </Row>
 
@@ -26,7 +28,7 @@
     <!-- 表格 -->
     <div class="table">
       <div class="title">
-        <span class="left">佣金支出</span>
+        <span class="left">充值记录</span>
         <div class="right">
           <span>最近3个月</span>
           <span>最近6个月</span>
@@ -42,66 +44,111 @@
         </div>
       </div>
       <Table :columns="columns" :data="data"></Table>
-      <Page :total="100" show-sizer class="page"/>
+      <Page
+        :total="total"
+        :current="pageNo"
+        :page-size="pageSize"
+        @on-change="changePage"
+        @on-page-size-change="changeSize"
+        show-sizer
+        class="page"
+      />
     </div>
   </div>
 </template>
 <script>
+import { rechargeLogList } from "../../api/acount";
 export default {
   name: "Recharge",
   data() {
     return {
+      form: {},
       value: "",
       model1: "",
-      columns:[
+      columns: [
         {
           title: "订单ID",
-          key: "name",
+          key: "id",
+          align: "center",
         },
         {
           title: "充值金额",
-          key: "age",
+          key: "rechargeTotal",
+          align: "center",
         },
         {
           title: "账户余额",
-          key: "address",
+          key: "balance",
+          align: "center",
         },
         {
           title: "累计充值总额",
-          key: "address",
+          key: "sumTotal",
+          align: "center",
         },
         {
           title: "充值方式",
-          key: "address",
+          key: "rechargeType",
+          align: "center",
         },
         {
           title: "充值状态",
-          key: "address",
+          key: "status",
+          align: "center",
         },
         {
           title: "充值日期",
-          key: "address",
+          key: "rechargeDate",
+          align: "center",
         },
         {
           title: "充值备注说明",
-          key: "address",
-        },
-        {
-          title: "操作",
-          key: "address",
+          key: "remark",
+          align: "center",
         },
       ],
-      data:[]
+      data: [],
+      pageNo: 1, //页数
+      pageSize: 10, //条数
+      total: 0, //总条数
     };
   },
-  methods:{
+  created() {
+    this.initData();
+  },
+  methods: {
+    // 初始化数据
+    initData() {
+      let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
+      this.$httpRequest({
+        api: rechargeLogList,
+        data,
+        success: (res) => {
+          console.log(res);
+          this.data = res.result.records;
+          this.total = res.result.total;
+        },
+      });
+    },
+    // 改变页数
+    changePage(page) {
+      console.log(page);
+      this.pageNo = page;
+      this.initData();
+    },
+    // 改变条数
+    changeSize(size) {
+      console.log(size);
+      this.pageSiz = size;
+      this.initData();
+    },
     handleRecharge() {
       this.$Notice.warning({
         title: "通知",
-        desc: '目前暂时不支持线上银行转账充值，如有需要，请联系平台客服线下操作'
+        desc: "目前暂时不支持线上银行转账充值，如有需要，请联系平台客服线下操作",
       });
     },
-  }
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -207,7 +254,7 @@ export default {
         }
       }
     }
-    .page{
+    .page {
       text-align: right;
       margin-top: 30px;
       padding-bottom: 30px;

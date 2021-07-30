@@ -9,3 +9,9 @@ export const acountList = {
     path: '/web/accountDetails/list',
     method: 'get'
 }
+
+// 账户中心列表
+export const rechargeLogList = {
+    path: '/web/rechargeLog/list',
+    method: 'get'
+}

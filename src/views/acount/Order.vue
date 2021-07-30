@@ -54,7 +54,11 @@
       <div>
         <span>收货国家</span>
         <Select v-model="model1" size="large" clearable class="width">
-          <Option :value="1">全部</Option>
+          <Option value="">全部</Option>
+          <Option value="英国">英国</Option>
+          <Option value="美国">美国</Option>
+          <Option value="法国">法国</Option>
+          <Option value="韩国">韩国</Option>
         </Select>
       </div>
       <div>
@@ -354,6 +358,16 @@ export default {
         {
           title: "收货国家",
           slot: "countryName",
+          align: "center",
+        },
+        {
+          title: "访问时间",
+          key: "aa",
+          align: "center",
+        },
+        {
+          title: "最后一次点击链接时间",
+          key: "aa",
           align: "center",
         },
         {
