@@ -90,32 +90,54 @@
     </div>
 
     <!-- 详情 -->
-    <Modal :title="$t('plans.boxs.title')" v-model="modal" width="600">
+    <Modal
+      :title="$t('plans.boxs.title')"
+      v-model="modal"
+      width="600"
+    >
       <div class="content_detail">
         <Form :model="detail" label-position="left" :label-width="100">
           <FormItem :label="$t('plans.boxs.formItem1')">
-            <Input v-model="detail.input1"></Input>
+            <Input v-model="detail.input1">
+              <Button
+                slot="append"
+                v-clipboard:copy="detail.input1"
+                v-clipboard:success="onCopy"
+                v-clipboard:error="onError"
+                >{{ $t("common.copy") }}</Button
+              >
+            </Input>
           </FormItem>
           <FormItem :label="$t('plans.boxs.formItem2')">
-            <Input v-model="detail.input2"></Input>
+            <Input v-model="detail.input2">
+              <Button
+                slot="append"
+                v-clipboard:copy="f"
+                v-clipboard:success="onCopy"
+                v-clipboard:error="onError"
+                >{{ $t("common.copy") }}</Button
+              >
+            </Input>
           </FormItem>
         </Form>
       </div>
       <div slot="footer">
-        <Button type="primary" size="large" ghost>{{
+        <Button type="primary" size="large" @click="cancel" ghost>{{
           $t("common.cancel")
         }}</Button>
-        <Button type="primary" size="large">{{ $t("common.copy") }}</Button>
+        <Button type="primary" size="large" @click="ok">{{ $t("common.sure") }}</Button>
       </div>
     </Modal>
   </div>
 </template>
 <script>
-import { plansList, plansDetails } from "../../api/plan";
+import { plansList } from "../../api/plan";
 export default {
   name: "Market",
   data() {
     return {
+      shopifyUrl: "https://xn-7gq605b6lt59y.myshopify.com/products/",
+      f: 11,
       modal: false,
       form: {
         id: "",
@@ -174,7 +196,10 @@ export default {
       pageNo: 1, //页数
       pageSize: 10, //条数
       total: 0, //总条数
-      detail: {}, //详情
+      detail: {
+        input1: "",
+        input2: "",
+      }, //详情
       pendingnum: 0, //进行中计划数
       endingnum: 0, //已结束计划数
     };
@@ -183,6 +208,11 @@ export default {
     this.initData();
     this.pendingNum();
     this.endingNum();
+  },
+  computed: {
+    getUserInfo() {
+      return JSON.parse(window.localStorage.getItem("userinfo"));
+    },
   },
   methods: {
     // 初始化数据
@@ -223,14 +253,8 @@ export default {
     // 查看详情
     details(row) {
       console.log(row);
-      this.$httpRequest({
-        api: plansDetails,
-        data: { id: row.id },
-        success: (res) => {
-          console.log(res);
-        },
-      });
-      this.detail = row;
+      this.detail.input1 =
+        this.shopifyUrl + row.goodName + "?utm_source=" + this.getUserInfo.id;
       this.modal = true;
     },
     // 改变页数
@@ -257,6 +281,20 @@ export default {
         goodName: "",
       };
       this.initData();
+    },
+    // 复制成功时的回调函数
+    onCopy() {
+      this.$Message.success("内容已复制到剪切板！");
+    },
+    // 复制失败时的回调函数
+    onError() {
+      this.$Message.error("抱歉，复制失败！");
+    },
+    ok() {
+      this.modal = false;
+    },
+    cancel() {
+      this.modal = false;
     },
   },
 };

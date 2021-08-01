@@ -5,6 +5,7 @@ export default {
     // 公共字段
     common: {
         reset: "重置",
+        sure:"确定",
         search: "查询",
         cancel:"取消",
         copy:"复制",
@@ -18,7 +19,10 @@ export default {
         helpCenter:"帮助中心",
         feedback:"反馈/建议",
         notice:"通知",
-        userInfo:"个人信息"
+        userInfo:"个人信息",
+        loginOut:"退出登录",
+        exit:"是否退出？",
+        cancelExit:"取消退出"
     },
     // 账户中心
     acount: {

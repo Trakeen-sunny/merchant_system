@@ -61,7 +61,7 @@
               <div class="avatar">
                 <!-- <Avatar icon="ios-person" size="large" /> -->
                 <img
-                  :src="getUserInfo.logo"
+                  src="../assets/avatar.png"
                   style="width: 40px; height: 40px; border-radius: 100%"
                 />
                 <span>{{ getUserInfo.shopName }}</span>
@@ -73,6 +73,7 @@
               </DropdownMenu>
               <DropdownMenu slot="list" v-else>
                 <DropdownItem name="2">{{$t('common.userInfo')}}</DropdownItem>
+                <DropdownItem name="4">{{$t('common.loginOut')}}</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -87,12 +88,14 @@
     <!-- 弹出层 -->
     <Modal
       v-model="modal1"
-      title="退出"
+      :title="$t('common.loginOut')"
       @on-ok="ok"
+      :ok-text="$t('common.sure')"
+      :cancel-text="$t('common.cancel')"
       @on-cancel="cancel"
       width="300"
     >
-      <p>是否退出？</p>
+      <p>{{$t('common.exit')}}？</p>
     </Modal>
   </div>
 </template>
@@ -156,12 +159,12 @@ export default {
           window.localStorage.removeItem("userinfo");
           window.localStorage.removeItem("token");
           this.$router.replace({ name: "Login" });
-          this.$Message.success("退出成功!");
+          this.$Message.success(this.$t('common.loginOut'));
         },
       });
     },
     cancel() {
-      this.$Message.info("取消退出!");
+      this.$Message.info(this.$t('common.cancelExit'));
     },
   },
 };

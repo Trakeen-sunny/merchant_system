@@ -5,6 +5,7 @@ export default {
     // 公共字段
     common: {
         reset: "Reset",
+        sure:"Sure",
         search: "Inquire",
         cancel:"Cancel",
         copy:"Copy",
@@ -18,7 +19,10 @@ export default {
         helpCenter:"Help Center",
         feedback:"Feedback / Suggestions",
         notice:"Notice",
-        userInfo:"Personal Information"
+        userInfo:"Personal Information",
+        loginOut:"Logout",
+        exit:"Exit",
+        cancelExit:"Cancel Exit"
     },
     // 账户中心
     acount: {

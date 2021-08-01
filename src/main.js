@@ -7,6 +7,8 @@ import http from './utils/httpRequest';
 import './common/iviewUI';
 import './common/theme.less';
 import { i18n } from './common/i18n/i18n';
+import VueClipboard from 'vue-clipboard2';
+Vue.use(VueClipboard)
 // import 'iview/dist/styles/iview.css';
 Vue.prototype.$httpRequest = http.request;
 Vue.config.productionTip = false;
