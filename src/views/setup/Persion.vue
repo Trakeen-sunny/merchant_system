@@ -7,69 +7,148 @@
       >
     </Row>
 
-    <div class="form" v-if="!visibily">
+    <div class="form">
       <Row>
-        <Col span="8"
-          ><span>{{ $t("setPersion.form.name") }}：</span><span>111</span></Col
-        >
-        <Col span="8"
-          ><span>{{ $t("setPersion.form.name1") }}：</span><span>111</span></Col
-        >
-        <Col span="8"
-          ><span>{{ $t("setPersion.form.name2") }}：</span><span>111</span></Col
-        >
-        <Col span="8"
-          ><span>{{ $t("setPersion.form.name3") }}：</span><span>111</span></Col
-        >
-        <Col span="8"
-          ><span>{{ $t("setPersion.form.name4") }}：</span><span>111</span></Col
-        >
-        <Col span="24"
-          ><span>{{ $t("setPersion.form.name5") }}：</span
-          ><span>111111111111111111111111111111111111111111111</span></Col
-        >
-      </Row>
-      <Row>
-        <Col span="24" style="display: flex; justify-content: center">
-          <Button type="info" class="button" size="large" @click="handleEdit">{{
-            $t("common.edit")
-          }}</Button>
+        <Col span="24" class="owninfo">
+          <img src="../../assets/avatar.png" />
+          <div>
+            <span>Sunny112</span>
+            <span>1223333</span>
+          </div>
         </Col>
       </Row>
-    </div>
+      <Tabs type="card">
+        <TabPane label="个人信息">
+          <Form model="formItem" :label-width="100" label-position="top">
+            <Row>
+              <Col span="8">
+                <FormItem label="公司名称">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="联系电话">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="联系邮箱">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="国家/地区">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="语言">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="货币">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="年龄">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="性别">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="接受纯佣">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="24">
+                <FormItem label="社交平台">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="24">
+                <FormItem label="简介说明">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+            </Row>
+          </Form>
+        </TabPane>
+        <TabPane label="账户设置">
+          <Row>
+            <Col span="24">
+              <FormItem label="账户余额">
+                <span>$700000</span>
+              </FormItem>
+            </Col>
+          </Row>
+          <Form model="formItem" :label-width="150" label-position="top">
+            <Row>
+              <Col span="8">
+                <FormItem label="请选择以下方式绑定账户">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="国家或地区">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="银行名称">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="分行地址">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+               <Col span="8">
+                <FormItem label="SWFIT 代码">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="账号">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+               <Col span="8">
+                <FormItem label="重新输入账户">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="银行账户名">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+                <Col span="8">
+                <FormItem label="银行账户持有人地址">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="银行账户持有人电话号码">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="验证码：">
+                  <Input v-model="formItem.input" size="large"></Input>
+                </FormItem>
+              </Col>
+            </Row>
+          </Form>
+        </TabPane>
+      </Tabs>
 
-    <div class="form" v-else>
-      <Form model="formItem" :label-width="100" :inline="true">
-        <FormItem :label="$t('setPersion.form.name')">
-          <Input v-model="formItem.input" size="large" class="width"></Input>
-        </FormItem>
-        <FormItem :label="$t('setPersion.form.name1')">
-          <Input v-model="formItem.input" size="large" class="width"></Input>
-        </FormItem>
-        <FormItem :label="$t('setPersion.form.name2')">
-          <Input v-model="formItem.input" size="large" class="width"></Input>
-        </FormItem>
-        <FormItem :label="$t('setPersion.form.name3')">
-          <Input v-model="formItem.input" size="large" class="width"></Input>
-        </FormItem>
-        <FormItem :label="$t('setPersion.form.name4')">
-          <Select v-model="model1" size="large" clearable class="width">
-            <Option :value="1">1</Option>
-            <Option :value="2">4</Option>
-            <Option :value="3">5</Option>
-          </Select>
-        </FormItem>
-        <FormItem :label="$t('setPersion.form.name5')">
-          <Input
-            v-model="value8"
-            size="large"
-            type="textarea"
-            :autosize="{ minRows: 4, maxRows: 10 }"
-            placeholder=""
-            style="min-width: 800px"
-          />
-        </FormItem>
-      </Form>
       <Row>
         <Col span="24" style="display: flex; justify-content: center">
           <Button
@@ -144,25 +223,19 @@ export default {
     background-color: #fff;
     border-radius: 4px;
     padding: 20px;
-    .ivu-col {
-      margin-bottom: 20px;
+    .owninfo {
       display: flex;
-    }
-    span:first-child {
-      color: #999;
-      font-weight: 500;
-      font-size: 16px;
-    }
-    span:last-child {
-      color: #333;
-      font-size: 16px;
-    }
-    img {
-      width: 100px;
-      height: 100px;
-    }
-    .width {
-      width: 250px;
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+      }
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        margin-left: 10px;
+      }
     }
     /deep/ .ivu-upload {
       width: 100px !important;
