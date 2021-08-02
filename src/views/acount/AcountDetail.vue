@@ -12,6 +12,33 @@
       </Col>
     </Row>
 
+    <!--  时间 搜索 -->
+    <div class="search table" style="margin-bottom: 30px">
+      <ul>
+        <li>{{ $t("common.searchTime7") }}</li>
+        <li>{{ $t("common.searchTime8") }}</li>
+        <li>{{ $t("common.searchTime9") }}</li>
+        <li>{{ $t("common.searchTime10") }}</li>
+        <li>{{ $t("common.searchTime11") }}</li>
+        <li>{{ $t("common.searchTime12") }}</li>
+      </ul>
+      <div class="right">
+        <span class="activeColor">{{ $t("common.searchTime4") }}</span>
+        <span>{{ $t("common.searchTime5") }}</span>
+        <div>
+          <span>{{ $t("common.searchTime6") }}</span>
+          <DatePicker
+            type="datetimerange"
+            format="yyyy-MM-dd"
+            style="width: 200px"
+          ></DatePicker>
+        </div>
+        <Button type="info" ghost class="button">{{
+          $t("common.exportPage")
+        }}</Button>
+      </div>
+    </div>
+
     <div class="content">
       <div>
         <span class="num">$0</span>
@@ -20,6 +47,14 @@
       <div>
         <span class="num">$0</span>
         <span class="title">{{ $t("acount.moneyLi2") }}</span>
+      </div>
+      <div>
+        <span class="num">0</span>
+        <span class="title">{{ $t("acount.moneyLi4") }}</span>
+      </div>
+      <div>
+        <span class="num">0</span>
+        <span class="title">{{ $t("acount.moneyLi5") }}</span>
       </div>
       <div>
         <span class="num">$0</span>
@@ -75,7 +110,7 @@
     <div class="table">
       <div class="title">
         <span class="left">{{ $t("acount.title1") }}</span>
-        <div class="right">
+        <!-- <div class="right">
           <span>{{ $t("common.searchTime1") }}</span>
           <span>{{ $t("common.searchTime2") }}</span>
           <div>
@@ -89,7 +124,7 @@
           <Button type="info" ghost class="button">{{
             $t("common.exportPage")
           }}</Button>
-        </div>
+        </div> -->
       </div>
       <Table :columns="columns" :data="data"></Table>
       <Page
@@ -129,6 +164,11 @@ export default {
           align: "center",
         },
         {
+          title: this.$t("acount.table.name5"),
+          key: "tranType",
+          align: "center",
+        },
+        {
           title: this.$t("acount.table.name2"),
           key: "taskNo",
           align: "center",
@@ -141,11 +181,6 @@ export default {
         {
           title: this.$t("acount.table.name4"),
           key: "accountTotal",
-          align: "center",
-        },
-        {
-          title: this.$t("acount.table.name5"),
-          key: "tranType",
           align: "center",
         },
         {
@@ -249,7 +284,7 @@ export default {
       flex-direction: column;
       align-items: center;
       position: relative;
-      width: calc(100% / 3);
+      width: calc(100% / 5);
       .num {
         color: #089444;
         font-size: 18px;
@@ -301,6 +336,52 @@ export default {
         margin-left: 20px;
       }
     }
+    > ul {
+      display: flex;
+      border: 1px solid #e0e0e0;
+      list-style: none;
+      border-radius: 5px;
+      li {
+        width: 50px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        font-size: 14px;
+        box-sizing: border-box;
+        border-right: 1px solid #e0e0e0;
+        font-weight: bold;
+        color: #999;
+      }
+      li:last-child {
+        border: 0;
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      > span {
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+        margin-right: 20px;
+      }
+      > div {
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        span {
+          margin-right: 10px;
+        }
+        margin-right: 20px;
+      }
+      .button {
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
   }
 
   .table {
@@ -349,4 +430,8 @@ export default {
     }
   }
 }
+ .activeColor{
+    color: #089444 !important;
+    font-weight: bolder !important;
+  }
 </style>

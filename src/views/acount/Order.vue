@@ -5,6 +5,43 @@
       <Col span="12"><span>订单明细</span></Col>
     </Row>
 
+    <!--  时间 搜索 -->
+    <div class="search table" style="margin-bottom: 30px">
+      <ul>
+        <li>日</li>
+        <li>周</li>
+        <li>月</li>
+        <li>季</li>
+        <li>半年</li>
+        <li>年</li>
+      </ul>
+      <div class="right">
+        <span class="activeColor">今天</span>
+        <span>最近7天</span>
+        <div>
+          <span>最近30天</span>
+          <DatePicker
+            type="datetimerange"
+            format="yyyy-MM-dd"
+            style="width: 200px"
+          ></DatePicker>
+        </div>
+        <Dropdown style="margin-left: 20px">
+          <Button type="info" ghost class="button">
+            导出
+            <Icon type="ios-arrow-down"></Icon>
+          </Button>
+          <DropdownMenu slot="list">
+            <DropdownItem>导出CSV</DropdownItem>
+            <DropdownItem>导出XLSX</DropdownItem>
+            <DropdownItem>导出XLS</DropdownItem>
+            <DropdownItem>导出XML</DropdownItem>
+            <DropdownItem>导出MHT</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+    </div>
+
     <div
       class="content"
       style="margin-bottom: 0; border-bottom: 0.5px solid #ebeef5"
@@ -255,7 +292,7 @@
             </Table>
             <Page :total="100" show-sizer class="page" />
           </TabPane>
-          <div class="right" slot="extra">
+          <!-- <div class="right" slot="extra">
             <span>最近3个月</span>
             <span>最近6个月</span>
             <div>
@@ -279,7 +316,7 @@
                 <DropdownItem>导出MHT</DropdownItem>
               </DropdownMenu>
             </Dropdown>
-          </div>
+          </div> -->
         </Tabs>
       </div>
     </div>
@@ -477,6 +514,52 @@ export default {
         margin-left: 20px;
       }
     }
+    > ul {
+      display: flex;
+      border: 1px solid #e0e0e0;
+      list-style: none;
+      border-radius: 5px;
+      li {
+        width: 50px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        font-size: 14px;
+        box-sizing: border-box;
+        border-right: 1px solid #e0e0e0;
+        font-weight: bold;
+        color: #999;
+      }
+      li:last-child {
+        border: 0;
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      > span {
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+        margin-right: 20px;
+      }
+      > div {
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        span {
+          margin-right: 10px;
+        }
+        margin-right: 20px;
+      }
+      .button {
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
   }
 
   .table {
@@ -520,5 +603,10 @@ export default {
       padding-bottom: 30px;
     }
   }
+}
+
+.activeColor {
+  color: #089444 !important;
+  font-weight: bolder !important;
 }
 </style>

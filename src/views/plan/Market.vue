@@ -1,5 +1,31 @@
 <template>
   <div class="acount">
+    <!--  时间 搜索 -->
+    <div class="search table" style="margin-bottom: 30px;margin-top:0;">
+      <ul>
+        <li>{{ $t("common.searchTime7") }}</li>
+        <li>{{ $t("common.searchTime8") }}</li>
+        <li>{{ $t("common.searchTime9") }}</li>
+        <li>{{ $t("common.searchTime10") }}</li>
+        <li>{{ $t("common.searchTime11") }}</li>
+        <li>{{ $t("common.searchTime12") }}</li>
+      </ul>
+      <div class="right">
+        <span class="activeColor">{{ $t("common.searchTime4") }}</span>
+        <span>{{ $t("common.searchTime5") }}</span>
+        <div>
+          <span>{{ $t("common.searchTime6") }}</span>
+          <DatePicker
+            type="datetimerange"
+            format="yyyy-MM-dd"
+            style="width: 200px"
+          ></DatePicker>
+        </div>
+        <Button type="info" ghost class="button">{{
+          $t("common.exportPage")
+        }}</Button>
+      </div>
+    </div>
     <!-- 标题一 -->
     <div class="content">
       <div>
@@ -49,7 +75,7 @@
     <div class="table">
       <div class="title">
         <span class="left">{{ $t("plans.title") }}</span>
-        <div class="right">
+        <!-- <div class="right">
           <span>{{ $t("common.searchTime1") }}</span>
           <span>{{ $t("common.searchTime2") }}</span>
           <div>
@@ -63,7 +89,7 @@
           <Button type="info" ghost class="button">{{
             $t("common.exportPage")
           }}</Button>
-        </div>
+        </div> -->
       </div>
       <Table :columns="columns" :data="data">
         <template slot-scope="{ row }" slot="status">
@@ -90,11 +116,7 @@
     </div>
 
     <!-- 详情 -->
-    <Modal
-      :title="$t('plans.boxs.title')"
-      v-model="modal"
-      width="600"
-    >
+    <Modal :title="$t('plans.boxs.title')" v-model="modal" width="600">
       <div class="content_detail">
         <Form :model="detail" label-position="left" :label-width="100">
           <FormItem :label="$t('plans.boxs.formItem1')">
@@ -125,7 +147,9 @@
         <Button type="primary" size="large" @click="cancel" ghost>{{
           $t("common.cancel")
         }}</Button>
-        <Button type="primary" size="large" @click="ok">{{ $t("common.sure") }}</Button>
+        <Button type="primary" size="large" @click="ok">{{
+          $t("common.sure")
+        }}</Button>
       </div>
     </Modal>
   </div>
@@ -363,6 +387,52 @@ export default {
         margin-left: 20px;
       }
     }
+    > ul {
+      display: flex;
+      border: 1px solid #e0e0e0;
+      list-style: none;
+      border-radius: 5px;
+      li {
+        width: 50px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        font-size: 14px;
+        box-sizing: border-box;
+        border-right: 1px solid #e0e0e0;
+        font-weight: bold;
+        color: #999;
+      }
+      li:last-child {
+        border: 0;
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      > span {
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+        margin-right: 20px;
+      }
+      > div {
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        span {
+          margin-right: 10px;
+        }
+        margin-right: 20px;
+      }
+      .button {
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
   }
 
   .table {
@@ -410,5 +480,10 @@ export default {
       padding-bottom: 30px;
     }
   }
+}
+
+.activeColor {
+  color: #089444 !important;
+  font-weight: bolder !important;
 }
 </style>

@@ -10,6 +10,33 @@
       </Col>
     </Row>
 
+    <!--  时间 搜索 -->
+    <div class="search table" style="margin-bottom: 30px">
+      <ul>
+        <li>日</li>
+        <li>周</li>
+        <li>月</li>
+        <li>季</li>
+        <li>半年</li>
+        <li>年</li>
+      </ul>
+      <div class="right">
+        <span class="activeColor">今天</span>
+        <span>最近7天</span>
+        <div>
+          <span>最近30天</span>
+          <DatePicker
+            type="datetimerange"
+            format="yyyy-MM-dd"
+            style="width: 200px"
+          ></DatePicker>
+        </div>
+        <Button type="info" ghost class="button">{{
+          $t("common.exportPage")
+        }}</Button>
+      </div>
+    </div>
+
     <div class="content">
       <div>
         <span class="num">$0</span>
@@ -29,7 +56,7 @@
     <div class="table">
       <div class="title">
         <span class="left">充值记录</span>
-        <div class="right">
+        <!-- <div class="right">
           <span>最近3个月</span>
           <span>最近6个月</span>
           <div>
@@ -41,7 +68,7 @@
             ></DatePicker>
           </div>
           <Button type="info" ghost class="button">导出报表</Button>
-        </div>
+        </div> -->
       </div>
       <Table :columns="columns" :data="data"></Table>
       <Page
@@ -260,5 +287,63 @@ export default {
       padding-bottom: 30px;
     }
   }
+
+  .search {
+    background-color: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    padding: 20px 20px;
+    > ul {
+      display: flex;
+      border: 1px solid #e0e0e0;
+      list-style: none;
+      border-radius: 5px;
+      li {
+        width: 50px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        font-size: 14px;
+        box-sizing: border-box;
+        border-right: 1px solid #e0e0e0;
+        font-weight: bold;
+        color: #999;
+      }
+      li:last-child {
+        border: 0;
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      > span {
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+        margin-right: 20px;
+      }
+      > div {
+        color: #666;
+        font-size: 15px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        span {
+          margin-right: 10px;
+        }
+        margin-right: 20px;
+      }
+      .button {
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
 }
+
+ .activeColor{
+    color: #089444 !important;
+    font-weight: bolder !important;
+  }
 </style>

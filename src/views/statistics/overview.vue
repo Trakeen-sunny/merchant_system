@@ -10,29 +10,59 @@
       </Col>
     </Row>
     <div class="content">
-        <div>
-          <span class="num">0</span>
-          <span class="title">累计订单数</span>
-        </div>
-        <div>
-          <span class="num">0</span>
-          <span class="title">累计销售额($)</span>
-        </div>
-        <div>
-          <span class="num">0</span>
-          <span class="title">累计佣金($)</span>
-        </div>
-        <div>
-          <span class="num">0</span>
-          <span class="title">账户余额($)</span>
-        </div>
+      <div>
+        <span class="num">0</span>
+        <span class="title">累计订单数</span>
       </div>
+      <div>
+        <span class="num">0</span>
+        <span class="title"
+          ><span> 累计销售额($) </span>
+          <Poptip
+            word-wrap
+            width="160"
+            placement="bottom"
+            content="全部订单的总交易金额。"
+          >
+            <Icon type="ios-alert-outline" size="20" />
+          </Poptip>
+        </span>
+      </div>
+      <div>
+        <span class="num">0</span>
+        <span class="title"
+          ><span> 累计佣金($) </span>
+          <Poptip
+            word-wrap
+            width="160"
+            placement="bottom"
+            content="全部订单的总佣金金额。"
+          >
+            <Icon type="ios-alert-outline" size="20" />
+          </Poptip>
+        </span>
+      </div>
+      <div>
+        <span class="num">0</span>
+        <span class="title">
+          <span>账户余额($)</span>
+          <Poptip
+            word-wrap
+            width="200"
+            placement="bottom"
+            content="如果金额低于$100,我们将暂停您的服务;为了不影响您的业务,请及时充值确保账户有足够余额。"
+          >
+            <Icon type="ios-alert-outline" size="20" />
+          </Poptip>
+        </span>
+      </div>
+    </div>
     <!-- 交易数据 -->
     <div class="table">
       <div class="title">
         <span class="left">交易数据</span>
         <div class="right">
-          <span>昨天</span>
+          <span class="activeColor">今天</span>
           <span>最近7天</span>
           <span>最近30天</span>
           <div>
@@ -75,7 +105,7 @@
       <div class="title">
         <span class="left">数据流量</span>
         <div class="right">
-          <span>昨天</span>
+          <span class="activeColor">今天</span>
           <span>最近7天</span>
           <span>最近30天</span>
           <span>最近90天</span>
@@ -102,10 +132,10 @@
           <span class="num">0</span>
           <span class="title">商品浏览量</span>
         </div>
-        <div>
+        <!-- <div>
           <span class="num">$0.00</span>
           <span class="title">账户余额</span>
-        </div>
+        </div> -->
         <div style="flex-direction: row; justify-content: center">
           <Button type="info" class="button" @click="handleRecharge"
             >立即充值</Button
@@ -168,6 +198,18 @@ export default {
           key: "name",
         },
         {
+          title: "佣金率",
+          key: "name",
+        },
+        {
+          title: "加购人数",
+          key: "age",
+        },
+        {
+          title: "加购件数",
+          key: "address",
+        },
+        {
           title: "下单人数",
           key: "age",
         },
@@ -176,20 +218,16 @@ export default {
           key: "address",
         },
         {
-          title: "下单件数",
-          key: "address",
-        },
-        {
           title: "有效订单数",
-          key: "address",
-        },
-        {
-          title: "下单总数",
           key: "address",
         },
       ],
       data1: [],
       columns2: [
+         {
+          title: "订单总数",
+          key: "address",
+        },
         {
           title: "退款金额",
           key: "name",
@@ -203,7 +241,7 @@ export default {
           key: "address",
         },
         {
-          title: "付款件数",
+          title: "付款简述",
           key: "address",
         },
         {
@@ -378,7 +416,7 @@ export default {
     margin-bottom: 30px;
     background-color: #ffffff;
     display: flex;
-    div {
+    > div {
       padding: 24px;
       display: flex;
       flex-direction: column;
@@ -465,6 +503,11 @@ export default {
     .right {
       width: 40%;
     }
+  }
+
+  .activeColor{
+    color: #089444 !important;
+    font-weight: bolder !important;
   }
 }
 </style>

@@ -81,7 +81,7 @@
                   </div>
               </div>
           </TabPane>
-          <TabPane name="name5" label="推荐佣金">
+          <!-- <TabPane name="name5" label="推荐佣金">
               <div class="li">
                   <Icon type="ios-paper" size="22" color="#45b1b"/>
                   <div class="right">
@@ -90,7 +90,7 @@
                       <p>您推荐的商家<span>30099</span>已成功注册平台，系统已大款推荐佣金<span>600¥</span>到您的账户</p>
                   </div>
               </div>
-          </TabPane>
+          </TabPane> -->
           <TabPane name="name6" label="系统">
               <div class="li">
                   <Icon type="ios-paper" size="22" color="#45b1b"/>
