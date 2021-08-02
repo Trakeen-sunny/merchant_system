@@ -1,6 +1,26 @@
 <template>
   <div class="acount">
 
+    <!-- 标题一 -->
+    <Row class="title">
+      <Col span="12"><span>优惠券</span></Col>
+      <Col span="12" class="right">
+      <Dropdown>
+        <Button type="info" class="button" style="margin-left:0" ghost>
+            批量修改
+            <Icon type="ios-arrow-down"></Icon>
+        </Button>
+        <DropdownMenu slot="list">
+            <DropdownItem style="text-align:left;">上架</DropdownItem>
+            <DropdownItem style="text-align:left;">下架</DropdownItem>
+            <DropdownItem style="text-align:left;">修改平台分类</DropdownItem>
+            <DropdownItem style="text-align:left;">修改平台品牌</DropdownItem>
+        </DropdownMenu>
+    </Dropdown>
+        <Button type="info" class="button" @click="couponAdd">添加优惠券</Button>
+      </Col>
+    </Row>
+
     <!-- 搜索 -->
     <div class="search">
       <div>
@@ -40,26 +60,6 @@
         <Button type="info" class="button" size="large">查询</Button>
       </div>
     </div>
-
-    <!-- 标题一 -->
-    <Row class="title">
-      <Col span="12"><span>优惠券</span></Col>
-      <Col span="12" class="right">
-      <Dropdown>
-        <Button type="info" class="button" style="margin-left:0" ghost>
-            批量修改
-            <Icon type="ios-arrow-down"></Icon>
-        </Button>
-        <DropdownMenu slot="list">
-            <DropdownItem style="text-align:left;">上架</DropdownItem>
-            <DropdownItem style="text-align:left;">下架</DropdownItem>
-            <DropdownItem style="text-align:left;">修改平台分类</DropdownItem>
-            <DropdownItem style="text-align:left;">修改平台品牌</DropdownItem>
-        </DropdownMenu>
-    </Dropdown>
-        <Button type="info" class="button" @click="couponAdd">添加优惠券</Button>
-      </Col>
-    </Row>
 
     <!-- 表格 -->
     <div class="table">

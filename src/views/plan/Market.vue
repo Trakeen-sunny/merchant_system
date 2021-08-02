@@ -1,5 +1,10 @@
 <template>
   <div class="acount">
+
+    <!-- 标题一 -->
+    <Row class="title">
+      <Col span="12"><span>营销计划</span></Col>
+    </Row>
     <!--  时间 搜索 -->
     <div class="search table" style="margin-bottom: 30px;margin-top:0;">
       <ul>
@@ -325,6 +330,25 @@ export default {
 </script>
 <style lang="less" scoped>
 .acount {
+   > .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    span {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    span::before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background-color: #419191;
+      font-size: 18px;
+      margin-right: 8px;
+    }
+  }
   .content {
     margin-bottom: 30px;
     background-color: #ffffff;

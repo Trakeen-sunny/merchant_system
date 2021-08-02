@@ -1,5 +1,10 @@
 <template>
   <div class="collaborator">
+    <!-- 标题一 -->
+    <Row class="title">
+      <Col span="12"><span>合作者</span></Col>
+    </Row>
+
     <!-- 搜索 -->
     <div class="search">
       <div>
@@ -329,6 +334,25 @@ export default {
 </script>
 <style lang="less" scoped>
 .collaborator {
+  > .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    span {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    span::before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background-color: #419191;
+      font-size: 18px;
+      margin-right: 8px;
+    }
+  }
   .search {
     background-color: #ffffff;
     border-radius: 4px;

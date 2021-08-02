@@ -13,7 +13,7 @@
     </Row>
 
     <!--  时间 搜索 -->
-    <div class="search table" style="margin-bottom: 30px">
+    <div class="search table" style="margin-bottom: 30px;margin-top:0;">
       <ul>
         <li>{{ $t("common.searchTime7") }}</li>
         <li>{{ $t("common.searchTime8") }}</li>
