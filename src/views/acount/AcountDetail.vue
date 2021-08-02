@@ -44,10 +44,10 @@
         <span class="num">$0</span>
         <span class="title">{{ $t("acount.moneyLi1") }}</span>
       </div>
-      <div>
+      <!-- <div>
         <span class="num">$0</span>
         <span class="title">{{ $t("acount.moneyLi2") }}</span>
-      </div>
+      </div> -->
       <div>
         <span class="num">0</span>
         <span class="title">{{ $t("acount.moneyLi4") }}</span>
@@ -284,7 +284,7 @@ export default {
       flex-direction: column;
       align-items: center;
       position: relative;
-      width: calc(100% / 5);
+      width: calc(100% / 4);
       .num {
         color: #089444;
         font-size: 18px;
@@ -330,7 +330,7 @@ export default {
         font-size: 14px;
       }
       .width {
-        width: 200px;
+        width: 195px;
       }
       .button:last-child {
         margin-left: 20px;
@@ -342,7 +342,7 @@ export default {
       list-style: none;
       border-radius: 5px;
       li {
-        width: 50px;
+        width: 60px;
         height: 35px;
         text-align: center;
         line-height: 35px;

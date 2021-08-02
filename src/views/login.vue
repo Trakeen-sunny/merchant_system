@@ -102,6 +102,7 @@ export default {
                 api: getUsersByToken,
                 data: {},
                 success: (res) => {
+                  res.result.userRole = 2;
                   window.localStorage.setItem(
                     "userinfo",
                     JSON.stringify(res.result)

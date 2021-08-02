@@ -299,7 +299,7 @@ export default {
       list-style: none;
       border-radius: 5px;
       li {
-        width: 50px;
+        width: 60px;
         height: 35px;
         text-align: center;
         line-height: 35px;
