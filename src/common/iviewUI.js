@@ -37,9 +37,10 @@ import {
     Steps,
     Step,
     Poptip,
-    Tag
+    Tag,
 } from 'iview';
 
+// Vue.component('Switch', Switch);
 Vue.component('Button', Button);
 Vue.component('Table', Table);
 Vue.component('Layout', Layout);

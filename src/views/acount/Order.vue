@@ -6,7 +6,7 @@
     </Row>
 
     <!--  时间 搜索 -->
-    <div class="search table" style="margin-bottom: 30px">
+    <div class="search table" style="margin-bottom: 30px;padding-bottom:20px;">
       <ul>
         <li>日</li>
         <li>周</li>
@@ -97,6 +97,22 @@
           <Option value="法国">法国</Option>
           <Option value="韩国">韩国</Option>
         </Select>
+      </div>
+      <div>
+        <span>访问时间</span>
+         <DatePicker
+          type="datetime"
+          format="yyyy-MM-dd"
+          style="width: 200px"
+        ></DatePicker>
+      </div>
+      <div>
+        <span>最后一次点击链接时间</span>
+        <DatePicker
+          type="datetime"
+          format="yyyy-MM-dd"
+          style="width: 200px"
+        ></DatePicker>
       </div>
       <div>
         <Button type="info" ghost class="button" size="large">重置</Button>
@@ -497,11 +513,13 @@ export default {
     background-color: #ffffff;
     border-radius: 4px;
     display: flex;
-    padding: 20px 20px;
+    flex-wrap: wrap;
+    padding: 20px 20px 0;
     > div {
       display: flex;
       align-items: center;
       margin-right: 20px;
+      margin-bottom: 20px;
       span {
         margin-right: 10px;
         font-weight: 500;
@@ -519,6 +537,7 @@ export default {
       border: 1px solid #e0e0e0;
       list-style: none;
       border-radius: 5px;
+       height: 37px;
       li {
         width: 60px;
         height: 35px;

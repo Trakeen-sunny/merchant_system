@@ -52,6 +52,25 @@
       </div>
     </div>
 
+     <!-- 搜索 -->
+    <div class="search">
+      <div>
+        <span>充值订单号</span>
+        <Input v-model="form.id" size="large" clearable class="width" />
+      </div>
+      <div>
+        <Button
+          type="info"
+          ghost
+          class="button"
+          @click="handleReset"
+          size="large"
+          >重置</Button
+        >
+        <Button type="info" class="button" size="large" @click="handleSearch">查询</Button>
+      </div>
+    </div>
+
     <!-- 表格 -->
     <div class="table">
       <div class="title">
@@ -94,7 +113,7 @@ export default {
       model1: "",
       columns: [
         {
-          title: "订单ID",
+          title: "充值订单号",
           key: "id",
           align: "center",
         },
@@ -167,6 +186,17 @@ export default {
     changeSize(size) {
       console.log(size);
       this.pageSiz = size;
+      this.initData();
+    },
+     // 搜索
+    handleSearch() {
+      this.initData();
+    },
+    //重置
+    handleReset() {
+      this.form = {
+        id: "",
+      };
       this.initData();
     },
     handleRecharge() {
@@ -293,6 +323,22 @@ export default {
     border-radius: 4px;
     display: flex;
     padding: 20px 20px;
+    > div {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      span {
+        margin-right: 10px;
+        font-weight: 500;
+        font-size: 14px;
+      }
+      .width {
+        width: 195px;
+      }
+      .button:last-child {
+        margin-left: 20px;
+      }
+    }
     > ul {
       display: flex;
       border: 1px solid #e0e0e0;

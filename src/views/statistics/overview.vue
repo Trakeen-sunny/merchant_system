@@ -108,7 +108,6 @@
           <span class="activeColor">今天</span>
           <span>最近7天</span>
           <span>最近30天</span>
-          <span>最近90天</span>
           <div>
             <!-- <span>去年</span> -->
             <DatePicker
@@ -136,21 +135,21 @@
           <span class="num">$0.00</span>
           <span class="title">账户余额</span>
         </div> -->
-        <div style="flex-direction: row; justify-content: center">
+        <!-- <div style="flex-direction: row; justify-content: center">
           <Button type="info" class="button" @click="handleRecharge"
             >立即充值</Button
           >
-        </div>
+        </div> -->
       </div>
     </div>
 
     <!-- TOP10合作者榜 -->
-    <div class="table" style="padding-bottom: 20px">
+    <!-- <div class="table" style="padding-bottom: 20px">
       <div class="title">
         <span class="left">TOP10合作者榜</span>
       </div>
       <Table :columns="columns" :data="data"></Table>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -219,6 +218,11 @@ export default {
         },
         {
           title: "有效订单数",
+          key: "address",
+          width:100
+        },
+        {
+          title: "下单件数",
           key: "address",
         },
       ],
@@ -450,6 +454,7 @@ export default {
   .table {
     background-color: #ffffff;
     margin-top: 30px;
+    margin-bottom: 30px;
     border-radius: 4px;
     > .title {
       padding: 20px;
@@ -498,10 +503,10 @@ export default {
     padding: 20px;
     display: flex;
     .left {
-      width: 60%;
+      width: 63%;
     }
     .right {
-      width: 40%;
+      width: 37%;
     }
   }
 
