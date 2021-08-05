@@ -91,8 +91,72 @@
 
       <div class="details">
         <div class="left">
-          <Table :columns="columns1" :data="data1"></Table>
-          <Table :columns="columns2" :data="data2"></Table>
+          <!-- <Table :columns="columns1" :data="data1"></Table> -->
+          <!-- <Table :columns="columns2" :data="data2"></Table> -->
+          <Row>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>独立访客</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>佣金率(%)</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>加购人数</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>加购件数</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>下单人数</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>订单数</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>有效订单数</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>下单件数</span>
+            </Col>
+          </Row>
+          <Row>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>订单总数</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>退款金额($)</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>付款人数</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>付款订单数</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>付款件数</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>付款金额($)</span>
+            </Col>
+            <Col span="3" class="list">
+              <span>0</span>
+              <span>客单价($)</span>
+            </Col>
+          </Row>
         </div>
         <div class="right">
           <div id="main" style="width: 400px; height: 200px"></div>
@@ -191,73 +255,6 @@ export default {
         },
       ],
       data: [],
-      columns1: [
-        {
-          title: "独立访客",
-          key: "name",
-        },
-        {
-          title: "佣金率",
-          key: "name",
-        },
-        {
-          title: "加购人数",
-          key: "age",
-        },
-        {
-          title: "加购件数",
-          key: "address",
-        },
-        {
-          title: "下单人数",
-          key: "age",
-        },
-        {
-          title: "订单数",
-          key: "address",
-        },
-        {
-          title: "有效订单数",
-          key: "address",
-          width:100
-        },
-        {
-          title: "下单件数",
-          key: "address",
-        },
-      ],
-      data1: [],
-      columns2: [
-         {
-          title: "订单总数",
-          key: "address",
-        },
-        {
-          title: "退款金额",
-          key: "name",
-        },
-        {
-          title: "付款人数",
-          key: "age",
-        },
-        {
-          title: "付款订单数",
-          key: "address",
-        },
-        {
-          title: "付款简述",
-          key: "address",
-        },
-        {
-          title: "付款金额",
-          key: "address",
-        },
-        {
-          title: "客单价",
-          key: "address",
-        },
-      ],
-      data2: [],
       myChart: null,
     };
   },
@@ -504,13 +501,38 @@ export default {
     display: flex;
     .left {
       width: 63%;
+      /deep/ .ivu-row {
+        height: 50%;
+        .list {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          box-sizing: border-box;
+          border-bottom: 1px solid #e0e0e0;
+          border-right: 1px solid #e0e0e0;
+          font-size: 15px;
+          span:first-child {
+            color: #089444;
+            font-size: 18px;
+            font-weight: bold;
+          }
+        }
+        .list:last-child {
+          border-right: 0;
+        }
+      }
+      /deep/ .ivu-row:last-child {
+        border-bottom: 0;
+      }
     }
     .right {
       width: 37%;
     }
   }
 
-  .activeColor{
+  .activeColor {
     color: #089444 !important;
     font-weight: bolder !important;
   }
