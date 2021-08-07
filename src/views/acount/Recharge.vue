@@ -21,38 +21,51 @@
         <li>年</li>
       </ul>
       <div class="right">
-        <span class="activeColor">今天</span>
-        <span>最近7天</span>
+        <span
+          :class="timeIdx == 0 ? 'activeColor' : ''"
+          @click="handleSelectTime(0, 0)"
+          >今天</span
+        >
+        <span
+          :class="timeIdx == 1 ? 'activeColor' : ''"
+          @click="handleSelectTime(1, 6)"
+          >最近7天</span
+        >
         <div>
-          <span>最近30天</span>
+          <span
+            :class="timeIdx == 2 ? 'activeColor' : ''"
+            @click="handleSelectTime(2, 29)"
+            >最近30天</span
+          >
           <DatePicker
             type="datetimerange"
-            format="yyyy-MM-dd"
-            style="width: 200px"
+            format="yyyy-MM-dd HH:mm:ss"
+            style="width: 300px"
+            @on-change="handleChange"
+            @on-ok="handleOk"
+            @on-clear="handleClear"
           ></DatePicker>
         </div>
-        <Button type="info" ghost class="button">{{
-          $t("common.exportPage")
-        }}</Button>
+        <Button type="info" ghost class="button">导出报表</Button>
       </div>
     </div>
 
     <div class="content">
       <div>
-        <span class="num">$0</span>
+        <span class="num">${{ countNum.balance || 0 }}</span>
         <span class="title">当前账户余额</span>
       </div>
       <div>
-        <span class="num">$0</span>
+        <span class="num">${{ countNum.recharge_last_money || 0 }}</span>
         <span class="title">最近一次充值金额</span>
       </div>
       <div>
-        <span class="num">$0</span>
+        <span class="num">{{ countNum.recharge_last_time || "未知" }}</span>
         <span class="title">最近一次充值日期</span>
       </div>
     </div>
 
-     <!-- 搜索 -->
+    <!-- 搜索 -->
     <div class="search">
       <div>
         <span>充值订单号</span>
@@ -67,7 +80,9 @@
           size="large"
           >重置</Button
         >
-        <Button type="info" class="button" size="large" @click="handleSearch">查询</Button>
+        <Button type="info" class="button" size="large" @click="handleSearch"
+          >查询</Button
+        >
       </div>
     </div>
 
@@ -75,19 +90,6 @@
     <div class="table">
       <div class="title">
         <span class="left">充值记录</span>
-        <!-- <div class="right">
-          <span>最近3个月</span>
-          <span>最近6个月</span>
-          <div>
-            <span>去年</span>
-            <DatePicker
-              type="datetimerange"
-              format="yyyy-MM-dd"
-              style="width: 200px"
-            ></DatePicker>
-          </div>
-          <Button type="info" ghost class="button">导出报表</Button>
-        </div> -->
       </div>
       <Table :columns="columns" :data="data"></Table>
       <Page
@@ -103,14 +105,13 @@
   </div>
 </template>
 <script>
-import { rechargeLogList } from "../../api/acount";
+import { rechargeLogList, rechargeLogTotal } from "../../api/acount";
+import { getTodayDate, getSevenDate } from "../../common/function";
 export default {
   name: "Recharge",
   data() {
     return {
       form: {},
-      value: "",
-      model1: "",
       columns: [
         {
           title: "充值订单号",
@@ -157,12 +158,56 @@ export default {
       pageNo: 1, //页数
       pageSize: 10, //条数
       total: 0, //总条数
+      countNum: {}, //统计数据
+      timeIdx: 0, // 默认时间选中
+      dateTime: [],
     };
   },
   created() {
     this.initData();
+    this.getCountNum();
+    console.log(getTodayDate(), getSevenDate(30));
   },
   methods: {
+    // 时间组件搜索
+    handleChange(ev) {
+      console.log(ev);
+      this.dateTime = ev;
+    },
+    handleOk() {
+      this.form.start = this.dateTime[0];
+      this.form.end = this.dateTime[1];
+      this.initData();
+    },
+    handleClear() {
+      delete this.form.start;
+      delete this.form.end;
+      this.initData();
+    },
+    // 时间搜索
+    handleSelectTime(ev, num) {
+      if (this.timeIdx == ev) return;
+      this.timeIdx = ev;
+      if (ev != 0) {
+        this.form.start = getSevenDate(num);
+        this.form.end = getTodayDate();
+      } else {
+        delete this.form.start;
+        delete this.form.end;
+      }
+      this.initData();
+    },
+    // 统计数据
+    getCountNum() {
+      this.$httpRequest({
+        api: rechargeLogTotal,
+        data: {},
+        success: (res) => {
+          console.log(res);
+          this.countNum = res.result;
+        },
+      });
+    },
     // 初始化数据
     initData() {
       let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
@@ -188,7 +233,7 @@ export default {
       this.pageSiz = size;
       this.initData();
     },
-     // 搜索
+    // 搜索
     handleSearch() {
       this.initData();
     },
@@ -388,8 +433,8 @@ export default {
   }
 }
 
- .activeColor{
-    color: #089444 !important;
-    font-weight: bolder !important;
-  }
+.activeColor {
+  color: #089444 !important;
+  font-weight: bolder !important;
+}
 </style>

@@ -10,8 +10,14 @@ export const acountList = {
     method: 'get'
 }
 
-// 账户中心列表
+// 充值中心列表
 export const rechargeLogList = {
-    path: '/web/rechargeLog/list',
+    path: '/web/rechargeLog/listByDate',
+    method: 'get'
+}
+
+// 充值中心-获取统计数据
+export const rechargeLogTotal = {
+    path: '/web/rechargeLog/queryTotal',
     method: 'get'
 }
