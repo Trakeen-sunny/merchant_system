@@ -151,6 +151,11 @@ const routes = [{
     name: "Thanks",
     component: () => import("@/views/invitation/Thanks.vue"),
   },
+  {
+    path: "/einvitation",
+    name: "EInvitation",
+    component: () => import("@/views/invitation/EInvitation.vue"),
+  },
 ];
 
 const router = new VueRouter({
