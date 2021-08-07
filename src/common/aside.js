@@ -69,7 +69,24 @@ export const aside = [{
 
             // }
         ]
-    }, 
+    },
+    {
+        name: '数据分析',
+        icon: 'ios-color-filter',
+        userRole: [0, 1],
+        children: [{
+                url: '/home/promoter',
+                name: '推广者数据分析',
+                userRole: [0, 1],
+            },
+            {
+                url: '/home/business',
+                name: '商家数据分析',
+                userRole: [0, 1],
+
+            }
+        ]
+    },
     // {
     //     name: '设置',
     //     icon: 'md-settings',

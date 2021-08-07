@@ -217,7 +217,6 @@
   </div>
 </template>
 <script>
-import * as echarts from "echarts";
 export default {
   name: "Overview",
   data() {
@@ -259,7 +258,7 @@ export default {
     };
   },
   mounted() {
-    this.myChart = echarts.init(document.getElementById("main"));
+    this.myChart = this.$echarts.init(document.getElementById("main"));
     this.getChart();
   },
   methods: {

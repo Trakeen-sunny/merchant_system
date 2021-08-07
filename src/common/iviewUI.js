@@ -38,9 +38,10 @@ import {
     Step,
     Poptip,
     Tag,
+    Circle,
+    Switch
 } from 'iview';
-
-// Vue.component('Switch', Switch);
+console.log(Input,Switch)
 Vue.component('Button', Button);
 Vue.component('Table', Table);
 Vue.component('Layout', Layout);
@@ -77,6 +78,8 @@ Vue.component('Steps', Steps);
 Vue.component('Step', Step);
 Vue.component('Poptip', Poptip);
 Vue.component('Tag', Tag);
+Vue.component('iCircle', Circle);
+Vue.component('iSwitch', Switch);
 Vue.prototype.$Modal = Modal;
 Vue.prototype.$Notice = Notice;
 Vue.prototype.$Message = Message;

@@ -14,86 +14,95 @@ const routes = [{
     name: "Home",
     component: Home,
     children: [{
-      path: "",
-      name: "Index",
-      component: () => import("@/views/statistics/overview.vue"),
-    }, {
-      path: "acount_detail",
-      name: "AcountDetail",
-      component: () => import("@/views/acount/AcountDetail.vue"),
-    },{
-      path: "message",
-      name: "Message",
-      component: () => import("@/views/home/Message.vue"),
-    }, {
-      path: "commision",
-      name: "Commision",
-      component: () => import("@/views/acount/Commision.vue"),
-    }, {
-      path: "recharge",
-      name: "Recharge",
-      component: () => import("@/views/acount/Recharge.vue"),
-    }, {
-      path: "profit",
-      name: "Profit",
-      component: () => import("@/views/acount/Profit.vue"),
-    },{
-      path: "order",
-      name: "Order",
-      component: () => import("@/views/acount/Order.vue"),
-    }, {
-      path: "collaborator",
-      name: "Collaborator",
-      component: () => import("@/views/Collaborator.vue"),
-    }, {
-      path: "product",
-      name: "Product",
-      component: () => import("@/views/material/Product.vue"),
-    }, {
-      path: "product_add",
-      name: "ProductAdd",
-      component: () => import("@/views/material/ProductAdd.vue"),
-    }, {
-      path: "coupon",
-      name: "Coupon",
-      component: () => import("@/views/material/Coupon.vue"),
-    }, {
-      path: "coupon_add",
-      name: "CouponAdd",
-      component: () => import("@/views/material/CouponAdd.vue"),
-    }, {
-      path: "picture",
-      name: "Picture",
-      component: () => import("@/views/material/Picture.vue"),
-    }, {
-      path: "picture_add",
-      name: "PictureAdd",
-      component: () => import("@/views/material/PictureAdd.vue"),
-    }, {
-      path: "setup_commission",
-      name: "SetupCommission",
-      component: () => import("@/views/setup/Commission.vue"),
-    }, {
-      path: "setup_product",
-      name: "SetupProduct",
-      component: () => import("@/views/setup/Product.vue"),
-    }, {
-      path: "setup_persion",
-      name: "SetupPersion",
-      component: () => import("@/views/setup/Persion.vue"),
-    }, {
-      path: "sale",
-      name: "Sale",
-      component: () => import("@/views/statistics/sale.vue"),
-    }, {
-      path: "overview",
-      name: "Overview",
-      component: () => import("@/views/Index.vue"),
-    },{
-      path: "market",
-      name: "Market",
-      component: () => import("@/views/plan/Market.vue"),
-    }]
+        path: "",
+        name: "Index",
+        component: () => import("@/views/statistics/overview.vue"),
+      }, {
+        path: "acount_detail",
+        name: "AcountDetail",
+        component: () => import("@/views/acount/AcountDetail.vue"),
+      }, {
+        path: "message",
+        name: "Message",
+        component: () => import("@/views/home/Message.vue"),
+      }, {
+        path: "commision",
+        name: "Commision",
+        component: () => import("@/views/acount/Commision.vue"),
+      }, {
+        path: "recharge",
+        name: "Recharge",
+        component: () => import("@/views/acount/Recharge.vue"),
+      }, {
+        path: "profit",
+        name: "Profit",
+        component: () => import("@/views/acount/Profit.vue"),
+      }, {
+        path: "order",
+        name: "Order",
+        component: () => import("@/views/acount/Order.vue"),
+      }, {
+        path: "collaborator",
+        name: "Collaborator",
+        component: () => import("@/views/Collaborator.vue"),
+      }, {
+        path: "product",
+        name: "Product",
+        component: () => import("@/views/material/Product.vue"),
+      }, {
+        path: "product_add",
+        name: "ProductAdd",
+        component: () => import("@/views/material/ProductAdd.vue"),
+      }, {
+        path: "coupon",
+        name: "Coupon",
+        component: () => import("@/views/material/Coupon.vue"),
+      }, {
+        path: "coupon_add",
+        name: "CouponAdd",
+        component: () => import("@/views/material/CouponAdd.vue"),
+      }, {
+        path: "picture",
+        name: "Picture",
+        component: () => import("@/views/material/Picture.vue"),
+      }, {
+        path: "picture_add",
+        name: "PictureAdd",
+        component: () => import("@/views/material/PictureAdd.vue"),
+      }, {
+        path: "setup_commission",
+        name: "SetupCommission",
+        component: () => import("@/views/setup/Commission.vue"),
+      }, {
+        path: "setup_product",
+        name: "SetupProduct",
+        component: () => import("@/views/setup/Product.vue"),
+      }, {
+        path: "setup_persion",
+        name: "SetupPersion",
+        component: () => import("@/views/setup/Persion.vue"),
+      }, {
+        path: "sale",
+        name: "Sale",
+        component: () => import("@/views/statistics/sale.vue"),
+      }, {
+        path: "overview",
+        name: "Overview",
+        component: () => import("@/views/Index.vue"),
+      }, {
+        path: "market",
+        name: "Market",
+        component: () => import("@/views/plan/Market.vue"),
+      }, {
+        path: "promoter",
+        name: "Promoter",
+        component: () => import("@/views/dataanalysis/Promoter.vue"),
+      }, {
+        path: "business",
+        name: "Business",
+        component: () => import("@/views/dataanalysis/Business.vue"),
+      }
+    ]
   }, {
     path: '/person',
     name: 'Person',
