@@ -8,9 +8,9 @@
             <Input v-model="emailForm.email"> </Input>
           </FormItem>
           <FormItem label="Verification code">
-            <Input v-model="emailForm.code" type="number">
+            <Input v-model="emailForm.code" type="text">
               <Button slot="append" @click="hanldeGetCode">{{
-                timerCount > 1 ? timerCount : "Get verification code"
+                timerCount > 1 ? timerCount+'s' : "Get verification code"
               }}</Button>
             </Input>
           </FormItem>
