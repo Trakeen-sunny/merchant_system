@@ -48,6 +48,12 @@ export default {
         searchName1: "订单编号",
         searchName2: "任务编号",
         searchName3: "交易类型",
+        selectSearch:{
+            name1:'全部',
+            name2:'佣金支出',
+            name3:'佣金收入',
+            name4:'充值收入'
+        },
         table: {
             name1: "流水单号",
             name2: "订单编号",

@@ -13,7 +13,7 @@
     </Row>
 
     <!--  时间 搜索 -->
-    <div class="search table" style="margin-bottom: 30px;margin-top:0;">
+    <div class="search table" style="margin-bottom: 30px; margin-top: 0">
       <ul>
         <li>{{ $t("common.searchTime7") }}</li>
         <li>{{ $t("common.searchTime8") }}</li>
@@ -23,14 +23,29 @@
         <li>{{ $t("common.searchTime12") }}</li>
       </ul>
       <div class="right">
-        <span class="activeColor">{{ $t("common.searchTime4") }}</span>
-        <span>{{ $t("common.searchTime5") }}</span>
+        <span
+          :class="timeIdx == 0 ? 'activeColor' : ''"
+          @click="handleSelectTime(0, 0)"
+          >{{ $t("common.searchTime4") }}</span
+        >
+        <span
+          :class="timeIdx == 1 ? 'activeColor' : ''"
+          @click="handleSelectTime(1, 6)"
+          >{{ $t("common.searchTime5") }}</span
+        >
         <div>
-          <span>{{ $t("common.searchTime6") }}</span>
+          <span
+            :class="timeIdx == 2 ? 'activeColor' : ''"
+            @click="handleSelectTime(2, 29)"
+            >{{ $t("common.searchTime6") }}</span
+          >
           <DatePicker
             type="datetimerange"
-            format="yyyy-MM-dd"
-            style="width: 200px"
+            format="yyyy-MM-dd HH:mm:ss"
+            style="width: 300px"
+            @on-change="handleChange"
+            @on-ok="handleOk"
+            @on-clear="handleClear"
           ></DatePicker>
         </div>
         <Button type="info" ghost class="button">{{
@@ -41,7 +56,7 @@
 
     <div class="content">
       <div>
-        <span class="num">$0</span>
+        <span class="num">${{ userinfo.totalFee }}</span>
         <span class="title">{{ $t("acount.moneyLi1") }}</span>
       </div>
       <!-- <div>
@@ -49,15 +64,15 @@
         <span class="title">{{ $t("acount.moneyLi2") }}</span>
       </div> -->
       <div>
-        <span class="num">0</span>
+        <span class="num">{{ userinfo.totalOrder }}</span>
         <span class="title">{{ $t("acount.moneyLi4") }}</span>
       </div>
       <div>
-        <span class="num">0</span>
+        <span class="num">{{ userinfo.totalOrder }}</span>
         <span class="title">{{ $t("acount.moneyLi5") }}</span>
       </div>
       <div>
-        <span class="num">$0</span>
+        <span class="num">${{ userinfo.balance }}</span>
         <span class="title"
           ><span>{{ $t("acount.moneyLi3") }}</span>
           <Poptip
@@ -85,10 +100,10 @@
       <div>
         <span>{{ $t("acount.searchName3") }}</span>
         <Select v-model="form.tranType" size="large" clearable class="width">
-          <Option :value="1">订单成交</Option>
-          <Option :value="2">订单退款</Option>
-          <Option :value="3">佣金支出</Option>
-          <Option :value="4">佣金返还</Option>
+          <Option value="">{{ $t("acount.selectSearch.name1") }}</Option>
+          <Option :value="1">{{ $t("acount.selectSearch.name2") }}</Option>
+          <Option :value="2">{{ $t("acount.selectSearch.name3") }}</Option>
+          <Option :value="3">{{ $t("acount.selectSearch.name4") }}</Option>
         </Select>
       </div>
       <div>
@@ -110,23 +125,14 @@
     <div class="table">
       <div class="title">
         <span class="left">{{ $t("acount.title1") }}</span>
-        <!-- <div class="right">
-          <span>{{ $t("common.searchTime1") }}</span>
-          <span>{{ $t("common.searchTime2") }}</span>
-          <div>
-            <span>{{ $t("common.searchTime3") }}</span>
-            <DatePicker
-              type="datetimerange"
-              format="yyyy-MM-dd"
-              style="width: 200px"
-            ></DatePicker>
-          </div>
-          <Button type="info" ghost class="button">{{
-            $t("common.exportPage")
-          }}</Button>
-        </div> -->
       </div>
-      <Table :columns="columns" :data="data"></Table>
+      <Table :columns="columns" :data="data">
+        <template slot-scope="{ row }" slot="tranType">
+          {{ row.tranType == 1 ? $t("acount.selectSearch.name2") : "" }}
+          {{ row.tranType == 2 ? $t("acount.selectSearch.name3") : "" }}
+          {{ row.tranType == 3 ? $t("acount.selectSearch.name4") : "" }}
+        </template>
+      </Table>
       <Page
         :total="total"
         :current="pageNo"
@@ -141,6 +147,8 @@
 </template>
 <script>
 import { acountList } from "../../api/acount";
+import { getUsersByToken } from "../../api/index";
+import { getTodayDate, getSevenDate } from "../../common/function";
 export default {
   name: "AcountDetail",
   data() {
@@ -165,7 +173,7 @@ export default {
         },
         {
           title: this.$t("acount.table.name5"),
-          key: "tranType",
+          slot: "tranType",
           align: "center",
         },
         {
@@ -193,12 +201,54 @@ export default {
       pageNo: 1, //页数
       pageSize: 10, //条数
       total: 0, //总条数
+      timeIdx: 0, // 默认时间选中
+      dateTime: [],
+      userinfo:{}
     };
   },
   created() {
     this.initData();
+    this.getUserToken();
   },
   methods: {
+    // 时间组件搜索
+    handleChange(ev) {
+      console.log(ev);
+      this.dateTime = ev;
+    },
+    handleOk() {
+      this.form.start = this.dateTime[0];
+      this.form.end = this.dateTime[1];
+      this.initData();
+    },
+    handleClear() {
+      delete this.form.start;
+      delete this.form.end;
+      this.initData();
+    },
+    // 获取统计数据
+    getUserToken() {
+      this.$httpRequest({
+        api: getUsersByToken,
+        data: {},
+        success: (res) => {
+          this.userinfo = res.result;
+        },
+      });
+    },
+    // 时间搜索
+    handleSelectTime(ev, num) {
+      if (this.timeIdx == ev) return;
+      this.timeIdx = ev;
+      if (ev != 0) {
+        this.form.start = getSevenDate(num);
+        this.form.end = getTodayDate();
+      } else {
+        delete this.form.start;
+        delete this.form.end;
+      }
+      this.initData();
+    },
     // 初始化数据
     initData() {
       let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
@@ -231,6 +281,7 @@ export default {
     //重置
     handleReset() {
       this.form = {
+        waterNo: "",
         taskNo: "",
         tranType: "",
       };
@@ -430,8 +481,8 @@ export default {
     }
   }
 }
- .activeColor{
-    color: #089444 !important;
-    font-weight: bolder !important;
-  }
+.activeColor {
+  color: #089444 !important;
+  font-weight: bolder !important;
+}
 </style>

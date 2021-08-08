@@ -101,7 +101,7 @@
 </template>
 
 <script>
-import { collect_add, entryInfo_add } from "../../api/invitation";
+import { collect_addOdd, entryInfo_add } from "../../api/invitation";
 export default {
   name: "Invitation",
   data() {
@@ -188,7 +188,7 @@ export default {
 
       this.form.email = this.$route.query.email;
       this.$httpRequest({
-        api: collect_add,
+        api: collect_addOdd,
         data: this.form,
         success: (res) => {
           console.log(res);

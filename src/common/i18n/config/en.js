@@ -48,6 +48,12 @@ export default {
         searchName1: "Order number",
         searchName2: "Task number",
         searchName3: "Transaction Type",
+        selectSearch:{
+            name1:'All',
+            name2:'Commission expenses',
+            name3:'Commission income',
+            name4:'Recharge income'
+        },
         table: {
             name1: "Serial number",
             name2: "Order Number",

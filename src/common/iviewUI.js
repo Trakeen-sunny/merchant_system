@@ -41,7 +41,6 @@ import {
     Circle,
     Switch
 } from 'iview';
-console.log(Input,Switch)
 Vue.component('Button', Button);
 Vue.component('Table', Table);
 Vue.component('Layout', Layout);

@@ -3,13 +3,15 @@
     <div class="box">
       <img src="../../assets/img.jpg" class="img" />
       <div class="form">
-        <Form :model="emailForm" label-width="103">
+        <Form :model="emailForm" :label-width="103">
           <FormItem label="Email">
             <Input v-model="emailForm.email" type="email"> </Input>
           </FormItem>
           <FormItem label="Verification code">
             <Input v-model="emailForm.code" type="number">
-              <Button slot="append" @click="hanldeGetCode">获取验证码</Button>
+              <Button slot="append" @click="hanldeGetCode">{{
+                timerCount > 1 ? timerCount : "获取验证码"
+              }}</Button>
             </Input>
           </FormItem>
         </Form>
@@ -111,7 +113,7 @@
 </template>
 
 <script>
-import { collect_add } from "../../api/invitation";
+import { collect_add, entryInfo_sendCaptcha } from "../../api/invitation";
 export default {
   name: "EInvitation",
   data() {
@@ -127,6 +129,8 @@ export default {
         otherPlatformRate: null,
         accept: 1,
         infoCollectcol: "",
+        email: "",
+        code: "",
       },
       emailForm: {
         email: "",
@@ -161,18 +165,21 @@ export default {
           value: "pinterest",
         },
       ],
+      timerCount: "",
     };
   },
-  created() {
-  
-  },
+  created() {},
   computed: {},
   mounted() {},
   destroyed() {},
   methods: {
     handleSubmit() {
-      if (!this.$route.query.email) {
-        this.$Message.info("无法获取您的邮箱");
+      if (!this.emailForm.email) {
+        this.$Message.info("请输入您的邮箱");
+        return;
+      }
+      if (!this.emailForm.code) {
+        this.$Message.info("请输入您的验证码");
         return;
       }
       if (
@@ -183,12 +190,12 @@ export default {
         this.form.twich == null &&
         this.form.pinterest == null
       ) {
-        //this.$Message.info("请输入YouTube");
         this.red = true;
         return;
       }
 
-      this.form.email = this.$route.query.email;
+      this.form.email = this.emailForm.email;
+      this.form.code = this.emailForm.code;
       this.$httpRequest({
         api: collect_add,
         data: this.form,
@@ -208,6 +215,8 @@ export default {
               otherPlatformRate: null,
               accept: 1,
               infoCollectcol: "",
+              email: "",
+              code: "",
             };
             this.$router.replace({ path: "/thanks" });
           } else {
@@ -217,9 +226,32 @@ export default {
       });
     },
     // 获取验证码
-    hanldeGetCode(){
-
-    }
+    hanldeGetCode() {
+      if (!this.emailForm.email) {
+        this.$Message.info("请输入您的邮箱");
+        return;
+      }
+      this.timerCount = 60;
+      this.geSendCaptcha();
+      let timer = setTimeout(() => {
+        this.timerCount--;
+        if (this.timerCount == 1) {
+          clearTimeout(timer);
+          this.timerCount = "";
+        }
+      }, 1000);
+    },
+    geSendCaptcha() {
+      this.$httpRequest({
+        api: entryInfo_sendCaptcha,
+        data: {
+          mail: this.emailForm.email,
+        },
+        success: (res) => {
+          console.log(res);
+        },
+      });
+    },
   },
 };
 </script>

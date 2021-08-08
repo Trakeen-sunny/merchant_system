@@ -1,7 +1,13 @@
 
-// 邀请
+// 新邀请
 export const collect_add = {
     path: '/web/infoCollect/add',
+    method: 'post'
+}
+
+// 旧邀请
+export const collect_addOdd = {
+    path: '/web/infoCollect/add-old',
     method: 'post'
 }
 // add email
