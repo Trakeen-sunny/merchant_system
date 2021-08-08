@@ -5,12 +5,12 @@
       <div class="form">
         <Form :model="emailForm" :label-width="103">
           <FormItem label="Email">
-            <Input v-model="emailForm.email" type="email"> </Input>
+            <Input v-model="emailForm.email"> </Input>
           </FormItem>
           <FormItem label="Verification code">
             <Input v-model="emailForm.code" type="number">
               <Button slot="append" @click="hanldeGetCode">{{
-                timerCount > 1 ? timerCount : "获取验证码"
+                timerCount > 1 ? timerCount : "Get verification code"
               }}</Button>
             </Input>
           </FormItem>
@@ -227,19 +227,16 @@ export default {
     },
     // 获取验证码
     hanldeGetCode() {
+      if (this.timerCount != "") {
+        return;
+      }
       if (!this.emailForm.email) {
         this.$Message.info("请输入您的邮箱");
         return;
       }
       this.timerCount = 60;
       this.geSendCaptcha();
-      let timer = setTimeout(() => {
-        this.timerCount--;
-        if (this.timerCount == 1) {
-          clearTimeout(timer);
-          this.timerCount = "";
-        }
-      }, 1000);
+      this.getInterVal();
     },
     geSendCaptcha() {
       this.$httpRequest({
@@ -251,6 +248,16 @@ export default {
           console.log(res);
         },
       });
+    },
+    // 定时器
+    getInterVal() {
+      let timer = setInterval(() => {
+        this.timerCount--;
+        if (this.timerCount == 1) {
+          clearInterval(timer);
+          this.timerCount = "";
+        }
+      }, 1000);
     },
   },
 };
