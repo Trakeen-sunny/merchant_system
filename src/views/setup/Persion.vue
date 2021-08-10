@@ -12,8 +12,8 @@
         <Col span="24" class="owninfo">
           <img src="../../assets/avatar.png" />
           <div>
-            <span>Sunny112</span>
-            <span>1223333</span>
+            <span>{{getUserInfo.realName}}</span>
+            <span>{{getUserInfo.email}}</span>
           </div>
         </Col>
       </Row>
@@ -29,7 +29,7 @@
               <Col span="8">
                 <FormItem label="联系电话">
                   <Input
-                    v-model="formItem.input"
+                    v-model="getUserInfo.phone"
                     type="tel"
                     size="large"
                   ></Input>
@@ -38,7 +38,7 @@
               <Col span="8">
                 <FormItem label="联系邮箱">
                   <Input
-                    v-model="formItem.input"
+                    v-model="getUserInfo.email"
                     type="email"
                     size="large"
                   ></Input>
@@ -46,17 +46,17 @@
               </Col>
               <Col span="8">
                 <FormItem label="国家/地区">
-                  <Select v-model="formItem.input" size="large">
+                  <Select v-model="getUserInfo.country" size="large">
                     <Option value="">111</Option>
-                    <Option value="">111</Option>
+                    <Option value="china">china</Option>
                   </Select>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem label="语言">
-                  <Select v-model="formItem.input" size="large">
+                  <Select v-model="getUserInfo.language" size="large">
                     <Option value="">111</Option>
-                    <Option value="">111</Option>
+                    <Option value="中文">中文</Option>
                   </Select>
                 </FormItem>
               </Col>
@@ -329,6 +329,11 @@ export default {
       uploadList: [],
     };
   },
+  computed:{
+    getUserInfo() {
+      return JSON.parse(window.localStorage.getItem("userinfo"));
+    }
+  },
   methods: {
     handleEdit() {
       this.visibily = !this.visibily;
@@ -364,6 +369,7 @@ export default {
     padding: 20px;
     .owninfo {
       display: flex;
+      margin-bottom: 20px;
       img {
         width: 80px;
         height: 80px;

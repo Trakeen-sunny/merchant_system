@@ -59,12 +59,11 @@
 
             <Dropdown @on-click="handleDropDown">
               <div class="avatar">
-                <!-- <Avatar icon="ios-person" size="large" /> -->
                 <img
                   src="../assets/avatar.png"
                   style="width: 40px; height: 40px; border-radius: 100%"
                 />
-                <span>{{ getUserInfo.shopName }}</span>
+                <span>{{ getUserInfo.realName }}</span>
               </div>
               <DropdownMenu slot="list" v-if="getUserInfo.userRole!=2">
                 <DropdownItem name="1">商家信息</DropdownItem>

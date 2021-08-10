@@ -175,11 +175,11 @@ export default {
   methods: {
     handleSubmit() {
       if (!this.emailForm.email) {
-        this.$Message.info("请输入您的邮箱");
+        this.$Message.info("Please enter your email");
         return;
       }
       if (!this.emailForm.code) {
-        this.$Message.info("请输入您的验证码");
+        this.$Message.info("Please enter your verification code");
         return;
       }
       if (
@@ -231,7 +231,7 @@ export default {
         return;
       }
       if (!this.emailForm.email) {
-        this.$Message.info("请输入您的邮箱");
+        this.$Message.info("Please enter your email");
         return;
       }
       this.timerCount = 60;

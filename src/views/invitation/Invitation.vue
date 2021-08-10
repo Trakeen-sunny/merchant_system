@@ -170,7 +170,7 @@ export default {
     },
     handleSubmit() {
       if (!this.$route.query.email) {
-        this.$Message.info("无法获取您的邮箱");
+        this.$Message.info("Unable to get your email");
         return;
       }
       if (
