@@ -36,16 +36,16 @@ export const aside = [{
         userRole: [0, 2],
         children: []
     },
-    {
-        name: '合作者管理',
-        icon: 'md-people',
-        userRole: [0, 1],
-        children: [{
-            url: '/home/collaborator',
-            name: '合作者管理',
-            userRole: [0, 1],
-        }]
-    },
+    // {//
+    //     name: '合作者管理',
+    //     icon: 'md-people',
+    //     userRole: [0, 1],
+    //     children: [{
+    //         url: '/home/collaborator',
+    //         name: '合作者管理',
+    //         userRole: [0, 1],
+    //     }]
+    // },
     {
         name: '素材管理',
         icon: 'md-photos',
@@ -61,33 +61,32 @@ export const aside = [{
                 name: '优惠券管理',
                 userRole: [0, 1],
 
-            }
-            //  {
+            },
+            //  {//
             //     url: '/home/picture',
             //     name: '图片管理',
             //     userRole: [0, 1],
-
             // }
         ]
     },
-    {
-        name: '数据分析',
-        icon: 'ios-color-filter',
-        userRole: [0, 1],
-        children: [{
-                url: '/home/promoter',
-                name: '推广者数据分析',
-                userRole: [0, 1],
-            },
-            {
-                url: '/home/business',
-                name: '商家数据分析',
-                userRole: [0, 1],
+    // { //
+    //     name: '数据分析',
+    //     icon: 'ios-color-filter',
+    //     userRole: [0, 1],
+    //     children: [{
+    //             url: '/home/promoter',
+    //             name: '推广者数据分析',
+    //             userRole: [0, 1],
+    //         },
+    //         {
+    //             url: '/home/business',
+    //             name: '商家数据分析',
+    //             userRole: [0, 1],
 
-            }
-        ]
-    },
-    // {
+    //         }
+    //     ]
+    // },
+    // { //
     //     name: '设置',
     //     icon: 'md-settings',
     //     userRole: [0, 1],
@@ -103,7 +102,7 @@ export const aside = [{
     //         }
     //     ]
     // },
-    // {
+    // { //
     //     name: '统计',
     //     icon: 'ios-stats',
     //     userRole: [0, 1],
@@ -118,5 +117,26 @@ export const aside = [{
     //             userRole: [0, 1],
     //         }
     //     ]
-    // }
+    // },
+    // {//
+    //     name: '我的计划',
+    //     url: '/home/myplan',
+    //     icon: 'md-albums',
+    //     userRole: [0,1,2],
+    //     children: []
+    // },
+    // { //
+    //     name: '订单中心',
+    //     url: '/home/ordercenter',
+    //     icon: 'md-albums',
+    //     userRole: [0,1,2],
+    //     children: []
+    // },
+    // { //
+    //     name: '财务中心',
+    //     url: '/home/financialcenter',
+    //     icon: 'md-albums',
+    //     userRole: [0,1,2],
+    //     children: []
+    // },
 ]

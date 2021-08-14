@@ -2,7 +2,8 @@ import axios from "axios";
 import {
     Message
 } from 'iview';
-let baseUrl = "http://42.192.225.148:6081";
+// let baseUrl = "http://42.192.225.148:6081"; //本地
+let baseUrl = "http://47.88.9.205:6081" // 线上
 export default {
     request: function ({
         api,

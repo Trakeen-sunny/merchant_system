@@ -101,6 +101,18 @@ const routes = [{
         path: "business",
         name: "Business",
         component: () => import("@/views/dataanalysis/Business.vue"),
+      }, {
+        path: "myplan",
+        name: "MyPlan",
+        component: () => import("@/views/promoter/MyPlan.vue"),
+      }, {
+        path: "ordercenter",
+        name: "OrderCenter",
+        component: () => import("@/views/promoter/OrderCenter.vue"),
+      }, {
+        path: "financialcenter",
+        name: "FinancialCenter",
+        component: () => import("@/views/promoter/FinancialCenter.vue"),
       }
     ]
   }, {
