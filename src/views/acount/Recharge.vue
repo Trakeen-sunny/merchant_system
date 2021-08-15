@@ -46,7 +46,9 @@
             @on-clear="handleClear"
           ></DatePicker>
         </div>
-        <Button type="info" ghost class="button">导出报表</Button>
+        <Button type="info" ghost class="button" @click="handleExport"
+          >导出报表</Button
+        >
       </div>
     </div>
 
@@ -107,6 +109,7 @@
 <script>
 import { rechargeLogList, rechargeLogTotal } from "../../api/acount";
 import { getTodayDate, getSevenDate } from "../../common/function";
+import { exportExcel } from "../../common/excelUtils";
 export default {
   name: "Recharge",
   data() {
@@ -119,40 +122,40 @@ export default {
           align: "center",
         },
         {
-          title: "充值金额",
+          title: "充值金额($)",
           key: "rechargeTotal",
           align: "center",
         },
         {
-          title: "账户余额",
+          title: "账户余额($)",
           key: "balance",
           align: "center",
         },
         {
-          title: "累计充值总额",
+          title: "累计充值总额($)",
           key: "sumTotal",
           align: "center",
         },
-        {
-          title: "充值方式",
-          key: "rechargeType",
-          align: "center",
-        },
-        {
-          title: "充值状态",
-          key: "status",
-          align: "center",
-        },
+        // {
+        //   title: "充值方式",
+        //   key: "rechargeType",
+        //   align: "center",
+        // },
+        // {
+        //   title: "充值状态",
+        //   key: "status",
+        //   align: "center",
+        // },
         {
           title: "充值日期",
           key: "rechargeDate",
           align: "center",
         },
-        {
-          title: "充值备注说明",
-          key: "remark",
-          align: "center",
-        },
+        // {
+        //   title: "充值备注说明",
+        //   key: "remark",
+        //   align: "center",
+        // },
       ],
       data: [],
       pageNo: 1, //页数
@@ -161,6 +164,48 @@ export default {
       countNum: {}, //统计数据
       timeIdx: 0, // 默认时间选中
       dateTime: [],
+      initColumn: [
+        {
+          title: "充值订单号",
+          key: "id",
+          dataIndex: "id",
+        },
+        {
+          title: "充值金额",
+          key: "rechargeTotal",
+          dataIndex: "rechargeTotal",
+        },
+        {
+          title: "账户余额",
+          key: "balance",
+          dataIndex: "balance",
+        },
+        {
+          title: "累计充值总额",
+          key: "sumTotal",
+          dataIndex: "sumTotal",
+        },
+        {
+          title: "充值方式",
+          key: "rechargeType",
+          dataIndex: "rechargeType",
+        },
+        {
+          title: "充值状态",
+          key: "status",
+          dataIndex: "status",
+        },
+        {
+          title: "充值日期",
+          key: "rechargeDate",
+          dataIndex: "rechargeDate",
+        },
+        {
+          title: "充值备注说明",
+          key: "remark",
+          dataIndex: "remark",
+        },
+      ],
     };
   },
   created() {
@@ -169,6 +214,34 @@ export default {
     console.log(getTodayDate(), getSevenDate(30));
   },
   methods: {
+    // 导出报表
+    handleExport() {
+      if (this.data.length == 0) {
+        this.$Message.success("暂无数据导出");
+        return;
+      }
+      let data = { pageNo: this.pageNo, pageSize: 999999999, ...this.form };
+      this.$httpRequest({
+        api: rechargeLogList,
+        data,
+        success: (res) => {
+          let arr = [];
+          for (const re of res.result.records) {
+            arr.push({
+              id: re.id,
+              rechargeTotal: re.rechargeTotal,
+              balance: re.balance,
+              sumTotal: re.sumTotal,
+              rechargeType: re.rechargeType,
+              status: re.status,
+              rechargeDate: re.rechargeDate,
+              remark: re.remark,
+            });
+          }
+          exportExcel(this.initColumn, arr, "充值记录" + ".xlsx");
+        },
+      });
+    },
     // 时间组件搜索
     handleChange(ev) {
       console.log(ev);

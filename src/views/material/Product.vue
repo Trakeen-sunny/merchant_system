@@ -44,47 +44,12 @@
         </Select>
       </div>
       <div>
-        <span>平台分类</span>
-        <Select v-model="model1" size="large" clearable class="width">
-          <Option :value="1">Mobile Phones</Option>
-          <Option :value="2">Appliances</Option>
-          <Option :value="3">Computer & Electronics</Option>
-          <Option :value="3">Industrial & Scientific</Option>
-          <Option :value="3">Sports & Outdoors</Option>
-          <Option :value="3">Smart Home</Option>
-          <Option :value="3">Hobbies & Toys</Option>
-          <Option :value="3">Pet Supplies</Option>
-          <Option :value="3">Automotive</Option>
-          <Option :value="3">Beauty</Option>
-          <Option :value="3">Health & Wellness</Option>
-          <Option :value="3">Home & Garden</Option>
-          <Option :value="3">DIY & Handmade</Option>
-          <Option :value="3">Consumer Electronics</Option>
-          <Option :value="3">Apparel & Accessories</Option>
-        </Select>
-      </div>
-      <div>
-        <span>平台品牌</span>
-        <Select v-model="model1" size="large" clearable class="width">
-          <Option :value="1">MECOOL</Option>
-          <Option :value="2">Creality 3D</Option>
-          <Option :value="3">HIMO</Option>
-          <Option :value="3">LANKELEISI</Option>
-          <Option :value="3">NIUBILITY</Option>
-          <Option :value="3">ONEBOT</Option>
-          <Option :value="3">SAMEBIKE</Option>
-          <Option :value="3">XIAOMI</Option>
-          <Option :value="3">ELEPHONE</Option>
-          <Option :value="3">SMART RAY</Option>
-          <Option :value="3">360</Option>
-          <Option :value="3">Dreame</Option>
-          <Option :value="3">Oclean</Option>
-          <Option :value="3">Roborock</Option>
-          <Option :value="3">POCO</Option>
-          <Option :value="3">XIAOMI MIJIA</Option>
-          <Option :value="3">Kospet</Option>
-          <Option :value="3">IMILAB</Option>
-        </Select>
+        <span>推广有效期</span>
+        <DatePicker
+          type="datetime"
+          format="yyyy-MM-dd"
+          style="width: 200px"
+        ></DatePicker>
       </div>
       <div>
         <Button type="info" ghost class="button" size="large">重置</Button>
@@ -200,7 +165,7 @@
     >
       <Form ref="formValidate" :model="formValidate3" :label-width="80">
         <FormItem label="商品名称">
-          <Input v-model="formValidate3.name" placeholder="" readonly></Input>
+          <Input v-model="formValidate3.name" placeholder=""></Input>
         </FormItem>
         <FormItem label="类目" prop="city">
           <Select v-model="formValidate3.city" placeholder="Select your city">
@@ -382,8 +347,7 @@ export default {
   created() {
     this.initData();
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     handleProductAdd() {
       this.$router.push({ name: "ProductAdd" });

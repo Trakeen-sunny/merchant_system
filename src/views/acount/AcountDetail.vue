@@ -48,7 +48,7 @@
             @on-clear="handleClear"
           ></DatePicker>
         </div>
-        <Button type="info" ghost class="button">{{
+        <Button type="info" ghost class="button" @click="handleExport">{{
           $t("common.exportPage")
         }}</Button>
       </div>
@@ -59,10 +59,10 @@
         <span class="num">${{ userinfo.totalFee }}</span>
         <span class="title">{{ $t("acount.moneyLi1") }}</span>
       </div>
-      <!-- <div>
-        <span class="num">$0</span>
+      <div>
+        <span class="num">${{ userinfo.totalFee }}</span>
         <span class="title">{{ $t("acount.moneyLi2") }}</span>
-      </div> -->
+      </div>
       <div>
         <span class="num">{{ userinfo.totalOrder }}</span>
         <span class="title">{{ $t("acount.moneyLi4") }}</span>
@@ -149,6 +149,8 @@
 import { acountList } from "../../api/acount";
 import { getUsersByToken } from "../../api/index";
 import { getTodayDate, getSevenDate } from "../../common/function";
+import { exportExcel } from "../../common/excelUtils";
+
 export default {
   name: "AcountDetail",
   data() {
@@ -203,7 +205,39 @@ export default {
       total: 0, //总条数
       timeIdx: 0, // 默认时间选中
       dateTime: [],
-      userinfo:{}
+      userinfo: {},
+      initColumn: [
+        {
+          title: this.$t("acount.table.name1"),
+          dataIndex: "waterNo",
+          key: "waterNo",
+        },
+        {
+          title: this.$t("acount.table.name5"),
+          dataIndex: "tranType",
+          key: "tranType",
+        },
+        {
+          title: this.$t("acount.table.name2"),
+          dataIndex: "taskNo",
+          key: "taskNo",
+        },
+        {
+          title: this.$t("acount.table.name3"),
+          dataIndex: "tranTotal",
+          key: "tranTotal",
+        },
+        {
+          title: this.$t("acount.table.name4"),
+          key: "accountTotal",
+          dataIndex: "accountTotal",
+        },
+        {
+          title: this.$t("acount.table.name6"),
+          key: "tranTime",
+          dataIndex: "tranTime",
+        },
+      ],
     };
   },
   created() {
@@ -248,6 +282,47 @@ export default {
         delete this.form.end;
       }
       this.initData();
+    },
+    // 导出报表
+    handleExport() {
+      if (this.data.length == 0) {
+        this.$Message.success("暂无数据导出");
+        return;
+      }
+      let data = { pageNo: this.pageNo, pageSize: 999999999, ...this.form };
+      this.$httpRequest({
+        api: acountList,
+        data,
+        success: (res) => {
+          console.log(res);
+          let arr = [];
+          for (const re of res.result.records) {
+            let tranType = "";
+            switch (re.tranType) {
+              case 1:
+                tranType = this.$t("acount.selectSearch.name2");
+                break;
+              case 2:
+                tranType = this.$t("acount.selectSearch.name3");
+                break;
+              case 3:
+                tranType = this.$t("acount.selectSearch.name4");
+                break;
+              default:
+                break;
+            }
+            arr.push({
+              waterNo: re.waterNo,
+              tranType: tranType,
+              taskNo: re.taskNo,
+              tranTotal: re.tranTotal,
+              accountTotal: re.accountTotal,
+              tranTime: re.tranTime,
+            });
+          }
+          exportExcel(this.initColumn, arr, "账户中心" + ".xlsx");
+        },
+      });
     },
     // 初始化数据
     initData() {
@@ -335,7 +410,7 @@ export default {
       flex-direction: column;
       align-items: center;
       position: relative;
-      width: calc(100% / 4);
+      width: calc(100% / 5);
       .num {
         color: #089444;
         font-size: 18px;

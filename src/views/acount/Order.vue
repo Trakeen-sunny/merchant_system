@@ -48,11 +48,11 @@
     >
       <div>
         <span class="num">$0</span>
-        <span class="title">下单总金额</span>
+        <span class="title">订单总金额</span>
       </div>
       <div>
         <span class="num">0</span>
-        <span class="title">下单总数</span>
+        <span class="title">订单总数</span>
       </div>
       <div>
         <span class="num">0</span>
