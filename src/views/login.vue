@@ -53,6 +53,7 @@
 </template>
 <script>
 import { loginIn, getUsersByToken } from "../api/index";
+import { shopifyStoreQueryByShop, shopifyStoreInstall } from "../api/other";
 export default {
   name: "Login",
   data() {
@@ -86,8 +87,15 @@ export default {
       },
     };
   },
-  created(){
-    console.log(this.$i18n.locale)
+  created() {
+    console.log(this.$route.query);
+    const { hmac, code, shop } = this.$route.query;
+    if (hmac && code) {
+      this.getshopifyStoreQueryByShop(shop, code);
+    }
+    if (hmac && !code) {
+      this.getshopifyStoreQueryByShop(shop);
+    }
   },
   methods: {
     handleSubmit(name) {
@@ -98,30 +106,66 @@ export default {
             data: this.formInline,
             success: (res) => {
               window.localStorage.setItem("token", res.result.token);
-              this.$httpRequest({
-                api: getUsersByToken,
-                data: {},
-                success: (res) => {
-                  window.localStorage.setItem(
-                    "userinfo",
-                    JSON.stringify(res.result)
-                  );
-                  let timer = setTimeout(() => {
-                    if (res.result&&res.result.userRole != 2) {
-                      this.$router.replace("/home");
-                      this.$i18n.locale = "zh";
-                    } else {
-                      this.$router.replace("/home/acount_detail");
-                      this.$i18n.locale = "en"
-                    }
-                    clearTimeout(timer);
-                  }, 1000);
-                  this.$Message.success("登录成功!");
-                },
-              });
+              this.getUserInfo();
             },
           });
         }
+      });
+    },
+    // 获取用户基本信息
+    getUserInfo() {
+      this.$httpRequest({
+        api: getUsersByToken,
+        data: { shop: "" },
+        success: (res) => {
+          window.localStorage.setItem("userinfo", JSON.stringify(res.result));
+          let timer = setTimeout(() => {
+            if (res.result && res.result.userRole != 2) {
+              this.$router.replace("/home");
+              this.$i18n.locale = "zh";
+            } else {
+              this.$router.replace("/home/acount_detail");
+              this.$i18n.locale = "en";
+            }
+            clearTimeout(timer);
+          }, 1000);
+          this.$Message.success("登录成功!");
+        },
+      });
+    },
+    // 判断商品是否安装
+    getshopifyStoreQueryByShop(shop, code) {
+      this.$httpRequest({
+        api: shopifyStoreQueryByShop,
+        data: { shop: "https://" + shop },
+        success: (res) => {
+          console.log(res.result);
+
+          if (res.result.living) {
+            window.localStorage.setItem("token", res.result.token);
+            this.getUserInfo();
+          } else {
+            if (code) {
+              this.getshopifyStoreInstall(code);
+            } else {
+              window.location.href = `https://${shop}/admin/oauth/authorize?client_id=151790686c89b0456adba11a4caabe7b
+&scope=unauthenticated_read_product_listings,unauthenticated_write_checkouts,unauthenticated_write_customers,unauthenticated_read_customer_tags,unauthenticated_read_content,unauthenticated_read_product_tags&redirect_uri=https://shopify.jstgzfy.com/
+`;
+            }
+          }
+        },
+      });
+    },
+    // 下载
+    getshopifyStoreInstall(code) {
+      this.$httpRequest({
+        api: shopifyStoreInstall,
+        data: { code },
+        success: (res) => {
+          console.log(res);
+          window.localStorage.setItem("token", res.result.token);
+          this.getUserInfo();
+        },
       });
     },
     forgetPwd() {
