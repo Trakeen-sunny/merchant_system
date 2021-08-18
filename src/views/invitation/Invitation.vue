@@ -107,6 +107,7 @@
 
 <script>
 import { collect_addOdd } from "../../api/invitation";
+import { getLocalTime } from "../../common/function";
 export default {
   name: "Invitation",
   data() {
@@ -159,6 +160,7 @@ export default {
   },
   created() {
     // this.initData();
+    console.log(new Date().toLocaleString());
   },
   computed: {},
   mounted() {},
@@ -195,6 +197,7 @@ export default {
       }
 
       this.form.email = this.emailForm.email;
+      this.form.createTime = getLocalTime(new Date().getTime());
       this.$httpRequest({
         api: collect_addOdd,
         data: this.form,

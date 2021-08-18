@@ -153,8 +153,8 @@ const routes = [{
     }]
   },
   {
-    path: "/invitation",
-    name: "Invitation",
+    path: "/einvitation",
+    name: "EInvitation",
     component: () => import("@/views/invitation/Invitation.vue"),
   },
   {
@@ -163,8 +163,8 @@ const routes = [{
     component: () => import("@/views/invitation/Thanks.vue"),
   },
   {
-    path: "/einvitation",
-    name: "EInvitation",
+    path: "/invitation",
+    name: "Invitation",
     component: () => import("@/views/invitation/EInvitation.vue"),
   },
   {
