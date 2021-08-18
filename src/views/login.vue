@@ -88,14 +88,13 @@ export default {
     };
   },
   created() {
-    console.log(this.$route.query);
-    const { hmac, code, shop } = this.$route.query;
-    if (hmac && code) {
-      this.getshopifyStoreQueryByShop(shop, code);
-    }
-    if (hmac && !code) {
-      this.getshopifyStoreQueryByShop(shop);
-    }
+    // const { hmac, code, shop } = this.$route.query;
+    // if (hmac && code) {
+    //   this.getshopifyStoreQueryByShop(shop, code);
+    // }
+    // if (hmac && !code) {
+    //   this.getshopifyStoreQueryByShop(shop);
+    // }
   },
   methods: {
     handleSubmit(name) {
@@ -146,21 +145,20 @@ export default {
             this.getUserInfo();
           } else {
             if (code) {
-              this.getshopifyStoreInstall(code);
+              this.getshopifyStoreInstall(shop, code);
             } else {
               window.location.href = `https://${shop}/admin/oauth/authorize?client_id=151790686c89b0456adba11a4caabe7b
-&scope=unauthenticated_read_product_listings,unauthenticated_write_checkouts,unauthenticated_write_customers,unauthenticated_read_customer_tags,unauthenticated_read_content,unauthenticated_read_product_tags&redirect_uri=https://shopify.jstgzfy.com/
-`;
+&scope=unauthenticated_read_product_listings,unauthenticated_write_checkouts,unauthenticated_write_customers,unauthenticated_read_customer_tags,unauthenticated_read_content,unauthenticated_read_product_tags&redirect_uri=http://shopify.jstgzfy.com/shopify/login`;
             }
           }
         },
       });
     },
     // 下载
-    getshopifyStoreInstall(code) {
+    getshopifyStoreInstall(shop, code) {
       this.$httpRequest({
         api: shopifyStoreInstall,
-        data: { code },
+        data: { storeUrl: shop, code: code },
         success: (res) => {
           console.log(res);
           window.localStorage.setItem("token", res.result.token);

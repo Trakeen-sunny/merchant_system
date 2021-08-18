@@ -4,7 +4,7 @@ import {
 } from 'iview';
 // let baseUrl = "http://42.192.225.148:6081"; //本地
 // let baseUrl = "http://47.88.9.205:6081" // 线上
-let baseUrl = "http://119.45.51.160:6081" // shopify
+let baseUrl = "https://myshopfiy.jstgzfy.com:6081" // shopify
 export default {
     request: function ({
         api,
