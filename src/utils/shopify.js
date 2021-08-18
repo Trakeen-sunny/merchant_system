@@ -52,7 +52,7 @@ export const getshopifyStoreQueryByShop = function getshopifyStoreQueryByShop(sh
                     getshopifyStoreInstall(shop, code, next);
                 } else {
                     window.location.href = `https://${shop}/admin/oauth/authorize?client_id=151790686c89b0456adba11a4caabe7b
-&scope=unauthenticated_read_product_listings,unauthenticated_write_checkouts,unauthenticated_write_customers,unauthenticated_read_customer_tags,unauthenticated_read_content,unauthenticated_read_product_tags&redirect_uri=http://shopify.jstgzfy.com/shopify/login`;
+&scope=unauthenticated_read_product_listings,unauthenticated_write_checkouts,unauthenticated_write_customers,unauthenticated_read_customer_tags,unauthenticated_read_content,unauthenticated_read_product_tags&redirect_uri=https://shopify.jstgzfy.com`;
                 }
             }
         },

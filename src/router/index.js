@@ -174,7 +174,7 @@ const routes = [{
   },
   {
     path: "/b",
-    name: "A",
+    name: "B",
     component: () => import("@/views/other/b.vue"),
   },
   {
@@ -185,7 +185,7 @@ const routes = [{
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes,
 });

@@ -3,6 +3,11 @@
     <div class="box">
       <img src="../../assets/img.jpg" class="img" />
       <div class="form">
+        <Form :model="emailForm" :label-width="103">
+          <FormItem label="Email">
+            <Input v-model="emailForm.email"> </Input>
+          </FormItem>
+        </Form>
         <h4>Here we need some information about collaboration preferences:</h4>
         <Form :model="form" label-position="top">
           <FormItem>
@@ -101,7 +106,7 @@
 </template>
 
 <script>
-import { collect_addOdd, entryInfo_add } from "../../api/invitation";
+import { collect_addOdd } from "../../api/invitation";
 export default {
   name: "Invitation",
   data() {
@@ -120,6 +125,9 @@ export default {
       },
       red: false,
       disabled: false,
+      emailForm: {
+        email: "",
+      },
       email: "",
       formItem: [
         {
@@ -150,27 +158,27 @@ export default {
     };
   },
   created() {
-    this.initData();
+    // this.initData();
   },
   computed: {},
   mounted() {},
   destroyed() {},
   methods: {
     // 初始化调接口
-    initData() {
-      this.$httpRequest({
-        api: entryInfo_add,
-        data: {
-          email: this.$route.query.email,
-        },
-        success: (res) => {
-          console.log(res);
-        },
-      });
-    },
+    // initData() {
+    //   this.$httpRequest({
+    //     api: entryInfo_add,
+    //     data: {
+    //       email: this.$route.query.email,
+    //     },
+    //     success: (res) => {
+    //       console.log(res);
+    //     },
+    //   });
+    // },
     handleSubmit() {
-      if (!this.$route.query.email) {
-        this.$Message.info("Unable to get your email");
+      if (!this.emailForm.email) {
+        this.$Message.info("Please enter your email");
         return;
       }
       if (
@@ -186,7 +194,7 @@ export default {
         return;
       }
 
-      this.form.email = this.$route.query.email;
+      this.form.email = this.emailForm.email;
       this.$httpRequest({
         api: collect_addOdd,
         data: this.form,
@@ -207,6 +215,7 @@ export default {
               accept: 1,
               infoCollectcol: "",
             };
+            this.emailForm.email = "";
             this.$router.replace({ path: "/thanks" });
           } else {
             this.$Message.info(res.message);
