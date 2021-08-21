@@ -42,6 +42,18 @@ const routes = [{
       name: "Order",
       component: () => import("@/views/acount/Order.vue"),
     }, {
+      path: "acount_financial",
+      name: "FinancialCenters",
+      component: () => import("@/views/acount/FinancialCenter.vue"),
+    },{
+      path: "rechargeaudit",
+      name: "RechargeAudit",
+      component: () => import("@/views/acount/RechargeAudit.vue"),
+    },{
+      path: "withdrawalreview",
+      name: "WithdrawalReview",
+      component: () => import("@/views/acount/WithdrawalReview.vue"),
+    }, {
       path: "collaborator",
       name: "Collaborator",
       component: () => import("@/views/Collaborator.vue"),
@@ -81,6 +93,14 @@ const routes = [{
       path: "setup_persion",
       name: "SetupPersion",
       component: () => import("@/views/setup/Persion.vue"),
+    }, {
+      path: "setup_merchant",
+      name: "MerchantManagement",
+      component: () => import("@/views/setup/MerchantManagement.vue"),
+    },{
+      path: "setup_promoter",
+      name: "PromoterManagement",
+      component: () => import("@/views/setup/PromoterManagement.vue"),
     }, {
       path: "sale",
       name: "Sale",

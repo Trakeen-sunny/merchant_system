@@ -3,6 +3,7 @@
     <Layout class="layout_main">
       <Sider
         ref="side1"
+        style="height:100%;overflow:scroll"
         hide-trigger
         collapsible
         :collapsed-width="78"

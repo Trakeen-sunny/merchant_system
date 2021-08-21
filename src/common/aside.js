@@ -19,7 +19,22 @@ export const aside = [{
                 url: '/home/recharge',
                 name: '充值记录',
                 userRole: [0, 1],
-            }
+            },
+            // {//
+            //     url: '/home/acount_financial',
+            //     name: '财务中心',
+            //     userRole: [0],
+            // },
+            // {//
+            //     url: '/home/rechargeaudit',
+            //     name: '充值审核',
+            //     userRole: [0],
+            // },
+            // {//
+            //     url: '/home/withdrawalreview',
+            //     name: '提现审核',
+            //     userRole: [0],
+            // }
         ]
     },
     {
@@ -99,6 +114,16 @@ export const aside = [{
     //             url: '/home/setup_product',
     //             name: '商家信息',
     //             userRole: [0, 1],
+    //         },
+    //         {//
+    //             url: '/home/setup_merchant',
+    //             name: '商家管理',
+    //             userRole: [0],
+    //         },
+    //         {//
+    //             url: '/home/setup_promoter',
+    //             name: '推广者管理',
+    //             userRole: [0],
     //         }
     //     ]
     // },
