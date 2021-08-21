@@ -31,7 +31,9 @@ export default {
         userInfo: "个人信息",
         loginOut: "退出登录",
         exit: "是否退出？",
-        cancelExit: "取消退出"
+        cancelExit: "取消退出",
+        add: "添加",
+        delete:"删除"
     },
     // 账户中心
     acount: {
@@ -106,13 +108,48 @@ export default {
     // 个人中心
     setPersion: {
         title: "个人信息",
+        title1:"账户设置",
+        tip1:"已阅读并同意",
+        tip2:"平台银行绑定认证协议",
         form: {
-            name: "用户名",
-            name1: "联系邮箱",
-            name2: "联系电话",
-            name3: "平台",
-            name4: "门类",
-            name5: "简介"
-        }
+            name: "公司名称",
+            name1: "联系电话",
+            name2: "联系邮箱",
+            name3: "国家/地区",
+            name4: "语言",
+            name5: "货币",
+            name6: "年龄",
+            name7: "性别",
+            gender:{
+                name1:"女",
+                name2:"男"
+            },
+            name8: "接受纯佣",
+            name9: "社交平台",
+            name10: "平台ID",
+            name11: "粉丝量",
+            name12: "推广费用",
+            name13: "主页链接",
+            name14: "简介说明"
+        },
+         form1:{
+             name1:"账户余额",
+             name2:"提现",
+             name3:"请选择以下方式绑定账户",
+             name4:"个人银行账户",
+             name5:"Palpay账户",
+             name6:"对公账户",
+             name7:"国家或地区",
+             name8:"银行名称",
+             name9:"分行地址",
+             name10:"SWFIT 代码",
+             name11:"账号",
+             name12:"重新输入账户",
+             name13:"银行账户名",
+             name14:"银行账户持有人地址",
+             name15:"银行账户持有人电话号码",
+             name16:"验证码",
+             name17:"获取验证码",
+         }
     }
 }

@@ -7,7 +7,7 @@
       >
     </Row>
 
-    <div class="form">
+    <div class="form"> 
       <Row>
         <Col span="24" class="owninfo">
           <img src="../../assets/avatar.png" />
@@ -18,16 +18,16 @@
         </Col>
       </Row>
       <Tabs type="card">
-        <TabPane label="个人信息">
+        <TabPane :label="$t('setPersion.title')">
           <Form model="formItem" label-position="top">
             <Row :gutter="24">
               <Col span="8">
-                <FormItem label="公司名称">
+                <FormItem :label="$t('setPersion.form.name')">
                   <Input v-model="formItem.input" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="联系电话">
+                <FormItem :label="$t('setPersion.form.name1')">
                   <Input
                     v-model="getUserInfo.phone"
                     type="tel"
@@ -36,7 +36,7 @@
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="联系邮箱">
+                <FormItem :label="$t('setPersion.form.name2')">
                   <Input
                     v-model="getUserInfo.email"
                     type="email"
@@ -45,7 +45,7 @@
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="国家/地区">
+                <FormItem :label="$t('setPersion.form.name3')">
                   <Select v-model="getUserInfo.country" size="large">
                     <Option value="">111</Option>
                     <Option value="china">china</Option>
@@ -53,7 +53,7 @@
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="语言">
+                <FormItem :label="$t('setPersion.form.name4')">
                   <Select v-model="getUserInfo.language" size="large">
                     <Option value="">111</Option>
                     <Option value="中文">中文</Option>
@@ -61,7 +61,7 @@
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="货币">
+                <FormItem :label="$t('setPersion.form.name5')">
                   <Select v-model="formItem.input" size="large">
                     <Option value="">111</Option>
                     <Option value="">111</Option>
@@ -69,7 +69,7 @@
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="年龄">
+                <FormItem :label="$t('setPersion.form.name6')">
                   <Input
                     v-model="formItem.input"
                     type="number"
@@ -78,19 +78,19 @@
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="性别">
+                <FormItem :label="$t('setPersion.form.name7')">
                   <RadioGroup v-model="formItem.input" size="large">
                     <Radio label="apple">
-                      <span>男</span>
+                      <span>{{$t('setPersion.form.gender.name2')}}</span>
                     </Radio>
                     <Radio label="android">
-                      <span>女</span>
+                      <span>{{$t('setPersion.form.gender.name1')}}</span>
                     </Radio>
                   </RadioGroup>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="接受纯佣">
+                <FormItem :label="$t('setPersion.form.name8')">
                   <RadioGroup v-model="formItem.input" size="large">
                     <Radio label="apple">
                       <span>off</span>
@@ -102,26 +102,26 @@
                 </FormItem>
               </Col>
               <Col span="24">
-                <FormItem label="社交平台">
+                <FormItem :label="$t('setPersion.form.name9')">
                   <Row :gutter="16">
                     <Col span="3">
                       <Input
                         v-model="formItem.input"
                         size="large"
-                        placeholder="社交平台"
+                        :placeholder="$t('setPersion.form.name9')"
                       ></Input>
                     </Col>
                     <Col span="3">
                       <Input
                         v-model="formItem.input"
                         size="large"
-                        placeholder="平台ID"
+                        :placeholder="$t('setPersion.form.name10')"
                       ></Input>
                     </Col>
                     <Col span="4">
                       <Input
                         v-model="formItem.input"
-                        placeholder="粉丝量"
+                        :placeholder="$t('setPersion.form.name11')"
                         size="large"
                       >
                         <span slot="append">W</span>
@@ -131,7 +131,7 @@
                       <Input
                         v-model="formItem.input"
                         size="large"
-                        placeholder="推广费用"
+                        :placeholder="$t('setPersion.form.name12')"
                       >
                         <span slot="prepend">$</span>
                       </Input>
@@ -140,19 +140,19 @@
                       <Input
                         v-model="formItem.input"
                         size="large"
-                        placeholder="主页链接"
+                        :placeholder="$t('setPersion.form.name13')"
                       >
                       </Input>
                     </Col>
                     <Col span="3">
-                      <Tag color="error">删除</Tag>
-                      <Tag color="default">添加</Tag>
+                      <Tag color="error">{{ $t("common.delete") }}</Tag>
+                      <Tag color="default">{{ $t("common.add") }}</Tag>
                     </Col>
                   </Row>
                 </FormItem>
               </Col>
               <Col span="24">
-                <FormItem label="简介说明">
+                <FormItem :label="$t('setPersion.form.name14')">
                   <Input
                     v-model="formItem.input"
                     type="textarea"
@@ -180,11 +180,11 @@
             </Row>
           </Form>
         </TabPane>
-        <TabPane label="账户设置">
+        <TabPane :label="$t('setPersion.title1')">
           <Form model="formItem" label-position="top">
             <Row :gutter="24" style="margin-bottom: 30px">
               <Col span="18">
-                <span>账户余额</span>
+                <span>{{ $t("setPersion.form1.name1") }}</span>
                 <span
                   style="
                     color: #333;
@@ -196,27 +196,27 @@
                 >
               </Col>
               <Col span="6">
-                <Button type="info" class="button" size="large">提现</Button>
+                <Button type="info" class="button" size="large">{{ $t("setPersion.form1.name2") }}</Button>
               </Col>
             </Row>
             <Row :gutter="24">
               <Col span="8">
-                <FormItem label="请选择以下方式绑定账户">
+                <FormItem :label="$t('setPersion.form1.name3')">
                   <RadioGroup v-model="formItem.input" size="large">
                     <Radio label="apple">
-                      <span>个人银行账户</span>
+                      <span>{{ $t("setPersion.form1.name4") }}</span>
                     </Radio>
                     <Radio label="android">
-                      <span>Palpay账户</span>
+                      <span>{{ $t("setPersion.form1.name5") }}</span>
                     </Radio>
                     <Radio label="android">
-                      <span>对公账户</span>
+                      <span>{{ $t("setPersion.form1.name6") }}</span>
                     </Radio>
                   </RadioGroup>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="国家或地区">
+                <FormItem :label="$t('setPersion.form1.name7')">
                   <Select v-model="formItem.input" size="large">
                     <Option value="">111</Option>
                     <Option value="">111</Option>
@@ -224,7 +224,7 @@
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="银行名称">
+                <FormItem :label="$t('setPersion.form1.name8')">
                   <Select v-model="formItem.input" size="large">
                     <Option value="">111</Option>
                     <Option value="">111</Option>
@@ -232,54 +232,54 @@
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="分行地址">
+                <FormItem :label="$t('setPersion.form1.name9')">
                   <Input v-model="formItem.input" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="SWFIT 代码">
+                <FormItem :label="$t('setPersion.form1.name10')">
                   <Input v-model="formItem.input" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="账号">
+                <FormItem :label="$t('setPersion.form1.name11')">
                   <Input v-model="formItem.input" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="重新输入账户">
+                <FormItem l:label="$t('setPersion.form1.name12')">
                   <Input v-model="formItem.input" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="银行账户名">
+                <FormItem :label="$t('setPersion.form1.name13')">
                   <Input v-model="formItem.input" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="银行账户持有人地址">
+                <FormItem :label="$t('setPersion.form1.name14')">
                   <Input v-model="formItem.input" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="银行账户持有人电话号码">
+                <FormItem :label="$t('setPersion.form1.name15')">
                   <Input v-model="formItem.input" size="large">
                     <span slot="prepend">+86</span>
                   </Input>
                 </FormItem>
               </Col>
               <Col span="8">
-                <FormItem label="验证码：">
+                <FormItem :label="$t('setPersion.form1.name16')">
                   <Input v-model="formItem.input" size="large">
-                    <span slot="append">获取验证码</span>
+                    <span slot="append">{{ $t("setPersion.form1.name17") }}</span>
                   </Input>
                 </FormItem>
               </Col>
               <Col span="24">
                 <FormItem label="">
                   <Radio v-model="single"
-                    >已阅读并同意<span style="color: blue"
-                      >《平台银行绑定认证协议》</span
+                    >{{ $t("setPersion.tip1") }}<span style="color: blue"
+                      >《{{ $t("setPersion.tip2") }}》</span
                     ></Radio
                   >
                 </FormItem>

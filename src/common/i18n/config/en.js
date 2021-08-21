@@ -31,7 +31,9 @@ export default {
         userInfo:"Personal Information",
         loginOut:"Logout",
         exit:"Exit",
-        cancelExit:"Cancel Exit"
+        cancelExit:"Cancel Exit",
+        add: "Add",
+        delete:"Delete"
     },
     // 账户中心
     acount: {
@@ -104,15 +106,50 @@ export default {
         }
     },
     // 个人中心
-    setPersion:{
-        title:"Userinfo",
-        form:{
-            name:"Username",
-            name1:"Email",
-            name2:"Phone number",
-            name3:"Network",
-            name4:"Category",
-            name5:"Introduction"
+    setPersion: {
+        title: "Personal Information",
+        title1: "Account settings",
+        tip1:"Read and agree",
+        tip2:"Platform bank binding authentication protocol",
+        form: {
+            name: "Agency",
+            name1: "Phone number",
+            name2: "Email",
+            name3: "country / region",
+            name4: "Language",
+            name5: "Functional currency",
+            name6: "Age",
+            name7: "gender",
+            gender:{
+                name1:"Female",
+                name2:"Male"
+            },
+            name8: "If accept only commision",
+            name9: "Media Name",
+            name10: "Media ID",
+            name11: "Number of fans",
+            name12: "Promotion cost",
+            name13: "Home page link",
+            name14: "Introduction"
+        },
+        form1:{
+            name1:"Account balance",
+            name2:"Withdrawal",
+            name3:"Please select the following method to bind the account",
+            name4:"Personal Bank Account",
+            name5:"Paypal Account",
+            name6:"Corporate Account",
+            name7:"Country or Region",
+            name8:"Receiving Bank Name",
+            name9:"Receiving Bank Address (branch address)",
+            name10:"Bank Routing / Swift Code (international wires)",
+            name11:"Beneficiary Account Number ",
+            name12:"Repeat Beneficiary Account Number ",
+            name13:"Beneficiary Account Name",
+            name14:"Beneficiary Account Address",
+            name15:"Contact Phone Number",
+            name16:"Verification Code",
+            name17:"Get verification code",
         }
     }
 }
