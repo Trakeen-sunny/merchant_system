@@ -1,11 +1,12 @@
 // 角色判断 userRole 0 管理员 1 普通用户 2 网红
-export const aside = [{
-        name: '首页',
-        url: '/home',
-        icon: 'md-albums',
-        userRole: [0, 1],
-        children: []
-    },
+export const aside = [
+    // {
+    //     name: '首页',
+    //     url: '/home',
+    //     icon: 'md-albums',
+    //     userRole: [0, 1],
+    //     children: []
+    // },
     {
         name: '财务管理',
         icon: 'logo-skype',
@@ -15,11 +16,11 @@ export const aside = [{
                 name: '账户中心',
                 userRole: [0, 1, 2],
             },
-            {
-                url: '/home/recharge',
-                name: '充值记录',
-                userRole: [0, 1],
-            },
+            // {
+            //     url: '/home/recharge',
+            //     name: '充值记录',
+            //     userRole: [0, 1],
+            // },
             // {//
             //     url: '/home/acount_financial',
             //     name: '财务中心',
@@ -69,14 +70,12 @@ export const aside = [{
                 url: '/home/product',
                 name: '商品管理',
                 userRole: [0, 1],
-
             },
-            {
-                url: '/home/coupon',
-                name: '优惠券管理',
-                userRole: [0, 1],
-
-            },
+            // {
+            //     url: '/home/coupon',
+            //     name: '优惠券管理',
+            //     userRole: [0, 1],
+            // },
             //  {//
             //     url: '/home/picture',
             //     name: '图片管理',

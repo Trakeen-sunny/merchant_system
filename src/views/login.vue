@@ -120,7 +120,7 @@ export default {
           window.localStorage.setItem("userinfo", JSON.stringify(res.result));
           let timer = setTimeout(() => {
             if (res.result && res.result.userRole != 2) {
-              this.$router.replace("/home");
+              this.$router.replace("/home/acount_detail");
               this.$i18n.locale = "zh";
             } else {
               this.$router.replace("/home/acount_detail");
