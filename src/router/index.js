@@ -152,6 +152,11 @@ const routes = [{
         path: '/message',
         name: 'Message',
         component: () => import('@/views/person/Message.vue'),
+      },
+      {
+        path: '/helpcenter',
+        name: 'HelpCenter',
+        component: () => import('@/views/help/HelpCenter.vue'),
       }
     ]
   }, {
@@ -206,7 +211,8 @@ const routes = [{
 
 const router = new VueRouter({
   mode: "hash",
-  base: process.env.BASE_URL,
+  base: '/',
+  // base: process.env.BASE_URL,
   routes,
 });
 

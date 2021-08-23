@@ -5,11 +5,11 @@
       <Col span="12"
         ><span>{{ $t("acount.title") }}</span></Col
       >
-      <Col span="12" class="right">
+      <!-- <Col span="12" class="right">
         <Button type="info" class="button" @click="handleRecharge">{{
           $t("acount.recharge")
         }}</Button>
-      </Col>
+      </Col> -->
     </Row>
 
     <!--  时间 搜索 -->

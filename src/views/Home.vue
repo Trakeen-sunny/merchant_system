@@ -3,7 +3,7 @@
     <Layout class="layout_main">
       <Sider
         ref="side1"
-        style="height:100%;overflow:scroll"
+        style="height: 100%; overflow: scroll"
         hide-trigger
         collapsible
         :collapsed-width="78"
@@ -25,7 +25,11 @@
             size="24"
           ></Icon>
           <div class="right">
-            <Tooltip :content="$t('common.kefu')" class="tooltip" v-if="getUserInfo.userRole!=2">
+            <Tooltip
+              :content="$t('common.kefu')"
+              class="tooltip"
+              v-if="getUserInfo.userRole != 2"
+            >
               <Icon
                 type="logo-whatsapp"
                 color="#666"
@@ -33,15 +37,23 @@
                 @click="handleGoto"
               />
             </Tooltip>
-            <Tooltip :content="$t('common.helpCenter')" class="tooltip" v-if="getUserInfo.userRole!=2">
+            <Tooltip
+              :content="$t('common.helpCenter')"
+              class="tooltip"
+              v-if="getUserInfo.userRole != 2"
+            >
               <Icon
                 type="md-help-circle"
                 color="#666"
                 size="25"
-                @click="handleGoto"
+                @click="handleGoto3"
               />
             </Tooltip>
-            <Tooltip :content="$t('common.feedback')" class="tooltip" v-if="getUserInfo.userRole!=2">
+            <Tooltip
+              :content="$t('common.feedback')"
+              class="tooltip"
+              v-if="getUserInfo.userRole != 2"
+            >
               <Icon
                 type="md-paper"
                 color="#666"
@@ -49,7 +61,11 @@
                 @click="handleGoTo1"
               />
             </Tooltip>
-            <Tooltip :content="$t('common.notice')" class="tooltip" v-if="getUserInfo.userRole!=2">
+            <Tooltip
+              :content="$t('common.notice')"
+              class="tooltip"
+              v-if="getUserInfo.userRole != 2"
+            >
               <Icon
                 type="md-notifications-outline"
                 color="#666"
@@ -66,14 +82,18 @@
                 />
                 <span>{{ getUserInfo.realName }}</span>
               </div>
-              <DropdownMenu slot="list" v-if="getUserInfo.userRole!=2">
+              <DropdownMenu slot="list" v-if="getUserInfo.userRole != 2">
                 <DropdownItem name="1">商家信息</DropdownItem>
                 <DropdownItem name="3">消息通知</DropdownItem>
                 <DropdownItem name="4">退出登录</DropdownItem>
               </DropdownMenu>
               <DropdownMenu slot="list" v-else>
-                <DropdownItem name="2">{{$t('common.userInfo')}}</DropdownItem>
-                <DropdownItem name="4">{{$t('common.loginOut')}}</DropdownItem>
+                <DropdownItem name="2">{{
+                  $t("common.userInfo")
+                }}</DropdownItem>
+                <DropdownItem name="4">{{
+                  $t("common.loginOut")
+                }}</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -95,7 +115,7 @@
       @on-cancel="cancel"
       width="300"
     >
-      <p>{{$t('common.exit')}}？</p>
+      <p>{{ $t("common.exit") }}？</p>
     </Modal>
   </div>
 </template>
@@ -117,7 +137,7 @@ export default {
     };
   },
   created() {
-    console.log(JSON.parse(window.localStorage.getItem("userinfo")))
+    console.log(JSON.parse(window.localStorage.getItem("userinfo")));
   },
   computed: {
     rotateIcon() {
@@ -125,7 +145,7 @@ export default {
     },
     getUserInfo() {
       return JSON.parse(window.localStorage.getItem("userinfo"));
-    }
+    },
   },
   methods: {
     collapsedSider() {
@@ -139,6 +159,9 @@ export default {
     },
     handleGoTo2() {
       this.$router.push({ name: "Message" });
+    },
+    handleGoto3() {
+      this.$router.push({ name: "HelpCenter" });
     },
     handleDropDown(ev) {
       if (ev == 1) {
@@ -159,12 +182,12 @@ export default {
           window.localStorage.removeItem("userinfo");
           window.localStorage.removeItem("token");
           this.$router.replace({ name: "Login" });
-          this.$Message.success(this.$t('common.loginOut'));
+          this.$Message.success(this.$t("common.loginOut"));
         },
       });
     },
     cancel() {
-      this.$Message.info(this.$t('common.cancelExit'));
+      this.$Message.info(this.$t("common.cancelExit"));
     },
   },
 };

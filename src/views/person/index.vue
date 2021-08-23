@@ -25,13 +25,13 @@ export default {
 .layout {
   background-color: #f7f7f7;
   .header {
-    background-color: #fff;
+    background-color: #335850;
     display: flex;
     justify-content: space-between;
     align-items: center;
     img {
-      width: 80px;
-      height: 100%;
+      // width: 80px;
+      // height: 100%;
     }
   }
   .content {
