@@ -16,7 +16,8 @@ export default {
   name: "Person",
   methods:{
     handleReturnTo(){
-      this.$router.replace({name:'Index'})
+      // this.$router.replace({name:'Index'})
+      this.$router.go(-1)
     }
   }
 };
