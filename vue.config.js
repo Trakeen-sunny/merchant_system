@@ -1,6 +1,6 @@
 module.exports = {
-    publicPath: './',
-    // publicPath: '/',
+    // publicPath: './',
+    publicPath: '/',
     productionSourceMap: false,
     devServer: {
         // 设置代理

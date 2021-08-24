@@ -1,60 +1,61 @@
 <template>
-  <div class="login">
-    <div class="left">
-      <div class="box">
-        <h1 style="padding-bottom: 20px">登录</h1>
-        <Form ref="formInline" :model="formInline" :rules="ruleInline">
-          <FormItem prop="email">
+  <div class="invitation">
+    <div class="box">
+      <div class="form">
+        <div class="logo">
+          <img src="../../assets/logo1.jpeg" />
+        </div>
+        <Form
+          ref="formInline"
+          :model="formInline"
+          :rules="ruleInline"
+          label-position="top"
+        >
+          <FormItem label="Email Address" prop="email">
             <Input
-              type="text"
               v-model="formInline.email"
               size="large"
-              placeholder="电子邮箱"
-            >
-              <Icon type="ios-mail-open-outline" slot="prepend" />
-            </Input>
+              placeholder=""
+            ></Input>
           </FormItem>
-          <FormItem prop="password" style="margin: 0">
+          <FormItem label="Password" prop="password">
             <Input
+              v-model="formInline.password"
               type="password"
               size="large"
-              v-model="formInline.password"
-              placeholder="密码"
+              placeholder=""
+            ></Input>
+          </FormItem>
+          <FormItem style="text-align: center">
+            <Button
+              style="width: 100%; height: 40px"
+              type="info"
+              @click="handleSubmit('formInline')"
+              >Login</Button
             >
-              <Icon type="ios-lock-outline" slot="prepend"></Icon>
-            </Input>
           </FormItem>
           <FormItem>
-            <div class="text">
-              <Button type="text" class="tip" @click="registerPwd"
-                >注册账户</Button
-              >
-              <Button type="text" class="tip" @click="forgetPwd"
-                >忘记密码</Button
-              >
+            <div class="tip">Forgot password?</div>
+            <div class="tip">
+              Don't have an accounts <span>Sign up here</span>
             </div>
           </FormItem>
           <FormItem>
-            <Button
-              type="info"
-              @click="handleSubmit('formInline')"
-              size="large"
-              style="width: 100%"
-              >登录</Button
-            >
+            <div class="policy">
+              <Button type="info" ghost>Privacy policy</Button>
+              <Button type="info" ghost>Support center</Button>
+            </div>
           </FormItem>
         </Form>
       </div>
     </div>
-    <div class="right">
-      <img src="../assets/logo.png" />
-    </div>
   </div>
 </template>
+
 <script>
-import { loginIn, getUsersByToken } from "../api/index";
+import { loginIn, getUsersByToken } from "../../api/index";
 export default {
-  name: "Login",
+  name: "OtherLogin",
   data() {
     return {
       formInline: {
@@ -86,9 +87,10 @@ export default {
       },
     };
   },
-  created() {
-   
-  },
+  created() {},
+  computed: {},
+  mounted() {},
+  destroyed() {},
   methods: {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
@@ -125,48 +127,45 @@ export default {
         },
       });
     },
-    forgetPwd() {
-      this.$router.push({ name: "Forget" });
-    },
-    registerPwd() {
-      this.$router.push({ name: "Register" });
-    },
   },
 };
 </script>
 <style lang="less" scoped>
-.login {
+.box {
   display: flex;
-  width: 100vw;
-  height: 100vh;
-  background-color: #f0f3f7;
-  .left {
-    flex: 1;
+  justify-content: center;
+  width: 100%;
+}
+.invitation {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  .form {
     display: flex;
     justify-content: center;
-    align-items: center;
-    .box {
-      width: 400px;
-      .text {
-        display: flex;
-        justify-content: space-between;
-        padding: 0;
-        width: 100%;
-        margin-top: 10px;
-        .tip {
-          color: #45b1b1;
-          font-weight: 700;
-          font-size: 15px;
-        }
+    flex-direction: column;
+    width: 28%;
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+      img {
+        display: inline-block;
+        width: 80%;
       }
     }
-  }
-  .right {
-    width: 40%;
-    height: 100%;
-    img {
-      width: 100%;
-      height: 100%;
+    .tip {
+      color: #999;
+      font-size: 15px;
+      text-align: center;
+      span {
+        text-decoration: underline;
+      }
+    }
+    .policy {
+      display: flex;
+      justify-content: space-around;
     }
   }
 }

@@ -1,30 +1,7 @@
 <template>
   <div class="register">
-    <!-- <Steps :current="current">
-      <Step title="邮箱信息填写"> </Step>
-      <Step title="商家资质填写"></Step>
-      <Step title="提交审核"></Step>
-    </Steps> -->
-    <!-- <div class="box" v-if="current == 0">
-      <h2>注册成为ZBANX的商家</h2>
-      <p>已有账户了？<span>登录</span></p>
-      <Form ref="formInline" :model="formInline" :rules="ruleInline">
-        <FormItem prop="user" label="邮箱">
-          <Input type="text" v-model="formInline.user" size="large"> </Input>
-        </FormItem>
-        <FormItem>
-          <Button type="info" @click="handleSubmit('formInline')" size="large"
-            >验证邮箱</Button
-          >
-          <p style="font-size: 14px">
-            为了保持我们平台商户的高质量，我们将要求您验证您的电子邮件地址
-          </p>
-        </FormItem>
-      </Form>
-    </div> -->
     <div class="box">
       <h2>注册成为ZBANX的商家</h2>
-
       <Form
         ref="formInline"
         :model="formInline"
@@ -166,7 +143,7 @@ export default {
   methods: {
     // 图片上传成功
     handleSuccess(res, file) {
-      console.log(res,file)
+      console.log(res, file);
     },
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
@@ -179,8 +156,8 @@ export default {
                 "userinfo",
                 JSON.stringify(res.result)
               );
-              this.$router.replace("/home");
-              this.$Message.success("注册成功!");
+              this.$router.replace("/");
+              this.$Message.success("注册成功,请重新登录!");
             },
           });
         } else {

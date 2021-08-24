@@ -207,10 +207,20 @@ const routes = [{
     name: "C",
     component: () => import("@/views/other/c.vue"),
   },
+  {
+    path: "/otherlogin",
+    name: "OtherLogin",
+    component: () => import("@/views/otherlogin/login.vue"),
+  },
+  {
+    path: "/otherregister",
+    name: "OtherRegister",
+    component: () => import("@/views/otherlogin/register.vue"),
+  },
 ];
 
 const router = new VueRouter({
-  mode: "hash",
+  mode: "history",
   base: '/',
   // base: process.env.BASE_URL,
   routes,
