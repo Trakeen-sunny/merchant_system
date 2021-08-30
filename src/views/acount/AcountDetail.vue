@@ -289,7 +289,7 @@ export default {
         this.$Message.success("暂无数据导出");
         return;
       }
-      let data = { pageNo: this.pageNo, pageSize: 999999999, ...this.form };
+      let data = { pageNo: 1, pageSize: 999999999, ...this.form };
       this.$httpRequest({
         api: acountList,
         data,
@@ -355,11 +355,9 @@ export default {
     },
     //重置
     handleReset() {
-      this.form = {
-        waterNo: "",
-        taskNo: "",
-        tranType: "",
-      };
+      this.form.waterNo = "";
+      this.form.taskNo = "";
+      this.form.tranType = "";
       this.initData();
     },
     handleRecharge() {
