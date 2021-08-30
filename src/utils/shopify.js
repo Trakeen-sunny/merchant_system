@@ -22,7 +22,7 @@ export const getUserInfo = function getUserInfo(next) {
             let timer = setTimeout(() => {
                 console.log(i18n.locale)
                 if (res.result && res.result.userRole != 2) {
-                    next("/home");
+                    next("/home/product");
                     i18n.locale = "zh";
                 } else {
                     next("/home/acount_detail");

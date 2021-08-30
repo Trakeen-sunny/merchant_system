@@ -220,6 +220,16 @@ export default {
           slot: "action",
           align: "center",
         },
+        {
+          title: "店铺地址",
+          key: "shopfiyUrl",
+          align: "center",
+        },
+        {
+          title: "标识符",
+          key: "handle",
+          align: "center",
+        },
       ],
       data: [],
       pageNo: 1, //页数
@@ -283,7 +293,7 @@ export default {
     details(row) {
       console.log(row);
       this.detail.input1 =
-        this.shopifyUrl + row.goodName + "?utm_source=" + this.getUserInfo.id;
+        row.shopfiyUrl + "/products/"+row.handle + "?utm_source=" + this.getUserInfo.id;
       this.modal = true;
     },
     // 改变页数

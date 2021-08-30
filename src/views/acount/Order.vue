@@ -41,7 +41,7 @@
         </Dropdown>
       </div>
     </div>
-
+<!--
     <div
       class="content"
       style="margin-bottom: 0; border-bottom: 0.5px solid #ebeef5"
@@ -62,23 +62,23 @@
         <span class="num">0</span>
         <span class="title">已付款订单数</span>
       </div>
-    </div>
+    </div>-->
     <div class="content">
-      <div>
+   <!--   <div>
         <span class="num">0</span>
         <span class="title">已取消订单数</span>
+      </div>-->
+      <div>
+        <span class="num">${{userinfo.totalOrder}}</span>
+        <span class="title">佣金商品总金额($)</span>
       </div>
       <div>
-        <span class="num">$0</span>
-        <span class="title">佣金总额($)</span>
+        <span class="num">${{-(userinfo.balance)}}</span>
+        <span class="title">支付佣金总额($)</span>
       </div>
-      <!-- <div>
-        <span class="num">$0</span>
-        <span class="title">推荐佣金总额($)</span>
-      </div> -->
       <div>
-        <span class="num">$0</span>
-        <span class="title">销售总额($)</span>
+        <span class="num">${{ userinfo.balance }}</span>
+        <span class="title">账号余额($)</span>
       </div>
     </div>
 
@@ -145,9 +145,9 @@
                 {{ row.customer && row.customer.default_address.country }}
               </template>
             </Table>
-            <Page :total="100" show-sizer class="page" />
+            <!--<Page :total="100" show-sizer class="page" />-->
           </TabPane>
-          <TabPane label="待付款" name="name2">
+         <!-- <TabPane label="待付款" name="name2">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="userID">
                 {{ row.customer && row.customer.id }}
@@ -307,7 +307,7 @@
               </template>
             </Table>
             <Page :total="100" show-sizer class="page" />
-          </TabPane>
+          </TabPane>-->
           <!-- <div class="right" slot="extra">
             <span>最近3个月</span>
             <span>最近6个月</span>
@@ -339,6 +339,7 @@
   </div>
 </template>
 <script>
+import { getUsersByToken } from "../../api/index";
 import { orderList } from "../../api/acount";
 import { getLocalTime } from "../../common/function";
 export default {
@@ -394,13 +395,8 @@ export default {
           align: "center",
         },
         {
-          title: "退款金额($)",
-          key: "total_price",
-          align: "center",
-        },
-        {
           title: "佣金金额($)",
-          key: "total_tax",
+          key: "commisson",
           align: "center",
         },
         {
@@ -430,11 +426,14 @@ export default {
         },
       ],
       data: [],
+      userinfo: {},
     };
   },
   created() {
     this.initData();
+    this.getUserToken();
   },
+
   methods: {
     // 初始化数据
     initData() {
@@ -450,6 +449,18 @@ export default {
         },
       });
     },
+       // 获取统计数据
+  getUserToken() {
+      this.$httpRequest({
+        api: getUsersByToken,
+        data: {},
+        success: (res) => {
+          this.userinfo = res.result;
+          console.log("宋敏发错了");
+        },
+      });
+  },
+    
   },
 };
 </script>

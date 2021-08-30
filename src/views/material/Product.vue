@@ -77,7 +77,7 @@
           <Button type="info" @click="setStatus(row, index)">开启</Button>
         </template>
       </Table>
-      <Page :total="100" show-sizer class="page" />
+     <!-- <Page :total="100" show-sizer class="page" />-->
     </div>
     <!-- 查看详情 -->
     <Modal v-model="modal1" title="查看" width="1200">

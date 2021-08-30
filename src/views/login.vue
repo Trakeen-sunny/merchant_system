@@ -53,6 +53,7 @@
 </template>
 <script>
 import { loginIn, getUsersByToken } from "../api/index";
+import { shopifyStoreQueryByShop, shopifyStoreInstall } from "../api/other";
 export default {
   name: "Login",
   data() {
@@ -87,7 +88,13 @@ export default {
     };
   },
   created() {
-   
+    // const { hmac, code, shop } = this.$route.query;
+    // if (hmac && code) {
+    //   this.getshopifyStoreQueryByShop(shop, code);
+    // }
+    // if (hmac && !code) {
+    //   this.getshopifyStoreQueryByShop(shop);
+    // }
   },
   methods: {
     handleSubmit(name) {
@@ -122,6 +129,40 @@ export default {
             clearTimeout(timer);
           }, 1000);
           this.$Message.success("登录成功!");
+        },
+      });
+    },
+    // 判断商品是否安装
+    getshopifyStoreQueryByShop(shop, code) {
+      this.$httpRequest({
+        api: shopifyStoreQueryByShop,
+        data: { shop: "https://" + shop },
+        success: (res) => {
+          console.log(res.result);
+
+          if (res.result.living) {
+            window.localStorage.setItem("token", res.result.token);
+            this.getUserInfo();
+          } else {
+            if (code) {
+              this.getshopifyStoreInstall(shop, code);
+            } else {
+              window.location.href = `https://${shop}/admin/oauth/authorize?client_id=151790686c89b0456adba11a4caabe7b
+&scope=unauthenticated_read_product_listings,unauthenticated_write_checkouts,unauthenticated_write_customers,unauthenticated_read_customer_tags,unauthenticated_read_content,unauthenticated_read_product_tags&redirect_uri=http://shopify.jstgzfy.com/shopify/login`;
+            }
+          }
+        },
+      });
+    },
+    // 下载
+    getshopifyStoreInstall(shop, code) {
+      this.$httpRequest({
+        api: shopifyStoreInstall,
+        data: { storeUrl: shop, code: code },
+        success: (res) => {
+          console.log(res);
+          window.localStorage.setItem("token", res.result.token);
+          this.getUserInfo();
         },
       });
     },
