@@ -7,9 +7,9 @@
         <Button type="info" class="button" ghost @click="handleExport"
           >导出报表</Button
         >
-        <Button type="info" class="button" ghost>设置佣金</Button>
+        <!-- <Button type="info" class="button" ghost>设置佣金</Button>
         <Button type="info" class="button" ghost>结束</Button>
-        <Button type="info" class="button">开启</Button>
+        <Button type="info" class="button">开启</Button> -->
         <!-- <Button type="info" class="button" @click="handleProductAdd"
           >商品导入</Button
         > -->
