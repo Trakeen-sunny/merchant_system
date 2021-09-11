@@ -13,7 +13,7 @@
     </Row>
 
     <!--  时间 搜索 -->
-    <div class="search table" style="margin-bottom: 30px; margin-top: 0">
+    <!-- <div class="search table" style="margin-bottom: 30px; margin-top: 0">
       <ul>
         <li>{{ $t("common.searchTime7") }}</li>
         <li>{{ $t("common.searchTime8") }}</li>
@@ -52,7 +52,7 @@
           $t("common.exportPage")
         }}</Button>
       </div>
-    </div>
+    </div> -->
 
     <div class="content">
       <div>
@@ -115,8 +115,11 @@
           size="large"
           >{{ $t("common.reset") }}</Button
         >
-        <Button type="info" class="button" size="large" @click="handleSearch">{{
+        <Button type="info" class="button" style="margin-left: 20px;" size="large" @click="handleSearch">{{
           $t("common.search")
+        }}</Button>
+         <Button type="info" ghost class="button" @click="handleExport">{{
+          $t("common.exportPage")
         }}</Button>
       </div>
     </div>

@@ -3,7 +3,8 @@
     <div class="box">
       <div class="form">
         <div class="logo">
-          <a href="http://www.shareweshop.com/index.html"><img src="../../assets/logo2.png"/><a>
+          <a href="http://www.shareweshop.com/index.html"> <img src="../../assets/logo2.png"/></a>
+           
         </div>
         <Form
           ref="formInline"

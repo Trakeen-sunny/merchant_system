@@ -21,3 +21,21 @@ export const getUsersByToken = {
     path: '/web/base/getUsersByToken',
     method: 'post'
 }
+
+// 获取网红用户信息
+export const getUsersById = {
+    path: '/web/users/queryById',
+    method: 'get'
+}
+
+// 获取媒介角色信息
+export const getQueryMediaList = {
+    path: '/web/users/queryMediaList',
+    method: 'get'
+}
+
+// 修改网红用户信息
+export const putUser = {
+    path: '/web/users/edit',
+    method: 'put'
+}

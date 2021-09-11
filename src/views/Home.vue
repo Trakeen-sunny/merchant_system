@@ -216,6 +216,11 @@ export default {
     .tooltip {
       margin-right: 20px;
     }
+    /deep/ .ivu-dropdown-rel{
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
     .avatar {
       display: flex;
       align-items: center;

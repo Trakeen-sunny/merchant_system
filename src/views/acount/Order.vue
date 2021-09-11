@@ -6,7 +6,7 @@
     </Row>
 
     <!--  时间 搜索 -->
-    <div class="search table" style="margin-bottom: 30px;padding-bottom:20px;">
+    <!-- <div class="search table" style="margin-bottom: 30px;padding-bottom:20px;">
       <ul>
         <li>日</li>
         <li>周</li>
@@ -40,7 +40,7 @@
           </DropdownMenu>
         </Dropdown>
       </div>
-    </div>
+    </div> -->
 <!--
     <div
       class="content"
@@ -98,7 +98,7 @@
           <Option value="韩国">韩国</Option>
         </Select>
       </div>
-      <div>
+      <!-- <div>
         <span>访问时间</span>
          <DatePicker
           type="datetime"
@@ -113,10 +113,23 @@
           format="yyyy-MM-dd"
           style="width: 200px"
         ></DatePicker>
-      </div>
+      </div> -->
       <div>
         <Button type="info" ghost class="button" size="large">重置</Button>
-        <Button type="info" class="button" size="large">查询</Button>
+        <Button type="info" class="button" size="large" style="margin-left:20px">查询</Button>
+        <Dropdown>
+          <Button type="info" ghost class="button">
+            导出
+            <Icon type="ios-arrow-down"></Icon>
+          </Button>
+          <DropdownMenu slot="list">
+            <DropdownItem>导出CSV</DropdownItem>
+            <DropdownItem>导出XLSX</DropdownItem>
+            <DropdownItem>导出XLS</DropdownItem>
+            <DropdownItem>导出XML</DropdownItem>
+            <DropdownItem>导出MHT</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </div> 
     </div>
  

@@ -7,29 +7,28 @@
       >
     </Row>
 
-    <div class="form"> 
+    <div class="form">
       <Row>
         <Col span="24" class="owninfo">
           <img src="../../assets/avatar.png" />
           <div>
-            <span>{{getUserInfo.realName}}</span>
-            <span>{{getUserInfo.email}}</span>
+            <span>{{ userInfo.email }}</span>
           </div>
         </Col>
       </Row>
       <Tabs type="card">
         <TabPane :label="$t('setPersion.title')">
-          <Form model="formItem" label-position="top">
+          <Form :model="userInfo" label-position="top">
             <Row :gutter="24">
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name')">
-                  <Input v-model="formItem.input" size="large"></Input>
+                  <Input v-model="userInfo.agency" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name1')">
                   <Input
-                    v-model="getUserInfo.phone"
+                    v-model="userInfo.phone"
                     type="tel"
                     size="large"
                   ></Input>
@@ -38,7 +37,7 @@
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name2')">
                   <Input
-                    v-model="getUserInfo.email"
+                    v-model="userInfo.email"
                     type="email"
                     size="large"
                   ></Input>
@@ -46,23 +45,25 @@
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name3')">
-                  <Select v-model="getUserInfo.country" size="large">
+                  <!-- <Select v-model="userInfo.country" size="large">
                     <Option value="">111</Option>
                     <Option value="china">china</Option>
-                  </Select>
+                  </Select> -->
+                  <Input v-model="userInfo.country" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name4')">
-                  <Select v-model="getUserInfo.language" size="large">
+                  <!-- <Select v-model="getUserInfo.language" size="large">
                     <Option value="">111</Option>
                     <Option value="中文">中文</Option>
-                  </Select>
+                  </Select> -->
+                  <Input v-model="userInfo.language" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name5')">
-                  <Select v-model="formItem.input" size="large">
+                  <Select v-model="userInfo.input" size="large">
                     <Option value="">111</Option>
                     <Option value="">111</Option>
                   </Select>
@@ -71,7 +72,7 @@
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name6')">
                   <Input
-                    v-model="formItem.input"
+                    v-model="userInfo.birthDay"
                     type="number"
                     size="large"
                   ></Input>
@@ -79,23 +80,23 @@
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name7')">
-                  <RadioGroup v-model="formItem.input" size="large">
-                    <Radio label="apple">
-                      <span>{{$t('setPersion.form.gender.name2')}}</span>
+                  <RadioGroup v-model="userInfo.gender" size="large">
+                    <Radio :label="0">
+                      <span>{{ $t("setPersion.form.gender.name2") }}</span>
                     </Radio>
-                    <Radio label="android">
-                      <span>{{$t('setPersion.form.gender.name1')}}</span>
+                    <Radio :label="1">
+                      <span>{{ $t("setPersion.form.gender.name1") }}</span>
                     </Radio>
                   </RadioGroup>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name8')">
-                  <RadioGroup v-model="formItem.input" size="large">
-                    <Radio label="apple">
+                  <RadioGroup v-model="userInfo.acceptFlag" size="large">
+                    <Radio :label="0">
                       <span>off</span>
                     </Radio>
-                    <Radio label="android">
+                    <Radio :label="1">
                       <span>on</span>
                     </Radio>
                   </RadioGroup>
@@ -103,24 +104,32 @@
               </Col>
               <Col span="24">
                 <FormItem :label="$t('setPersion.form.name9')">
-                  <Row :gutter="16">
+                  <Row
+                    :gutter="16"
+                    v-for="(itm, i) in userInfo.mediaVOList"
+                    :key="i"
+                    style="margin-bottom:10px;"
+                  >
                     <Col span="3">
-                      <Input
-                        v-model="formItem.input"
-                        size="large"
-                        :placeholder="$t('setPersion.form.name9')"
-                      ></Input>
+                      <Select v-model="itm.mediaName" size="large">
+                        <Option
+                          v-for="(item, index) in mediaList"
+                          :key="index"
+                          :value="item"
+                          >{{ item }}</Option
+                        >
+                      </Select>
                     </Col>
                     <Col span="3">
                       <Input
-                        v-model="formItem.input"
+                        v-model="itm.mediaId"
                         size="large"
                         :placeholder="$t('setPersion.form.name10')"
                       ></Input>
                     </Col>
                     <Col span="4">
                       <Input
-                        v-model="formItem.input"
+                        v-model="itm.funNum"
                         :placeholder="$t('setPersion.form.name11')"
                         size="large"
                       >
@@ -129,7 +138,7 @@
                     </Col>
                     <Col span="4">
                       <Input
-                        v-model="formItem.input"
+                        v-model="itm.promotionCost"
                         size="large"
                         :placeholder="$t('setPersion.form.name12')"
                       >
@@ -138,15 +147,28 @@
                     </Col>
                     <Col span="7">
                       <Input
-                        v-model="formItem.input"
+                        v-model="itm.homeLink"
                         size="large"
                         :placeholder="$t('setPersion.form.name13')"
                       >
                       </Input>
                     </Col>
                     <Col span="3">
-                      <Tag color="error">{{ $t("common.delete") }}</Tag>
-                      <Tag color="default">{{ $t("common.add") }}</Tag>
+                      <Button
+                        type="error"
+                        class="button"
+                        size="small"
+                        style="margin-right: 10px"
+                        @click="handleDelete(index)"
+                        >{{ $t("common.delete") }}</Button
+                      >
+                      <Button
+                        type="info"
+                        class="button"
+                        size="small"
+                        @click="handleAdd(index)"
+                        >{{ $t("common.add") }}</Button
+                      >
                     </Col>
                   </Row>
                 </FormItem>
@@ -173,9 +195,13 @@
                   @click="handleEdit"
                   >{{ $t("common.cancel") }}</Button
                 >
-                <Button type="info" class="button" size="large">{{
-                  $t("common.save")
-                }}</Button>
+                <Button
+                  type="info"
+                  class="button"
+                  size="large"
+                  @click="handleSubmit"
+                  >{{ $t("common.save") }}</Button
+                >
               </Col>
             </Row>
           </Form>
@@ -196,7 +222,9 @@
                 >
               </Col>
               <Col span="6">
-                <Button type="info" class="button" size="large">{{ $t("setPersion.form1.name2") }}</Button>
+                <Button type="info" class="button" size="large">{{
+                  $t("setPersion.form1.name2")
+                }}</Button>
               </Col>
             </Row>
             <Row :gutter="24">
@@ -271,14 +299,17 @@
               <Col span="8">
                 <FormItem :label="$t('setPersion.form1.name16')">
                   <Input v-model="formItem.input" size="large">
-                    <span slot="append">{{ $t("setPersion.form1.name17") }}</span>
+                    <span slot="append">{{
+                      $t("setPersion.form1.name17")
+                    }}</span>
                   </Input>
                 </FormItem>
               </Col>
               <Col span="24">
-                <FormItem label="">
+                <FormItem>
                   <Radio v-model="single"
-                    >{{ $t("setPersion.tip1") }}<span style="color: blue"
+                    >{{ $t("setPersion.tip1")
+                    }}<span style="color: blue"
                       >《{{ $t("setPersion.tip2") }}》</span
                     ></Radio
                   >
@@ -308,6 +339,7 @@
   </div>
 </template>
 <script>
+import { getUsersById, getQueryMediaList, putUser } from "../../api/index";
 export default {
   name: "SetupPersion",
   data() {
@@ -327,14 +359,91 @@ export default {
         },
       ],
       uploadList: [],
+      userInfo: {},
+      mediaList: [],
+      single: "",
     };
   },
-  computed:{
+  computed: {
     getUserInfo() {
       return JSON.parse(window.localStorage.getItem("userinfo"));
-    }
+    },
+  },
+  mounted() {
+    this.getMediaList();
   },
   methods: {
+    // 获取用户信息
+    getUserData() {
+      this.$httpRequest({
+        api: getUsersById,
+        data: { id: this.getUserInfo.id },
+        success: (res) => {
+          if (res.result.mediaVOList.length == 0) {
+            res.result.mediaVOList = [
+              {
+                mediaName: "",
+                mediaId: "",
+                funNum: "",
+                promotionCost: "",
+                homeLink: "",
+              },
+            ];
+          }
+          this.userInfo = res.result;
+          console.log(this.userInfo);
+        },
+      });
+    },
+    // 获取角色信息
+    getMediaList() {
+      this.$httpRequest({
+        api: getQueryMediaList,
+        data: {},
+        success: (res) => {
+          this.mediaList = res.result;
+          this.getUserData();
+        },
+      });
+    },
+    // 提交数据
+    handleSubmit() {
+      this.$httpRequest({
+        api: putUser,
+        data: {
+          id: this.getUserInfo.id,
+          phone: this.userInfo.phone,
+          mediaVOList: this.userInfo.mediaVOList,
+          language: this.userInfo.language,
+          gender: this.userInfo.gender,
+          email: this.userInfo.email,
+          country: this.userInfo.country,
+          birthDay: this.userInfo.birthDay,
+          agency: this.userInfo.agency,
+        },
+        success: (res) => {
+          console.log(res);
+          if (res.code == 0) {
+            this.$Message.success("修改成功!");
+          }
+        },
+      });
+    },
+    // 删除
+    handleDelete(index) {
+      this.userInfo.mediaVOList.splice(index, 1);
+    },
+    // 新增
+    handleAdd() {
+      this.userInfo.mediaVOList.push({
+        mediaName: "",
+        mediaId: "",
+        funNum: "",
+        promotionCost: "",
+        homeLink: "",
+      });
+      console.log(this.userInfo.mediaVOList);
+    },
     handleEdit() {
       this.visibily = !this.visibily;
     },
