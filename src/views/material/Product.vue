@@ -4,12 +4,10 @@
     <Row class="title">
       <Col span="12"><span>商品列表</span></Col>
       <Col span="12" class="right">
-        <Button type="info" class="button" ghost @click="handleExport"
-          >导出报表</Button
-        >
-        <!-- <Button type="info" class="button" ghost>设置佣金</Button>
+        <Button type="info" class="button" ghost>导出</Button>
+        <Button type="info" class="button" ghost>设置佣金</Button>
         <Button type="info" class="button" ghost>结束</Button>
-        <Button type="info" class="button">开启</Button> -->
+        <Button type="info" class="button">开启</Button>
         <!-- <Button type="info" class="button" @click="handleProductAdd"
           >商品导入</Button
         > -->
@@ -17,7 +15,7 @@
     </Row>
 
     <!-- 搜索 -->
-    <!-- <div class="search">
+    <div class="search">
       <div>
         <span>商品名称</span>
         <Input v-model="value" size="large" clearable class="width" />
@@ -57,7 +55,7 @@
         <Button type="info" ghost class="button" size="large">重置</Button>
         <Button type="info" class="button" size="large">查询</Button>
       </div>
-    </div> -->
+    </div>
 
     <!-- 表格 -->
     <div class="table">
@@ -79,7 +77,7 @@
           <Button type="info" @click="setStatus(row, index)">开启</Button>
         </template>
       </Table>
-      <!-- <Page :total="100" show-sizer class="page" />-->
+     <!-- <Page :total="100" show-sizer class="page" />-->
     </div>
     <!-- 查看详情 -->
     <Modal v-model="modal1" title="查看" width="1200">
@@ -151,19 +149,19 @@
           <span>{{ setCommision.title }}</span>
         </FormItem>
         <FormItem label="佣金比例" prop="number">
-          <Input v-model="setCommision.number" type="number">
-            <span slot="append">$</span>
+          <Input v-model="setCommision.number"  type="number">
+            <span slot="append">%</span>
           </Input>
         </FormItem>
       </Form>
     </Modal>
-    <!-- 编辑 -->
+    <!-- 编辑 --> 
     <Modal
       v-model="modal3"
       title="编辑"
       @on-ok="ok"
       @on-cancel="cancel"
-      width="500"
+      width="500" 
     >
       <Form ref="formValidate" :model="formValidate3" :label-width="80">
         <FormItem label="商品名称">
@@ -207,54 +205,6 @@
 </template>
 <script>
 import { goodsList, setCommission } from "../../api/material";
-import { exportExcel } from "../../common/excelUtils";
-const initColumn = [
-  {
-    title: "商品图片",
-    dataIndex: "img",
-    key: "img",
-  },
-  {
-    title: "商品名称",
-    key: "title",
-    dataIndex: "title",
-  },
-  {
-    title: "推广状态",
-    key: "status",
-    dataIndex: "status",
-  },
-  {
-    title: "类目",
-    key: "product_type",
-    dataIndex: "product_type",
-  },
-  {
-    title: "售价($)",
-    key: "price",
-    dataIndex: "price",
-  },
-  {
-    title: "折扣码",
-    key: "address",
-    dataIndex: "address",
-  },
-  {
-    title: "佣金率(%)",
-    key: "address1",
-    dataIndex: "address",
-  },
-  {
-    title: "发货仓",
-    key: "position",
-    dataIndex: "position",
-  },
-  {
-    title: "推广有效期",
-    key: "time",
-    dataIndex: "time",
-  },
-];
 export default {
   name: "Product",
   data() {
@@ -399,35 +349,6 @@ export default {
   },
   mounted() {},
   methods: {
-    // 导出报表
-    handleExport() {
-      if (this.data.length == 0) {
-        this.$Message.success("暂无数据导出");
-        return;
-      }
-      this.$httpRequest({
-        api: goodsList,
-        data: {},
-        success: (res) => {
-          console.log(res);
-          let arr = [];
-          for (const res of res.result.prodList) {
-            arr.push({
-              img: res.image && res.image.src,
-              title: res.title,
-              status: res.status,
-              product_type: res.product_type,
-              price: res.price,
-              address: "",
-              address1: "",
-              position: res.image ? res.image.position:"",
-              time: res.time,
-            });
-          }
-          exportExcel(initColumn, arr, "商品管理" + ".xlsx");
-        },
-      });
-    },
     handleProductAdd() {
       this.$router.push({ name: "ProductAdd" });
     },
@@ -457,6 +378,10 @@ export default {
     },
     // 设置佣金
     handleCommosion() {
+	  if(this.setCommision.number<0){
+	      this.$Message.info("佣金不可为负数!");
+		  return false;
+	  };
       this.$httpRequest({
         api: setCommission,
         data: {
@@ -470,7 +395,7 @@ export default {
           this.$Message.success(res.message);
           this.initData();
         },
-      });
+      }); 
     },
     // 设置开启关闭状态
     setStatus() {

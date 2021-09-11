@@ -6,7 +6,7 @@
     </Row>
 
     <!--  时间 搜索 -->
-    <div class="search table" style="margin-bottom: 30px; padding-bottom: 20px">
+    <div class="search table" style="margin-bottom: 30px;padding-bottom:20px;">
       <ul>
         <li>日</li>
         <li>周</li>
@@ -16,7 +16,7 @@
         <li>年</li>
       </ul>
       <div class="right">
-        <!-- <span class="activeColor">今天</span>
+        <span class="activeColor">今天</span>
         <span>最近7天</span>
         <div>
           <span>最近30天</span>
@@ -25,8 +25,8 @@
             format="yyyy-MM-dd"
             style="width: 200px"
           ></DatePicker>
-        </div> -->
-        <!-- <Dropdown style="margin-left: 20px">
+        </div>
+        <Dropdown style="margin-left: 20px">
           <Button type="info" ghost class="button">
             导出
             <Icon type="ios-arrow-down"></Icon>
@@ -38,13 +38,10 @@
             <DropdownItem>导出XML</DropdownItem>
             <DropdownItem>导出MHT</DropdownItem>
           </DropdownMenu>
-        </Dropdown> -->
-        <Button type="info" ghost class="button" @click="handleExport"
-          >导出报表</Button
-        >
+        </Dropdown>
       </div>
     </div>
-    <!--
+<!--
     <div
       class="content"
       style="margin-bottom: 0; border-bottom: 0.5px solid #ebeef5"
@@ -67,16 +64,16 @@
       </div>
     </div>-->
     <div class="content">
-      <!--   <div>
+   <!--   <div>
         <span class="num">0</span>
         <span class="title">已取消订单数</span>
       </div>-->
       <div>
-        <span class="num">${{ userinfo.totalOrder }}</span>
+        <span class="num">${{userinfo.totalOrder}}</span>
         <span class="title">佣金商品总金额($)</span>
       </div>
       <div>
-        <span class="num">${{ -userinfo.balance }}</span>
+        <span class="num">${{-(userinfo.balance)}}</span>
         <span class="title">支付佣金总额($)</span>
       </div>
       <div>
@@ -86,7 +83,7 @@
     </div>
 
     <!-- 搜索 -->
-    <!-- <div class="search">
+    <div class="search">
       <div>
         <span>订单编号</span>
         <Input v-model="value" size="large" clearable class="width" />
@@ -103,7 +100,7 @@
       </div>
       <div>
         <span>访问时间</span>
-        <DatePicker
+         <DatePicker
           type="datetime"
           format="yyyy-MM-dd"
           style="width: 200px"
@@ -120,9 +117,9 @@
       <div>
         <Button type="info" ghost class="button" size="large">重置</Button>
         <Button type="info" class="button" size="large">查询</Button>
-      </div>
-    </div> -->
-
+      </div> 
+    </div>
+ 
     <!-- 表格 -->
     <div class="table">
       <div class="title">
@@ -136,7 +133,15 @@
                 {{ row.line_items && row.line_items[0].title }}
               </template>
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.confirmed ? "已完成" : "未完成" }}
+                {{ row.financial_status=="authorized" ? "已授权" : "" }}
+				{{ row.financial_status=="pending" ? "未付款" : "" }}
+				{{ row.financial_status=="paid" ? "已付款" : "" }}
+				{{ row.financial_status=="partially_paid" ? "部分付款" : "" }}
+				{{ row.financial_status=="refunded" ? "已退款" : "" }}
+				{{ row.financial_status=="voided" ? "无效" : "" }}
+				{{ row.financial_status=="partially_refunded" ? "部分退款" : "" }}
+				
+				{{ row.financial_status=="unpaid" ? "部分授权与支付" : "" }}
               </template>
               <template slot-scope="{ row }" slot="orderCount">
                 {{ row.customer && row.customer.orders_count }}
@@ -149,8 +154,8 @@
               </template>
             </Table>
             <!--<Page :total="100" show-sizer class="page" />-->
-          </TabPane>
-          <!-- <TabPane label="待付款" name="name2">
+          </TabPane> 
+         <!-- <TabPane label="待付款" name="name2"> 
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="userID">
                 {{ row.customer && row.customer.id }}
@@ -345,79 +350,6 @@
 import { getUsersByToken } from "../../api/index";
 import { orderList } from "../../api/acount";
 import { getLocalTime } from "../../common/function";
-import { exportExcel } from "../../common/excelUtils";
-const initColumn = [
-  {
-    title: "订单编号",
-    dataIndex: "order_number",
-    key: "order_number",
-  },
-  {
-    title: "订单状态",
-    key: "confirmed",
-    dataIndex: "confirmed",
-  },
-  {
-    title: "商品名称",
-    key: "title",
-    dataIndex: "title",
-  },
-  {
-    title: "SKU",
-    key: "sku",
-    dataIndex: "sku",
-  },
-  {
-    title: "商品数量",
-    key: "orderCount",
-    dataIndex: "orderCount",
-  },
-  {
-    title: "商品单价($)",
-    key: "total_line_items_price",
-    dataIndex: "total_line_items_price",
-  },
-  {
-    title: "订单金额($)",
-    key: "total_price",
-    dataIndex: "total_price",
-  },
-  {
-    title: "优惠金额($)",
-    key: "total_discounts",
-    dataIndex: "total_discounts",
-  },
-  {
-    title: "佣金金额($)",
-    key: "commisson",
-    dataIndex: "commisson",
-  },
-  {
-    title: "买家ID",
-    key: "userID",
-    dataIndex: "userID",
-  },
-  {
-    title: "收货国家",
-    key: "countryName",
-    dataIndex: "countryName",
-  },
-  {
-    title: "访问时间",
-    key: "visitTime",
-    dataIndex: "visitTime",
-  },
-  {
-    title: "最后一次点击链接时间",
-    key: "lastTime",
-    dataIndex: "lastTime",
-  },
-  {
-    title: "创建时间",
-    key: "created_at",
-    dataIndex: "created_at",
-  },
-];
 export default {
   name: "Order",
   data() {
@@ -511,40 +443,6 @@ export default {
   },
 
   methods: {
-    // 导出报表
-    handleExport() {
-      if (this.data.length == 0) {
-        this.$Message.success("暂无数据导出");
-        return;
-      }
-      this.$httpRequest({
-        api: orderList,
-        data: {},
-        success: (res) => {
-          console.log(res);
-          let arr = [];
-          for (const res of res.result.orderList) {
-            arr.push({
-              order_number: res.order_number,
-              confirmed: res.confirmed ? "已完成" : "未完成",
-              title: res.line_items && res.line_items[0].title,
-              sku: res.line_items && res.line_items[0].variant_title,
-              orderCount: res.customer && res.customer.orders_count,
-              total_line_items_price: res.total_line_items_price,
-              total_price: res.total_price,
-              total_discounts: res.total_discounts,
-              commisson: res.commisson,
-              userID: res.customer && res.customer.id,
-              countryName: res.customer && res.customer.default_address.country,
-              visitTime: "",
-              lastTime: "",
-              created_at: getLocalTime(res.created_at),
-            });
-          }
-          exportExcel(initColumn, arr, "订单中心" + ".xlsx");
-        },
-      });
-    },
     // 初始化数据
     initData() {
       this.$httpRequest({
@@ -559,17 +457,17 @@ export default {
         },
       });
     },
-    // 获取统计数据
-    getUserToken() {
+       // 获取统计数据
+  getUserToken() {
       this.$httpRequest({
         api: getUsersByToken,
         data: {},
         success: (res) => {
           this.userinfo = res.result;
-          console.log("宋敏发错了");
         },
       });
-    },
+  },
+    
   },
 };
 </script>
@@ -604,7 +502,7 @@ export default {
       flex-direction: column;
       align-items: center;
       position: relative;
-      width: calc(100% / 3);
+      width: calc(100% / 4);
       .num {
         color: #089444;
         font-size: 18px;
@@ -657,7 +555,7 @@ export default {
       border: 1px solid #e0e0e0;
       list-style: none;
       border-radius: 5px;
-      height: 37px;
+       height: 37px;
       li {
         width: 60px;
         height: 35px;

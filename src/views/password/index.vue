@@ -24,13 +24,13 @@ export default {
 <style lang="less" scoped>
 .index {
   .header {
-    background-color: #fff;
+    background-color: #335850;
     display: flex;
     justify-content: space-between;
     align-items: center;
     img {
-      width: 80px;
-      height: 100%;
+     
+     
     }
   }
   .content {

@@ -3,7 +3,7 @@
     <div class="box">
       <div class="form">
         <div class="logo">
-          <img src="../../assets/logo1.jpeg" />
+          <a href="http://www.shareweshop.com/index.html"><img src="../../assets/logo2.png"/><a>
         </div>
         <Form
           ref="formInline"
@@ -28,22 +28,27 @@
           </FormItem>
           <FormItem style="text-align: center">
             <Button
-              style="width: 100%; height: 40px;background:#54ff9f"
+              style="width: 100%; height: 40px;background:#54ff9f;border:none"
               type="info"
               @click="handleSubmit('formInline')"
-              >Login</Button
+              >LOG IN</Button
             >
           </FormItem>
           <FormItem>
             <div class="tip">Forgot password?</div>
             <div class="tip" @click="handleGoTO">
-              Don't have an accounts <span>Sign up here</span>
+              Don't have an account? <span>Sign up here</span>.
             </div>
           </FormItem>
           <FormItem>
-            <div class="policy">
-              <Button type="info" style="background:#54ff9f" ghost>Privacy policy</Button>
-              <Button type="info" style="background:#54ff9f" ghost>Support center</Button>
+              <br/>
+              <br/>
+              <br/>
+            <div clss="policy" style="text-align:center;font-size:13px">
+               © 2021 COZMOX LLC &nbsp;&nbsp;
+              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Privacy policy</a>
+              &nbsp;
+              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Terms of use</a>
             </div>
           </FormItem>
         </Form>
@@ -123,7 +128,7 @@ export default {
             }
             clearTimeout(timer);
           }, 1000);
-          this.$Message.success("登录成功!");
+          this.$Message.success("login successfully!");
         },
       });
     },
@@ -155,12 +160,12 @@ export default {
       margin-bottom: 30px;
       img {
         display: inline-block;
-        width: 80%;
+        width: 37%;
       }
     }
     .tip {
       color: #999;
-      font-size: 15px;
+      font-size: 13px;
       text-align: center;
       cursor: pointer;
       span {
@@ -170,6 +175,8 @@ export default {
     .policy {
       display: flex;
       justify-content: space-around;
+      border:none;
+      text-align: center;
     }
   }
 }

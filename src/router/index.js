@@ -222,8 +222,8 @@ const routes = [{
 const router = new VueRouter({
   mode: "history",
   base: '/',
-  // base: process.env.BASE_URL,
+  //base: process.env.BASE_URL,
   routes,
-});
+}); 
 
 export default router;

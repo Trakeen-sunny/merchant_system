@@ -1,11 +1,11 @@
 <template>
   <div class="invitation">
     <div class="logo">
-      <img src="../../assets/logo1.jpeg" />
+     <a href="http://www.shareweshop.com/index.html"> <img src="../../assets/logo2.png" /></a>
     </div>
     <div class="title">
       <span
-        >Sign up now! Let's start by confirming your main contact email
+        style="font-size:13px">Sign up now!<br/> Let's start by confirming your main contact email
         address</span
       >
     </div>
@@ -36,24 +36,33 @@
         <FormItem label="Password" prop="password">
           <Input v-model="formInline.password" placeholder=""></Input>
         </FormItem>
-        <FormItem label="Confirm Password">
-          <Input v-model="ConfirmPassword" placeholder=""></Input>
+        <FormItem label="Confirm Password" prop="ConfirmPassword">
+          <Input v-model="formInline.ConfirmPassword" placeholder=""></Input>
         </FormItem>
         <FormItem>
-          <div class="tip">
-            To keep the quality of our network high,we'll ask you to verify your
-            email address,accept legal trems,and provide detailssuch as your fax
-            and bonking info,before you can astrt masking money and getting paid
+          <div class="tip" style="font-size:13px">
+            To keep the quality of our network high, we'll ask you to verify your email address, accept legal terms, and provide details such as your tax and banking info, before you can start making money and getting paid.
           </div>
         </FormItem>
         <FormItem style="text-align: center">
           <Button
-            style="width: 100%; height: 40px;background:#54ff9f"
+            style="width: 100%; height: 40px;background:#54ff9f;border:none"
             type="info"
             @click="handleSubmit('formInline')"
-            >submit</Button
+            >SUBMIT</Button
           >
         </FormItem>
+        <FormItem>
+              <br/>
+              <br/>
+              <br/>
+            <div clss="policy" style="text-align:center;font-size:13px">
+               © 2021 COZMOX LLC &nbsp;&nbsp;
+              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Privacy policy</a>
+              &nbsp;
+              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Terms of use</a>
+            </div>
+         </FormItem>
       </Form>
     </div>
   </div>
@@ -99,6 +108,15 @@ export default {
             trigger: "blur",
           },
         ],
+        ConfirmPassword: [
+          { required: true, message: "please enter the Confirm Password", trigger: "blur" },
+          {
+            type: "string",
+            min: 6,
+            message: "The password length shall not be less than 6 digits",
+            trigger: "blur",
+          },
+        ],
       },
       timerCount: "",
     };
@@ -112,8 +130,8 @@ export default {
       this.$refs[name].validate((valid) => {
         console.log(valid);
         if (valid) {
-          if (this.formInline.password !== this.ConfirmPassword) {
-            this.$Message.error("注册失败!");
+          if (this.formInline.password !== this.formInline.ConfirmPassword) {
+            this.$Message.error("fail to register!");
             return;
           }
           this.$httpRequest({
@@ -124,12 +142,12 @@ export default {
                 "userinfo",
                 JSON.stringify(res.result)
               );
-              this.$router.replace("/");
-              this.$Message.success("注册成功,请重新登录!");
+              this.$router.replace("/otherlogin");
+              this.$Message.success("Registertered successfully");
             },
           });
         } else {
-          this.$Message.error("注册失败!");
+          this.$Message.error("fail to register!");
         }
       });
     },
@@ -179,11 +197,12 @@ export default {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 30px;
-    padding-bottom: 10px;
+    padding-bottom: 25px;
+    padding-top: 25px;
     border-bottom: 1px solid #e0e0e0;
     img {
       display: inline-block;
-      width: 20%;
+      width: 10%;
     }
   }
   .title {
@@ -192,7 +211,7 @@ export default {
     text-align: center;
     font-weight: bold;
     span {
-      width: 25%;
+      width: 37%;
       display: inline-block;
     }
   }

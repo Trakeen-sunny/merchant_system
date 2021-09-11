@@ -221,12 +221,12 @@ export default {
           align: "center",
         },
         {
-          title: "店铺地址",
+          title: "shopfiyUrl",
           key: "shopfiyUrl",
           align: "center",
         },
         {
-          title: "标识符",
+          title: "center",
           key: "handle",
           align: "center",
         },
@@ -511,7 +511,7 @@ export default {
     .page {
       text-align: right;
       margin-top: 30px;
-      padding-bottom: 30px;
+      padding-bottom: 30px; 
     }
   }
 }
