@@ -46,9 +46,9 @@
         </Form>
       </div>
     </div>
-    <div class="right">
+    <!-- <div class="right">
       <img src="../assets/logo.png" />
-    </div>
+    </div> -->
   </div>
 </template>
 <script>

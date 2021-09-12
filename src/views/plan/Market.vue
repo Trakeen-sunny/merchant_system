@@ -199,16 +199,16 @@ export default {
           key: "commission",
           align: "center",
         },
-        {
-          title: this.$t("plans.table.name5"),
-          key: "payCount",
-          align: "center",
-        },
-        {
-          title: this.$t("plans.table.name6"),
-          key: "commissionTotal",
-          align: "center",
-        },
+        // {
+        //   title: this.$t("plans.table.name5"),
+        //   key: "payCount",
+        //   align: "center",
+        // },
+        // {
+        //   title: this.$t("plans.table.name6"),
+        //   key: "commissionTotal",
+        //   align: "center",
+        // },
         {
           title: this.$t("plans.table.name7"),
           key: "createTime",

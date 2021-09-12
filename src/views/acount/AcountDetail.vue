@@ -65,16 +65,19 @@
       </div>
       <div>
         <span class="num">{{ userinfo.totalOrder }}</span>
+        <span class="title">{{ $t("acount.moneyLi3") }}</span>
+      </div>
+    </div>
+
+    <div class="content content1">
+      <div>
+        <span class="num">{{ userinfo.totalOrder }}</span>
         <span class="title">{{ $t("acount.moneyLi4") }}</span>
       </div>
       <div>
-        <span class="num">{{ userinfo.totalOrder }}</span>
-        <span class="title">{{ $t("acount.moneyLi5") }}</span>
-      </div>
-      <div>
-        <span class="num">${{ userinfo.balance }}</span>
+        <span class="num">${{ balance }}</span>
         <span class="title"
-          ><span>{{ $t("acount.moneyLi3") }}</span>
+          ><span>{{ $t("acount.moneyLi5") }}</span>
           <Poptip
             word-wrap
             width="200"
@@ -115,10 +118,15 @@
           size="large"
           >{{ $t("common.reset") }}</Button
         >
-        <Button type="info" class="button" style="margin-left: 20px;" size="large" @click="handleSearch">{{
-          $t("common.search")
-        }}</Button>
-         <Button type="info" ghost class="button" @click="handleExport">{{
+        <Button
+          type="info"
+          class="button"
+          style="margin-left: 20px"
+          size="large"
+          @click="handleSearch"
+          >{{ $t("common.search") }}</Button
+        >
+        <Button type="info" ghost class="button" @click="handleExport">{{
           $t("common.exportPage")
         }}</Button>
       </div>
@@ -129,11 +137,14 @@
       <div class="title">
         <span class="left">{{ $t("acount.title1") }}</span>
       </div>
-      <Table :columns="columns" :data="data">
+      <Table :columns="columns" :data="data">accountTotal
         <template slot-scope="{ row }" slot="tranType">
           {{ row.tranType == 1 ? $t("acount.selectSearch.name2") : "" }}
           {{ row.tranType == 2 ? $t("acount.selectSearch.name3") : "" }}
           {{ row.tranType == 3 ? $t("acount.selectSearch.name4") : "" }}
+        </template>
+        <template slot-scope="{ row }" slot="accountTotal">
+          {{ (row.accountTotal+'').replace(/-/,'') }}
         </template>
       </Table>
       <Page
@@ -193,7 +204,7 @@ export default {
         },
         {
           title: this.$t("acount.table.name4"),
-          key: "accountTotal",
+          slot: "accountTotal",
           align: "center",
         },
         {
@@ -242,6 +253,11 @@ export default {
         },
       ],
     };
+  },
+  computed:{
+    balance(){
+      return (this.userinfo.balance+'').replace(/-/,'')
+    }
   },
   created() {
     this.initData();
@@ -413,7 +429,7 @@ export default {
       flex-direction: column;
       align-items: center;
       position: relative;
-      width: calc(100% / 5);
+      width: calc(100% / 3);
       .num {
         color: #089444;
         font-size: 18px;
@@ -441,6 +457,12 @@ export default {
     div:last-child::after {
       content: "";
       border: 0;
+    }
+  }
+
+  .content1 {
+    > div {
+      width: calc(100% / 2);
     }
   }
 
