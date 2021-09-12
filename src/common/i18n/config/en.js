@@ -118,11 +118,12 @@ export default {
             name3: "country / region",
             name4: "Language",
             name5: "Functional currency",
-            name6: "Age",
-            name7: "gender",
+            name6: "Birthday",
+            name7: "Gender",
             gender:{
                 name1:"Female",
-                name2:"Male"
+                name2:"Male",
+                name3:"Unknown"
             },
             name8: "If accept only commision",
             name9: "Media Name",
@@ -150,6 +151,10 @@ export default {
             name15:"Contact Phone Number",
             name16:"Verification Code",
             name17:"Get verification code",
+        },
+        total:{
+            delete:"Invalid deletion",
+            edit:"Modified successfully"
         }
     }
 }

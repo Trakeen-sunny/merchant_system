@@ -71,11 +71,7 @@
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name6')">
-                  <Input
-                    v-model="userInfo.birthDay"
-                    type="number"
-                    size="large"
-                  ></Input>
+                  <DatePicker type="date" :value="userInfo.birthDay" size="large" @on-change="handleChangeDate"></DatePicker>
                 </FormItem>
               </Col>
               <Col span="8">
@@ -86,6 +82,9 @@
                     </Radio>
                     <Radio :label="1">
                       <span>{{ $t("setPersion.form.gender.name1") }}</span>
+                    </Radio>
+                    <Radio :label="2">
+                      <span>{{ $t("setPersion.form.gender.name3") }}</span>
                     </Radio>
                   </RadioGroup>
                 </FormItem>
@@ -108,7 +107,7 @@
                     :gutter="16"
                     v-for="(itm, i) in userInfo.mediaVOList"
                     :key="i"
-                    style="margin-bottom:10px;"
+                    style="margin-bottom: 10px"
                   >
                     <Col span="3">
                       <Select v-model="itm.mediaName" size="large">
@@ -132,6 +131,7 @@
                         v-model="itm.funNum"
                         :placeholder="$t('setPersion.form.name11')"
                         size="large"
+                        type="number"
                       >
                         <span slot="append">W</span>
                       </Input>
@@ -140,6 +140,7 @@
                       <Input
                         v-model="itm.promotionCost"
                         size="large"
+                        type="number"
                         :placeholder="$t('setPersion.form.name12')"
                       >
                         <span slot="prepend">$</span>
@@ -154,21 +155,20 @@
                       </Input>
                     </Col>
                     <Col span="3">
-                      <Button
-                        type="error"
-                        class="button"
-                        size="small"
+                      <Icon
+                        type="ios-remove-circle-outline"
+                        @click="handleDelete(i)"
+                        color="red"
+                        size="25"
                         style="margin-right: 10px"
-                        @click="handleDelete(index)"
-                        >{{ $t("common.delete") }}</Button
-                      >
-                      <Button
-                        type="info"
-                        class="button"
-                        size="small"
-                        @click="handleAdd(index)"
-                        >{{ $t("common.add") }}</Button
-                      >
+                      />
+                      <Icon
+                        type="ios-add-circle-outline"
+                        @click="handleAdd(i)"
+                        v-if="userInfo.mediaVOList.length == i + 1"
+                        color="#45b1b1"
+                        size="25"
+                      />
                     </Col>
                   </Row>
                 </FormItem>
@@ -420,17 +420,22 @@ export default {
           country: this.userInfo.country,
           birthDay: this.userInfo.birthDay,
           agency: this.userInfo.agency,
+          acceptFlag: this.userInfo.acceptFlag
         },
         success: (res) => {
           console.log(res);
           if (res.code == 0) {
-            this.$Message.success("修改成功!");
+            this.$Message.success(this.$t("setPersion.total.edit")+"!");
           }
         },
       });
     },
     // 删除
     handleDelete(index) {
+      if(this.userInfo.mediaVOList.length == 1){
+        this.$Message.warning(this.$t("setPersion.total.delete")+"!");
+        return
+      }
       this.userInfo.mediaVOList.splice(index, 1);
     },
     // 新增
@@ -443,6 +448,10 @@ export default {
         homeLink: "",
       });
       console.log(this.userInfo.mediaVOList);
+    },
+    // 选择日期
+    handleChangeDate(ev){
+      this.userInfo.birthDay = ev;
     },
     handleEdit() {
       this.visibily = !this.visibily;

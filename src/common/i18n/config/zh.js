@@ -118,11 +118,12 @@ export default {
             name3: "国家/地区",
             name4: "语言",
             name5: "货币",
-            name6: "年龄",
+            name6: "出生日期",
             name7: "性别",
             gender:{
                 name1:"女",
-                name2:"男"
+                name2:"男",
+                name3:"未知"
             },
             name8: "接受纯佣",
             name9: "社交平台",
@@ -150,6 +151,10 @@ export default {
              name15:"银行账户持有人电话号码",
              name16:"验证码",
              name17:"获取验证码",
-         }
+         },
+         total:{
+            delete:"删除无效",
+            edit:"修改成功"
+        }
     }
 }
