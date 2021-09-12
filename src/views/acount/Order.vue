@@ -515,7 +515,7 @@ export default {
       flex-direction: column;
       align-items: center;
       position: relative;
-      width: calc(100% / 4);
+      width: calc(100% / 3);
       .num {
         color: #089444;
         font-size: 18px;

@@ -39,7 +39,8 @@ import {
     Poptip,
     Tag,
     Circle,
-    Switch
+    Switch,
+    OptionGroup
 } from 'iview';
 Vue.component('Button', Button);
 Vue.component('Table', Table);
@@ -79,6 +80,7 @@ Vue.component('Poptip', Poptip);
 Vue.component('Tag', Tag);
 Vue.component('iCircle', Circle);
 Vue.component('iSwitch', Switch);
+Vue.component('OptionGroup', OptionGroup);
 Vue.prototype.$Modal = Modal;
 Vue.prototype.$Notice = Notice;
 Vue.prototype.$Message = Message;

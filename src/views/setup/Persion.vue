@@ -45,33 +45,48 @@
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name3')">
-                  <!-- <Select v-model="userInfo.country" size="large">
-                    <Option value="">111</Option>
-                    <Option value="china">china</Option>
-                  </Select> -->
-                  <Input v-model="userInfo.country" size="large"></Input>
+                  <Select v-model="userInfo.country" size="large">
+                    <Option
+                      v-for="(item, i) in countrysList"
+                      :key="i"
+                      :value="item.countryEn"
+                      >{{ item.countryEn }}</Option
+                    >
+                  </Select>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name4')">
-                  <!-- <Select v-model="getUserInfo.language" size="large">
-                    <Option value="">111</Option>
-                    <Option value="中文">中文</Option>
-                  </Select> -->
-                  <Input v-model="userInfo.language" size="large"></Input>
+                  <Select v-model="userInfo.language" size="large">
+                    <Option
+                      v-for="(item, i) in languageList"
+                      :key="i"
+                      :value="item.languageEn"
+                      >{{ item.languageEn }}</Option
+                    >
+                  </Select>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name5')">
-                  <Select v-model="userInfo.input" size="large">
-                    <Option value="">111</Option>
-                    <Option value="">111</Option>
+                  <Select v-model="userInfo.currency" size="large">
+                    <Option
+                      v-for="(item, i) in currencysList"
+                      :key="i"
+                      :value="item.currencyEn"
+                      >{{ item.currencyEn }}</Option
+                    >
                   </Select>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form.name6')">
-                  <DatePicker type="date" :value="userInfo.birthDay" size="large" @on-change="handleChangeDate"></DatePicker>
+                  <DatePicker
+                    type="date"
+                    :value="userInfo.birthday"
+                    size="large"
+                    @on-change="handleChangeDate"
+                  ></DatePicker>
                 </FormItem>
               </Col>
               <Col span="8">
@@ -150,6 +165,7 @@
                       <Input
                         v-model="itm.homeLink"
                         size="large"
+                        type="url"
                         :placeholder="$t('setPersion.form.name13')"
                       >
                       </Input>
@@ -176,7 +192,7 @@
               <Col span="24">
                 <FormItem :label="$t('setPersion.form.name14')">
                   <Input
-                    v-model="formItem.input"
+                    v-model="userInfo.remark"
                     type="textarea"
                     :autosize="{ minRows: 2, maxRows: 5 }"
                     size="large"
@@ -207,7 +223,7 @@
           </Form>
         </TabPane>
         <TabPane :label="$t('setPersion.title1')">
-          <Form model="formItem" label-position="top">
+          <Form :model="formItem" label-position="top">
             <Row :gutter="24" style="margin-bottom: 30px">
               <Col span="18">
                 <span>{{ $t("setPersion.form1.name1") }}</span>
@@ -245,17 +261,27 @@
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form1.name7')">
-                  <Select v-model="formItem.input" size="large">
-                    <Option value="">111</Option>
-                    <Option value="">111</Option>
+                  <Select v-model="formItem.country" size="large" @on-change="handleCountry">
+                    <Option
+                      v-for="(item, i) in countrysList"
+                      :key="i"
+                      :value="item.countryEn"
+                      >{{ item.countryEn }}</Option
+                    >
                   </Select>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form1.name8')">
-                  <Select v-model="formItem.input" size="large">
-                    <Option value="">111</Option>
-                    <Option value="">111</Option>
+                  <Select v-model="formItem.bank" style="width: 200px">
+                    <OptionGroup  v-for="(item,i) in bankList" :key="i" :label="item.countryEn">
+                      <Option
+                        v-for="(itm,index) in item.countryBankList"
+                        :value="itm.bankEn"
+                        :key="index"
+                        >{{ itm.bankEn }}</Option
+                      >
+                    </OptionGroup>
                   </Select>
                 </FormItem>
               </Col>
@@ -339,14 +365,20 @@
   </div>
 </template>
 <script>
-import { getUsersById, getQueryMediaList, putUser } from "../../api/index";
+import {
+  getUsersById,
+  getQueryMediaList,
+  putUser,
+  getLanguages,
+  getCurrencys,
+  getCountrys,
+  getBankList,
+} from "../../api/index";
 export default {
   name: "SetupPersion",
   data() {
     return {
       value: "",
-      model1: "",
-      formItem: {},
       visibily: false,
       defaultList: [
         {
@@ -361,6 +393,11 @@ export default {
       uploadList: [],
       userInfo: {},
       mediaList: [],
+      languageList: [],
+      currencysList: [],
+      countrysList: [],
+      bankList: [],
+      formItem: {},
       single: "",
     };
   },
@@ -371,6 +408,11 @@ export default {
   },
   mounted() {
     this.getMediaList();
+    this.getLanguagesList();
+    this.getCurrencysList();
+    this.getCountrysList();
+    this.getUserData();
+    this.getBankList();
   },
   methods: {
     // 获取用户信息
@@ -391,7 +433,6 @@ export default {
             ];
           }
           this.userInfo = res.result;
-          console.log(this.userInfo);
         },
       });
     },
@@ -402,7 +443,46 @@ export default {
         data: {},
         success: (res) => {
           this.mediaList = res.result;
-          this.getUserData();
+        },
+      });
+    },
+    // 获取语言
+    getLanguagesList() {
+      this.$httpRequest({
+        api: getLanguages,
+        data: {},
+        success: (res) => {
+          this.languageList = res.result;
+        },
+      });
+    },
+    // 获取货币
+    getCurrencysList() {
+      this.$httpRequest({
+        api: getCurrencys,
+        data: {},
+        success: (res) => {
+          this.currencysList = res.result;
+        },
+      });
+    },
+    // 获取国家
+    getCountrysList() {
+      this.$httpRequest({
+        api: getCountrys,
+        data: {},
+        success: (res) => {
+          this.countrysList = res.result;
+        },
+      });
+    },
+    getBankList() {
+      this.$httpRequest({
+        api: getBankList,
+        data: {},
+        success: (res) => {
+          console.log(res)
+          this.bankList = res.result;
         },
       });
     },
@@ -418,23 +498,25 @@ export default {
           gender: this.userInfo.gender,
           email: this.userInfo.email,
           country: this.userInfo.country,
-          birthDay: this.userInfo.birthDay,
+          birthday: this.userInfo.birthDay,
           agency: this.userInfo.agency,
-          acceptFlag: this.userInfo.acceptFlag
+          acceptFlag: this.userInfo.acceptFlag,
+          remark: this.userInfo.remark,
+          currency: this.userInfo.currency,
         },
         success: (res) => {
           console.log(res);
           if (res.code == 0) {
-            this.$Message.success(this.$t("setPersion.total.edit")+"!");
+            this.$Message.success(this.$t("setPersion.total.edit") + "!");
           }
         },
       });
     },
     // 删除
     handleDelete(index) {
-      if(this.userInfo.mediaVOList.length == 1){
-        this.$Message.warning(this.$t("setPersion.total.delete")+"!");
-        return
+      if (this.userInfo.mediaVOList.length == 1) {
+        this.$Message.warning(this.$t("setPersion.total.delete") + "!");
+        return;
       }
       this.userInfo.mediaVOList.splice(index, 1);
     },
@@ -450,8 +532,11 @@ export default {
       console.log(this.userInfo.mediaVOList);
     },
     // 选择日期
-    handleChangeDate(ev){
+    handleChangeDate(ev) {
       this.userInfo.birthDay = ev;
+    },
+    handleCountry(ev){
+      console.log(ev)
     },
     handleEdit() {
       this.visibily = !this.visibily;
