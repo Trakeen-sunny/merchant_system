@@ -46,15 +46,15 @@
     <div class="search">
       <div>
         <span>计划ID</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>商品名称</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>计划状态</span>
-        <Select v-model="model1" size="large" clearable class="width">
+        <Select v-model="model1" size="large"  class="width">
           <Option value="">全部</Option>
           <Option value="">进行中</Option>
           <Option value="">已结束</Option>
@@ -62,15 +62,15 @@
       </div>
       <div>
         <span>折扣码</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>优惠券</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>销售国家</span>
-        <Select v-model="model1" size="large" clearable class="width">
+        <Select v-model="model1" size="large"  class="width">
           <Option value="">全部</Option>
           <Option value="英国">英国</Option>
           <Option value="美国">美国</Option>

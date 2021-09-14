@@ -156,5 +156,44 @@ export default {
             delete:"Invalid deletion",
             edit:"Modified successfully"
         }
+    },
+    // 订单中心
+    orderCenter:{
+        asideName:"Order Details",
+        asideName1:"Order Center",
+        form:{
+            name1:"Total amount of commission goods",
+            name2:"Total commission paid",
+            name3:"Account balance",
+            name4:"Total Commission"
+        },
+        form2:{
+            label1:"Order No",
+            label2:"Receiving country",
+        },
+        tab:{
+            name1:"Paid",
+            name2:"Authorized",
+            name3:"Unpaid",
+            name4:"Partial payment",
+            name5:"Refunded",
+            name6:"Invalid",
+            name7:"Partial refund",
+            name8:"Partial authorization and payment"
+        },
+        table:{
+            name1:"Order No",
+            name2:"Order status",
+            name3:"Trade name",
+            name4:"SKU",
+            name5:"Quantity of goods",
+            name6:"Item pricing($)",
+            name7:"Order amount($)",
+            name8:"Preferential amount($)",
+            name9:"Commission amount($)",
+            name10:"Buyer ID",
+            name11:"Receiving country",
+            name12:"Creation time"
+        }
     }
 }

@@ -76,35 +76,35 @@
     <div class="search">
       <div>
         <span>流水号</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>交易类型</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>
       <div>
         <span>订单编号</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>计划ID</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>商品名称</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>支出平台</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>
       <div>
         <span>佣金获取人</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <Button

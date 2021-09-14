@@ -71,7 +71,7 @@
     <div class="search">
       <div>
         <span>充值订单号</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <Button

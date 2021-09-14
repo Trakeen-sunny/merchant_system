@@ -62,11 +62,11 @@
     <div class="search">
       <div>
         <span>订单编号</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>订单状态</span>
-        <Select v-model="model1" size="large" clearable class="width">
+        <Select v-model="model1" size="large"  class="width">
           <Option value="">全部</Option>
           <Option value="">已付款</Option>
           <Option value="">退款中</Option>
@@ -78,27 +78,27 @@
       </div>
       <div>
         <span>计划ID</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>商品名称</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>SKU</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>折扣码</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>优惠券</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>结算状态</span>
-        <Select v-model="model1" size="large" clearable class="width">
+        <Select v-model="model1" size="large" class="width">
           <Option value="">全部</Option>
           <Option value="">待结算</Option>
           <Option value="">已结算</Option>

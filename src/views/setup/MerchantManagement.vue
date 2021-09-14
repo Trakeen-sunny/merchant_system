@@ -101,15 +101,15 @@
     <div class="search">
       <div>
         <span>店铺名称</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>商家账户</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>商家状态</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>

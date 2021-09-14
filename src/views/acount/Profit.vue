@@ -22,7 +22,7 @@
         <div class="search">
           <div>
             <span>推荐合作者</span>
-            <Input v-model="value" size="large" clearable class="width" />
+            <Input v-model="value" size="large"  class="width" />
           </div>
           <div>
             <Button type="info" class="button" size="large">查询</Button>
@@ -63,7 +63,7 @@
         <div class="search">
           <div>
             <span>推荐商家</span>
-            <Input v-model="value" size="large" clearable class="width" />
+            <Input v-model="value" size="large"  class="width" />
           </div>
           <div>
             <Button type="info" class="button" size="large">查询</Button>

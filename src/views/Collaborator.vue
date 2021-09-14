@@ -9,15 +9,15 @@
     <div class="search">
       <div>
         <span>合作者姓名</span>
-        <Input v-model="form.realName" size="large" clearable class="width" />
+        <Input v-model="form.realName" size="large" class="width" />
       </div>
       <div>
         <span>合作者ID</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large" class="width" />
       </div>
       <div>
         <span>合作者类型</span>
-        <Select v-model="form.userType" size="large" clearable class="width">
+        <Select v-model="form.userType" size="large" class="width">
           <Option value="">全部</Option>
           <Option value="私域">私域</Option>
           <Option value="公域">公域</Option>
@@ -25,7 +25,7 @@
       </div>
       <div>
         <span>语言</span>
-        <Select v-model="form.language" size="large" clearable class="width">
+        <Select v-model="form.language" size="large" class="width">
           <Option value="">全部</Option>
           <Option value="英语">英语</Option>
           <Option value="日语">日语</Option>
@@ -34,7 +34,7 @@
       </div>
       <div>
         <span>地区</span>
-        <Select v-model="form.country" size="large" clearable class="width">
+        <Select v-model="form.country" size="large" class="width">
           <Option value="">全部</Option>
           <Option value="欧美地区">欧美地区</Option>
           <Option value="日本">日本</Option>
@@ -44,7 +44,7 @@
       </div>
       <div>
         <span>类别</span>
-        <Select v-model="form.userClass" size="large" clearable class="width">
+        <Select v-model="form.userClass" size="large" class="width">
           <Option value="">全部</Option>
           <Option value="黑名单">黑名单</Option>
           <Option value="白名单">白名单</Option>

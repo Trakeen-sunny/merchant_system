@@ -39,15 +39,15 @@
     <div class="search">
       <div>
         <span>订单/任务编号</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>合作者编号</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>结算类型</span>
-        <Select v-model="model1" size="large" clearable class="width">
+        <Select v-model="model1" size="large"  class="width">
           <Option :value="1">全部</Option>
           <Option :value="2">CPS佣金</Option>
           <Option :value="3">CPA佣金</Option>
@@ -55,7 +55,7 @@
       </div>
       <div>
         <span>佣金获取人</span>
-        <Select v-model="model1" size="large" clearable class="width">
+        <Select v-model="model1" size="large"  class="width">
           <Option :value="1">全部</Option>
           <Option :value="2">合作者</Option>
           <Option :value="3">平台</Option>

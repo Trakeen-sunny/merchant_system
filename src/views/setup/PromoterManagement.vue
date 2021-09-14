@@ -76,45 +76,45 @@
     <div class="search">
       <div>
         <span>推广者账户</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>推广者名称</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>国家/地区</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>
       <div>
         <span>推广者分类</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>
       <div>
         <span>注册渠道</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>
       <div>
         <span>接受纯佣</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>
       <div>
         <span>粉丝量</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>
       <div>
         <span>推广费用</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>

@@ -4,7 +4,9 @@
     <Row class="title">
       <Col span="12"><span>商品列表</span></Col>
       <Col span="12" class="right">
-        <Button type="info" class="button" ghost>导出</Button>
+        <Button type="info" class="button" ghost @click="handleExport"
+          >导出报表</Button
+        >
         <!-- <Button type="info" class="button" ghost>设置佣金</Button>
         <Button type="info" class="button" ghost>结束</Button>
         <Button type="info" class="button">开启</Button> -->
@@ -18,25 +20,15 @@
     <div class="search">
       <div>
         <span>商品名称</span>
-        <Input
-          v-model="form.shopfiyName"
-          size="large"
-          clearable
-          class="width"
-        />
+        <Input v-model="form.shopfiyName" size="large" class="width" />
       </div>
       <div>
         <span>类目</span>
-        <Input
-          v-model="form.shopfiyCategory"
-          size="large"
-          clearable
-          class="width"
-        />
+        <Input v-model="form.shopfiyCategory" size="large" class="width" />
       </div>
       <div>
         <span>推广状态</span>
-        <Select v-model="form.promote" size="large" clearable class="width">
+        <Select v-model="form.promote" size="large" class="width">
           <Option :value="1">开启</Option>
           <Option :value="0">待开启</Option>
         </Select>
@@ -145,7 +137,6 @@
           <Input
             v-model="setCommision.shopfiyCategory"
             size="large"
-            clearable
             class="width"
           />
         </FormItem>
@@ -187,6 +178,7 @@
   </div>
 </template>
 <script>
+import { exportExcel } from "../../common/excelUtils";
 import {
   cozmoxGoodsList,
   setCommission,
@@ -268,6 +260,48 @@ export default {
       setCommision: {
         commisson: 0,
       },
+      initColumn: [
+        {
+          title: "商品图片",
+          key: "img",
+          dataIndex: "img",
+        },
+        {
+          title: "商品名称",
+          key: "shopfiyName",
+          dataIndex: "center",
+        },
+        {
+          title: "推广状态",
+          key: "promote",
+          dataIndex: "promote",
+        },
+        {
+          title: "类目",
+          key: "shopfiyCategorys",
+          dataIndex: "shopfiyCategorys",
+        },
+        {
+          title: "售价($)",
+          key: "price",
+          dataIndex: "price",
+        },
+        {
+          title: "折扣码",
+          key: "discountCode",
+          dataIndex: "discountCode",
+        },
+        {
+          title: "佣金率(%)",
+          key: "commisson",
+          dataIndex: "commisson",
+        },
+        {
+          title: "推广有效期",
+          key: "time",
+          dataIndex: "time",
+        },
+      ],
     };
   },
   created() {
@@ -275,6 +309,35 @@ export default {
   },
   mounted() {},
   methods: {
+    // 导出报表
+    handleExport() {
+      if (this.data.length == 0) {
+        this.$Message.success("暂无数据导出");
+        return;
+      }
+      let data = { pageNo: this.pageNo, pageSize: 999999999, ...this.form };
+      this.$httpRequest({
+        api: cozmoxGoodsList,
+        data,
+        success: (res) => {
+          console.log(res);
+          let arr = [];
+          for (const re of res.result.records) {
+            arr.push({
+              img: re.shopfiyImg,
+              shopfiyName: re.shopfiyName,
+              promote: re.promote == 0 ? "待开启" : "开启",
+              shopfiyCategorys: re.shopfiyCategory,
+              price: re.price,
+              discountCode: re.discountCode,
+              commisson: re.commisson,
+              time: re.promoteStart + "-" + re.promoteEnd,
+            });
+          }
+          exportExcel(this.initColumn, arr, "商品管理" + ".xlsx");
+        },
+      });
+    },
     handleProductAdd() {
       this.$router.push({ name: "ProductAdd" });
     },

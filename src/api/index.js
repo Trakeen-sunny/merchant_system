@@ -86,3 +86,16 @@ export const getTelCode = {
     path: '/web/country/telCode',
     method: 'get'
 }
+
+//获取商家信息
+export const getPersonInfo = {
+    path: '/web/business/user/info',
+    method: 'get'
+}
+
+//修改商家信息
+export const setPersonInfo = {
+    path: '/web/business/user/edit',
+    method: 'put'
+}
+

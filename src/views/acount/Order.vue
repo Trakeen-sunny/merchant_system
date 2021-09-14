@@ -2,7 +2,7 @@
   <div class="sale">
     <!-- 标题一 -->
     <Row class="title">
-      <Col span="12"><span>订单明细</span></Col>
+      <Col span="12"><span>{{$t("orderCenter.asideName")}}</span></Col>
     </Row>
 
     <!--  时间 搜索 -->
@@ -41,7 +41,7 @@
         </Dropdown>
       </div>
     </div> -->
-<!--
+    <!--
     <div
       class="content"
       style="margin-bottom: 0; border-bottom: 0.5px solid #ebeef5"
@@ -64,39 +64,49 @@
       </div>
     </div>-->
     <div class="content">
-   <!--   <div>
+      <!--   <div>
         <span class="num">0</span>
         <span class="title">已取消订单数</span>
       </div>-->
       <div>
-        <span class="num">${{userinfo.totalOrder}}</span>
-        <span class="title">佣金商品总金额($)</span>
+        <span class="num"
+          >${{
+            userRole == 1
+              ? userinfo.totalFee - userinfo.totalFeePay
+              : userinfo.totalFee
+          }}</span
+        >
+        <span class="title">{{$t("orderCenter.form.name1")}}</span>
       </div>
       <div>
-        <span class="num">${{-(userinfo.balance)}}</span>
-        <span class="title">支付佣金总额($)</span>
+        <span class="num"
+          >${{ userRole == 1 ? userinfo.totalFeePay : userinfo.totalFee }}</span
+        >
+        <span class="title">{{userRole == 1?$t("orderCenter.form.name2"):$t("orderCenter.form.name4")}}</span>
       </div>
       <div>
         <span class="num">${{ userinfo.balance }}</span>
-        <span class="title">账号余额($)</span>
+        <span class="title">{{$t("orderCenter.form.name3")}}</span>
       </div>
     </div>
 
     <!-- 搜索 -->
     <div class="search">
       <div>
-        <span>订单编号</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <span>{{$t("orderCenter.form2.label1")}}</span>
+        <Input
+          v-model="form.shopfiyNumber"
+          size="large"
+          class="width"
+        />
       </div>
       <div>
-        <span>收货国家</span>
-        <Select v-model="model1" size="large" clearable class="width">
-          <Option value="">全部</Option>
-          <Option value="英国">英国</Option>
-          <Option value="美国">美国</Option>
-          <Option value="法国">法国</Option>
-          <Option value="韩国">韩国</Option>
-        </Select>
+        <span>{{$t("orderCenter.form2.label2")}}</span>
+        <Input
+          v-model="form.customerCountry"
+          size="large"
+          class="width"
+        />
       </div>
       <!-- <div>
         <span>访问时间</span>
@@ -115,228 +125,228 @@
         ></DatePicker>
       </div> -->
       <div>
-        <Button type="info" ghost class="button" size="large">重置</Button>
-        <Button type="info" class="button" size="large" style="margin-left:20px">查询</Button>
-        <Dropdown>
-          <Button type="info" ghost class="button">
-            导出
-            <Icon type="ios-arrow-down"></Icon>
-          </Button>
-          <DropdownMenu slot="list">
-            <DropdownItem>导出CSV</DropdownItem>
-            <DropdownItem>导出XLSX</DropdownItem>
-            <DropdownItem>导出XLS</DropdownItem>
-            <DropdownItem>导出XML</DropdownItem>
-            <DropdownItem>导出MHT</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </div> 
+        <Button
+          type="info"
+          ghost
+          class="button"
+          size="large"
+          @click="handleReset"
+          >{{ $t("common.reset") }}</Button
+        >
+        <Button type="info" class="button" size="large" style="margin-left:20px;" @click="handleSearch">{{
+          $t("common.search")
+        }}</Button>
+        <Button type="info" ghost class="button" @click="handleExport">{{
+          $t("common.exportPage")
+        }}</Button>
+      </div>
     </div>
- 
+
     <!-- 表格 -->
     <div class="table">
       <div class="title">
-        <Tabs value="name1">
-          <TabPane label="全部" name="name1">
+        <Tabs value="paid" @on-click="handleTabs">
+          <TabPane :label="$t('orderCenter.tab.name1')" name="paid">
             <Table :columns="columns" :data="data">
-              <template slot-scope="{ row }" slot="userID">
-                {{ row.customer && row.customer.id }}
-              </template>
-              <template slot-scope="{ row }" slot="title">
-                {{ row.line_items && row.line_items[0].title }}
-              </template>
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.shopfiyStatus=="authorized" ? "已授权" : "" }}
-				{{ row.shopfiyStatus=="pending" ? "未付款" : "" }}
-				{{ row.shopfiyStatus=="paid" ? "已付款" : "" }}
-				{{ row.shopfiyStatus=="partially_paid" ? "部分付款" : "" }}
-				{{ row.shopfiyStatus=="refunded" ? "已退款" : "" }}
-				{{ row.shopfiyStatus=="voided" ? "无效" : "" }}
-				{{ row.shopfiyStatus=="partially_refunded" ? "部分退款" : "" }}
-				
-				{{ row.shopfiyStatus=="unpaid" ? "部分授权与支付" : "" }}
-              </template>
-              <template slot-scope="{ row }" slot="orderCount">
-                {{ row.customer && row.customer.orders_count }}
-              </template>
-              <template slot-scope="{ row }" slot="sku">
-                {{ row.line_items && row.line_items[0].variant_title }}
-              </template>
-              <template slot-scope="{ row }" slot="countryName">
-                {{ row.customer && row.customer.default_address.country }}
+                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
+                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
+                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
+                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
+                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
+                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
+                {{
+                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                }}
+                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
               </template>
             </Table>
-            <Page 
-			 :total="total"
-			 :current="pageNo"
-			 :page-size="pageSize"
-			 @on-change="changePage"
-			 @on-page-size-change="changeSize"
-		     show-sizer
-			 class="page"
-			/>
-          </TabPane> 
-         <!-- <TabPane label="待付款" name="name2"> 
-            <Table :columns="columns" :data="data">
-              <template slot-scope="{ row }" slot="userID">
-                {{ row.customer && row.customer.id }}
-              </template>
-              <template slot-scope="{ row }" slot="title">
-                {{ row.line_items && row.line_items[0].title }}
-              </template>
-              <template slot-scope="{ row }" slot="confirmed">
-                {{ row.confirmed ? "已完成" : "未完成" }}
-              </template>
-              <template slot-scope="{ row }" slot="orderCount">
-                {{ row.customer && row.customer.orders_count }}
-              </template>
-              <template slot-scope="{ row }" slot="sku">
-                {{ row.line_items && row.line_items[0].variant_title }}
-              </template>
-              <template slot-scope="{ row }" slot="countryName">
-                {{ row.customer && row.customer.default_address.country }}
-              </template>
-            </Table>
-            <Page :total="100" show-sizer class="page" />
+            <Page
+              :total="total"
+              :current="pageNo"
+              :page-size="pageSize"
+              @on-change="changePage"
+              @on-page-size-change="changeSize"
+              show-sizer
+              class="page"
+            />
           </TabPane>
-          <TabPane label="已付款" name="name3">
+          <TabPane :label="$t('orderCenter.tab.name2')" name="authorized">
             <Table :columns="columns" :data="data">
-              <template slot-scope="{ row }" slot="userID">
-                {{ row.customer && row.customer.id }}
-              </template>
-              <template slot-scope="{ row }" slot="title">
-                {{ row.line_items && row.line_items[0].title }}
-              </template>
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.confirmed ? "已完成" : "未完成" }}
-              </template>
-              <template slot-scope="{ row }" slot="orderCount">
-                {{ row.customer && row.customer.orders_count }}
-              </template>
-              <template slot-scope="{ row }" slot="sku">
-                {{ row.line_items && row.line_items[0].variant_title }}
-              </template>
-              <template slot-scope="{ row }" slot="countryName">
-                {{ row.customer && row.customer.default_address.country }}
+                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
+                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
+                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
+                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
+                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
+                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
+                {{
+                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                }}
+                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
               </template>
             </Table>
-            <Page :total="100" show-sizer class="page" />
+            <Page
+              :total="total"
+              :current="pageNo"
+              :page-size="pageSize"
+              @on-change="changePage"
+              @on-page-size-change="changeSize"
+              show-sizer
+              class="page"
+            />
           </TabPane>
-          <TabPane label="退款中" name="name4">
+          <TabPane :label="$t('orderCenter.tab.name3')" name="pending">
             <Table :columns="columns" :data="data">
-              <template slot-scope="{ row }" slot="userID">
-                {{ row.customer && row.customer.id }}
-              </template>
-              <template slot-scope="{ row }" slot="title">
-                {{ row.line_items && row.line_items[0].title }}
-              </template>
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.confirmed ? "已完成" : "未完成" }}
-              </template>
-              <template slot-scope="{ row }" slot="orderCount">
-                {{ row.customer && row.customer.orders_count }}
-              </template>
-              <template slot-scope="{ row }" slot="sku">
-                {{ row.line_items && row.line_items[0].variant_title }}
-              </template>
-              <template slot-scope="{ row }" slot="countryName">
-                {{ row.customer && row.customer.default_address.country }}
+                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
+                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
+                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
+                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
+                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
+                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
+                {{
+                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                }}
+                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
               </template>
             </Table>
-            <Page :total="100" show-sizer class="page" />
+            <Page
+              :total="total"
+              :current="pageNo"
+              :page-size="pageSize"
+              @on-change="changePage"
+              @on-page-size-change="changeSize"
+              show-sizer
+              class="page"
+            />
           </TabPane>
-          <TabPane label="已退款" name="name5">
+
+          <TabPane :label="$t('orderCenter.tab.name4')" name="partially_paid">
             <Table :columns="columns" :data="data">
-              <template slot-scope="{ row }" slot="userID">
-                {{ row.customer && row.customer.id }}
-              </template>
-              <template slot-scope="{ row }" slot="title">
-                {{ row.line_items && row.line_items[0].title }}
-              </template>
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.confirmed ? "已完成" : "未完成" }}
-              </template>
-              <template slot-scope="{ row }" slot="orderCount">
-                {{ row.customer && row.customer.orders_count }}
-              </template>
-              <template slot-scope="{ row }" slot="sku">
-                {{ row.line_items && row.line_items[0].variant_title }}
-              </template>
-              <template slot-scope="{ row }" slot="countryName">
-                {{ row.customer && row.customer.default_address.country }}
+                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
+                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
+                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
+                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
+                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
+                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
+                {{
+                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                }}
+                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
               </template>
             </Table>
-            <Page :total="100" show-sizer class="page" />
+            <Page
+              :total="total"
+              :current="pageNo"
+              :page-size="pageSize"
+              @on-change="changePage"
+              @on-page-size-change="changeSize"
+              show-sizer
+              class="page"
+            />
           </TabPane>
-          <TabPane label="已取消" name="name6">
+          <TabPane :label="$t('orderCenter.tab.name5')" name="refunded">
             <Table :columns="columns" :data="data">
-              <template slot-scope="{ row }" slot="userID">
-                {{ row.customer && row.customer.id }}
-              </template>
-              <template slot-scope="{ row }" slot="title">
-                {{ row.line_items && row.line_items[0].title }}
-              </template>
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.confirmed ? "已完成" : "未完成" }}
-              </template>
-              <template slot-scope="{ row }" slot="orderCount">
-                {{ row.customer && row.customer.orders_count }}
-              </template>
-              <template slot-scope="{ row }" slot="sku">
-                {{ row.line_items && row.line_items[0].variant_title }}
-              </template>
-              <template slot-scope="{ row }" slot="countryName">
-                {{ row.customer && row.customer.default_address.country }}
+               {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
+                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
+                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
+                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
+                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
+                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
+                {{
+                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                }}
+                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
               </template>
             </Table>
-            <Page :total="100" show-sizer class="page" />
+            <Page
+              :total="total"
+              :current="pageNo"
+              :page-size="pageSize"
+              @on-change="changePage"
+              @on-page-size-change="changeSize"
+              show-sizer
+              class="page"
+            />
           </TabPane>
-          <TabPane label="已确认收获" name="name7">
+          <TabPane :label="$t('orderCenter.tab.name6')" name="voided">
             <Table :columns="columns" :data="data">
-              <template slot-scope="{ row }" slot="userID">
-                {{ row.customer && row.customer.id }}
-              </template>
-              <template slot-scope="{ row }" slot="title">
-                {{ row.line_items && row.line_items[0].title }}
-              </template>
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.confirmed ? "已完成" : "未完成" }}
-              </template>
-              <template slot-scope="{ row }" slot="orderCount">
-                {{ row.customer && row.customer.orders_count }}
-              </template>
-              <template slot-scope="{ row }" slot="sku">
-                {{ row.line_items && row.line_items[0].variant_title }}
-              </template>
-              <template slot-scope="{ row }" slot="countryName">
-                {{ row.customer && row.customer.default_address.country }}
+                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
+                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
+                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
+                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
+                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
+                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
+                {{
+                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                }}
+                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
               </template>
             </Table>
-            <Page :total="100" show-sizer class="page" />
+            <Page
+              :total="total"
+              :current="pageNo"
+              :page-size="pageSize"
+              @on-change="changePage"
+              @on-page-size-change="changeSize"
+              show-sizer
+              class="page"
+            />
           </TabPane>
-          <TabPane label="已完成" name="name8">
+          <TabPane :label="$t('orderCenter.tab.name7')" name="partially_refunded">
             <Table :columns="columns" :data="data">
-              <template slot-scope="{ row }" slot="userID">
-                {{ row.customer && row.customer.id }}
-              </template>
-              <template slot-scope="{ row }" slot="title">
-                {{ row.line_items && row.line_items[0].title }}
-              </template>
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.confirmed ? "已完成" : "未完成" }}
-              </template>
-              <template slot-scope="{ row }" slot="orderCount">
-                {{ row.customer && row.customer.orders_count }}
-              </template>
-              <template slot-scope="{ row }" slot="sku">
-                {{ row.line_items && row.line_items[0].variant_title }}
-              </template>
-              <template slot-scope="{ row }" slot="countryName">
-                {{ row.customer && row.customer.default_address.country }}
+                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
+                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
+                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
+                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
+                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
+                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
+                {{
+                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                }}
+                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
               </template>
             </Table>
-            <Page :total="100" show-sizer class="page" />
-          </TabPane>-->
+            <Page
+              :total="total"
+              :current="pageNo"
+              :page-size="pageSize"
+              @on-change="changePage"
+              @on-page-size-change="changeSize"
+              show-sizer
+              class="page"
+            />
+          </TabPane>
+          <TabPane :label="$t('orderCenter.tab.name8')" name="unpaid">
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="confirmed">
+                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
+                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
+                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
+                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
+                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
+                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
+                {{
+                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                }}
+                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
+              </template>
+            </Table>
+            <Page
+              :total="total"
+              :current="pageNo"
+              :page-size="pageSize"
+              @on-change="changePage"
+              @on-page-size-change="changeSize"
+              show-sizer
+              class="page"
+            />
+          </TabPane>
           <!-- <div class="right" slot="extra">
             <span>最近3个月</span>
             <span>最近6个月</span>
@@ -370,7 +380,7 @@
 <script>
 import { getUsersByToken } from "../../api/index";
 import { cozmoxOrdersList } from "../../api/acount";
-import { getLocalTime } from "../../common/function";
+import { exportExcel } from "../../common/excelUtils";
 export default {
   name: "Order",
   data() {
@@ -380,100 +390,168 @@ export default {
       columns: [
         {
           type: "selection",
-          width: 40,
+          width: 50,
           align: "center",
         },
         {
-          title: "订单编号",
+          title: this.$t("orderCenter.table.name1"),
           key: "shopfiyNumber",
           align: "center",
+          width: 90,
         },
         {
-          title: "订单状态",
+          title: this.$t("orderCenter.table.name2"),
           slot: "confirmed",
           align: "center",
         },
         {
-          title: "商品名称",
+          title: this.$t("orderCenter.table.name3"),
           key: "productName",
           align: "center",
         },
         {
-          title: "SKU",
+          title: this.$t("orderCenter.table.name4"),
           key: "productSuk",
           align: "center",
         },
         {
-          title: "商品数量",
+          title: this.$t("orderCenter.table.name5"),
           key: "productNumber",
           align: "center",
         },
         {
-          title: "商品单价($)",
+          title: this.$t("orderCenter.table.name6"),
           key: "productPrice",
           align: "center",
         },
         {
-          title: "订单金额($)",
+          title: this.$t("orderCenter.table.name7"),
           key: "orderPrice",
           align: "center",
         },
         {
-          title: "优惠金额($)",
+          title: this.$t("orderCenter.table.name8"),
           key: "orderDiscount",
           align: "center",
         },
         {
-          title: "佣金金额($)",
+          title: this.$t("orderCenter.table.name9"),
           key: "commisson",
           align: "center",
         },
         {
-          title: "买家ID",
+          title: this.$t("orderCenter.table.name10"),
           key: "customerId",
           align: "center",
         },
         {
-          title: "收货国家",
+          title: this.$t("orderCenter.table.name11"),
           key: "customerCountry",
           align: "center",
         },
         {
-          title: "创建时间",
+          title: this.$t("orderCenter.table.name12"),
           key: "createTime",
-          align: "center", 
+          align: "center",
         },
       ],
       data: [],
-	  pageNo: 1, //页数
+      pageNo: 1, //页数
       pageSize: 10, //条数
       total: 0, //总条数
       userinfo: {},
+      form: {
+        shopfiyStatus: "paid",
+      },
+      initColumn: [
+        {
+          title: this.$t("orderCenter.table.name1"),
+          key: "shopfiyNumber",
+          dataIndex: "shopfiyNumber",
+        },
+        {
+          title: this.$t("orderCenter.table.name2"),
+          key: "confirmed",
+          dataIndex: "confirmed",
+        },
+        {
+          title: this.$t("orderCenter.table.name3"),
+          key: "productName",
+          dataIndex: "productName",
+        },
+        {
+          title: this.$t("orderCenter.table.name4"),
+          key: "productSuk",
+          dataIndex: "productSuk",
+        },
+        {
+          title: this.$t("orderCenter.table.name5"),
+          key: "productNumber",
+          dataIndex: "productNumber",
+        },
+        {
+          title: this.$t("orderCenter.table.name6"),
+          key: "productPrice",
+          dataIndex: "productPrice",
+        },
+        {
+          title: this.$t("orderCenter.table.name7"),
+          key: "orderPrice",
+          dataIndex: "orderPrice",
+        },
+        {
+          title: this.$t("orderCenter.table.name8"),
+          key: "orderDiscount",
+          dataIndex: "orderDiscount",
+        },
+        {
+          title: this.$t("orderCenter.table.name9"),
+          key: "commisson",
+          dataIndex: "commisson",
+        },
+        {
+          title: this.$t("orderCenter.table.name10"),
+          key: "customerId",
+          dataIndex: "customerId",
+        },
+        {
+          title: this.$t("orderCenter.table.name11"),
+          key: "customerCountry",
+          dataIndex: "customerCountry",
+        },
+        {
+          title: this.$t("orderCenter.table.name12"),
+          key: "createTime",
+          dataIndex: "createTime",
+        },
+      ],
     };
   },
   created() {
     this.initData();
     this.getUserToken();
   },
-
+  computed: {
+    userRole() {
+      return JSON.parse(window.localStorage.getItem("userinfo")).userRole;
+    },
+  },
   methods: {
     // 初始化数据
     initData() {
-		let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
-		this.$httpRequest({
+      let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
+      this.$httpRequest({
         api: cozmoxOrdersList,
         data: data,
         success: (res) => {
           console.log(res);
-          for (const res of res.result.records) {
-            res.created_at = getLocalTime(res.created_at);
-          }
           this.data = res.result.records;
+          this.total = res.result.total;
         },
       });
     },
-       // 获取统计数据
-  getUserToken() {
+    // 获取统计数据
+    getUserToken() {
       this.$httpRequest({
         api: getUsersByToken,
         data: {},
@@ -481,8 +559,8 @@ export default {
           this.userinfo = res.result;
         },
       });
-  },
-      // 改变页数
+    },
+    // 改变页数
     changePage(page) {
       console.log(page);
       this.pageNo = page;
@@ -494,7 +572,86 @@ export default {
       this.pageSiz = size;
       this.initData();
     },
-    
+    // 搜索
+    handleSearch() {
+      this.initData();
+    },
+    //重置
+    handleReset() {
+      this.form = {};
+      this.initData();
+    },
+    handleTabs(ev) {
+      this.pageNo = 1;
+      this.pageSiz = 1;
+      this.total = 0;
+      this.data = [];
+      this.form.shopfiyStatus = ev;
+      this.initData();
+      console.log(ev);
+    },
+     // 导出报表
+    handleExport() {
+      if (this.data.length == 0) {
+        this.$Message.success("暂无数据导出");
+        return;
+      }
+      let data = { pageNo: this.pageNo, pageSize: 999999999, ...this.form };
+      this.$httpRequest({
+        api: cozmoxOrdersList,
+        data,
+        success: (res) => {
+          console.log(res);
+          let arr = [];
+          for (const re of res.result.records) {
+            let tranType = "";
+            switch (re.shopfiyStatus) {
+              case "authorized":
+                tranType = this.$t("orderCenter.tab.name2");
+                break;
+              case "pending":
+                tranType = this.$t("orderCenter.tab.name3");
+                break;
+              case "paid":
+                tranType = this.$t("orderCenter.tab.name1");
+                break;
+              case "partially_paid":
+                tranType = this.$t("orderCenter.tab.name4");
+                break;
+              case "refunded":
+                tranType = this.$t("orderCenter.tab.name5");
+                break;
+              case "voided":
+                tranType = this.$t("orderCenter.tab.name6");
+                break;
+              case "partially_refunded":
+               tranType = this.$t("orderCenter.tab.name7");
+                break;
+              case "unpaid":
+               tranType = this.$t("orderCenter.tab.name8");
+                break;
+              default:
+                break;
+            }
+            arr.push({
+              shopfiyNumber: re.shopfiyNumber,
+              confirmed: tranType,
+              productName: re.productName,
+              productSuk: re.productSuk,
+              productNumber: re.productNumber,
+              productPrice: re.productPrice,
+              orderPrice: re.orderPrice,
+              orderDiscount: re.orderDiscount,
+              commisson: re.commisson,
+              customerId: re.customerId,
+              customerCountry: re.customerCountry,
+              createTime: re.createTime,
+            });
+          }
+          exportExcel(this.initColumn, arr, "订单中心" + ".xlsx");
+        },
+      });
+    },
   },
 };
 </script>
@@ -582,7 +739,7 @@ export default {
       border: 1px solid #e0e0e0;
       list-style: none;
       border-radius: 5px;
-       height: 37px;
+      height: 37px;
       li {
         width: 60px;
         height: 35px;

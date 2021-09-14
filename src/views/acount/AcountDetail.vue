@@ -56,36 +56,36 @@
 
     <div class="content">
       <div>
-        <span class="num">${{ userinfo.totalFee }}</span>
+        <span class="num">${{ userRole==1?userinfo.totalFeePayWait:userinfo.totalFeeWait }}</span>
         <span class="title">{{ $t("acount.moneyLi1") }}</span>
       </div>
       <div>
-        <span class="num">${{ userinfo.totalFee }}</span>
+        <span class="num">${{ userRole==1?userinfo.totalFeePay : userinfo.totalFee }}</span>
         <span class="title">{{ $t("acount.moneyLi2") }}</span>
       </div>
       <div>
-        <span class="num">{{ userinfo.totalOrder }}</span>
+        <span class="num">${{ userRole==1?(userinfo.totalFeePayWait + userinfo.totalFeePay) :(userinfo.totalFee + userinfo.totalFeeWait) }}</span>
         <span class="title">{{ $t("acount.moneyLi3") }}</span>
       </div>
     </div>
 
     <div class="content content1">
       <div>
-        <span class="num">{{ userinfo.totalOrder }}</span>
+        <span class="num">$0</span>
         <span class="title">{{ $t("acount.moneyLi4") }}</span>
       </div>
       <div>
-        <span class="num">${{ balance }}</span>
+        <span class="num">${{ balance || 0 }}</span>
         <span class="title"
           ><span>{{ $t("acount.moneyLi5") }}</span>
-          <Poptip
+          <!-- <Poptip
             word-wrap
             width="200"
             placement="bottom"
             :content="$t('acount.tip')"
           >
             <Icon type="md-list-box" color="#999" />
-          </Poptip>
+          </Poptip> -->
         </span>
       </div>
     </div>
@@ -94,19 +94,19 @@
     <div class="search">
       <div>
         <span>{{ $t("acount.table.name1") }}</span>
-        <Input v-model="form.waterNo" size="large" clearable class="width" />
+        <Input v-model="form.waterNo" size="large"  class="width" />
       </div>
       <div>
         <span>{{ $t("acount.table.name2") }}</span>
-        <Input v-model="form.taskNo" size="large" clearable class="width" />
+        <Input v-model="form.taskNo" size="large"  class="width" />
       </div>
       <div>
         <span>{{ $t("acount.searchName3") }}</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">{{ $t("acount.selectSearch.name1") }}</Option>
-          <Option :value="1">{{ $t("acount.selectSearch.name2") }}</Option>
-          <Option :value="2">{{ $t("acount.selectSearch.name3") }}</Option>
-          <Option :value="3">{{ $t("acount.selectSearch.name4") }}</Option>
+          <Option :value="1" v-if="userRole!=2">{{ $t("acount.selectSearch.name2") }}</Option>
+          <Option :value="2" v-if="userRole!=1">{{ $t("acount.selectSearch.name3") }}</Option>
+          <Option :value="3" v-if="userRole!=2">{{ $t("acount.selectSearch.name4") }}</Option>
         </Select>
       </div>
       <div>
@@ -257,6 +257,9 @@ export default {
   computed:{
     balance(){
       return (this.userinfo.balance+'').replace(/-/,'')
+    },
+    userRole(){
+      return JSON.parse(window.localStorage.getItem("userinfo")).userRole
     }
   },
   created() {

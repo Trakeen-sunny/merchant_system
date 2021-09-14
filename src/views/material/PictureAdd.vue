@@ -13,7 +13,7 @@
           <Input v-model="formItem.input" size="large" class="width"></Input>
         </FormItem>
         <FormItem label="图片尺寸">
-          <Select v-model="model1" size="large" clearable class="width">
+          <Select v-model="model1" size="large"  class="width">
             <Option :value="1">1</Option>
             <Option :value="2">4</Option>
             <Option :value="3">5</Option>

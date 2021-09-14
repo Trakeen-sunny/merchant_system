@@ -72,15 +72,15 @@
     <div class="search">
       <div>
         <span>流水号</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>提现人</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>提现方式</span>
-        <Select v-model="form.tranType" size="large" clearable class="width">
+        <Select v-model="form.tranType" size="large"  class="width">
           <Option value="">全部</Option>
         </Select>
       </div>

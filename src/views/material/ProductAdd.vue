@@ -17,7 +17,7 @@
         <div class="search" style="padding-left:0;">
           <div>
             <span>导入到平台分类</span>
-            <Select v-model="model1" size="large" clearable class="width">
+            <Select v-model="model1" size="large" class="width">
               <Option :value="1">Mobile Phones</Option>
               <Option :value="2">Appliances</Option>
               <Option :value="3">Computer & Electronics</Option>
@@ -37,7 +37,7 @@
           </div>
           <div>
             <span>导入到对应品牌</span>
-            <Select v-model="model1" size="large" clearable class="width">
+            <Select v-model="model1" size="large"  class="width">
               <Option :value="1">MECOOL</Option>
               <Option :value="2">Creality 3D</Option>
               <Option :value="3">HIMO</Option>
@@ -89,7 +89,7 @@
     <div class="search">
       <div>
         <span>商品名称</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <Button type="info" ghost class="button" size="large">重置</Button>

@@ -3,10 +3,10 @@
 
     <!-- 标题一 -->
     <Row class="title">
-      <Col span="12"><span>营销计划</span></Col>
+      <Col span="12"><span>{{$t("plans.asideName.name1")}}</span></Col>
     </Row>
     <!--  时间 搜索 -->
-    <div class="search table" style="margin-bottom: 30px;margin-top:0;">
+    <!-- <div class="search table" style="margin-bottom: 30px;margin-top:0;">
       <ul>
         <li>{{ $t("common.searchTime7") }}</li>
         <li>{{ $t("common.searchTime8") }}</li>
@@ -30,7 +30,7 @@
           $t("common.exportPage")
         }}</Button>
       </div>
-    </div>
+    </div> -->
     <!-- 标题一 -->
     <div class="content">
       <div>
@@ -47,15 +47,15 @@
     <div class="search">
       <div>
         <span>{{ $t("plans.search.name1") }}</span>
-        <Input v-model="form.id" size="large" clearable class="width" />
+        <Input v-model="form.id" size="large"  class="width" />
       </div>
       <div>
         <span>{{ $t("plans.search.name2") }}</span>
-        <Input v-model="form.goodName" size="large" clearable class="width" />
+        <Input v-model="form.goodName" size="large"  class="width" />
       </div>
       <div>
         <span>{{ $t("plans.search.name3") }}</span>
-        <Select v-model="form.status" size="large" clearable class="width">
+        <Select v-model="form.status" size="large"  class="width">
           <Option value="">{{ $t("plans.select.name1") }}</Option>
           <Option :value="0">{{ $t("plans.select.name2") }}</Option>
           <Option :value="1">{{ $t("plans.select.name3") }}</Option>
@@ -70,8 +70,11 @@
           @click="handleReset"
           >{{ $t("common.reset") }}</Button
         >
-        <Button type="info" class="button" size="large" @click="handleSearch">{{
+        <Button type="info" class="button" size="large" style="margin-left:20px;" @click="handleSearch">{{
           $t("common.search")
+        }}</Button>
+        <Button type="info" ghost class="button">{{
+          $t("common.exportPage")
         }}</Button>
       </div>
     </div>

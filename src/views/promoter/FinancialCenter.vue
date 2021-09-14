@@ -57,19 +57,19 @@
     <div class="search">
       <div>
         <span>流水号</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>订单编号</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>计划ID</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>商品名称</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <Button type="info" ghost class="button" size="large">重置</Button>

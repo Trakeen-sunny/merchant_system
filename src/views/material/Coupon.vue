@@ -25,11 +25,11 @@
     <div class="search">
       <div>
         <span>折扣码</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>类型</span>
-        <Select v-model="model1" size="large" clearable class="width">
+        <Select v-model="model1" size="large"  class="width">
           <Option :value="1">1</Option>
           <Option :value="2">4</Option>
           <Option :value="3">5</Option>
@@ -37,7 +37,7 @@
       </div>
       <div>
         <span>优惠券名称</span>
-        <Input v-model="value" size="large" clearable class="width" />
+        <Input v-model="value" size="large"  class="width" />
       </div>
       <div>
         <span>有效期</span>
@@ -49,7 +49,7 @@
       </div>
       <div>
         <span>状态</span>
-        <Select v-model="model1" size="large" clearable class="width">
+        <Select v-model="model1" size="large"  class="width">
           <Option :value="1">1</Option>
           <Option :value="2">4</Option>
           <Option :value="3">5</Option>

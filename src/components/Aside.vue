@@ -58,6 +58,9 @@ export default {
           if (res.name == "营销计划") {
             res.name = this.$t("plans.asideName");
           }
+          if (res.name == "订单中心") {
+            res.name = this.$t("orderCenter.asideName1");
+          }
         }
         res.isShow = res.userRole.includes(userinfo.userRole);
         if (res.children.length > 0) {

@@ -13,7 +13,7 @@
       <div class="search">
         <div>
           <span>图片名称</span>
-          <Input v-model="value" size="large" clearable class="width" />
+          <Input v-model="value" size="large"  class="width" />
         </div>
         <div>
           <Button type="info" ghost class="button" size="large">重置</Button>

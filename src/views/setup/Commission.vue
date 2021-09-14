@@ -31,11 +31,11 @@
       <div class="search">
         <div>
           <span>商品名称</span>
-          <Input v-model="value" size="large" clearable class="width" />
+          <Input v-model="value" size="large"  class="width" />
         </div>
         <div>
           <span>SKU</span>
-          <Input v-model="value" size="large" clearable class="width" />
+          <Input v-model="value" size="large"  class="width" />
         </div>
         <div>
           <Button type="info" ghost class="button" size="large">重置</Button>
@@ -61,7 +61,7 @@
       <div class="search">
         <div>
           <span>类目</span>
-          <Input v-model="value" size="large" clearable class="width" />
+          <Input v-model="value" size="large"  class="width" />
         </div>
         <div>
           <Button type="info" ghost class="button" size="large">重置</Button>
@@ -132,8 +132,7 @@
               <div>
                 <Input
                   v-model="value"
-                  placeholder="请输入SKU查询"
-                  clearable
+                  placeholder="请输入SKU查询"  
                   style="width: 200px"
                 />
               </div>

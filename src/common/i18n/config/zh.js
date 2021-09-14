@@ -156,5 +156,44 @@ export default {
             delete:"删除无效",
             edit:"修改成功"
         }
+    },
+    // 订单中心
+    orderCenter:{
+        asideName:"订单明细",
+        asideName1:"订单中心",
+        form:{
+            name1:"佣金商品总金额",
+            name2:"支付佣金总额",
+            name3:"账号余额",
+            name4:"佣金总额"
+        },
+        form2:{
+            label1:"订单编号",
+            label2:"收货国家",
+        },
+        tab:{
+            name1:"已付款",
+            name2:"已授权",
+            name3:"未付款",
+            name4:"部分付款",
+            name5:"已退款",
+            name6:"无效",
+            name7:"部分退款",
+            name8:"部分授权与支付"
+        },
+        table:{
+            name1:"订单编号",
+            name2:"订单状态",
+            name3:"商品名称",
+            name4:"SKU",
+            name5:"商品数量",
+            name6:"商品单价($)",
+            name7:"订单金额($)",
+            name8:"优惠金额($)",
+            name9:"佣金金额($)",
+            name10:"买家ID",
+            name11:"收货国家",
+            name12:"创建时间"
+        }
     }
 }

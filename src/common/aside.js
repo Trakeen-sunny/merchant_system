@@ -1,4 +1,4 @@
-// 角色判断 userRole 0 管理员 1 普通用户 2 网红
+// 角色判断 userRole 0 管理员 1 商家端 2 网红
 export const aside = [
     // {
     //     name: '首页',
@@ -42,7 +42,7 @@ export const aside = [
         name: '订单中心',
         url: '/home/order',
         icon: 'md-book',
-        userRole: [0, 1],
+        userRole: [0, 1, 2],
         children: []
     },
     {
