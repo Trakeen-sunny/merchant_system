@@ -26,19 +26,6 @@
         />
       </div>
       <div>
-        <span>发货仓</span>
-        <Select
-          v-model="form.shippingWarehouse"
-          size="large"
-          clearable
-          class="width"
-        >
-          <Option :value="1">1</Option>
-          <Option :value="2">4</Option>
-          <Option :value="3">5</Option>
-        </Select>
-      </div>
-      <div>
         <span>类目</span>
         <Input
           v-model="form.shopfiyCategory"
@@ -53,17 +40,6 @@
           <Option :value="1">开启</Option>
           <Option :value="0">待开启</Option>
         </Select>
-      </div>
-      <div>
-        <span>推广有效期</span>
-        <DatePicker
-          type="datetimerange"
-          format="yyyy-MM-dd HH:mm:ss"
-          style="width: 200px"
-          @on-change="handleChange"
-          @on-ok="handleOk"
-          @on-clear="handleClear"
-        ></DatePicker>
       </div>
       <div>
         <Button
@@ -269,12 +245,6 @@ export default {
         {
           title: "佣金率(%)",
           key: "commisson",
-          align: "center",
-          width: 100,
-        },
-        {
-          title: "发货仓",
-          key: "shippingWarehouse",
           align: "center",
           width: 100,
         },

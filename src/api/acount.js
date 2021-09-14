@@ -21,3 +21,9 @@ export const rechargeLogTotal = {
     path: '/web/rechargeLog/queryTotal',
     method: 'get'
 }
+
+// 最新订单列表
+export const cozmoxOrdersList = {
+    path: '/web/cozmoxOrders/list',
+    method: 'get'
+}

@@ -234,7 +234,9 @@
                     font-size: 20px;
                     margin-left: 10px;
                   "
-                  >$700000</span
+                  >${{
+                    formItem.accountBalance ? formItem.accountBalance : "--"
+                  }}</span
                 >
               </Col>
               <Col span="6">
@@ -246,22 +248,30 @@
             <Row :gutter="24">
               <Col span="8">
                 <FormItem :label="$t('setPersion.form1.name3')">
-                  <RadioGroup v-model="formItem.input" size="large">
-                    <Radio label="apple">
+                  <RadioGroup
+                    v-model="formItem.accountType"
+                    size="large"
+                    @on-change="radioChange"
+                  >
+                    <Radio label="PERSONAL_BANK_ACCOUNT">
                       <span>{{ $t("setPersion.form1.name4") }}</span>
                     </Radio>
-                    <Radio label="android">
+                    <Radio label="PAYPAL_ACCOUNT">
                       <span>{{ $t("setPersion.form1.name5") }}</span>
                     </Radio>
-                    <Radio label="android">
+                    <Radio label="CORPORATE_ACCOUNT">
                       <span>{{ $t("setPersion.form1.name6") }}</span>
                     </Radio>
                   </RadioGroup>
                 </FormItem>
               </Col>
-              <Col span="8">
+              <Col span="8" v-show="formItem.accountType != 'PAYPAL_ACCOUNT'">
                 <FormItem :label="$t('setPersion.form1.name7')">
-                  <Select v-model="formItem.country" size="large" @on-change="handleCountry">
+                  <Select
+                    v-model="formItem.country"
+                    size="large"
+                    @on-change="handleCountry"
+                  >
                     <Option
                       v-for="(item, i) in countrysList"
                       :key="i"
@@ -271,12 +281,15 @@
                   </Select>
                 </FormItem>
               </Col>
-              <Col span="8">
+              <Col span="8" v-show="formItem.accountType != 'PAYPAL_ACCOUNT'">
                 <FormItem :label="$t('setPersion.form1.name8')">
-                  <Select v-model="formItem.bank" style="width: 200px">
-                    <OptionGroup  v-for="(item,i) in bankList" :key="i" :label="item.countryEn">
+                  <Select
+                    v-model="formItem.receivingBankName"
+                    style="width: 200px"
+                  >
+                    <OptionGroup :label="bank.countryEn">
                       <Option
-                        v-for="(itm,index) in item.countryBankList"
+                        v-for="(itm, index) in bank.countryBankList"
                         :value="itm.bankEn"
                         :key="index"
                         >{{ itm.bankEn }}</Option
@@ -285,52 +298,77 @@
                   </Select>
                 </FormItem>
               </Col>
-              <Col span="8">
+              <Col span="8" v-show="formItem.accountType != 'PAYPAL_ACCOUNT'">
                 <FormItem :label="$t('setPersion.form1.name9')">
-                  <Input v-model="formItem.input" size="large"></Input>
+                  <Input
+                    v-model="formItem.receivingBankAddress"
+                    size="large"
+                  ></Input>
                 </FormItem>
               </Col>
-              <Col span="8">
+              <Col span="8" v-show="formItem.accountType != 'PAYPAL_ACCOUNT'">
                 <FormItem :label="$t('setPersion.form1.name10')">
-                  <Input v-model="formItem.input" size="large"></Input>
+                  <Input v-model="formItem.bankRouting" size="large"></Input>
                 </FormItem>
               </Col>
               <Col span="8">
                 <FormItem :label="$t('setPersion.form1.name11')">
-                  <Input v-model="formItem.input" size="large"></Input>
+                  <Input
+                    v-model="formItem.beneficiaryAccountNumber"
+                    size="large"
+                  ></Input>
                 </FormItem>
               </Col>
-              <Col span="8">
-                <FormItem l:label="$t('setPersion.form1.name12')">
-                  <Input v-model="formItem.input" size="large"></Input>
+              <!-- <Col span="8" v-show="formItem.accountType != 'PAYPAL_ACCOUNT'">
+                <FormItem :label="$t('setPersion.form1.name12')">
+                  <Input v-model="formItem.accountType" size="large"></Input>
                 </FormItem>
-              </Col>
-              <Col span="8">
+              </Col> -->
+              <Col span="8" v-show="formItem.accountType != 'PAYPAL_ACCOUNT'">
                 <FormItem :label="$t('setPersion.form1.name13')">
-                  <Input v-model="formItem.input" size="large"></Input>
+                  <Input
+                    v-model="formItem.beneficiaryAccountName"
+                    size="large"
+                  ></Input>
                 </FormItem>
               </Col>
-              <Col span="8">
+              <Col span="8" v-show="formItem.accountType != 'PAYPAL_ACCOUNT'">
                 <FormItem :label="$t('setPersion.form1.name14')">
-                  <Input v-model="formItem.input" size="large"></Input>
+                  <Input
+                    v-model="formItem.beneficiaryAccountAddress"
+                    size="large"
+                  ></Input>
                 </FormItem>
               </Col>
-              <Col span="8">
+              <Col span="8" v-show="formItem.accountType != 'PAYPAL_ACCOUNT'">
                 <FormItem :label="$t('setPersion.form1.name15')">
-                  <Input v-model="formItem.input" size="large">
-                    <span slot="prepend">+86</span>
+                  <Input v-model="formItem.contactPhoneNumber" size="large">
+                    <span slot="prepend">
+                      <Select
+                        v-model="formItem.telephoneCode"
+                        size="large"
+                        style="width: 200px"
+                      >
+                        <Option
+                          v-for="(item, i) in teleArr"
+                          :key="i"
+                          :value="item.telephoneCode"
+                          >{{ item.countryEn }}+{{ item.telephoneCode }}</Option
+                        >
+                      </Select>
+                    </span>
                   </Input>
                 </FormItem>
               </Col>
-              <Col span="8">
+              <!-- <Col span="8" v-show="formItem.accountType == 'CORPORATE_ACCOUNT'">
                 <FormItem :label="$t('setPersion.form1.name16')">
-                  <Input v-model="formItem.input" size="large">
+                  <Input v-model="formItem.accountType" size="large">
                     <span slot="append">{{
                       $t("setPersion.form1.name17")
                     }}</span>
                   </Input>
                 </FormItem>
-              </Col>
+              </Col> -->
               <Col span="24">
                 <FormItem>
                   <Radio v-model="single"
@@ -353,7 +391,7 @@
                   @click="handleEdit"
                   >{{ $t("common.cancel") }}</Button
                 >
-                <Button type="info" class="button" size="large">{{
+                <Button type="info" class="button" size="large" @click="save">{{
                   $t("common.save")
                 }}</Button>
               </Col>
@@ -373,6 +411,10 @@ import {
   getCurrencys,
   getCountrys,
   getBankList,
+  getAccount,
+  editAccount,
+  getTelCode,
+  addAccount,
 } from "../../api/index";
 export default {
   name: "SetupPersion",
@@ -397,8 +439,24 @@ export default {
       currencysList: [],
       countrysList: [],
       bankList: [],
-      formItem: {},
+      bank: { countryBankList: [] },
+      formItem: {
+        accountType: "PERSONAL_BANK_ACCOUNT",
+        bankRouting: "",
+        accountBalance: "",
+        beneficiaryAccountAddress: "",
+        beneficiaryAccountName: "",
+        beneficiaryAccountNumber: "",
+        contactPhoneNumber: "",
+        country: "",
+        receivingBankAddress: "",
+        receivingBankName: "",
+        telephoneCode: "",
+        id: "",
+      },
+      formItemArr: [],
       single: "",
+      teleArr: [],
     };
   },
   computed: {
@@ -413,8 +471,88 @@ export default {
     this.getCountrysList();
     this.getUserData();
     this.getBankList();
+
+    this.getTelCode();
   },
   methods: {
+    radioChange() {
+      this.single = false;
+      for (let i = 0; i < this.formItemArr.length; i++) {
+        if (this.formItemArr[i].accountType == this.formItem.accountType) {
+          this.formItem = JSON.parse(JSON.stringify(this.formItemArr[i]));
+          this.handleCountry(this.formItem.country, 1);
+          return;
+        }
+      }
+      this.formItem.bankRouting = "";
+      this.formItem.accountBalance = "";
+      this.formItem.beneficiaryAccountAddress = "";
+      this.formItem.beneficiaryAccountName = "";
+      this.formItem.beneficiaryAccountNumber = "";
+      this.formItem.contactPhoneNumber = "";
+      this.formItem.country = "";
+      this.formItem.receivingBankAddress = "";
+      this.formItem.receivingBankName = "";
+      this.formItem.telephoneCode = "";
+      this.formItem.id = "";
+    },
+    save() {
+      if (!this.single) {
+        this.$Message.warning("please select the protocol");
+        return;
+      }
+      console.log(this.formItem);
+      this.formItem.userId = this.getUserInfo.id;
+      if (this.formItem.id) {
+        this.$httpRequest({
+          api: editAccount,
+          data: this.formItem,
+          success: () => {
+            this.$Message.success("save successfully");
+            this.getAccount();
+          },
+        });
+      } else {
+        this.$httpRequest({
+          api: addAccount,
+          data: this.formItem,
+          success: () => {
+            this.$Message.success("save successfully");
+            this.getAccount();
+          },
+        });
+      }
+    },
+    //号码前缀
+    getTelCode() {
+      this.$httpRequest({
+        api: getTelCode,
+        success: (res) => {
+          this.teleArr = res.result;
+        },
+      });
+    },
+    //获取用户账户信息
+    getAccount() {
+      this.$httpRequest({
+        api: getAccount,
+        data: { id: this.getUserInfo.id },
+        success: (res) => {
+          this.formItemArr = res.result;
+          this.radioChange();
+        },
+      });
+    },
+    //编辑用户账户
+    // editAccount() {
+    //   this.$httpRequest({
+    //     api: editAccount,
+    //     data: { id: this.getUserInfo.id },
+    //     success: (res) => {
+    //       this.$Message.success("操作成功")
+    //     },
+    //   });
+    // },
     // 获取用户信息
     getUserData() {
       this.$httpRequest({
@@ -481,8 +619,9 @@ export default {
         api: getBankList,
         data: {},
         success: (res) => {
-          console.log(res)
+          console.log(res);
           this.bankList = res.result;
+          this.getAccount();
         },
       });
     },
@@ -535,8 +674,20 @@ export default {
     handleChangeDate(ev) {
       this.userInfo.birthDay = ev;
     },
-    handleCountry(ev){
-      console.log(ev)
+    handleCountry(ev, flag) {
+      if (flag != 1) {
+        this.formItem.receivingBankName = "";
+        this.formItem.receivingBankAddress = "";
+      }
+
+      for (let i = 0; i < this.bankList.length; i++) {
+        if (ev == this.bankList[i].countryEn) {
+          this.bank = JSON.parse(JSON.stringify(this.bankList[i]));
+          return;
+        }
+      }
+
+      this.bank = { countryBankList: [] };
     },
     handleEdit() {
       this.visibily = !this.visibily;

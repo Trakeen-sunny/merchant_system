@@ -146,15 +146,15 @@
                 {{ row.line_items && row.line_items[0].title }}
               </template>
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.financial_status=="authorized" ? "已授权" : "" }}
-				{{ row.financial_status=="pending" ? "未付款" : "" }}
-				{{ row.financial_status=="paid" ? "已付款" : "" }}
-				{{ row.financial_status=="partially_paid" ? "部分付款" : "" }}
-				{{ row.financial_status=="refunded" ? "已退款" : "" }}
-				{{ row.financial_status=="voided" ? "无效" : "" }}
-				{{ row.financial_status=="partially_refunded" ? "部分退款" : "" }}
+                {{ row.shopfiyStatus=="authorized" ? "已授权" : "" }}
+				{{ row.shopfiyStatus=="pending" ? "未付款" : "" }}
+				{{ row.shopfiyStatus=="paid" ? "已付款" : "" }}
+				{{ row.shopfiyStatus=="partially_paid" ? "部分付款" : "" }}
+				{{ row.shopfiyStatus=="refunded" ? "已退款" : "" }}
+				{{ row.shopfiyStatus=="voided" ? "无效" : "" }}
+				{{ row.shopfiyStatus=="partially_refunded" ? "部分退款" : "" }}
 				
-				{{ row.financial_status=="unpaid" ? "部分授权与支付" : "" }}
+				{{ row.shopfiyStatus=="unpaid" ? "部分授权与支付" : "" }}
               </template>
               <template slot-scope="{ row }" slot="orderCount">
                 {{ row.customer && row.customer.orders_count }}
@@ -166,7 +166,15 @@
                 {{ row.customer && row.customer.default_address.country }}
               </template>
             </Table>
-            <!--<Page :total="100" show-sizer class="page" />-->
+            <Page 
+			 :total="total"
+			 :current="pageNo"
+			 :page-size="pageSize"
+			 @on-change="changePage"
+			 @on-page-size-change="changeSize"
+		     show-sizer
+			 class="page"
+			/>
           </TabPane> 
          <!-- <TabPane label="待付款" name="name2"> 
             <Table :columns="columns" :data="data">
@@ -361,7 +369,7 @@
 </template>
 <script>
 import { getUsersByToken } from "../../api/index";
-import { orderList } from "../../api/acount";
+import { cozmoxOrdersList } from "../../api/acount";
 import { getLocalTime } from "../../common/function";
 export default {
   name: "Order",
@@ -377,7 +385,7 @@ export default {
         },
         {
           title: "订单编号",
-          key: "order_number",
+          key: "shopfiyNumber",
           align: "center",
         },
         {
@@ -387,32 +395,32 @@ export default {
         },
         {
           title: "商品名称",
-          slot: "title",
+          key: "productName",
           align: "center",
         },
         {
           title: "SKU",
-          slot: "sku",
+          key: "productSuk",
           align: "center",
         },
         {
           title: "商品数量",
-          slot: "orderCount",
+          key: "productNumber",
           align: "center",
         },
         {
           title: "商品单价($)",
-          key: "total_line_items_price",
+          key: "productPrice",
           align: "center",
         },
         {
           title: "订单金额($)",
-          key: "total_price",
+          key: "orderPrice",
           align: "center",
         },
         {
           title: "优惠金额($)",
-          key: "total_discounts",
+          key: "orderDiscount",
           align: "center",
         },
         {
@@ -422,31 +430,24 @@ export default {
         },
         {
           title: "买家ID",
-          slot: "userID",
+          key: "customerId",
           align: "center",
         },
         {
           title: "收货国家",
-          slot: "countryName",
-          align: "center",
-        },
-        {
-          title: "访问时间",
-          key: "aa",
-          align: "center",
-        },
-        {
-          title: "最后一次点击链接时间",
-          key: "aa",
+          key: "customerCountry",
           align: "center",
         },
         {
           title: "创建时间",
-          key: "created_at",
-          align: "center",
+          key: "createTime",
+          align: "center", 
         },
       ],
       data: [],
+	  pageNo: 1, //页数
+      pageSize: 10, //条数
+      total: 0, //总条数
       userinfo: {},
     };
   },
@@ -458,15 +459,16 @@ export default {
   methods: {
     // 初始化数据
     initData() {
-      this.$httpRequest({
-        api: orderList,
-        data: {},
+		let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
+		this.$httpRequest({
+        api: cozmoxOrdersList,
+        data: data,
         success: (res) => {
           console.log(res);
-          for (const res of res.result.orderList) {
+          for (const res of res.result.records) {
             res.created_at = getLocalTime(res.created_at);
           }
-          this.data = res.result.orderList;
+          this.data = res.result.records;
         },
       });
     },
@@ -480,6 +482,18 @@ export default {
         },
       });
   },
+      // 改变页数
+    changePage(page) {
+      console.log(page);
+      this.pageNo = page;
+      this.initData();
+    },
+    // 改变条数
+    changeSize(size) {
+      console.log(size);
+      this.pageSiz = size;
+      this.initData();
+    },
     
   },
 };

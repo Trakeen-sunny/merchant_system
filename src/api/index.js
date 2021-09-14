@@ -63,3 +63,26 @@ export const getBankList = {
     path: '/web/country/BankList',
     method: 'get'
 }
+
+//获取用户账户信息
+export const getAccount = {
+    path: '/web/userAccount/list',
+    method: 'get'
+}
+
+//编辑用户账号信息
+export const editAccount = {
+    path: '/web/userAccount/edit',
+    method: 'put'
+}
+//新增用户账号信息
+export const addAccount = {
+    path: '/web/userAccount/save',
+    method: 'post'
+}
+
+//获取地区手机号前缀
+export const getTelCode = {
+    path: '/web/country/telCode',
+    method: 'get'
+}
