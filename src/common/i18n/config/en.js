@@ -162,10 +162,11 @@ export default {
         asideName:"Order Details",
         asideName1:"Order Center",
         form:{
-            name1:"Total amount of commission goods",
+            name1:"Total amount of goods paid Commission",
             name2:"Total commission paid",
             name3:"Account balance",
-            name4:"Total Commission"
+            name4:"Total Commission",
+            name5:"Total amount of commission goods",
         },
         form2:{
             label1:"Order No",

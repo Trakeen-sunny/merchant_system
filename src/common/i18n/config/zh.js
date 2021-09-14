@@ -162,10 +162,11 @@ export default {
         asideName:"订单明细",
         asideName1:"订单中心",
         form:{
-            name1:"佣金商品总金额",
+            name1:"支付佣金商品总金额",
             name2:"支付佣金总额",
             name3:"账号余额",
-            name4:"佣金总额"
+            name4:"佣金总额",
+            name5:"佣金商品总金额",
         },
         form2:{
             label1:"订单编号",

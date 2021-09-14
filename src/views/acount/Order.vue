@@ -76,7 +76,7 @@
               : userinfo.totalFee
           }}</span
         >
-        <span class="title">{{$t("orderCenter.form.name1")}}</span>
+        <span class="title">{{userRole == 1?$t("orderCenter.form.name1"):$t("orderCenter.form.name5")}}</span>
       </div>
       <div>
         <span class="num"
