@@ -285,7 +285,6 @@
                 <FormItem :label="$t('setPersion.form1.name8')">
                   <Select
                     v-model="formItem.receivingBankName"
-                    style="width: 200px"
                   >
                     <OptionGroup :label="bank.countryEn">
                       <Option
