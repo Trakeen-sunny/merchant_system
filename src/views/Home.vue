@@ -84,7 +84,6 @@
               </div>
               <DropdownMenu slot="list" v-if="getUserInfo.userRole != 2">
                 <DropdownItem name="1">商家信息</DropdownItem>
-                <DropdownItem name="3">消息通知</DropdownItem>
                 <DropdownItem name="4">退出登录</DropdownItem>
               </DropdownMenu>
               <DropdownMenu slot="list" v-else>

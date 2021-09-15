@@ -72,8 +72,8 @@
         <span class="num"
           >${{
             userRole == 1
-              ? userinfo.totalFee - userinfo.totalFeePay
-              : userinfo.totalFee
+              ? userinfo.totalFeePay + userinfo.totalFeePayWait
+              : userinfo.totalFee + userinfo.totalFeeWait
           }}</span
         >
         <span class="title">{{userRole == 1?$t("orderCenter.form.name1"):$t("orderCenter.form.name5")}}</span>
@@ -549,6 +549,17 @@ export default {
           this.total = res.result.total;
         },
       });
+	 if(this.userRole==0||this.userRole==2){
+	    this.columns = this.columns.filter(col => col.key !== 'productName' );
+	    this.columns = this.columns.filter(col => col.key !== 'productSuk' );
+	    this.columns = this.columns.filter(col => col.key !== 'productNumber' );
+	    this.columns = this.columns.filter(col => col.key !== 'productPrice' );
+	    this.columns = this.columns.filter(col => col.key !== 'orderPrice' );
+	    this.columns = this.columns.filter(col => col.key !== 'orderDiscount' );
+	    this.columns = this.columns.filter(col => col.key !== 'commisson' );
+		
+	 };
+	 
     },
     // 获取统计数据
     getUserToken() {
@@ -648,7 +659,7 @@ export default {
               createTime: re.createTime,
             });
           }
-          exportExcel(this.initColumn, arr, "订单中心" + ".xlsx");
+          exportExcel(this.initColumn, arr, "orderlist" + ".xlsx");
         },
       });
     },

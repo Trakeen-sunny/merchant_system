@@ -75,7 +75,7 @@
         <span class="title">{{ $t("acount.moneyLi4") }}</span>
       </div>
       <div>
-        <span class="num">${{ balance || 0 }}</span>
+        <span class="num">${{userinfo.balance}}</span>
         <span class="title"
           ><span>{{ $t("acount.moneyLi5") }}</span>
           <!-- <Poptip
@@ -144,7 +144,7 @@
           {{ row.tranType == 3 ? $t("acount.selectSearch.name4") : "" }}
         </template>
         <template slot-scope="{ row }" slot="accountTotal">
-          {{ (row.accountTotal+'').replace(/-/,'') }}
+          {{row.accountTotal}}
         </template>
       </Table>
       <Page
@@ -342,7 +342,7 @@ export default {
               tranTime: re.tranTime,
             });
           }
-          exportExcel(this.initColumn, arr, "账户中心" + ".xlsx");
+          exportExcel(this.initColumn, arr, "accountcenter" + ".xlsx");
         },
       });
     },

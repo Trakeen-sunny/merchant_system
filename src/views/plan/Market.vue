@@ -73,9 +73,6 @@
         <Button type="info" class="button" size="large" style="margin-left:20px;" @click="handleSearch">{{
           $t("common.search")
         }}</Button>
-        <Button type="info" ghost class="button">{{
-          $t("common.exportPage")
-        }}</Button>
       </div>
     </div>
 
@@ -105,6 +102,9 @@
             $t("plans.status.name1")
           }}</span>
           <span v-else style="color: red">{{ $t("plans.status.name2") }}</span>
+        </template>
+		<template slot-scope="{ row }" slot="smcomisson">
+              {{Math.round(row.commission*0.8)}}
         </template>
         <template slot-scope="{ row, index }" slot="action">
           <Button type="info" @click="details(row, index)">{{
@@ -199,7 +199,7 @@ export default {
         },
         {
           title: this.$t("plans.table.name4"),
-          key: "commission",
+          slot:"smcomisson",
           align: "center",
         },
         // {
@@ -326,11 +326,11 @@ export default {
     },
     // 复制成功时的回调函数
     onCopy() {
-      this.$Message.success("内容已复制到剪切板！");
+      this.$Message.success("Link has been copied");
     },
     // 复制失败时的回调函数
     onError() {
-      this.$Message.error("抱歉，复制失败！");
+      this.$Message.error("Copied unsuccessfully！");
     },
     ok() {
       this.modal = false;
