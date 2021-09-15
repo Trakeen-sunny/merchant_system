@@ -3,3 +3,8 @@ export const usersList = {
     path: '/web/users/list',
     method: 'get'
 }
+
+export const usersReCharge = {
+    path: '/web/users/recharge',
+    method: 'put'
+}

@@ -16,6 +16,11 @@ export const aside = [
                 name: '账户中心',
                 userRole: [0, 1, 2],
             },
+            {
+                url: '/home/voucher_center',
+                name: '充值中心',
+                userRole: [0],
+            },
             // {
             //     url: '/home/recharge',
             //     name: '充值记录',
@@ -65,7 +70,7 @@ export const aside = [
     {
         name: '素材管理',
         icon: 'md-photos',
-        userRole: [0, 1],
+        userRole: [1],
         children: [{
                 url: '/home/product',
                 name: '商品管理',

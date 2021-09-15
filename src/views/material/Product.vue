@@ -172,8 +172,21 @@
       </Form>
     </Modal>
     <!-- 结束 -->
-    <Modal v-model="modal5" width="400" title="结束" @on-ok="handleFinish">
-      <span>确定要结束吗？</span>
+    <Modal v-model="modal5" width="500" title="结束" @on-ok="handleFinish">
+      <!-- <span>确定要结束吗？</span> -->
+      <Form :model="setCommision" :label-width="80">
+        <FormItem label="结束时间:" prop="number">
+          <DatePicker
+            type="datetime"
+            format="yyyy-MM-dd HH:mm:ss"
+            style="width: 300px"
+            @on-change="handleChange1"
+            @on-ok="handleOk1"
+            @on-clear="handleClear1"
+            :value="setCommision.endTime"
+          ></DatePicker>
+        </FormItem>
+      </Form>
     </Modal>
   </div>
 </template>
@@ -257,6 +270,7 @@ export default {
       total: 0, //总条数
       form: {},
       dateTime: [],
+      endTime: "",
       setCommision: {
         commisson: 0,
       },
@@ -399,6 +413,7 @@ export default {
         api: setClosure,
         data: {
           id: this.setCommision.id,
+          endTime: this.setCommision.endTime,
         },
         success: (res) => {
           console.log(res);
@@ -488,6 +503,17 @@ export default {
       }
       delete this.form.promoteStart;
       delete this.form.promoteEnd;
+    },
+    // 时间组件搜索
+    handleChange1(ev) {
+      console.log(ev);
+      this.setCommision.endTime = ev;
+    },
+    handleOk1() {
+      // this.setCommision.endTime = this.dateTime;
+    },
+    handleClear1() {
+      delete this.setCommision.endTime;
     },
     equalNum(ev) {
       console.log(ev);

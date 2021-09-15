@@ -32,6 +32,11 @@ export default {
         } else {
             config.data = data 
         }
+        if (api.method == "put") {
+            config.params = data;
+            config.data = data;
+        }
+        
         if (api.dataType) {
             config.dataType = api.dataType;
         }

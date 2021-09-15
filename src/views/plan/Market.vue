@@ -1,9 +1,10 @@
 <template>
   <div class="acount">
-
     <!-- 标题一 -->
     <Row class="title">
-      <Col span="12"><span>{{$t("plans.asideName.name1")}}</span></Col>
+      <Col span="12"
+        ><span>{{ $t("plans.asideName") }}</span></Col
+      >
     </Row>
     <!--  时间 搜索 -->
     <!-- <div class="search table" style="margin-bottom: 30px;margin-top:0;">
@@ -47,15 +48,15 @@
     <div class="search">
       <div>
         <span>{{ $t("plans.search.name1") }}</span>
-        <Input v-model="form.id" size="large"  class="width" />
+        <Input v-model="form.id" size="large" class="width" />
       </div>
       <div>
         <span>{{ $t("plans.search.name2") }}</span>
-        <Input v-model="form.goodName" size="large"  class="width" />
+        <Input v-model="form.goodName" size="large" class="width" />
       </div>
       <div>
         <span>{{ $t("plans.search.name3") }}</span>
-        <Select v-model="form.status" size="large"  class="width">
+        <Select v-model="form.status" size="large" class="width">
           <Option value="">{{ $t("plans.select.name1") }}</Option>
           <Option :value="0">{{ $t("plans.select.name2") }}</Option>
           <Option :value="1">{{ $t("plans.select.name3") }}</Option>
@@ -70,9 +71,14 @@
           @click="handleReset"
           >{{ $t("common.reset") }}</Button
         >
-        <Button type="info" class="button" size="large" style="margin-left:20px;" @click="handleSearch">{{
-          $t("common.search")
-        }}</Button>
+        <Button
+          type="info"
+          class="button"
+          size="large"
+          style="margin-left: 20px"
+          @click="handleSearch"
+          >{{ $t("common.search") }}</Button
+        >
       </div>
     </div>
 
@@ -103,13 +109,20 @@
           }}</span>
           <span v-else style="color: red">{{ $t("plans.status.name2") }}</span>
         </template>
-		<template slot-scope="{ row }" slot="smcomisson">
-              {{Math.round(row.commission*0.8)}}
+        <template slot-scope="{ row }" slot="smcomisson">
+          {{ Math.round(row.commission * 0.8) }}
         </template>
         <template slot-scope="{ row, index }" slot="action">
           <Button type="info" @click="details(row, index)">{{
             $t("plans.button.detail")
           }}</Button>
+          <Button
+            v-if="getUserInfo.userRole == 0 && row.status == 0"
+            ghost
+            type="info"
+            @click="end(row, index)"
+            >{{ $t("plans.button.end") }}</Button
+          >
         </template>
       </Table>
       <Page
@@ -160,10 +173,15 @@
         }}</Button>
       </div>
     </Modal>
+    <!-- 结束 -->
+    <Modal v-model="modal5" width="400" title="结束" @on-ok="handleFinish">
+      <span>确定要结束吗？</span>
+    </Modal>
   </div>
 </template>
 <script>
 import { plansList } from "../../api/plan";
+import { setClosure } from "../../api/material";
 export default {
   name: "Market",
   data() {
@@ -171,6 +189,7 @@ export default {
       shopifyUrl: "https://xn-7gq605b6lt59y.myshopify.com/products/",
       f: 11,
       modal: false,
+      modal5: false,
       form: {
         id: "",
         status: "",
@@ -199,7 +218,7 @@ export default {
         },
         {
           title: this.$t("plans.table.name4"),
-          slot:"smcomisson",
+          slot: "smcomisson",
           align: "center",
         },
         // {
@@ -244,6 +263,7 @@ export default {
       }, //详情
       pendingnum: 0, //进行中计划数
       endingnum: 0, //已结束计划数
+      goodsid: "",
     };
   },
   created() {
@@ -296,8 +316,31 @@ export default {
     details(row) {
       console.log(row);
       this.detail.input1 =
-        row.shopfiyUrl + "/products/"+row.handle + "?utm_source=" + this.getUserInfo.id;
+        row.shopfiyUrl +
+        "/products/" +
+        row.handle +
+        "?utm_source=" +
+        this.getUserInfo.id;
       this.modal = true;
+    },
+    // 结束
+    end(row) {
+      this.goodsid = row.goodId;
+      this.modal5 = true;
+    },
+    handleFinish() {
+      this.$httpRequest({
+        api: setClosure,
+        data: {
+          id: this.goodsid,
+        },
+        success: (res) => {
+          if (res.code == 0) {
+            this.$Message.success("结束成功!");
+             this.initData();
+          }
+        },
+      });
     },
     // 改变页数
     changePage(page) {
@@ -343,7 +386,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .acount {
-   > .title {
+  > .title {
     display: flex;
     align-items: center;
     margin-bottom: 30px;
@@ -514,7 +557,7 @@ export default {
     .page {
       text-align: right;
       margin-top: 30px;
-      padding-bottom: 30px; 
+      padding-bottom: 30px;
     }
   }
 }

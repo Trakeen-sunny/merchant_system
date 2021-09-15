@@ -83,7 +83,8 @@ export default {
         },
         title:"List commission",
         button:{
-            detail:"detail"
+            detail:"detail",
+            end:"end"
         },
         status:{
            name1:"In progress",

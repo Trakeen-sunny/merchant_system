@@ -22,6 +22,10 @@ const routes = [{
       name: "AcountDetail",
       component: () => import("@/views/acount/AcountDetail.vue"),
     }, {
+      path: "voucher_center",
+      name: "VoucherCenter",
+      component: () => import("@/views/acount/VoucherCenter.vue"),
+    }, {
       path: "message",
       name: "Message",
       component: () => import("@/views/home/Message.vue"),

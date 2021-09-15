@@ -83,7 +83,8 @@ export default {
         },
         title: "营销计划明细",
         button: {
-            detail: "查看"
+            detail: "查看",
+            end:"结束"
         },
         status: {
             name1: "进行中",
