@@ -53,8 +53,21 @@
         }}</Button>
       </div>
     </div> -->
-
-    <div class="content">
+    <div class="content" v-if="userRole==0">
+      <div>
+        <span class="num">${{ userinfos.totalFeeWaitPartner || 0 }}</span>
+        <span class="title">{{ $t("acount.moneyLi6") }}</span>
+      </div>
+      <div>
+        <span class="num">${{ userinfos.totalFeePartner || 0 }}</span>
+        <span class="title">{{ $t("acount.moneyLi7") }}</span>
+      </div>
+      <div>
+        <span class="num">${{ userinfos.totalFeePayStoer|| 0  }}</span>
+        <span class="title">{{ $t("acount.moneyLi8") }}</span>
+      </div>
+    </div>
+    <div class="content" v-else>
       <div>
         <span class="num">${{ userRole==1?userinfo.totalFeePayWait || 0 : userinfo.totalFeeWait || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi1") }}</span>
@@ -167,7 +180,7 @@
 </template>
 <script>
 import { acountList } from "../../api/acount";
-import { getUsersByToken } from "../../api/index";
+import { getUsersByToken, getAdminToatl } from "../../api/index";
 import { getTodayDate, getSevenDate } from "../../common/function";
 import { exportExcel } from "../../common/excelUtils";
 
@@ -258,6 +271,7 @@ export default {
           dataIndex: "tranTime",
         },
       ],
+      userinfos:{}
     };
   },
   computed:{
@@ -271,8 +285,19 @@ export default {
   created() {
     this.initData();
     this.getUserToken();
+    this.getAdminToatls();
   },
   methods: {
+    // 获取管理员的信息
+    getAdminToatls(){
+      this.$httpRequest({
+        api: getAdminToatl,
+        data:{},
+        success: (res) => {
+          this.userinfos = res.result
+        },
+      });
+    },
     // 时间组件搜索
     handleChange(ev) {
       console.log(ev);

@@ -99,3 +99,9 @@ export const setPersonInfo = {
     method: 'put'
 }
 
+// 获取管理员的账户信息
+export const getAdminToatl = {
+    path: '/web/users/getAdminToatl',
+    method: 'post'
+}
+
