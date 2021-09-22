@@ -72,20 +72,20 @@
         <span class="num"
           >${{
             userRole == 1
-              ? userinfo.totalFeePay + userinfo.totalFeePayWait
-              : userinfo.totalFee + userinfo.totalFeeWait
+              ? (userinfo.totalFeePay + userinfo.totalFeePayWait) || 0
+              : (userinfo.totalFee + userinfo.totalFeeWait) || 0
           }}</span
         >
         <span class="title">{{userRole == 1?$t("orderCenter.form.name1"):$t("orderCenter.form.name5")}}</span>
       </div>
       <div>
         <span class="num"
-          >${{ userRole == 1 ? userinfo.totalFeePay : userinfo.totalFee }}</span
+          >${{ userRole == 1 ? userinfo.totalFeePay || 0 : userinfo.totalFee || 0 }}</span
         >
         <span class="title">{{userRole == 1?$t("orderCenter.form.name2"):$t("orderCenter.form.name4")}}</span>
       </div>
       <div>
-        <span class="num">${{ userinfo.balance }}</span>
+        <span class="num">${{ userinfo.balance || 0 }}</span>
         <span class="title">{{$t("orderCenter.form.name3")}}</span>
       </div>
     </div>

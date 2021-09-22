@@ -56,15 +56,15 @@
 
     <div class="content">
       <div>
-        <span class="num">${{ userRole==1?userinfo.totalFeePayWait:userinfo.totalFeeWait }}</span>
+        <span class="num">${{ userRole==1?userinfo.totalFeePayWait || 0 : userinfo.totalFeeWait || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi1") }}</span>
       </div>
       <div>
-        <span class="num">${{ userRole==1?userinfo.totalFeePay : userinfo.totalFee }}</span>
+        <span class="num">${{ userRole==1?userinfo.totalFeePay || 0 : userinfo.totalFee || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi2") }}</span>
       </div>
       <div>
-        <span class="num">${{ userRole==1?(userinfo.totalFeePayWait + userinfo.totalFeePay) :(userinfo.totalFee + userinfo.totalFeeWait) }}</span>
+        <span class="num">${{ userRole==1?(userinfo.totalFeePayWait + userinfo.totalFeePay) || 0 :(userinfo.totalFee + userinfo.totalFeeWait) || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi3") }}</span>
       </div>
     </div>
@@ -75,7 +75,7 @@
         <span class="title">{{ $t("acount.moneyLi4") }}</span>
       </div>
       <div>
-        <span class="num">${{userinfo.balance}}</span>
+        <span class="num">${{userinfo.balance || 0}}</span>
         <span class="title"
           ><span>{{ $t("acount.moneyLi5") }}</span>
           <!-- <Poptip
