@@ -54,7 +54,10 @@ export default {
             name1:'All',
             name2:'Commission expenses',
             name3:'Commission income',
-            name4:'Recharge income'
+            name4:'Recharge income',
+			name5:"service moeny",
+			name101:"Pay back commission",
+			name104:"Pay back service",
         },
         table: {
             name1: "Serial number",
@@ -156,7 +159,11 @@ export default {
         total:{
             delete:"Invalid deletion",
             edit:"Modified successfully"
-        }
+        },
+		withdraw:{
+			title1:"Withdrawal Reminder",
+			notice:"Please contact customer service: woody@cozmox.com for withdrawal operation",
+		}
     },
     // 订单中心
     orderCenter:{

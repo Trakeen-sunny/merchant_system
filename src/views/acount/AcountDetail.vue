@@ -107,6 +107,9 @@
           <Option :value="1" v-if="userRole!=2">{{ $t("acount.selectSearch.name2") }}</Option>
           <Option :value="2" v-if="userRole!=1">{{ $t("acount.selectSearch.name3") }}</Option>
           <Option :value="3" v-if="userRole!=2">{{ $t("acount.selectSearch.name4") }}</Option>
+		  <Option :value="4" v-if="userRole!=2">{{ $t("acount.selectSearch.name5") }}</Option>
+		  <Option :value="101" v-if="userRole!=2">{{ $t("acount.selectSearch.name101") }}</Option>
+		  <Option :value="104" v-if="userRole!=2">{{ $t("acount.selectSearch.name104") }}</Option>
         </Select>
       </div>
       <div>
@@ -142,6 +145,9 @@
           {{ row.tranType == 1 ? $t("acount.selectSearch.name2") : "" }}
           {{ row.tranType == 2 ? $t("acount.selectSearch.name3") : "" }}
           {{ row.tranType == 3 ? $t("acount.selectSearch.name4") : "" }}
+		  {{ row.tranType == 4 ? $t("acount.selectSearch.name5") : "" }}
+		  {{ row.tranType == 101 ? $t("acount.selectSearch.name101") : "" }}
+		  {{ row.tranType == 104 ? $t("acount.selectSearch.name104") : "" }}
         </template>
         <template slot-scope="{ row }" slot="accountTotal">
           {{row.accountTotal}}
@@ -329,6 +335,9 @@ export default {
                 break;
               case 3:
                 tranType = this.$t("acount.selectSearch.name4");
+                break;
+			  case 4:
+                tranType = this.$t("acount.selectSearch.name5");
                 break;
               default:
                 break;

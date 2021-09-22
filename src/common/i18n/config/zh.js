@@ -54,7 +54,10 @@ export default {
             name1:'全部',
             name2:'佣金支出',
             name3:'佣金收入',
-            name4:'充值收入'
+            name4:'充值收入',
+			name5:'平台服务费',
+			name101:'支付佣金返还',
+			name104:'支付服务费返还'
         },
         table: {
             name1: "流水单号",

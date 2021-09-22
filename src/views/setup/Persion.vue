@@ -240,7 +240,7 @@
                 >
               </Col>
               <Col span="6">
-                <Button type="info" class="button" size="large">{{
+                <Button type="info" class="button" size="large" @click="info(false)" title="ces">{{
                   $t("setPersion.form1.name2")
                 }}</Button>
               </Col>
@@ -522,6 +522,14 @@ export default {
         });
       }
     },
+	//消息提示
+	info (nodesc) {
+                this.$Notice.open({
+                    title: 'Withdrawal Reminder',
+                    desc: nodesc ? '' : 'Please contact customer service: woody@cozmox.com for withdrawal operation'
+                });
+            },
+	
     //号码前缀
     getTelCode() {
       this.$httpRequest({

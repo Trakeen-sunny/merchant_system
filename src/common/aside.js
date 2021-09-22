@@ -70,11 +70,11 @@ export const aside = [
     {
         name: '素材管理',
         icon: 'md-photos',
-        userRole: [1],
+        userRole: [0,1],
         children: [{
                 url: '/home/product',
                 name: '商品管理',
-                userRole: [1],
+                userRole: [0,1],
             },
             // {
             //     url: '/home/coupon',

@@ -7,6 +7,9 @@
 
     <div class="form" v-if="!visibily">
       <Row>
+	   <Col span="8"
+          ><span>用户账号：</span><span>{{ form.email }}</span></Col
+        >
         <Col span="8"
           ><span>商家名称：</span><span>{{ form.shopName }}</span></Col
         >
@@ -34,7 +37,7 @@
           ><span>货币：</span><span>{{ form.currency }}</span></Col
         >
         <Col span="8"
-          ><span>联系邮箱：</span><span>{{ form.email }}</span></Col
+          ><span>联系邮箱：</span><span>{{ form.emailShop }}</span></Col
         >
         <Col span="8"
           ><span>联系电话：</span><span>{{ form.phone }}</span></Col
@@ -55,6 +58,9 @@
 
     <div class="form" v-else>
       <Form model="formItem" :label-width="100" :inline="true">
+		<FormItem label="用户账号">
+          <Input v-model="form.email" size="large" class="width"></Input>
+        </FormItem>
         <FormItem label="商家名称">
           <Input v-model="form.shopName" size="large" class="width"></Input>
         </FormItem>
@@ -100,7 +106,7 @@
               v-for="(item, i) in languageList"
               :key="i"
               :value="item.languageEn"
-              >{{ item.languageEn }}</Option
+              >{{ item.languageEn }}</Option 
             >
           </Select>
         </FormItem>
@@ -112,10 +118,10 @@
               :value="item.currencyEn"
               >{{ item.currencyEn }}</Option
             >
-          </Select>
+          </Select> 
         </FormItem>
         <FormItem label="联系邮箱">
-          <Input v-model="form.email" size="large" class="width"></Input>
+          <Input v-model="form.emailShop" size="large" class="width"></Input>
         </FormItem>
         <FormItem label="联系电话">
           <Input v-model="form.phone" size="large" class="width"></Input>

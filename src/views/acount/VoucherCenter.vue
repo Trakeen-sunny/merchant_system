@@ -16,6 +16,14 @@
         <span>商家账户</span>
         <Input v-model="form.email" size="large" class="width" />
       </div>
+	  <div>
+        <span>联系邮箱</span>
+        <Input v-model="form.emailShop" size="large" class="width" />
+      </div>
+	  <div>
+        <span>店铺名称</span>
+        <Input v-model="form.shopName" size="large" class="width" />
+      </div>
       <div>
         <Button
           type="info"
@@ -92,7 +100,7 @@
 </template>
 <script>
 import { exportExcel } from "../../common/excelUtils";
-import { usersList, usersReCharge } from "../../api/collaborator";
+import { usersList,usersListLike,usersReCharge } from "../../api/collaborator";
 export default {
   name: "VoucherCenter",
   data() {
@@ -106,6 +114,16 @@ export default {
         {
           title: "商家账户",
           key: "email",
+          align: "center",
+        },
+		{
+          title: "店铺名称",
+          key: "shopName",
+          align: "center",
+        },
+		{
+          title: "联系邮箱",
+          key: "emailShop",
           align: "center",
         },
         {
@@ -172,7 +190,7 @@ export default {
     initData() {
       let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
       this.$httpRequest({
-        api: usersList,
+        api: usersListLike,
         data,
         success: (res) => {
           console.log(res);

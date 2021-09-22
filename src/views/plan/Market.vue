@@ -110,14 +110,14 @@
           <span v-else style="color: red">{{ $t("plans.status.name2") }}</span>
         </template>
         <template slot-scope="{ row }" slot="smcomisson">
-          {{ Math.round(row.commission * 0.8) }}
+          {{row.commission}}
         </template>
         <template slot-scope="{ row, index }" slot="action">
           <Button type="info" @click="details(row, index)">{{
             $t("plans.button.detail")
           }}</Button>
           <Button
-            v-if="getUserInfo.userRole == 0 && row.status == 0"
+            v-if="getUserInfo.userRole == 0 && row.status == 3"
             ghost
             type="info"
             @click="end(row, index)"
