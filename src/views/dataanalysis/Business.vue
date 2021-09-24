@@ -296,10 +296,11 @@ export default {
   },
   methods: {
     // 初始化组件
-    initEchart(xdata, sdata, yname) {
+    initEchart(xdata, sdata, yname, sname) {
       const option = {
         tooltip: {
-          trigger: "axis",
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c}",
         },
         xAxis: {
           type: "category",
@@ -319,12 +320,14 @@ export default {
         series: [
           {
             data: sdata,
+            name: sname,
             type: "line",
             showBackground: true,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.2)",
             },
             smooth: true,
+            color: "#089444",
           },
         ],
       };
@@ -396,26 +399,31 @@ export default {
           let arr = [];
           let arr1 = [];
           let yname = "";
+          let sname = "";
           for (const re of res.result) {
             arr.push(re.date);
             if (this.chartType == 0) {
               arr1.push(re.storeNum);
               yname = "商家数量(人)";
+              sname = "商家数量";
             }
             if (this.chartType == 1) {
               arr1.push(re.cost);
               yname = "销售额($)";
+              sname = "销售额";
             }
             if (this.chartType == 2) {
               arr1.push(re.recharge);
               yname = "充值金额($)";
+              sname = "充值金额";
             }
             if (this.chartType == 3) {
               arr1.push(re.totalFeePay);
               yname = "佣金收入($)";
+              sname = "佣金收入";
             }
           }
-          this.initEchart(arr, arr1, yname);
+          this.initEchart(arr, arr1, yname, sname);
         },
       });
     },
