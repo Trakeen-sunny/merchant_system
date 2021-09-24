@@ -80,7 +80,6 @@
           <Button type="info" @click="setMoney(row, index)">设置佣金</Button>
           <Button
             type="info"
-            v-if="row.shopfiyCategoryIs == 0"
             @click="setEdit(row, index)"
             >编辑</Button
           >

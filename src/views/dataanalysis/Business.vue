@@ -91,38 +91,38 @@
       <div class="right">
         <ul class="top">
           <li>
-            <i-circle :percent="80" stroke-color="#f1334b" style="width:85%;">
-              <h2>322</h2>
-              <span style="font-size: 13px;color:#999">商家总数</span>
+            <i-circle :percent="dataInfo.storeSum" stroke-color="#eaeef2" style="width: 85%">
+              <h2>{{dataInfo.storeSum}}</h2>
+              <span style="font-size: 13px; color: #999">商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="80" stroke-color="#e2ef3e" style="width:85%;">
-              <h2>50%</h2>
-              <span style="font-size: 13px;color:#999">余额预警商家总数</span>
+            <i-circle :percent="(dataInfo.balanceWarn / dataInfo.storeSum) * 100" stroke-color="#e2ef3e" style="width: 85%">
+              <h2>{{(dataInfo.balanceWarn / dataInfo.storeSum) * 100}}%</h2>
+              <span style="font-size: 13px; color: #999">余额预警商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="80"  stroke-color="#ec4ae5" style="width:85%;">
-              <h2>50%</h2>
-              <span style="font-size: 13px;color:#999">余额不足商家总数</span>
+            <i-circle :percent="(dataInfo.balanceLow / dataInfo.storeSum) * 100" stroke-color="#ec4ae5" style="width: 85%">
+              <h2>{{(dataInfo.balanceLow / dataInfo.storeSum) * 100}}%</h2>
+              <span style="font-size: 13px; color: #999">余额不足商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="80" stroke-color="#417cef" style="width:85%;">
-              <h2>50%</h2>
-              <span style="font-size: 13px;color:#999">充值商家总数</span>
+            <i-circle :percent="(dataInfo.rechargeStoreSum / dataInfo.storeSum) * 100" stroke-color="#417cef" style="width: 85%">
+              <h2>{{(dataInfo.rechargeStoreSum / dataInfo.storeSum) * 100}}%</h2>
+              <span style="font-size: 13px; color: #999">充值商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="80" stroke-color="#32a6ec" style="width:85%;">
-              <h2>50%</h2>
-              <span style="font-size: 13px;color:#999">活跃商家总数</span>
+            <i-circle :percent="(dataInfo.activeStoreSum / dataInfo.storeSum) * 100" stroke-color="#32a6ec" style="width: 85%">
+              <h2>{{(dataInfo.activeStoreSum / dataInfo.storeSum) * 100}}%</h2>
+              <span style="font-size: 13px; color: #999">活跃商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="80" stroke-color="#53e825" style="width:85%;">
-              <h2>50%</h2>
+            <i-circle :percent="(dataInfo.incomeStoreSum / dataInfo.storeSum) * 100" stroke-color="#53e825" style="width: 85%">
+              <h2>{{(dataInfo.incomeStoreSum / dataInfo.storeSum) * 100}}%</h2>
               <span style="font-size: 13px">有收入商家总数</span>
             </i-circle>
           </li>
@@ -152,7 +152,7 @@
   </div>
 </template>
 <script>
-import { rechargeLogList } from "../../api/acount";
+import { statisticsTopTen, statisticsSum } from "../../api/dataanalysis";
 import { getTodayDate, getSevenDate } from "../../common/function";
 export default {
   name: "Business",
@@ -162,33 +162,33 @@ export default {
       form: {},
       columns: [
         {
-          title: "排行",
-          key: "id",
+          type: "index",
+          width: 60,
           align: "center",
         },
         {
           title: "店铺名称",
-          key: "rechargeTotal",
+          key: "storeName",
           align: "center",
         },
         {
           title: "商家账户",
-          key: "balance",
+          key: "storeId",
           align: "center",
         },
         {
           title: "销售总额($)",
-          key: "sumTotal",
+          key: "totalSales",
           align: "center",
         },
         {
           title: "充值总额($)",
-          key: "sumTotal",
+          key: "totalRecharge",
           align: "center",
         },
         {
           title: "佣金支出总额($)",
-          key: "sumTotal",
+          key: "totalCommissionExpenses",
           align: "center",
         },
       ],
@@ -196,10 +196,12 @@ export default {
       timeIdx: 0, // 默认时间选中
       dateTime: [],
       myChart: null,
+      dataInfo:{}
     };
   },
   created() {
     this.initData();
+    this.initData2();
   },
   mounted() {
     this.myChart = this.$echarts.init(document.getElementById("myChart"));
@@ -263,15 +265,27 @@ export default {
       }
       this.initData();
     },
-    // 初始化数据
+    // 获取商家排行榜 top10
     initData() {
-      let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
+      let data = { type: 1 };
       this.$httpRequest({
-        api: rechargeLogList,
+        api: statisticsTopTen,
         data,
         success: (res) => {
           console.log(res);
-          //   this.data = res.result.records;
+          this.data = res.result;
+        },
+      });
+    },
+    // 获取统计商家总数
+    initData2() {
+      let data = { type: 1 };
+      this.$httpRequest({
+        api: statisticsSum,
+        data,
+        success: (res) => {
+          console.log(res);
+          this.dataInfo = res.result
         },
       });
     },

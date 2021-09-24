@@ -53,36 +53,59 @@
         }}</Button>
       </div>
     </div> -->
+	  
+	<div class="textsm" v-if="userRole==0">
+	商家/推广者
+	</div>
     <div class="content" v-if="userRole==0">
       <div>
-        <span class="num">${{ userinfos.totalFeeWaitPartner || 0 }}</span>
-        <span class="title">{{ $t("acount.moneyLi6") }}</span>
+        <span class="num">${{ userinfos.totalFeePayWaitSx || 0 }}</span>
+        <span class="title">{{ $t("acount.moneyLi9") }}</span>
       </div>
       <div>
-        <span class="num">${{ userinfos.totalFeePartner || 0 }}</span>
-        <span class="title">{{ $t("acount.moneyLi7") }}</span>
+        <span class="num">${{ userinfos.totalFeePaySx || 0 }}</span>
+        <span class="title">{{ $t("acount.moneyLi10") }}</span>
       </div>
       <div>
-        <span class="num">${{ userinfos.totalFeePayStoer|| 0  }}</span>
-        <span class="title">{{ $t("acount.moneyLi8") }}</span>
+        <span class="num">${{ userinfos.totalBalanceStoer|| 0  }}</span>
+        <span class="title">{{ $t("acount.moneyLi11") }}</span>
+      </div>
+	  <div>
+        <span class="num">${{ userinfos.totalBalancePartner|| 0  }}</span>
+        <span class="title">{{ $t("acount.moneyLi12") }}</span>
       </div>
     </div>
     <div class="content" v-else>
       <div>
-        <span class="num">${{ userRole==1?userinfo.totalFeePayWait || 0 : userinfo.totalFeeWait || 0 }}</span>
+        <span class="num">${{ userRole==1?userinfo.totalFeePayWaitSx || 0 : userinfo.totalFeeWait || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi1") }}</span>
       </div>
       <div>
-        <span class="num">${{ userRole==1?userinfo.totalFeePay || 0 : userinfo.totalFee || 0 }}</span>
+        <span class="num">${{ userRole==1?userinfo.totalFeePaySx || 0 : userinfo.totalFee || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi2") }}</span>
       </div>
       <div>
-        <span class="num">${{ userRole==1?(userinfo.totalFeePayWait + userinfo.totalFeePay) || 0 :(userinfo.totalFee + userinfo.totalFeeWait) || 0 }}</span>
+        <span class="num">${{ userRole==1?(userinfo.totalFeePayWaitSx + userinfo.totalFeePaySx) || 0 :(userinfo.totalFee + userinfo.totalFeeWait) || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi3") }}</span>
       </div>
     </div>
-
-    <div class="content content1">
+	<span class="textsm" v-if="userRole==0">平台</span>
+	<div class="content content1" v-if="userRole==0">
+	 
+	  <div>
+        <span class="num">${{parseFloat(userinfos.totalFeePayWaitSx*0.2).toFixed(2)}}</span>
+        <span class="title">{{ $t("acount.moneyLi13") }}</span>
+      </div>
+	  <div>
+        <span class="num">${{parseFloat(userinfos.totalFeePaySx*0.2).toFixed(2)}}</span>
+        <span class="title">{{ $t("acount.moneyLi14") }}</span>
+      </div>
+	  <div>
+        <span class="num">${{parseFloat((userinfos.totalFeePaySx+userinfos.totalFeePayWaitSx)*0.2).toFixed(2)}}</span>
+        <span class="title">{{ $t("acount.moneyLi15") }}</span>
+      </div>
+	</div>
+    <div class="content content1" v-else>
       <div>
         <span class="num">$0</span>
         <span class="title">{{ $t("acount.moneyLi4") }}</span>
@@ -206,14 +229,14 @@ export default {
           key: "waterNo",
           align: "center",
         },
-        {
-          title: this.$t("acount.table.name5"),
-          slot: "tranType",
+		{
+          title: this.$t("acount.table.name2"),
+          key: "taskNo",
           align: "center",
         },
         {
-          title: this.$t("acount.table.name2"),
-          key: "taskNo",
+          title: this.$t("acount.table.name5"),
+          slot: "tranType",
           align: "center",
         },
         {
@@ -455,7 +478,9 @@ export default {
       }
     }
   }
-
+  .textsm{
+    font-size: 12px;
+  }
   .content {
     margin-bottom: 30px;
     background-color: #ffffff;

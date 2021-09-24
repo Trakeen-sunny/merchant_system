@@ -72,22 +72,22 @@
         <span class="num"
           >${{
             userRole == 1
-              ? (userinfo.totalFeePay + userinfo.totalFeePayWait) || 0
-              : (userinfo.totalFee + userinfo.totalFeeWait) || 0
+              ? userinfo.totalFeePayWaitSx || 0
+              : userinfo.totalFeeWait || 0
           }}</span
         >
         <span class="title">{{userRole == 1?$t("orderCenter.form.name1"):$t("orderCenter.form.name5")}}</span>
       </div>
       <div>
         <span class="num"
-          >${{ userRole == 1 ? userinfo.totalFeePay || 0 : userinfo.totalFee || 0 }}</span
+          >${{ userRole == 1 ? userinfo.totalFeePaySx || 0 : userinfo.totalFee || 0 }}</span
         >
         <span class="title">{{userRole == 1?$t("orderCenter.form.name2"):$t("orderCenter.form.name4")}}</span>
       </div>
       <div>
         <span class="num">${{ userinfo.balance || 0 }}</span>
         <span class="title">{{$t("orderCenter.form.name3")}}</span>
-      </div>
+      </div>   
     </div>
 
     <!-- 搜索 -->
@@ -171,7 +171,7 @@
               class="page"
             />
           </TabPane>
-          <TabPane :label="$t('orderCenter.tab.name2')" name="authorized">
+         <!-- <TabPane :label="$t('orderCenter.tab.name2')" name="authorized">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
                 {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
@@ -195,7 +195,7 @@
               show-sizer
               class="page"
             />
-          </TabPane>
+          </TabPane>-->
           <TabPane :label="$t('orderCenter.tab.name3')" name="pending">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
@@ -222,7 +222,7 @@
             />
           </TabPane>
 
-          <TabPane :label="$t('orderCenter.tab.name4')" name="partially_paid">
+        <!--  <TabPane :label="$t('orderCenter.tab.name4')" name="partially_paid">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
                 {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
@@ -246,7 +246,7 @@
               show-sizer
               class="page"
             />
-          </TabPane>
+          </TabPane>-->
           <TabPane :label="$t('orderCenter.tab.name5')" name="refunded">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
@@ -272,7 +272,7 @@
               class="page"
             />
           </TabPane>
-          <TabPane :label="$t('orderCenter.tab.name6')" name="voided">
+         <!-- <TabPane :label="$t('orderCenter.tab.name6')" name="voided">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
                 {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
@@ -296,7 +296,7 @@
               show-sizer
               class="page"
             />
-          </TabPane>
+          </TabPane>-->
           <TabPane :label="$t('orderCenter.tab.name7')" name="partially_refunded">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
@@ -322,7 +322,7 @@
               class="page"
             />
           </TabPane>
-          <TabPane :label="$t('orderCenter.tab.name8')" name="unpaid">
+         <!-- <TabPane :label="$t('orderCenter.tab.name8')" name="unpaid">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
                 {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
@@ -346,7 +346,7 @@
               show-sizer
               class="page"
             />
-          </TabPane>
+          </TabPane>-->
           <!-- <div class="right" slot="extra">
             <span>最近3个月</span>
             <span>最近6个月</span>

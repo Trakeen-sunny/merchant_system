@@ -136,7 +136,7 @@ export default {
     };
   },
   created() {
-    console.log(JSON.parse(window.localStorage.getItem("userinfo")));
+    // console.log(JSON.parse(window.localStorage.getItem("userinfo")));
   },
   computed: {
     rotateIcon() {
