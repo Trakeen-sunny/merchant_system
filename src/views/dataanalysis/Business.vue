@@ -6,7 +6,7 @@
     </Row>
 
     <!--  时间 搜索 -->
-    <div class="search table" style="margin-bottom: 30px">
+    <!-- <div class="search table" style="margin-bottom: 30px">
       <ul>
         <li>日</li>
         <li>周</li>
@@ -42,18 +42,43 @@
           ></DatePicker>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- 图表 -->
     <div class="echart">
       <div class="left">
         <ul class="tabbar">
-          <li class="active">今日</li>
-          <li>本周</li>
-          <li>本月</li>
-          <li>本季</li>
-          <li>本半年</li>
-          <li>本年</li>
+          <li
+            :class="rateType == 'day' ? 'active' : ''"
+            @click="handleDate('day')"
+          >
+            今日
+          </li>
+          <li
+            :class="rateType == 'week' ? 'active' : ''"
+            @click="handleDate('week')"
+          >
+            本周
+          </li>
+          <li
+            :class="rateType == 'month' ? 'active' : ''"
+            @click="handleDate('month')"
+          >
+            本月
+          </li>
+          <li
+            :class="rateType == 'season' ? 'active' : ''"
+            @click="handleDate('season')"
+          >
+            本季
+          </li>
+          <!-- <li :class="rateType=='month'?'active':''" @click="handleDate('month')">本半年</li> -->
+          <li
+            :class="rateType == 'year' ? 'active' : ''"
+            @click="handleDate('year')"
+          >
+            本年
+          </li>
         </ul>
         <ul class="data">
           <li>
@@ -61,8 +86,10 @@
             <div class="content">
               <span></span>
               <div>
-                <span>322</span>
-                <span>同比昨天增长<i>+10%</i></span>
+                <span>{{ rateInfo.storeSumNum || 0 }}</span>
+                <span
+                  >同比昨天增长<i>+{{ rateInfo.storeSumRate || 0 }}%</i></span
+                >
               </div>
             </div>
           </li>
@@ -71,8 +98,10 @@
             <div class="content">
               <span></span>
               <div>
-                <span>322</span>
-                <span>同比昨天增长<i>+10%</i></span>
+                <span>{{ rateInfo.rechargeStoreSumNum || 0 }}</span>
+                <span
+                  >同比昨天增长<i>+{{ rateInfo.rechargeRate || 0 }}%</i></span
+                >
               </div>
             </div>
           </li>
@@ -81,8 +110,10 @@
             <div class="content">
               <span></span>
               <div>
-                <span>322</span>
-                <span>同比昨天增长<i>+10%</i></span>
+                <span>{{ rateInfo.activeStoreSumNum || 0 }}</span>
+                <span
+                  >同比昨天增长<i>+{{ rateInfo.activeRate || 0 }}%</i></span
+                >
               </div>
             </div>
           </li>
@@ -91,52 +122,96 @@
       <div class="right">
         <ul class="top">
           <li>
-            <i-circle :percent="dataInfo.storeSum" stroke-color="#eaeef2" style="width: 85%">
-              <h2>{{dataInfo.storeSum}}</h2>
+            <i-circle
+              :percent="dataInfo.storeSum"
+              stroke-color="#eaeef2"
+              style="width: 85%"
+            >
+              <h2>{{ dataInfo.storeSum }}</h2>
               <span style="font-size: 13px; color: #999">商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="(dataInfo.balanceWarn / dataInfo.storeSum) * 100" stroke-color="#e2ef3e" style="width: 85%">
-              <h2>{{(dataInfo.balanceWarn / dataInfo.storeSum) * 100}}%</h2>
+            <i-circle
+              :percent="dataInfo.balanceWarn"
+              stroke-color="#e2ef3e"
+              style="width: 85%"
+            >
+              <h2>{{ dataInfo.balanceWarn }}%</h2>
               <span style="font-size: 13px; color: #999">余额预警商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="(dataInfo.balanceLow / dataInfo.storeSum) * 100" stroke-color="#ec4ae5" style="width: 85%">
-              <h2>{{(dataInfo.balanceLow / dataInfo.storeSum) * 100}}%</h2>
+            <i-circle
+              :percent="dataInfo.balanceLow"
+              stroke-color="#ec4ae5"
+              style="width: 85%"
+            >
+              <h2>{{ dataInfo.balanceLow }}%</h2>
               <span style="font-size: 13px; color: #999">余额不足商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="(dataInfo.rechargeStoreSum / dataInfo.storeSum) * 100" stroke-color="#417cef" style="width: 85%">
-              <h2>{{(dataInfo.rechargeStoreSum / dataInfo.storeSum) * 100}}%</h2>
+            <i-circle
+              :percent="dataInfo.rechargeStoreSum"
+              stroke-color="#417cef"
+              style="width: 85%"
+            >
+              <h2>{{ dataInfo.rechargeStoreSum }}%</h2>
               <span style="font-size: 13px; color: #999">充值商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="(dataInfo.activeStoreSum / dataInfo.storeSum) * 100" stroke-color="#32a6ec" style="width: 85%">
-              <h2>{{(dataInfo.activeStoreSum / dataInfo.storeSum) * 100}}%</h2>
+            <i-circle
+              :percent="dataInfo.activeStoreSum"
+              stroke-color="#32a6ec"
+              style="width: 85%"
+            >
+              <h2>{{ dataInfo.activeStoreSum }}%</h2>
               <span style="font-size: 13px; color: #999">活跃商家总数</span>
             </i-circle>
           </li>
           <li>
-            <i-circle :percent="(dataInfo.incomeStoreSum / dataInfo.storeSum) * 100" stroke-color="#53e825" style="width: 85%">
-              <h2>{{(dataInfo.incomeStoreSum / dataInfo.storeSum) * 100}}%</h2>
+            <i-circle
+              :percent="dataInfo.incomeStoreSum"
+              stroke-color="#53e825"
+              style="width: 85%"
+            >
+              <h2>{{ dataInfo.incomeStoreSum }}%</h2>
               <span style="font-size: 13px">有收入商家总数</span>
             </i-circle>
           </li>
         </ul>
         <div class="bottom">
           <ul>
-            <li class="active">商家数</li>
-            <li>销售额</li>
-            <li>充值金额</li>
-            <li>佣金收入</li>
+            <li
+              :class="chartType == 0 ? 'active' : ''"
+              @click="handleChartType(0)"
+            >
+              商家数
+            </li>
+            <li
+              :class="chartType == 1 ? 'active' : ''"
+              @click="handleChartType(1)"
+            >
+              销售额
+            </li>
+            <li
+              :class="chartType == 2 ? 'active' : ''"
+              @click="handleChartType(2)"
+            >
+              充值金额
+            </li>
+            <li
+              :class="chartType == 3 ? 'active' : ''"
+              @click="handleChartType(3)"
+            >
+              佣金收入
+            </li>
           </ul>
           <div
             id="myChart"
-            :style="{ width: '100%', minHeight: '180px' }"
+            :style="{ width: '100%', minHeight: '190px' }"
           ></div>
         </div>
       </div>
@@ -152,7 +227,12 @@
   </div>
 </template>
 <script>
-import { statisticsTopTen, statisticsSum } from "../../api/dataanalysis";
+import {
+  statisticsTopTen,
+  statisticsSum,
+  statisticsChart,
+  statisticsRate,
+} from "../../api/dataanalysis";
 import { getTodayDate, getSevenDate } from "../../common/function";
 export default {
   name: "Business",
@@ -180,58 +260,71 @@ export default {
           title: "销售总额($)",
           key: "totalSales",
           align: "center",
+          sortable: true,
         },
         {
           title: "充值总额($)",
           key: "totalRecharge",
           align: "center",
+          sortable: true,
         },
         {
           title: "佣金支出总额($)",
           key: "totalCommissionExpenses",
           align: "center",
+          sortable: true,
         },
       ],
       data: [],
       timeIdx: 0, // 默认时间选中
       dateTime: [],
       myChart: null,
-      dataInfo:{}
+      dataInfo: {},
+      rateInfo: {},
+      rateType: "day",
+      chartType: 0,
     };
   },
   created() {
     this.initData();
     this.initData2();
+    this.initData3();
+    this.initData4();
   },
   mounted() {
     this.myChart = this.$echarts.init(document.getElementById("myChart"));
-    this.initEchart();
   },
   methods: {
     // 初始化组件
-    initEchart() {
+    initEchart(xdata, sdata, yname) {
       const option = {
+        tooltip: {
+          trigger: "axis",
+        },
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: xdata,
+          name: "日期",
         },
         yAxis: {
           type: "value",
+          name: yname,
         },
         grid: {
           left: "5%",
-          right: "2%",
-          bottom: "15%",
-          top: "3%",
+          right: "8%",
+          bottom: "10%",
+          top: "15%",
         },
         series: [
           {
-            data: [120, 200, 150, 80, 70, 110, 130],
+            data: sdata,
             type: "line",
             showBackground: true,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.2)",
             },
+            smooth: true,
           },
         ],
       };
@@ -267,7 +360,7 @@ export default {
     },
     // 获取商家排行榜 top10
     initData() {
-      let data = { type: 1 };
+      let data = { type: "total_order" };
       this.$httpRequest({
         api: statisticsTopTen,
         data,
@@ -279,15 +372,74 @@ export default {
     },
     // 获取统计商家总数
     initData2() {
-      let data = { type: 1 };
+      let data = {};
       this.$httpRequest({
         api: statisticsSum,
         data,
         success: (res) => {
           console.log(res);
-          this.dataInfo = res.result
+          this.dataInfo = res.result;
         },
       });
+    },
+    // 获取获取图标数据
+    initData3() {
+      let data = {};
+      if (this.chartType == 2) {
+        data = { type: "recharge" };
+      }
+      this.$httpRequest({
+        api: statisticsChart,
+        data,
+        success: (res) => {
+          console.log(res);
+          let arr = [];
+          let arr1 = [];
+          let yname = "";
+          for (const re of res.result) {
+            arr.push(re.date);
+            if (this.chartType == 0) {
+              arr1.push(re.storeNum);
+              yname = "商家数量(人)";
+            }
+            if (this.chartType == 1) {
+              arr1.push(re.cost);
+              yname = "销售额($)";
+            }
+            if (this.chartType == 2) {
+              arr1.push(re.recharge);
+              yname = "充值金额($)";
+            }
+            if (this.chartType == 3) {
+              arr1.push(re.totalFeePay);
+              yname = "佣金收入($)";
+            }
+          }
+          this.initEchart(arr, arr1, yname);
+        },
+      });
+    },
+    // 获取环比统计数据
+    initData4() {
+      let data = { type: this.rateType };
+      this.$httpRequest({
+        api: statisticsRate,
+        data,
+        success: (res) => {
+          console.log(res);
+          this.rateInfo = res.result;
+        },
+      });
+    },
+    // 切换时间
+    handleDate(ev) {
+      this.rateType = ev;
+      this.initData4();
+    },
+    // 图标类型切换
+    handleChartType(ev) {
+      this.chartType = ev;
+      this.initData3();
     },
   },
 };
@@ -424,7 +576,7 @@ export default {
     padding: 20px 0;
     background: #ffffff;
     display: flex;
-    min-height: 380px;
+    min-height: 430px;
     .left {
       width: 25%;
       margin-left: 10px;
@@ -437,7 +589,7 @@ export default {
         list-style: none;
         width: 90%;
         li {
-          width: calc(100% / 6);
+          width: calc(100% / 5);
           text-align: center;
           padding: 1px 0;
         }
@@ -497,7 +649,7 @@ export default {
       width: 75%;
       margin-left: 10px;
       .top {
-        height: 40%;
+        height: 35%;
         display: flex;
         width: 100%;
         justify-content: space-around;
@@ -511,7 +663,7 @@ export default {
         }
       }
       .bottom {
-        height: 60%;
+        height: 65%;
         ul {
           list-style: none;
           display: flex;
