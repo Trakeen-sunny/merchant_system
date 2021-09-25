@@ -2,7 +2,9 @@
   <div class="sale">
     <!-- 标题一 -->
     <Row class="title">
-      <Col span="12"><span>{{$t("orderCenter.asideName")}}</span></Col>
+      <Col span="12"
+        ><span>{{ $t("orderCenter.asideName") }}</span></Col
+      >
     </Row>
 
     <!--  时间 搜索 -->
@@ -76,37 +78,39 @@
               : userinfo.totalFeeWait || 0
           }}</span
         >
-        <span class="title">{{userRole == 1?$t("orderCenter.form.name1"):$t("orderCenter.form.name5")}}</span>
+        <span class="title">{{
+          userRole == 1
+            ? $t("orderCenter.form.name1")
+            : $t("orderCenter.form.name5")
+        }}</span>
       </div>
       <div>
         <span class="num"
-          >${{ userRole == 1 ? userinfo.totalFeePaySx || 0 : userinfo.totalFee || 0 }}</span
+          >${{
+            userRole == 1 ? userinfo.totalFeePaySx || 0 : userinfo.totalFee || 0
+          }}</span
         >
-        <span class="title">{{userRole == 1?$t("orderCenter.form.name2"):$t("orderCenter.form.name4")}}</span>
+        <span class="title">{{
+          userRole == 1
+            ? $t("orderCenter.form.name2")
+            : $t("orderCenter.form.name4")
+        }}</span>
       </div>
       <div>
         <span class="num">${{ userinfo.balance || 0 }}</span>
-        <span class="title">{{$t("orderCenter.form.name3")}}</span>
-      </div>   
+        <span class="title">{{ $t("orderCenter.form.name3") }}</span>
+      </div>
     </div>
 
     <!-- 搜索 -->
     <div class="search">
       <div>
-        <span>{{$t("orderCenter.form2.label1")}}</span>
-        <Input
-          v-model="form.shopfiyNumber"
-          size="large"
-          class="width"
-        />
+        <span>{{ $t("orderCenter.form2.label1") }}</span>
+        <Input v-model="form.shopfiyNumber" size="large" class="width" />
       </div>
       <div>
-        <span>{{$t("orderCenter.form2.label2")}}</span>
-        <Input
-          v-model="form.customerCountry"
-          size="large"
-          class="width"
-        />
+        <span>{{ $t("orderCenter.form2.label2") }}</span>
+        <Input v-model="form.customerCountry" size="large" class="width" />
       </div>
       <!-- <div>
         <span>访问时间</span>
@@ -133,9 +137,14 @@
           @click="handleReset"
           >{{ $t("common.reset") }}</Button
         >
-        <Button type="info" class="button" size="large" style="margin-left:20px;" @click="handleSearch">{{
-          $t("common.search")
-        }}</Button>
+        <Button
+          type="info"
+          class="button"
+          size="large"
+          style="margin-left: 20px"
+          @click="handleSearch"
+          >{{ $t("common.search") }}</Button
+        >
         <Button type="info" ghost class="button" @click="handleExport">{{
           $t("common.exportPage")
         }}</Button>
@@ -145,20 +154,48 @@
     <!-- 表格 -->
     <div class="table">
       <div class="title">
-        <Tabs value="paid" @on-click="handleTabs">
-          <TabPane :label="$t('orderCenter.tab.name1')" name="paid">
+        <Tabs value="all" @on-click="handleTabs">
+          <TabPane :label="$t('orderCenter.tab.name0')" name="all">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
-                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
-                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
-                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
-                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
-                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
                 {{
-                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                  row.shopfiyStatus == "authorized"
+                    ? $t("orderCenter.tab.name2")
+                    : ""
                 }}
-                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
+                {{
+                  row.shopfiyStatus == "pending"
+                    ? $t("orderCenter.tab.name3")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_paid"
+                    ? $t("orderCenter.tab.name4")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "refunded"
+                    ? $t("orderCenter.tab.name5")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "voided"
+                    ? $t("orderCenter.tab.name6")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_refunded"
+                    ? $t("orderCenter.tab.name7")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "unpaid"
+                    ? $t("orderCenter.tab.name8")
+                    : ""
+                }}
               </template>
             </Table>
             <Page
@@ -171,7 +208,60 @@
               class="page"
             />
           </TabPane>
-         <!-- <TabPane :label="$t('orderCenter.tab.name2')" name="authorized">
+          <TabPane :label="$t('orderCenter.tab.name1')" name="paid">
+            <Table :columns="columns" :data="data">
+              <template slot-scope="{ row }" slot="confirmed">
+                {{
+                  row.shopfiyStatus == "authorized"
+                    ? $t("orderCenter.tab.name2")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "pending"
+                    ? $t("orderCenter.tab.name3")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_paid"
+                    ? $t("orderCenter.tab.name4")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "refunded"
+                    ? $t("orderCenter.tab.name5")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "voided"
+                    ? $t("orderCenter.tab.name6")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_refunded"
+                    ? $t("orderCenter.tab.name7")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "unpaid"
+                    ? $t("orderCenter.tab.name8")
+                    : ""
+                }}
+              </template>
+            </Table>
+            <Page
+              :total="total"
+              :current="pageNo"
+              :page-size="pageSize"
+              @on-change="changePage"
+              @on-page-size-change="changeSize"
+              show-sizer
+              class="page"
+            />
+          </TabPane>
+          <!-- <TabPane :label="$t('orderCenter.tab.name2')" name="authorized">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
                 {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
@@ -199,16 +289,44 @@
           <TabPane :label="$t('orderCenter.tab.name3')" name="pending">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
-                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
-                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
-                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
-                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
-                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
                 {{
-                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                  row.shopfiyStatus == "authorized"
+                    ? $t("orderCenter.tab.name2")
+                    : ""
                 }}
-                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
+                {{
+                  row.shopfiyStatus == "pending"
+                    ? $t("orderCenter.tab.name3")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_paid"
+                    ? $t("orderCenter.tab.name4")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "refunded"
+                    ? $t("orderCenter.tab.name5")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "voided"
+                    ? $t("orderCenter.tab.name6")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_refunded"
+                    ? $t("orderCenter.tab.name7")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "unpaid"
+                    ? $t("orderCenter.tab.name8")
+                    : ""
+                }}
               </template>
             </Table>
             <Page
@@ -222,7 +340,7 @@
             />
           </TabPane>
 
-        <!--  <TabPane :label="$t('orderCenter.tab.name4')" name="partially_paid">
+          <!--  <TabPane :label="$t('orderCenter.tab.name4')" name="partially_paid">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
                 {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
@@ -250,16 +368,44 @@
           <TabPane :label="$t('orderCenter.tab.name5')" name="refunded">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
-               {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
-                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
-                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
-                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
-                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
-                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
                 {{
-                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                  row.shopfiyStatus == "authorized"
+                    ? $t("orderCenter.tab.name2")
+                    : ""
                 }}
-                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
+                {{
+                  row.shopfiyStatus == "pending"
+                    ? $t("orderCenter.tab.name3")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_paid"
+                    ? $t("orderCenter.tab.name4")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "refunded"
+                    ? $t("orderCenter.tab.name5")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "voided"
+                    ? $t("orderCenter.tab.name6")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_refunded"
+                    ? $t("orderCenter.tab.name7")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "unpaid"
+                    ? $t("orderCenter.tab.name8")
+                    : ""
+                }}
               </template>
             </Table>
             <Page
@@ -272,7 +418,7 @@
               class="page"
             />
           </TabPane>
-         <!-- <TabPane :label="$t('orderCenter.tab.name6')" name="voided">
+          <!-- <TabPane :label="$t('orderCenter.tab.name6')" name="voided">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
                 {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
@@ -297,19 +443,50 @@
               class="page"
             />
           </TabPane>-->
-          <TabPane :label="$t('orderCenter.tab.name7')" name="partially_refunded">
+          <TabPane
+            :label="$t('orderCenter.tab.name7')"
+            name="partially_refunded"
+          >
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
-                {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
-                {{ row.shopfiyStatus == "pending" ?  $t("orderCenter.tab.name3")  : "" }}
-                {{ row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : "" }}
-                {{ row.shopfiyStatus == "partially_paid" ? $t("orderCenter.tab.name4") : "" }}
-                {{ row.shopfiyStatus == "refunded" ? $t("orderCenter.tab.name5") : "" }}
-                {{ row.shopfiyStatus == "voided" ? $t("orderCenter.tab.name6") : "" }}
                 {{
-                  row.shopfiyStatus == "partially_refunded" ? $t("orderCenter.tab.name7") : ""
+                  row.shopfiyStatus == "authorized"
+                    ? $t("orderCenter.tab.name2")
+                    : ""
                 }}
-                {{ row.shopfiyStatus == "unpaid" ? $t("orderCenter.tab.name8") : "" }}
+                {{
+                  row.shopfiyStatus == "pending"
+                    ? $t("orderCenter.tab.name3")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "paid" ? $t("orderCenter.tab.name1") : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_paid"
+                    ? $t("orderCenter.tab.name4")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "refunded"
+                    ? $t("orderCenter.tab.name5")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "voided"
+                    ? $t("orderCenter.tab.name6")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "partially_refunded"
+                    ? $t("orderCenter.tab.name7")
+                    : ""
+                }}
+                {{
+                  row.shopfiyStatus == "unpaid"
+                    ? $t("orderCenter.tab.name8")
+                    : ""
+                }}
               </template>
             </Table>
             <Page
@@ -322,7 +499,7 @@
               class="page"
             />
           </TabPane>
-         <!-- <TabPane :label="$t('orderCenter.tab.name8')" name="unpaid">
+          <!-- <TabPane :label="$t('orderCenter.tab.name8')" name="unpaid">
             <Table :columns="columns" :data="data">
               <template slot-scope="{ row }" slot="confirmed">
                 {{ row.shopfiyStatus == "authorized" ? $t("orderCenter.tab.name2") : "" }}
@@ -460,9 +637,7 @@ export default {
       pageSize: 10, //条数
       total: 0, //总条数
       userinfo: {},
-      form: {
-        shopfiyStatus: "paid",
-      },
+      form: {},
       initColumn: [
         {
           title: this.$t("orderCenter.table.name1"),
@@ -549,17 +724,19 @@ export default {
           this.total = res.result.total;
         },
       });
-	 if(this.userRole==0||this.userRole==2){
-	    this.columns = this.columns.filter(col => col.key !== 'productName' );
-	    this.columns = this.columns.filter(col => col.key !== 'productSuk' );
-	    this.columns = this.columns.filter(col => col.key !== 'productNumber' );
-	    this.columns = this.columns.filter(col => col.key !== 'productPrice' );
-	    this.columns = this.columns.filter(col => col.key !== 'orderPrice' );
-	    this.columns = this.columns.filter(col => col.key !== 'orderDiscount' );
-	    this.columns = this.columns.filter(col => col.key !== 'commisson' );
-		
-	 };
-	 
+      if (this.userRole == 0 || this.userRole == 2) {
+        this.columns = this.columns.filter((col) => col.key !== "productName");
+        this.columns = this.columns.filter((col) => col.key !== "productSuk");
+        this.columns = this.columns.filter(
+          (col) => col.key !== "productNumber"
+        );
+        this.columns = this.columns.filter((col) => col.key !== "productPrice");
+        this.columns = this.columns.filter((col) => col.key !== "orderPrice");
+        this.columns = this.columns.filter(
+          (col) => col.key !== "orderDiscount"
+        );
+        this.columns = this.columns.filter((col) => col.key !== "commisson");
+      }
     },
     // 获取统计数据
     getUserToken() {
@@ -597,11 +774,15 @@ export default {
       this.pageSiz = 1;
       this.total = 0;
       this.data = [];
-      this.form.shopfiyStatus = ev;
+      if (ev == "all") {
+        delete this.form.shopfiyStatus;
+      } else {
+        this.form.shopfiyStatus = ev;
+      }
       this.initData();
       console.log(ev);
     },
-     // 导出报表
+    // 导出报表
     handleExport() {
       if (this.data.length == 0) {
         this.$Message.success("暂无数据导出");
@@ -636,10 +817,10 @@ export default {
                 tranType = this.$t("orderCenter.tab.name6");
                 break;
               case "partially_refunded":
-               tranType = this.$t("orderCenter.tab.name7");
+                tranType = this.$t("orderCenter.tab.name7");
                 break;
               case "unpaid":
-               tranType = this.$t("orderCenter.tab.name8");
+                tranType = this.$t("orderCenter.tab.name8");
                 break;
               default:
                 break;
