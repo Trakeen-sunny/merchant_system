@@ -221,6 +221,21 @@ const routes = [{
     name: "OtherRegister",
     component: () => import("@/views/otherlogin/register.vue"),
   },
+  {
+    path: "/fpassword",
+    name: "OtherFpassword",
+    component: () => import("@/views/otherlogin/Fpassword.vue"),
+  },
+  {
+    path: "/epassword",
+    name: "OtherEpassword",
+    component: () => import("@/views/otherlogin/Epassword.vue"),
+  },
+  {
+    path: "/success",
+    name: "OtherSuccess",
+    component: () => import("@/views/otherlogin/success.vue"),
+  },
 ];
 
 const router = new VueRouter({

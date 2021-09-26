@@ -3,8 +3,9 @@
     <div class="box">
       <div class="form">
         <div class="logo">
-          <a href="http://www.shareweshop.com/index.html"> <img src="../../assets/logo2.png"/></a>
-           
+          <a href="http://www.cozmox.com/index.html">
+            <img src="../../assets/logo2.png"
+          /></a>
         </div>
         <Form
           ref="formInline"
@@ -29,27 +30,55 @@
           </FormItem>
           <FormItem style="text-align: center">
             <Button
-              style="width: 100%; height: 40px;background:#54ff9f;border:none"
+              style="
+                width: 100%;
+                height: 40px;
+                background: #54ff9f;
+                border: none;
+              "
               type="info"
               @click="handleSubmit('formInline')"
               >LOG IN</Button
             >
           </FormItem>
           <FormItem>
-            <div class="tip">Forgot password?</div>
+            <div
+              class="tip"
+              style="text-decoration: underline"
+              @click="handleForget"
+            >
+              Forgot password?
+            </div>
+            <div
+              class="tip"
+              style="text-decoration: underline"
+              @click="handleEdit"
+            >
+              Edit password?
+            </div>
             <div class="tip" @click="handleGoTO">
               Don't have an account? <span>Sign up here</span>.
             </div>
           </FormItem>
           <FormItem>
-              <br/>
-              <br/>
-              <br/>
-            <div clss="policy" style="text-align:center;font-size:13px">
-               © 2021 COZMOX LLC &nbsp;&nbsp;
-              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Privacy policy</a>
+            <br />
+            <br />
+            <br />
+            <div clss="policy" style="text-align: center; font-size: 13px">
+              © 2021 COZMOX LLC &nbsp;&nbsp;
+              <a
+                type="info"
+                style="color: #999; border: none; text-decoration: underline"
+                ghost
+                >Privacy policy</a
+              >
               &nbsp;
-              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Terms of use</a>
+              <a
+                type="info"
+                style="color: #999; border: none; text-decoration: underline"
+                ghost
+                >Terms of use</a
+              >
             </div>
           </FormItem>
         </Form>
@@ -75,7 +104,11 @@ export default {
             message: "please enter the email",
             trigger: "blur",
           },
-          { type: "email", message: "please enter the correct password", trigger: "blur" },
+          {
+            type: "email",
+            message: "please enter the correct password",
+            trigger: "blur",
+          },
         ],
         password: [
           {
@@ -133,9 +166,15 @@ export default {
         },
       });
     },
-    handleGoTO(){
-      this.$router.push({name:'OtherRegister'})
-    }
+    handleGoTO() {
+      this.$router.push({ name: "OtherRegister" });
+    },
+    handleForget() {
+      this.$router.push({ name: "OtherFpassword" });
+    },
+    handleEdit() {
+      this.$router.push({ name: "OtherEpassword" });
+    },
   },
 };
 </script>
@@ -176,7 +215,7 @@ export default {
     .policy {
       display: flex;
       justify-content: space-around;
-      border:none;
+      border: none;
       text-align: center;
     }
   }

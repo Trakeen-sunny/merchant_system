@@ -69,20 +69,16 @@
 
         <template slot-scope="{ row, index }" slot="action">
           <Button
-            type="info"
+            type="text"
             @click="setStatus(row, index)"
             v-if="row.promote == 0"
             >开启</Button
           >
-          <Button type="info" @click="setStatus(row, index)" v-else
+          <Button type="text" @click="setStatus(row, index)" v-else
             >结束</Button
           >
-          <Button type="info" @click="setMoney(row, index)">设置佣金</Button>
-          <Button
-            type="info"
-            @click="setEdit(row, index)"
-            >编辑</Button
-          >
+          <Button type="text" icon="ios-create" @click="setMoney(row, index)">设置佣金</Button>
+          <Button type="text" icon="ios-create"  @click="setEdit(row, index)">编辑</Button>
         </template>
       </Table>
       <Page
@@ -588,6 +584,9 @@ export default {
       margin-top: 30px;
       padding-bottom: 30px;
     }
+  }
+  /deep/ .ivu-btn-text{
+    color: #45b1b1;
   }
 }
 </style>
