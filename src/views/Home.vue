@@ -9,7 +9,6 @@
         :collapsed-width="78"
         v-model="isCollapsed"
       >
-        <!-- <div class="logo">{{getUserInfo.websiteName}}</div> -->
         <div class="logo">
           <img style="width: 95%; height: 27%" src="../assets/logo.png" />
         </div>
@@ -28,7 +27,7 @@
             <Tooltip
               :content="$t('common.kefu')"
               class="tooltip"
-              v-if="getUserInfo.userRole = 0"
+              v-if="getUserInfo.userRole == 0"
             >
               <Icon
                 type="logo-whatsapp"
@@ -40,7 +39,7 @@
             <Tooltip
               :content="$t('common.helpCenter')"
               class="tooltip"
-              v-if="getUserInfo.userRole = 0"
+              v-if="getUserInfo.userRole == 0"
             >
               <Icon
                 type="md-help-circle"
@@ -52,7 +51,7 @@
             <Tooltip
               :content="$t('common.feedback')"
               class="tooltip"
-              v-if="getUserInfo.userRole = 0"
+              v-if="getUserInfo.userRole == 0"
             >
               <Icon
                 type="md-paper"
@@ -64,7 +63,7 @@
             <Tooltip
               :content="$t('common.notice')"
               class="tooltip"
-              v-if="getUserInfo.userRole = 0"
+              v-if="getUserInfo.userRole == 0"
             >
               <Icon
                 type="md-notifications-outline"
@@ -135,9 +134,7 @@ export default {
       isCollapsed: false,
     };
   },
-  created() {
-    // console.log(JSON.parse(window.localStorage.getItem("userinfo")));
-  },
+  created() {},
   computed: {
     rotateIcon() {
       return ["menu-icon", this.isCollapsed ? "rotate-icon" : ""];
@@ -180,7 +177,12 @@ export default {
         success: () => {
           window.localStorage.removeItem("userinfo");
           window.localStorage.removeItem("token");
-          this.$router.replace({ name: "Login" });
+          if (this.getUserInfo.userRole == 2) {
+             this.$router.replace({ name: "OtherLogin" });
+          } else {
+            this.$router.replace({ name: "Login" });
+          }
+
           this.$Message.success(this.$t("common.loginOut"));
         },
       });
@@ -215,7 +217,7 @@ export default {
     .tooltip {
       margin-right: 20px;
     }
-    /deep/ .ivu-dropdown-rel{
+    /deep/ .ivu-dropdown-rel {
       height: 100%;
       display: flex;
       align-items: center;
