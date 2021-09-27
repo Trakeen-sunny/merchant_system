@@ -1,12 +1,12 @@
 <template>
   <div class="invitation">
     <div class="logo">
-     <a href="http://www.shareweshop.com/index.html"> <img src="../../assets/logo2.png" /></a>
+      <a href="http://www.shareweshop.com/index.html">
+        <img src="../../assets/logo2.png"
+      /></a>
     </div>
     <div class="title">
-      <span
-        style="font-size:13px">Edit password!</span
-      >
+      <span style="font-size: 13px">Edit password!</span>
     </div>
     <div class="form">
       <Form
@@ -20,12 +20,12 @@
           <Input v-model="formInline.email" placeholder=""></Input>
         </FormItem>
         <FormItem label="Verification code" prop="code">
-            <Input v-model="formInline.code" type="text">
-              <Button slot="append" @click="hanldeGetCode">{{
-                timerCount > 1 ? timerCount+'s' : "Get verification code"
-              }}</Button>
-            </Input>
-          </FormItem>
+          <Input v-model="formInline.code" type="text">
+            <Button slot="append" @click="hanldeGetCode">{{
+              timerCount > 1 ? timerCount + "s" : "Get verification code"
+            }}</Button>
+          </Input>
+        </FormItem>
         <FormItem label="Password" prop="password">
           <Input v-model="formInline.password" placeholder=""></Input>
         </FormItem>
@@ -34,28 +34,41 @@
         </FormItem>
         <FormItem style="text-align: center">
           <Button
-            style="width: 100%; height: 40px;background:#54ff9f;border:none"
+            style="width: 100%; height: 40px; background: #54ff9f; border: none"
             type="info"
             @click="handleSubmit('formInline')"
             >SUBMIT</Button
           >
         </FormItem>
         <FormItem>
-            <br/>
-            <div clss="policy" style="text-align:center;font-size:13px">
-               © 2021 COZMOX LLC &nbsp;&nbsp;
-              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Privacy policy</a>
-              &nbsp;
-              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Terms of use</a>
-            </div>
-         </FormItem>
+          <br />
+          <div clss="policy" style="text-align: center; font-size: 13px">
+            © 2021 COZMOX LLC &nbsp;&nbsp;
+            <a
+              type="info"
+              style="color: #999; border: none; text-decoration: underline"
+              ghost
+              >Privacy policy</a
+            >
+            &nbsp;
+            <a
+              type="info"
+              style="color: #999; border: none; text-decoration: underline"
+              ghost
+              >Terms of use</a
+            >
+          </div>
+        </FormItem>
       </Form>
     </div>
   </div>
 </template>
 
 <script>
-import { entryInfo_sendCaptcha, updatePasswordBySendEmail } from "../../api/invitation";
+import {
+  entryInfo_sendCaptcha,
+  updatePasswordBySendEmail,
+} from "../../api/invitation";
 export default {
   name: "OtherRegister",
   data() {
@@ -63,20 +76,32 @@ export default {
       formInline: {
         email: "",
         code: "",
-        password:"",
-        passwordRe:""
+        password: "",
+        passwordRe: "",
       },
       ConfirmPassword: "",
       ruleInline: {
         email: [
-          { required: true, message: "please enter the email", trigger: "blur" },
-          { type: "email", message: "please enter the correct password", trigger: "blur" },
+          {
+            required: true,
+            message: "please enter the email",
+            trigger: "blur",
+          },
+          {
+            type: "email",
+            message: "please enter the correct password",
+            trigger: "blur",
+          },
         ],
         code: [
-          { required: true, message: "please enter the code", trigger: "blur" }
+          { required: true, message: "please enter the code", trigger: "blur" },
         ],
         password: [
-          { required: true, message: "please enter the password", trigger: "blur" },
+          {
+            required: true,
+            message: "please enter the password",
+            trigger: "blur",
+          },
           {
             type: "string",
             min: 6,
@@ -85,7 +110,11 @@ export default {
           },
         ],
         passwordRe: [
-          { required: true, message: "please enter the Confirm Password", trigger: "blur" },
+          {
+            required: true,
+            message: "please enter the Confirm Password",
+            trigger: "blur",
+          },
           {
             type: "string",
             min: 6,
@@ -104,7 +133,6 @@ export default {
   methods: {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
-        console.log(valid);
         if (valid) {
           if (this.formInline.password !== this.formInline.passwordRe) {
             this.$Message.error("fail to register!");
@@ -113,9 +141,13 @@ export default {
           this.$httpRequest({
             api: updatePasswordBySendEmail,
             data: this.formInline,
-            success: () => {
-              this.$router.replace("/success");
-              this.$Message.success("Edit password successfully");
+            success: (res) => {
+              if (res.result) {
+                this.$router.replace("/success");
+                this.$Message.success("Edit password successfully");
+              } else {
+                this.$Message.error(res.message);
+              }
             },
           });
         } else {
