@@ -52,7 +52,7 @@
             <div
               class="tip"
               style="text-decoration: underline"
-              @click="handleEdit"
+              @click="handleForget"
             >
               Edit password?
             </div>
@@ -171,9 +171,6 @@ export default {
     },
     handleForget() {
       this.$router.push({ name: "OtherFpassword" });
-    },
-    handleEdit() {
-      this.$router.push({ name: "OtherEpassword" });
     },
   },
 };

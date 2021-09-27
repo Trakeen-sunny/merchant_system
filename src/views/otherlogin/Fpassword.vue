@@ -1,47 +1,99 @@
 <template>
   <div class="invitation">
-    <div class="box">
-      <div class="form">
-        <h2>忘记密码</h2>
-        <Form :model="emailForm" :label-width="90">
-          <FormItem label="邮箱账号">
-            <Input v-model="emailForm.email"> </Input>
-          </FormItem>
-          <FormItem label="验证码">
-            <Input v-model="emailForm.code" type="text">
+    <div class="logo">
+     <a href="http://www.shareweshop.com/index.html"> <img src="../../assets/logo2.png" /></a>
+    </div>
+    <div class="title">
+      <span
+        style="font-size:13px">Edit password!</span
+      >
+    </div>
+    <div class="form">
+      <Form
+        ref="formInline"
+        :model="formInline"
+        :rules="ruleInline"
+        label-position="top"
+        class="form_box"
+      >
+        <FormItem label="Email" prop="email">
+          <Input v-model="formInline.email" placeholder=""></Input>
+        </FormItem>
+        <FormItem label="Verification code" prop="code">
+            <Input v-model="formInline.code" type="text">
               <Button slot="append" @click="hanldeGetCode">{{
-                timerCount > 1 ? timerCount + "s" : "发送验证码"
+                timerCount > 1 ? timerCount+'s' : "Get verification code"
               }}</Button>
             </Input>
           </FormItem>
-          <FormItem label="新密码">
-            <Input v-model="emailForm.email"> </Input>
-          </FormItem>
-          <FormItem label="再次输入密码">
-            <Input v-model="emailForm.email"> </Input>
-          </FormItem>
-        </Form>
-        <div style="text-align: center">
-          <Button type="info" style="width: 100%" @click="handleSubmit"
-            >重置密码</Button
+        <FormItem label="Password" prop="password">
+          <Input v-model="formInline.password" placeholder=""></Input>
+        </FormItem>
+        <FormItem label="Confirm Password" prop="passwordRe">
+          <Input v-model="formInline.passwordRe" placeholder=""></Input>
+        </FormItem>
+        <FormItem style="text-align: center">
+          <Button
+            style="width: 100%; height: 40px;background:#54ff9f;border:none"
+            type="info"
+            @click="handleSubmit('formInline')"
+            >SUBMIT</Button
           >
-        </div>
-      </div>
+        </FormItem>
+        <FormItem>
+            <br/>
+            <div clss="policy" style="text-align:center;font-size:13px">
+               © 2021 COZMOX LLC &nbsp;&nbsp;
+              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Privacy policy</a>
+              &nbsp;
+              <a type="info" style="color:#999;border:none;text-decoration: underline;" ghost>Terms of use</a>
+            </div>
+         </FormItem>
+      </Form>
     </div>
   </div>
 </template>
 
 <script>
-import { collect_add, entryInfo_sendCaptcha } from "../../api/invitation";
+import { entryInfo_sendCaptcha, updatePasswordBySendEmail } from "../../api/invitation";
 export default {
-  name: "OtherFpassword",
+  name: "OtherRegister",
   data() {
     return {
-      emailForm: {
+      formInline: {
         email: "",
         code: "",
+        password:"",
+        passwordRe:""
       },
-      email: "",
+      ConfirmPassword: "",
+      ruleInline: {
+        email: [
+          { required: true, message: "please enter the email", trigger: "blur" },
+          { type: "email", message: "please enter the correct password", trigger: "blur" },
+        ],
+        code: [
+          { required: true, message: "please enter the code", trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "please enter the password", trigger: "blur" },
+          {
+            type: "string",
+            min: 6,
+            message: "The password length shall not be less than 6 digits",
+            trigger: "blur",
+          },
+        ],
+        passwordRe: [
+          { required: true, message: "please enter the Confirm Password", trigger: "blur" },
+          {
+            type: "string",
+            min: 6,
+            message: "The password length shall not be less than 6 digits",
+            trigger: "blur",
+          },
+        ],
+      },
       timerCount: "",
     };
   },
@@ -50,28 +102,25 @@ export default {
   mounted() {},
   destroyed() {},
   methods: {
-    handleSubmit() {
-      if (!this.emailForm.email) {
-        this.$Message.info("Please enter your email");
-        return;
-      }
-      if (!this.emailForm.code) {
-        this.$Message.info("Please enter your verification code");
-        return;
-      }
-
-      this.$httpRequest({
-        api: collect_add,
-        data: this.form,
-        success: (res) => {
-          console.log(res);
-          if (res.code == 0) {
-            this.$Message.success("Completed");
-            this.$router.replace({ path: "/thanks" });
-          } else {
-            this.$Message.info(res.message);
+    handleSubmit(name) {
+      this.$refs[name].validate((valid) => {
+        console.log(valid);
+        if (valid) {
+          if (this.formInline.password !== this.formInline.passwordRe) {
+            this.$Message.error("fail to register!");
+            return;
           }
-        },
+          this.$httpRequest({
+            api: updatePasswordBySendEmail,
+            data: this.formInline,
+            success: () => {
+              this.$router.replace("/success");
+              this.$Message.success("Edit password successfully");
+            },
+          });
+        } else {
+          this.$Message.error("fail to edit!");
+        }
       });
     },
     // 获取验证码
@@ -79,7 +128,7 @@ export default {
       if (this.timerCount != "") {
         return;
       }
-      if (!this.emailForm.email) {
+      if (!this.formInline.email) {
         this.$Message.info("Please enter your email");
         return;
       }
@@ -91,7 +140,7 @@ export default {
       this.$httpRequest({
         api: entryInfo_sendCaptcha,
         data: {
-          mail: this.emailForm.email,
+          mail: this.formInline.email,
         },
         success: (res) => {
           console.log(res);
@@ -113,34 +162,44 @@ export default {
 </script>
 <style lang="less" scoped>
 .invitation {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .box {
-    width: 40%;
+  .logo {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    border-bottom: 1px solid #e0e0e0;
+    img {
+      display: inline-block;
+      width: 10%;
+    }
+  }
+  .title {
+    color: #666;
+    font-size: 19px;
+    text-align: center;
+    font-weight: bold;
+    span {
+      width: 37%;
+      display: inline-block;
+    }
   }
   .form {
-    flex: 1;
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    width: 80%;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    /deep/ .ivu-form-item-label {
-      word-break: keep-all;
-      word-wrap: break-word;
-      text-align: left;
-    }
-    .label {
-      width: 60px;
+    margin-top: 30px;
+    .form_box {
+      border: 1px solid #e0e0e0;
+      width: 30%;
+      padding: 30px 35px 10px;
+      .tip {
+        color: #999;
+        font-size: 14px;
+        text-align: left;
+      }
     }
   }
 }

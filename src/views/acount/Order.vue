@@ -587,6 +587,11 @@ export default {
           align: "center",
         },
         {
+          title: this.$t("orderCenter.table.name13"),
+          slot: "stroerEamil",
+          align: "center",
+        },
+        {
           title: this.$t("orderCenter.table.name4"),
           key: "productSuk",
           align: "center",
@@ -725,7 +730,7 @@ export default {
         },
       });
       if (this.userRole == 0 || this.userRole == 2) {
-        this.columns = this.columns.filter((col) => col.key !== "productName");
+        this.columns = this.columns.filter((col) => col.key !== "stroerEamil");
         this.columns = this.columns.filter((col) => col.key !== "productSuk");
         this.columns = this.columns.filter(
           (col) => col.key !== "productNumber"

@@ -105,6 +105,26 @@
         <span class="title">{{ $t("acount.moneyLi15") }}</span>
       </div>
 	</div>
+    <div class="content content1" v-else-if="userRole==1">
+      <div>
+        <span class="num">$0</span>
+        <span class="title">{{ $t("acount.moneyLi16") }}</span>
+      </div>
+      <div>
+        <span class="num">${{userinfo.balance || 0}}</span>
+        <span class="title"
+          ><span>{{ $t("acount.moneyLi5") }}</span>
+          <!-- <Poptip
+            word-wrap
+            width="200"
+            placement="bottom"
+            :content="$t('acount.tip')"
+          >
+            <Icon type="md-list-box" color="#999" />
+          </Poptip> -->
+        </span>
+      </div>
+    </div>
     <div class="content content1" v-else>
       <div>
         <span class="num">$0</span>
@@ -135,6 +155,10 @@
       <div>
         <span>{{ $t("acount.table.name2") }}</span>
         <Input v-model="form.taskNo" size="large"  class="width" />
+      </div>
+      <div v-if="userRole==0">
+        <span>{{ $t("acount.table.name7") }}</span>
+        <Input v-model="form.stroerEamil" size="large"  class="width" />
       </div>
       <div>
         <span>{{ $t("acount.searchName3") }}</span>
@@ -229,6 +253,11 @@ export default {
           key: "waterNo",
           align: "center",
         },
+    {
+          title: this.$t("acount.table.name7"),
+          key: "stroerEamil",
+          align: "center",
+        },
 		{
           title: this.$t("acount.table.name2"),
           key: "taskNo",
@@ -265,6 +294,11 @@ export default {
       initColumn: [
         {
           title: this.$t("acount.table.name1"),
+          dataIndex: "waterNo",
+          key: "waterNo",
+        },
+        {
+          title: this.$t("acount.table.name7"),
           dataIndex: "waterNo",
           key: "waterNo",
         },

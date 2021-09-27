@@ -21,3 +21,9 @@ export const entryInfo_sendCaptcha = {
     path: '/web/infoCollect/sendCaptcha',
     method: 'get'
 }
+
+// 获取验证码
+export const updatePasswordBySendEmail = {
+    path: '/web/users/updatePasswordBySendEmail',
+    method: 'post'
+}

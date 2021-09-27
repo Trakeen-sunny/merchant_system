@@ -227,11 +227,6 @@ const routes = [{
     component: () => import("@/views/otherlogin/Fpassword.vue"),
   },
   {
-    path: "/epassword",
-    name: "OtherEpassword",
-    component: () => import("@/views/otherlogin/Epassword.vue"),
-  },
-  {
     path: "/success",
     name: "OtherSuccess",
     component: () => import("@/views/otherlogin/success.vue"),

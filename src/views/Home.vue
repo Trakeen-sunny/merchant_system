@@ -28,7 +28,7 @@
             <Tooltip
               :content="$t('common.kefu')"
               class="tooltip"
-              v-if="getUserInfo.userRole != 2"
+              v-if="getUserInfo.userRole = 0"
             >
               <Icon
                 type="logo-whatsapp"
@@ -40,7 +40,7 @@
             <Tooltip
               :content="$t('common.helpCenter')"
               class="tooltip"
-              v-if="getUserInfo.userRole != 2"
+              v-if="getUserInfo.userRole = 0"
             >
               <Icon
                 type="md-help-circle"
@@ -52,7 +52,7 @@
             <Tooltip
               :content="$t('common.feedback')"
               class="tooltip"
-              v-if="getUserInfo.userRole != 2"
+              v-if="getUserInfo.userRole = 0"
             >
               <Icon
                 type="md-paper"
@@ -64,7 +64,7 @@
             <Tooltip
               :content="$t('common.notice')"
               class="tooltip"
-              v-if="getUserInfo.userRole != 2"
+              v-if="getUserInfo.userRole = 0"
             >
               <Icon
                 type="md-notifications-outline"

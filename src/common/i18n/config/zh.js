@@ -56,7 +56,8 @@ export default {
 		moneyLi12:"推广者总余额", 
 		moneyLi13:"平台服务费(待结算)",
 		moneyLi14:"平台服务费(已结算)",
-		moneyLi15:"平台服务总费用",		
+		moneyLi15:"平台服务总费用",	
+        moneyLi16: "充值总金额",	
         searchName1: "订单编号",
         searchName2: "任务编号",
         searchName3: "交易类型",
@@ -75,7 +76,8 @@ export default {
             name3: "交易金额",
             name4: "账户金额",
             name5: "交易类型",
-            name6: "交易日期"
+            name6: "交易日期",
+            name7: "商家账号"
         },
         tip: "如果余额低于$100，我们将暂停您的服务；为了不影响你的业务，请及时充值确保账户有足够的余额。"
     },
@@ -209,7 +211,8 @@ export default {
             name9:"佣金金额($)",
             name10:"买家ID",
             name11:"收货国家",
-            name12:"创建时间"
+            name12:"创建时间",
+            name13:"商家账号"
         }
     }
 }
