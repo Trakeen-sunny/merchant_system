@@ -5,12 +5,12 @@ export default {
     // 公共字段
     common: {
         reset: "Reset",
-        sure:"Sure",
+        sure: "Sure",
         search: "Inquire",
-        cancel:"Cancel",
-        copy:"Copy",
-        edit:"Edit",
-        save:"Save",
+        cancel: "Cancel",
+        copy: "Copy",
+        edit: "Edit",
+        save: "Save",
         searchTime1: "Last 3 months",
         searchTime2: "Last 6 months",
         searchTime3: "Last year",
@@ -24,21 +24,21 @@ export default {
         searchTime11: "Half A Year",
         searchTime12: "Year",
         exportPage: "Generate Report",
-        kefu:"Customer Service",
-        helpCenter:"Help Center",
-        feedback:"Feedback / Suggestions",
-        notice:"Notice",
-        userInfo:"Personal Information",
-        loginOut:"Logout",
-        exit:"Exit",
-        cancelExit:"Cancel Exit",
+        kefu: "Customer Service",
+        helpCenter: "Help Center",
+        feedback: "Feedback / Suggestions",
+        notice: "Notice",
+        userInfo: "Personal Information",
+        loginOut: "Logout",
+        exit: "Exit",
+        cancelExit: "Cancel Exit",
         add: "Add",
-        delete:"Delete"
+        delete: "Delete"
     },
     // 账户中心
     acount: {
-        mainAsideName:"Financial",
-        asideName:"Account center",
+        mainAsideName: "Financial",
+        asideName: "Account center",
         title: "Account information",
         title1: "Account details",
         recharge: "Recharge",
@@ -50,24 +50,25 @@ export default {
         moneyLi6: "Total commission amount (waiting)",
         moneyLi7: "Total commission amount (paid)",
         moneyLi8: "Total commission amount (all)",
-	    moneyLi9: "Total commission to be settled",
-		moneyLi10:"Total commission settled",
-		moneyLi11:"Total merchant balance",
-		moneyLi12:"Promoters total balance",
-		moneyLi13:"Platform service fee (to be settled)",
-		moneyLi14:"Platform service fee (settled)",
-		moneyLi15:"Total cost of platform services",	
+        moneyLi9: "Total commission to be settled",
+        moneyLi10: "Total commission settled",
+        moneyLi11: "Total merchant balance",
+        moneyLi12: "Promoters total balance",
+        moneyLi13: "Platform service fee (to be settled)",
+        moneyLi14: "Platform service fee (settled)",
+        moneyLi15: "Total cost of platform services",
         searchName1: "Order number",
         searchName2: "Task number",
         searchName3: "Transaction Type",
-        selectSearch:{
-            name1:'All',
-            name2:'Commission expenses',
-            name3:'Commission income',
-            name4:'Recharge income',
-			name5:"service moeny",
-			name101:"Pay back commission",
-			name104:"Pay back service",
+        selectSearch: {
+            name1: 'All',
+            name2: 'Commission expenses',
+            name3: 'Commission income',
+            name4: 'Recharge income',
+            name5: "service moeny",
+            name101: "Pay back commission",
+            name104: "Pay back service",
+            name103: 'Decrease in recharge'
         },
         table: {
             name1: "Serial number",
@@ -75,35 +76,36 @@ export default {
             name3: "Transaction amount",
             name4: "Account balance",
             name5: "Payment method",
-            name6: "Payment date"
+            name6: "Payment date",
+            name6: "StoreID"
         },
         tip: " If the balance is less than $100, we will suspend your service; in order not to affect your business, please recharge in time to ensure that the account has sufficient balance."
     },
     // 营销计划
     plans: {
-        asideName:"Marketing Plan",
+        asideName: "Marketing Plan",
         minTitle1: 'In progress',
         minTitle2: 'Completed',
-        search:{
-            name1:"Referral ID",
-            name2:"Product",
-            name3:"Status"
+        search: {
+            name1: "Referral ID",
+            name2: "Product",
+            name3: "Status"
         },
-        select:{
-            name1:"All",
-            name2:"In progress",
-            name3:"Completed"
+        select: {
+            name1: "All",
+            name2: "In progress",
+            name3: "Completed"
         },
-        title:"List commission",
-        button:{
-            detail:"detail",
-            end:"end"
+        title: "List commission",
+        button: {
+            detail: "detail",
+            end: "end"
         },
-        status:{
-           name1:"In progress",
-           name2:"Completed" 
+        status: {
+            name1: "In progress",
+            name2: "Completed"
         },
-        table:{
+        table: {
             name1: "Referral ID",
             name2: "Product",
             name3: "Status",
@@ -113,18 +115,18 @@ export default {
             name7: "Create at",
             name8: "Actions"
         },
-        boxs:{
-            title:"detail",
-            formItem1:"Product Link",
-            formItem2:"Coupon Link"
+        boxs: {
+            title: "detail",
+            formItem1: "Product Link",
+            formItem2: "Coupon Link"
         }
     },
     // 个人中心
     setPersion: {
         title: "Personal Information",
         title1: "Account settings",
-        tip1:"Read and agree",
-        tip2:"Platform bank binding authentication protocol",
+        tip1: "Read and agree",
+        tip2: "Platform bank binding authentication protocol",
         form: {
             name: "Agency",
             name1: "Phone number",
@@ -134,10 +136,10 @@ export default {
             name5: "Functional currency",
             name6: "Birthday",
             name7: "Gender",
-            gender:{
-                name1:"Female",
-                name2:"Male",
-                name3:"Unknown"
+            gender: {
+                name1: "Female",
+                name2: "Male",
+                name3: "Unknown"
             },
             name8: "If accept only commision",
             name9: "Media Name",
@@ -147,73 +149,75 @@ export default {
             name13: "Home page link",
             name14: "Introduction"
         },
-        form1:{
-            name1:"Account balance",
-            name2:"Withdrawal",
-            name3:"Please select the following method to bind the account",
-            name4:"Personal Bank Account",
-            name5:"Paypal Account",
-            name6:"Corporate Account",
-            name7:"Country or Region",
-            name8:"Receiving Bank Name",
-            name9:"Receiving Bank Address (branch address)",
-            name10:"Bank Routing / Swift Code (international wires)",
-            name11:"Beneficiary Account Number ",
-            name12:"Repeat Beneficiary Account Number ",
-            name13:"Beneficiary Account Name",
-            name14:"Beneficiary Account Address",
-            name15:"Contact Phone Number",
-            name16:"Verification Code",
-            name17:"Get verification code",
+        form1: {
+            name1: "Account balance",
+            name2: "Withdrawal",
+            name3: "Please select the following method to bind the account",
+            name4: "Personal Bank Account",
+            name5: "Paypal Account",
+            name6: "Corporate Account",
+            name7: "Country or Region",
+            name8: "Receiving Bank Name",
+            name9: "Receiving Bank Address (branch address)",
+            name10: "Bank Routing / Swift Code (international wires)",
+            name11: "Beneficiary Account Number ",
+            name12: "Repeat Beneficiary Account Number ",
+            name13: "Beneficiary Account Name",
+            name14: "Beneficiary Account Address",
+            name15: "Contact Phone Number",
+            name16: "Verification Code",
+            name17: "Get verification code",
         },
-        total:{
-            delete:"Invalid deletion",
-            edit:"Modified successfully"
+        total: {
+            delete: "Invalid deletion",
+            edit: "Modified successfully"
         },
-		withdraw:{
-			title1:"Withdrawal Reminder",
-			notice:"Please contact customer service: woody@cozmox.com for withdrawal operation",
-		}
+        withdraw: {
+            title1: "Withdrawal Reminder",
+            notice: "Please contact customer service: woody@cozmox.com for withdrawal operation",
+        }
     },
     // 订单中心
-    orderCenter:{
-        asideName:"Order Details",
-        asideName1:"Order Center",
-        form:{
-            name1:"Total amount of commission to be settled",
-            name2:"Total amount of commission settled",
-            name3:"Account balance",
-            name4:"Total amount of commission settled",
-            name5:"Total amount of commission to be settled",
+    orderCenter: {
+        asideName: "Order Details",
+        asideName1: "Order Center",
+        form: {
+            name1: "Total amount of commission to be settled",
+            name2: "Total amount of commission settled",
+            name3: "Account balance",
+            name4: "Total amount of commission settled",
+            name5: "Total amount of commission to be settled",
         },
-        form2:{
-            label1:"Order No",
-            label2:"Receiving country",
+        form2: {
+            label1: "Order No",
+            label2: "Receiving country",
+            label3: "StoreID",
         },
-        tab:{
-			name0:"all",
-            name1:"Paid",
-            name2:"Authorized",
-            name3:"Unpaid",
-            name4:"Partial payment",
-            name5:"Refunded",
-            name6:"Invalid",
-            name7:"Partial refund",
-            name8:"Partial authorization and payment"
+        tab: {
+            name0: "all",
+            name1: "Paid",
+            name2: "Authorized",
+            name3: "Unpaid",
+            name4: "Partial payment",
+            name5: "Refunded",
+            name6: "Invalid",
+            name7: "Partial refund",
+            name8: "Partial authorization and payment"
         },
-        table:{
-            name1:"Order No",
-            name2:"Order status",
-            name3:"Trade name",
-            name4:"SKU",
-            name5:"Quantity of goods",
-            name6:"Item pricing($)",
-            name7:"Order amount($)",
-            name8:"Preferential amount($)",
-            name9:"Commission amount($)",
-            name10:"Buyer ID",
-            name11:"Receiving country",
-            name12:"Creation time"
+        table: {
+            name1: "Order No",
+            name2: "Order status",
+            name3: "Trade name",
+            name4: "SKU",
+            name5: "Quantity of goods",
+            name6: "Item pricing($)",
+            name7: "Order amount($)",
+            name8: "Preferential amount($)",
+            name9: "Commission amount($)",
+            name10: "Buyer ID",
+            name11: "Receiving country",
+            name12: "Creation time",
+            name13: "StoreID"
         }
     }
 }

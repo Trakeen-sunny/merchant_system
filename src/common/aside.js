@@ -70,11 +70,11 @@ export const aside = [
     {
         name: '素材管理',
         icon: 'md-photos',
-        userRole: [0,1],
+        userRole: [0, 1],
         children: [{
                 url: '/home/product',
                 name: '商品管理',
-                userRole: [0,1],
+                userRole: [0, 1],
             },
             // {
             //     url: '/home/coupon',
@@ -89,21 +89,20 @@ export const aside = [
         ]
     },
     {
-       name: '数据分析',
-       icon: 'ios-color-filter',
-       userRole: [0],
-       children: [
-        //    {
-        //        url: '/home/promoter',
-        //        name: '推广者数据分析',
-        //        userRole: [0],
-        //    },
-           {
-               url: '/home/business',
-               name: '商家数据分析',
-               userRole: [0],
-           }
-       ]
+        name: '数据分析',
+        icon: 'ios-color-filter',
+        userRole: [0],
+        children: [{
+                url: '/home/promoter',
+                name: '推广者数据分析',
+                userRole: [0],
+            },
+            {
+                url: '/home/business',
+                name: '商家数据分析',
+                userRole: [0],
+            }
+        ]
     },
     // { //
     //     name: '设置',

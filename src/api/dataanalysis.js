@@ -21,3 +21,15 @@ export const statisticsRate = {
     path: '/web/store/statistics/rate',
     method: 'get'
 }
+
+// 获取网红统计数据
+export const statisticsInternetCelebrity = {
+    path: '/web/store/statistics/internetCelebrity',
+    method: 'get'
+}
+
+// 获取推广者排行榜 top10
+export const statisticsInternetCelebrityTopTen = {
+    path: '/web/store/statistics/internetCelebrityTopTen',
+    method: 'get'
+}

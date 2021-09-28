@@ -16,11 +16,11 @@
         <span>商家账户</span>
         <Input v-model="form.email" size="large" class="width" />
       </div>
-	  <div>
+      <div>
         <span>联系邮箱</span>
         <Input v-model="form.emailShop" size="large" class="width" />
       </div>
-	  <div>
+      <div>
         <span>店铺名称</span>
         <Input v-model="form.shopName" size="large" class="width" />
       </div>
@@ -73,7 +73,7 @@
           <Select v-model="details.tranType" size="large" class="width">
             <Option value="">请选择</Option>
             <Option :value="3">增加</Option>
-            <Option :value="4">减少</Option>
+            <Option :value="103">减少</Option>
           </Select>
         </FormItem>
         <FormItem label="金额:" prop="commisson">
@@ -100,7 +100,11 @@
 </template>
 <script>
 import { exportExcel } from "../../common/excelUtils";
-import { usersList,usersListLike,usersReCharge } from "../../api/collaborator";
+import {
+  usersList,
+  usersListLike,
+  usersReCharge,
+} from "../../api/collaborator";
 export default {
   name: "VoucherCenter",
   data() {
@@ -116,12 +120,12 @@ export default {
           key: "email",
           align: "center",
         },
-		{
+        {
           title: "店铺名称",
           key: "shopName",
           align: "center",
         },
-		{
+        {
           title: "联系邮箱",
           key: "emailShop",
           align: "center",

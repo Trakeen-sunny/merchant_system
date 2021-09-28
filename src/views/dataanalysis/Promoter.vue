@@ -6,7 +6,7 @@
     </Row>
 
     <!--  时间 搜索 -->
-    <div class="search table" style="margin-bottom: 30px">
+    <!-- <div class="search table" style="margin-bottom: 30px">
       <ul>
         <li>日</li>
         <li>周</li>
@@ -42,11 +42,11 @@
           ></DatePicker>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- 图表 -->
     <div class="echart">
-      <div id="myChart" :style="{ width: '100%', height: '250px' }"></div>
+      <div id="myChart" :style="{ width: '100%', height: '300px' }"></div>
     </div>
 
     <!-- 表格 -->
@@ -59,7 +59,10 @@
   </div>
 </template>
 <script>
-import { rechargeLogList } from "../../api/acount";
+import {
+  statisticsInternetCelebrity,
+  statisticsInternetCelebrityTopTen,
+} from "../../api/dataanalysis";
 import { getTodayDate, getSevenDate } from "../../common/function";
 export default {
   name: "Promoter",
@@ -68,24 +71,32 @@ export default {
       form: {},
       columns: [
         {
-          title: "排行榜",
-          key: "id",
+          type: "index",
+          width: 60,
           align: "center",
         },
         {
           title: "推广者账户",
-          key: "rechargeTotal",
+          key: "promoterName",
           align: "center",
         },
         {
           title: "销售总额($)",
-          key: "balance",
+          key: "salesVolume",
           align: "center",
+          sortable: true,
         },
         {
           title: "订单数",
-          key: "sumTotal",
+          key: "orderNum",
           align: "center",
+          sortable: true,
+        },
+        {
+          title: "佣金总额",
+          key: "commisson",
+          align: "center",
+          sortable: true,
         },
       ],
       data: [],
@@ -99,41 +110,75 @@ export default {
   },
   mounted() {
     this.myChart = this.$echarts.init(document.getElementById("myChart"));
-    this.initEchart();
+    this.initData2();
   },
   methods: {
     // 初始化组件
-    initEchart() {
+    initEchart(xdata, sdata1, sdata2) {
       const option = {
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+          },
+        },
+        legend: {},
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: xdata,
         },
-        yAxis: {
-          type: "value",
-        },
+        yAxis: [
+          {
+            type: "value",
+            scale: true,
+            name: "销售额($)",
+            min: 0,
+            boundaryGap: [0.2, 0.2],
+          },
+          {
+            type: "value",
+            scale: true,
+            name: "订单数(单)",
+            min: 0,
+            boundaryGap: [0.2, 0.2],
+          },
+        ],
         grid: {
           left: "5%",
-          right: "2%",
+          right: "5%",
           bottom: "10%",
-          top:'3%'
+          top: "10%",
         },
         series: [
           {
-            data: [120, 200, 150, 80, 70, 110, 130],
+            data: sdata2,
             type: "bar",
+            name: "销售额",
             showBackground: true,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.2)",
             },
+            label: {
+              show: true,
+              position: "top",
+            },
+            yAxisIndex: 0,
+            color: "#12733c",
           },
           {
-            data: [10, 20, 15, 80, 70, 10, 30],
+            data: sdata1,
             type: "bar",
+            name: "订单数",
             showBackground: true,
             backgroundStyle: {
               color: "rgba(180, 180, 180, 0.2)",
             },
+            label: {
+              show: true,
+              position: "top",
+            },
+            yAxisIndex: 1,
+            color: "#1cd66c",
           },
         ],
       };
@@ -169,13 +214,33 @@ export default {
     },
     // 初始化数据
     initData() {
-      let data = { pageNo: this.pageNo, pageSize: this.pageSize, ...this.form };
+      let data = { type: "salesVolume" };
       this.$httpRequest({
-        api: rechargeLogList,
+        api: statisticsInternetCelebrityTopTen,
         data,
         success: (res) => {
           console.log(res);
-          //   this.data = res.result.records;
+          this.data = res.result;
+        },
+      });
+    },
+    // 初始化数据
+    initData2() {
+      let data = {};
+      this.$httpRequest({
+        api: statisticsInternetCelebrity,
+        data,
+        success: (res) => {
+          console.log(res.result);
+          let arr = [];
+          let arr1 = [];
+          let arr2 = [];
+          for (const re of res.result) {
+            arr.push(re.date);
+            arr1.push(re.orderNum);
+            arr2.push(re.salesVolume);
+          }
+          this.initEchart(arr, arr1, arr2);
         },
       });
     },

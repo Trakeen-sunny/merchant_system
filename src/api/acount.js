@@ -27,3 +27,9 @@ export const cozmoxOrdersList = {
     path: '/web/cozmoxOrders/list',
     method: 'get'
 }
+
+// 充值统计数据
+export const getRechargeTotal = {
+    path: '/web/users/getRechargeTotal',
+    method: 'get'
+}

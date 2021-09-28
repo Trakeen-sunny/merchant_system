@@ -53,11 +53,9 @@
         }}</Button>
       </div>
     </div> -->
-	  
-	<div class="textsm" v-if="userRole==0">
-	商家/推广者
-	</div>
-    <div class="content" v-if="userRole==0">
+
+    <div class="textsm" v-if="userRole == 0">商家/推广者</div>
+    <div class="content" v-if="userRole == 0">
       <div>
         <span class="num">${{ userinfos.totalFeePayWaitSx || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi9") }}</span>
@@ -67,51 +65,76 @@
         <span class="title">{{ $t("acount.moneyLi10") }}</span>
       </div>
       <div>
-        <span class="num">${{ userinfos.totalBalanceStoer|| 0  }}</span>
+        <span class="num">${{ userinfos.totalBalanceStoer || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi11") }}</span>
       </div>
-	  <div>
-        <span class="num">${{ userinfos.totalBalancePartner|| 0  }}</span>
+      <div>
+        <span class="num">${{ userinfos.totalBalancePartner || 0 }}</span>
         <span class="title">{{ $t("acount.moneyLi12") }}</span>
       </div>
     </div>
     <div class="content" v-else>
       <div>
-        <span class="num">${{ userRole==1?userinfo.totalFeePayWaitSx || 0 : userinfo.totalFeeWait || 0 }}</span>
+        <span class="num"
+          >${{
+            userRole == 1
+              ? userinfo.totalFeePayWaitSx || 0
+              : userinfo.totalFeeWait || 0
+          }}</span
+        >
         <span class="title">{{ $t("acount.moneyLi1") }}</span>
       </div>
       <div>
-        <span class="num">${{ userRole==1?userinfo.totalFeePaySx || 0 : userinfo.totalFee || 0 }}</span>
+        <span class="num"
+          >${{
+            userRole == 1 ? userinfo.totalFeePaySx || 0 : userinfo.totalFee || 0
+          }}</span
+        >
         <span class="title">{{ $t("acount.moneyLi2") }}</span>
       </div>
       <div>
-        <span class="num">${{ userRole==1?(userinfo.totalFeePayWaitSx + userinfo.totalFeePaySx) || 0 :(userinfo.totalFee + userinfo.totalFeeWait) || 0 }}</span>
+        <span class="num"
+          >${{
+            userRole == 1
+              ? userinfo.totalFeePayWaitSx + userinfo.totalFeePaySx || 0
+              : userinfo.totalFee + userinfo.totalFeeWait || 0
+          }}</span
+        >
         <span class="title">{{ $t("acount.moneyLi3") }}</span>
       </div>
     </div>
-	<span class="textsm" v-if="userRole==0">平台</span>
-	<div class="content content1" v-if="userRole==0">
-	 
-	  <div>
-        <span class="num">${{parseFloat(userinfos.totalFeePayWaitSx*0.2).toFixed(2)}}</span>
+    <span class="textsm" v-if="userRole == 0">平台</span>
+    <div class="content content1" v-if="userRole == 0">
+      <div>
+        <span class="num"
+          >${{ parseFloat(userinfos.totalFeePayWaitSx * 0.2).toFixed(2) }}</span
+        >
         <span class="title">{{ $t("acount.moneyLi13") }}</span>
       </div>
-	  <div>
-        <span class="num">${{parseFloat(userinfos.totalFeePaySx*0.2).toFixed(2)}}</span>
+      <div>
+        <span class="num"
+          >${{ parseFloat(userinfos.totalFeePaySx * 0.2).toFixed(2) }}</span
+        >
         <span class="title">{{ $t("acount.moneyLi14") }}</span>
       </div>
-	  <div>
-        <span class="num">${{parseFloat((userinfos.totalFeePaySx+userinfos.totalFeePayWaitSx)*0.2).toFixed(2)}}</span>
+      <div>
+        <span class="num"
+          >${{
+            parseFloat(
+              (userinfos.totalFeePaySx + userinfos.totalFeePayWaitSx) * 0.2
+            ).toFixed(2)
+          }}</span
+        >
         <span class="title">{{ $t("acount.moneyLi15") }}</span>
       </div>
-	</div>
-    <div class="content content1" v-else-if="userRole==1">
+    </div>
+    <div class="content content1" v-else-if="userRole == 1">
       <div>
-        <span class="num">$0</span>
+        <span class="num">${{ rechargeTotal }}</span>
         <span class="title">{{ $t("acount.moneyLi16") }}</span>
       </div>
       <div>
-        <span class="num">${{userinfo.balance || 0}}</span>
+        <span class="num">${{ userinfo.balance || 0 }}</span>
         <span class="title"
           ><span>{{ $t("acount.moneyLi5") }}</span>
           <!-- <Poptip
@@ -131,7 +154,7 @@
         <span class="title">{{ $t("acount.moneyLi4") }}</span>
       </div>
       <div>
-        <span class="num">${{userinfo.balance || 0}}</span>
+        <span class="num">${{ userinfo.balance || 0 }}</span>
         <span class="title"
           ><span>{{ $t("acount.moneyLi5") }}</span>
           <!-- <Poptip
@@ -150,26 +173,41 @@
     <div class="search">
       <div>
         <span>{{ $t("acount.table.name1") }}</span>
-        <Input v-model="form.waterNo" size="large"  class="width" />
+        <Input v-model="form.waterNo" size="large" class="width" />
       </div>
       <div>
         <span>{{ $t("acount.table.name2") }}</span>
-        <Input v-model="form.taskNo" size="large"  class="width" />
+        <Input v-model="form.taskNo" size="large" class="width" />
       </div>
-      <div v-if="userRole==0">
+      <div v-if="userRole == 0">
         <span>{{ $t("acount.table.name7") }}</span>
-        <Input v-model="form.stroerEamil" size="large"  class="width" />
+        <Input v-model="form.stroerEamil" size="large" class="width" />
       </div>
       <div>
         <span>{{ $t("acount.searchName3") }}</span>
-        <Select v-model="form.tranType" size="large"  class="width">
+        <Select v-model="form.tranType" size="large" class="width">
           <Option value="">{{ $t("acount.selectSearch.name1") }}</Option>
-          <Option :value="1" v-if="userRole!=2">{{ $t("acount.selectSearch.name2") }}</Option>
-          <Option :value="2" v-if="userRole!=1">{{ $t("acount.selectSearch.name3") }}</Option>
-          <Option :value="3" v-if="userRole!=2">{{ $t("acount.selectSearch.name4") }}</Option>
-		  <Option :value="4" v-if="userRole!=2">{{ $t("acount.selectSearch.name5") }}</Option>
-		  <Option :value="101" v-if="userRole!=2">{{ $t("acount.selectSearch.name101") }}</Option>
-		  <Option :value="104" v-if="userRole!=2">{{ $t("acount.selectSearch.name104") }}</Option>
+          <Option :value="1" v-if="userRole != 2">{{
+            $t("acount.selectSearch.name2")
+          }}</Option>
+          <Option :value="2" v-if="userRole != 1">{{
+            $t("acount.selectSearch.name3")
+          }}</Option>
+          <Option :value="3" v-if="userRole != 2">{{
+            $t("acount.selectSearch.name4")
+          }}</Option>
+          <Option :value="4" v-if="userRole != 2">{{
+            $t("acount.selectSearch.name5")
+          }}</Option>
+          <Option :value="101" v-if="userRole != 2">{{
+            $t("acount.selectSearch.name101")
+          }}</Option>
+          <Option :value="104" v-if="userRole != 2">{{
+            $t("acount.selectSearch.name104")
+          }}</Option>
+          <Option :value="103" v-if="userRole != 2">{{
+            $t("acount.selectSearch.name103")
+          }}</Option>
         </Select>
       </div>
       <div>
@@ -200,17 +238,19 @@
       <div class="title">
         <span class="left">{{ $t("acount.title1") }}</span>
       </div>
-      <Table :columns="columns" :data="data">accountTotal
+      <Table :columns="columns" :data="data"
+        >accountTotal
         <template slot-scope="{ row }" slot="tranType">
           {{ row.tranType == 1 ? $t("acount.selectSearch.name2") : "" }}
           {{ row.tranType == 2 ? $t("acount.selectSearch.name3") : "" }}
           {{ row.tranType == 3 ? $t("acount.selectSearch.name4") : "" }}
-		  {{ row.tranType == 4 ? $t("acount.selectSearch.name5") : "" }}
-		  {{ row.tranType == 101 ? $t("acount.selectSearch.name101") : "" }}
-		  {{ row.tranType == 104 ? $t("acount.selectSearch.name104") : "" }}
+          {{ row.tranType == 4 ? $t("acount.selectSearch.name5") : "" }}
+          {{ row.tranType == 101 ? $t("acount.selectSearch.name101") : "" }}
+          {{ row.tranType == 104 ? $t("acount.selectSearch.name104") : "" }}
+          {{ row.tranType == 103 ? $t("acount.selectSearch.name103") : "" }}
         </template>
         <template slot-scope="{ row }" slot="accountTotal">
-          {{row.accountTotal}}
+          {{ row.accountTotal }}
         </template>
       </Table>
       <Page
@@ -226,7 +266,7 @@
   </div>
 </template>
 <script>
-import { acountList } from "../../api/acount";
+import { acountList, getRechargeTotal } from "../../api/acount";
 import { getUsersByToken, getAdminToatl } from "../../api/index";
 import { getTodayDate, getSevenDate } from "../../common/function";
 import { exportExcel } from "../../common/excelUtils";
@@ -253,12 +293,12 @@ export default {
           key: "waterNo",
           align: "center",
         },
-    {
+        {
           title: this.$t("acount.table.name7"),
           key: "stroerEamil",
           align: "center",
         },
-		{
+        {
           title: this.$t("acount.table.name2"),
           key: "taskNo",
           align: "center",
@@ -290,6 +330,7 @@ export default {
       total: 0, //总条数
       timeIdx: 0, // 默认时间选中
       dateTime: [],
+      rechargeTotal: 0,
       userinfo: {},
       initColumn: [
         {
@@ -328,30 +369,41 @@ export default {
           dataIndex: "tranTime",
         },
       ],
-      userinfos:{}
+      userinfos: {},
     };
   },
-  computed:{
-    balance(){
-      return (this.userinfo.balance+'').replace(/-/,'')
+  computed: {
+    balance() {
+      return (this.userinfo.balance + "").replace(/-/, "");
     },
-    userRole(){
-      return JSON.parse(window.localStorage.getItem("userinfo")).userRole
-    }
+    userRole() {
+      return JSON.parse(window.localStorage.getItem("userinfo")).userRole;
+    },
   },
   created() {
     this.initData();
     this.getUserToken();
     this.getAdminToatls();
+    this.getRechargeTotal();
   },
   methods: {
     // 获取管理员的信息
-    getAdminToatls(){
+    getAdminToatls() {
       this.$httpRequest({
         api: getAdminToatl,
-        data:{},
+        data: {},
         success: (res) => {
-          this.userinfos = res.result
+          this.userinfos = res.result;
+        },
+      });
+    },
+    // 获取充值统计信息
+    getRechargeTotal() {
+      this.$httpRequest({
+        api: getRechargeTotal,
+        data: {},
+        success: (res) => {
+          this.rechargeTotal = res.result;
         },
       });
     },
@@ -418,7 +470,7 @@ export default {
               case 3:
                 tranType = this.$t("acount.selectSearch.name4");
                 break;
-			  case 4:
+              case 4:
                 tranType = this.$t("acount.selectSearch.name5");
                 break;
               default:
@@ -449,6 +501,9 @@ export default {
           this.total = res.result.total;
         },
       });
+      if (this.userRole == 1 || this.userRole == 2) {
+        this.columns = this.columns.filter((col) => col.key !== "stroerEamil");
+      }
     },
     // 改变页数
     changePage(page) {
@@ -512,7 +567,7 @@ export default {
       }
     }
   }
-  .textsm{
+  .textsm {
     font-size: 12px;
   }
   .content {

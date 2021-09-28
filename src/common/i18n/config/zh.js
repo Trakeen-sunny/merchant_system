@@ -33,7 +33,7 @@ export default {
         exit: "是否退出？",
         cancelExit: "取消退出",
         add: "添加",
-        delete:"删除"
+        delete: "删除"
     },
     // 账户中心
     acount: {
@@ -50,25 +50,26 @@ export default {
         moneyLi6: "佣金总金额（等待）",
         moneyLi7: "佣金总金额（支付）",
         moneyLi8: "佣金总金额（全部）",
-		moneyLi9: "待结算总佣金",
-		moneyLi10:"已结算总佣金",
-		moneyLi11:"商家总余额",
-		moneyLi12:"推广者总余额", 
-		moneyLi13:"平台服务费(待结算)",
-		moneyLi14:"平台服务费(已结算)",
-		moneyLi15:"平台服务总费用",	
-        moneyLi16: "充值总金额",	
+        moneyLi9: "待结算总佣金",
+        moneyLi10: "已结算总佣金",
+        moneyLi11: "商家总余额",
+        moneyLi12: "推广者总余额",
+        moneyLi13: "平台服务费(待结算)",
+        moneyLi14: "平台服务费(已结算)",
+        moneyLi15: "平台服务总费用",
+        moneyLi16: "充值总金额",
         searchName1: "订单编号",
         searchName2: "任务编号",
         searchName3: "交易类型",
-        selectSearch:{
-            name1:'全部',
-            name2:'佣金支出',
-            name3:'佣金收入',
-            name4:'充值收入',
-			name5:'平台服务费',
-			name101:'支付佣金返还',
-			name104:'支付服务费返还'
+        selectSearch: {
+            name1: '全部',
+            name2: '佣金支出',
+            name3: '佣金收入',
+            name4: '充值收入',
+            name5: '平台服务费',
+            name101: '支付佣金返还',
+            name104: '支付服务费返还',
+            name103: '充值减少'
         },
         table: {
             name1: "流水单号",
@@ -99,7 +100,7 @@ export default {
         title: "营销计划明细",
         button: {
             detail: "查看",
-            end:"结束"
+            end: "结束"
         },
         status: {
             name1: "进行中",
@@ -124,9 +125,9 @@ export default {
     // 个人中心
     setPersion: {
         title: "个人信息",
-        title1:"账户设置",
-        tip1:"已阅读并同意",
-        tip2:"平台银行绑定认证协议",
+        title1: "账户设置",
+        tip1: "已阅读并同意",
+        tip2: "平台银行绑定认证协议",
         form: {
             name: "公司名称",
             name1: "联系电话",
@@ -136,10 +137,10 @@ export default {
             name5: "货币",
             name6: "出生日期",
             name7: "性别",
-            gender:{
-                name1:"女",
-                name2:"男",
-                name3:"未知"
+            gender: {
+                name1: "女",
+                name2: "男",
+                name3: "未知"
             },
             name8: "接受纯佣",
             name9: "社交平台",
@@ -149,70 +150,71 @@ export default {
             name13: "主页链接",
             name14: "简介说明"
         },
-         form1:{
-             name1:"账户余额",
-             name2:"提现",
-             name3:"请选择以下方式绑定账户",
-             name4:"个人银行账户",
-             name5:"Palpay账户",
-             name6:"对公账户",
-             name7:"国家或地区",
-             name8:"银行名称",
-             name9:"分行地址",
-             name10:"SWFIT 代码",
-             name11:"账号",
-             name12:"重新输入账户",
-             name13:"银行账户名",
-             name14:"银行账户持有人地址",
-             name15:"银行账户持有人电话号码",
-             name16:"验证码",
-             name17:"获取验证码",
-         },
-         total:{
-            delete:"删除无效",
-            edit:"修改成功"
+        form1: {
+            name1: "账户余额",
+            name2: "提现",
+            name3: "请选择以下方式绑定账户",
+            name4: "个人银行账户",
+            name5: "Palpay账户",
+            name6: "对公账户",
+            name7: "国家或地区",
+            name8: "银行名称",
+            name9: "分行地址",
+            name10: "SWFIT 代码",
+            name11: "账号",
+            name12: "重新输入账户",
+            name13: "银行账户名",
+            name14: "银行账户持有人地址",
+            name15: "银行账户持有人电话号码",
+            name16: "验证码",
+            name17: "获取验证码",
+        },
+        total: {
+            delete: "删除无效",
+            edit: "修改成功"
         }
     },
     // 订单中心
-    orderCenter:{
-        asideName:"订单明细",
-        asideName1:"订单中心",
-        form:{
-            name1:"待结算佣金总金额",
-            name2:"已结算佣金总金额",
-            name3:"账户余额",
-            name4:"已结算佣金总金额",
-            name5:"待结算佣金总金额",
+    orderCenter: {
+        asideName: "订单明细",
+        asideName1: "订单中心",
+        form: {
+            name1: "待结算佣金总金额",
+            name2: "已结算佣金总金额",
+            name3: "账户余额",
+            name4: "已结算佣金总金额",
+            name5: "待结算佣金总金额",
         },
-        form2:{
-            label1:"订单编号",
-            label2:"收货国家",
+        form2: {
+            label1: "订单编号",
+            label2: "收货国家",
+            label3: "商户账号",
         },
-        tab:{
-			name0:"全部",
-            name1:"已付款",
-            name2:"已授权",
-            name3:"未付款",
-            name4:"部分付款",
-            name5:"已退款",
-            name6:"无效",
-            name7:"部分退款",
-            name8:"部分授权与支付"
+        tab: {
+            name0: "全部",
+            name1: "已付款",
+            name2: "已授权",
+            name3: "未付款",
+            name4: "部分付款",
+            name5: "已退款",
+            name6: "无效",
+            name7: "部分退款",
+            name8: "部分授权与支付"
         },
-        table:{
-            name1:"订单编号",
-            name2:"订单状态",
-            name3:"商品名称",
-            name4:"SKU",
-            name5:"商品数量",
-            name6:"商品单价($)",
-            name7:"订单金额($)",
-            name8:"优惠金额($)",
-            name9:"佣金金额($)",
-            name10:"买家ID",
-            name11:"收货国家",
-            name12:"创建时间",
-            name13:"商家账号"
+        table: {
+            name1: "订单编号",
+            name2: "订单状态",
+            name3: "商品名称",
+            name4: "SKU",
+            name5: "商品数量",
+            name6: "商品单价($)",
+            name7: "订单金额($)",
+            name8: "优惠金额($)",
+            name9: "佣金金额($)",
+            name10: "买家ID",
+            name11: "收货国家",
+            name12: "创建时间",
+            name13: "商家账号"
         }
     }
 }
